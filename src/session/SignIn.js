@@ -41,7 +41,6 @@ class SignIn extends React.Component {
   showError = () => {};
 
   render() {
-    //console.log(this.props);
     return (
       <div className="text-center">
         <form className="form-group">

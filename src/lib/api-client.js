@@ -15,8 +15,6 @@ const configureApi = store => {
         config.headers["X-User-Email"] = state.session.email;
         config.headers["X-User-Token"] = state.session.token;
       }
-      console.log(store.getState(), config);
-
       return config;
     },
     function(error) {

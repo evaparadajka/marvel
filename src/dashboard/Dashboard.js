@@ -7,7 +7,7 @@ import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 
 class Dashboard extends React.Component {
-  fetchCharacters(ts) {
+  fetchCharacters() {
     axios
       .get(
         "http://gateway.marvel.com/v1/public/characters?apikey=93e03380bbb458e68945c50bdd245b08",
@@ -17,23 +17,33 @@ class Dashboard extends React.Component {
           }
         }
       )
-      .then(response => console.log(response))
+
+      .then(response => {
+        this.props.dispatch({
+          type: "FETCH_CHAR",
+          payload: response.data.data.results
+        });
+      })
       .catch(error => console.log(error));
   }
 
-  // componentDidMount() {
-  //   this.fetchCharacters(new Date().toString());
-  // }
+  show = id => {
+    this.props.dispatch({ type: "SHOW", id: id });
+    this.props.router.push("/character-details/" + id);
+  };
+
+  componentDidMount() {
+    if (this.props.characters.charactersCollection.length === 0) {
+      this.fetchCharacters();
+    }
+  }
 
   render() {
-    console.log(this.props);
-
     const charactersToRender = this.props.characters.charactersCollection;
-
     return (
       <div>
         <StyledDashboard>
-          <CharacterList characters={charactersToRender} />
+          <CharacterList show={this.show} characters={charactersToRender} />
         </StyledDashboard>
       </div>
     );

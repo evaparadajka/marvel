@@ -25,7 +25,6 @@ export const signIn = user => {
             user_id: response.data.data.user_id
           }
         });
-        console.log("hash");
         dispatch({
           type: "LOGIN_PROCESSING",
           data: "Success"

@@ -10,10 +10,11 @@ class CharacterList extends Component {
       <div>
         {this.props.characters.map((d, index) =>
           <Character
+            show={this.props.show}
             id={d.id}
             name={d.name}
             description={d.description}
-            img={d.img}
+            img={`${d.thumbnail.path}/standard_fantastic.jpg`}
           />
         )}
       </div>

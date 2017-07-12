@@ -1,8 +1,10 @@
 import React from "react";
 
+import Button from "../user_interface/Button";
 import StyledCharacter from "../user_interface/StyledCharacter";
 
 class Character extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +13,19 @@ class Character extends React.Component {
     //this.logDate = this.logDate.bind(this);
     //this.addPost = this.addPost.bind(this);
   }
+
+  show = () => {
+    this.props.show(this.props.id);
+  };
+
+  render() {
+    return (
+      <div className="col-md-4">
+        <StyledCharacter>
+          {this.props.img}
+          <div>
+            ID: {this.props.id}
+          </div>
 
   onMouseEnterHandler = () => {
     this.setState({
@@ -58,6 +73,8 @@ class Character extends React.Component {
       >
         <StyledCharacter>
           <img src={this.props.img} />
+
+        <Button onClick={this.show} label="SHOW DETAILS" />
         </StyledCharacter>
         {this.renderOverlay()}
       </div>
