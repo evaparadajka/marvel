@@ -4,8 +4,7 @@ const StyledCharacter = styled.div`
   border: 1px solid #aaa;
   background-color: #fff;
   padding: 2%;
-  margin-bottom: 5px;
-  dispaly: flex;
+  margin: 1%;
   justifyContent: space-between;
   &:hover {
     opacity: 0.8;
