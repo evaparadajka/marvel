@@ -7,8 +7,9 @@ class Character extends React.Component {
     return (
       <div className="col-md-4">
         <StyledCharacter>
+          {this.props.img}
           <div>
-            ID: {this.props.id}{" "}
+            ID: {this.props.id}
           </div>
           <div>
             Name: {this.props.name}

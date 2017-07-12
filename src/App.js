@@ -8,7 +8,7 @@ import Layout from "./Layout";
 
 import SignIn from "./session/SignIn";
 import SignUp from "./session/SignUp";
-import CharacterPage from "./dashboard/CharacterPage";
+import Dashboard from "./dashboard/Dashboard";
 
 class App extends Component {
   authenticateUser = (nextState, replace) => {
@@ -24,7 +24,7 @@ class App extends Component {
       <div className="App">
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>
-            <IndexRoute path="home" component={CharacterPage} />
+            <IndexRoute path="home" component={Dashboard} />
             {/* <Route path="characters" component={CharacterPage} /> */}
             {/* <Route path="comics" component={Comics} /> */}
           </Route>

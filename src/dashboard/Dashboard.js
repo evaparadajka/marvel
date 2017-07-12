@@ -1,13 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import md5 from "react-native-md5";
 
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 
-class CharacterPage extends React.Component {
-  fetchCharacters(ts) {
+class Dashboard extends React.Component {
+  fetchCharacters() {
     axios
       .get(
         "http://gateway.marvel.com/v1/public/characters?apikey=93e03380bbb458e68945c50bdd245b08",
@@ -17,16 +16,22 @@ class CharacterPage extends React.Component {
           }
         }
       )
-      .then(response => console.log(response))
+      .then(response => {
+        this.props.dispatch({
+          type: "FETCH_CHAR",
+          payload: response.data.data.results
+        });
+      })
       .catch(error => console.log(error));
   }
 
   componentDidMount() {
-    this.fetchCharacters(new Date().toString());
+    this.fetchCharacters();
   }
 
   render() {
     const charactersToRender = this.props.characters.charactersCollection;
+    console.log(this.props.characters);
 
     return (
       <div>
@@ -44,4 +49,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CharacterPage);
+export default connect(mapStateToProps)(Dashboard);
