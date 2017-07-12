@@ -6,13 +6,10 @@ import { Router, Route, IndexRoute, hashHistory } from "react-router";
 import Home from "./Home";
 import Layout from "./Layout";
 
-
-import CharacterPage from "./dashboard/CharacterPage";
-
-
 import SignIn from "./session/SignIn";
 import SignUp from "./session/SignUp";
 import CharacterPage from "./dashboard/CharacterPage";
+
 class App extends Component {
   authenticateUser = (nextState, replace) => {
     const state = this.props.store.getState();
@@ -24,7 +21,6 @@ class App extends Component {
   };
   render() {
     return (
-
       <div className="App">
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>
@@ -35,8 +31,6 @@ class App extends Component {
           <Route path="sign-in" component={SignIn} />
           <Route path="sign-up" component={SignUp} />
         </Router>
-
-
       </div>
     );
   }
