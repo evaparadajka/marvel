@@ -7,7 +7,7 @@ import Layout from "./Layout";
 
 import SignIn from "./session/SignIn";
 import SignUp from "./session/SignUp";
-
+import CharacterPage from "./dashboard/CharacterPage";
 class App extends Component {
   authenticateUser = (nextState, replace) => {
     const state = this.props.store.getState();
@@ -22,7 +22,9 @@ class App extends Component {
       <div className="App">
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>
-            <IndexRoute path="home" component={Home} />
+            <IndexRoute path="home" component={CharacterPage} />
+            {/* <Route path="characters" component={CharacterPage} /> */}
+            {/* <Route path="comics" component={Comics} /> */}
           </Route>
           <Route path="sign-in" component={SignIn} />
           <Route path="sign-up" component={SignUp} />
