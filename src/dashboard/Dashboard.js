@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import md5 from "react-native-md5";
 
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
@@ -16,6 +17,7 @@ class Dashboard extends React.Component {
           }
         }
       )
+
       .then(response => {
         this.props.dispatch({
           type: "FETCH_CHAR",
@@ -38,7 +40,6 @@ class Dashboard extends React.Component {
 
   render() {
     const charactersToRender = this.props.characters.charactersCollection;
-
     return (
       <div>
         <StyledDashboard>

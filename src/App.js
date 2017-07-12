@@ -11,6 +11,7 @@ import SignUp from "./session/SignUp";
 import Dashboard from "./dashboard/Dashboard";
 import CharacterDetails from "./character_details/CharacterDetails";
 
+
 class App extends Component {
   authenticateUser = (nextState, replace) => {
     const state = this.props.store.getState();
@@ -25,6 +26,7 @@ class App extends Component {
       <div className="App">
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>
+            <IndexRoute component={Dashboard} />
             <IndexRoute path="home" component={Dashboard} />
             <Route path="character-details/:id" component={CharacterDetails} />
             {/* <Route path="characters" component={CharacterPage} /> */}
