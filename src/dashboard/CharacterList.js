@@ -4,10 +4,17 @@ import Character from "./Character";
 
 class CharacterList extends Component {
   render() {
+    console.log(this.props);
+
     return (
-      <div className={this.props.className}>
+      <div>
         {this.props.characters.map((d, index) =>
-          <Character id={d.id} name={d.name} description={d.description} />
+          <Character
+            id={d.id}
+            name={d.name}
+            description={d.description}
+            img={d.img}
+          />
         )}
       </div>
     );
