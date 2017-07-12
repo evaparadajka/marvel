@@ -58,7 +58,7 @@ export class Layout extends React.Component {
             </li>
 
             <li className="active">
-              <Link to="/" style={{ color: "#c94c4c" }}>
+              <Link to="/characters" style={{ color: "#c94c4c" }}>
                 Characters
               </Link>
             </li>

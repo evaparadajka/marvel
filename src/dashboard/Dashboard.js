@@ -6,7 +6,7 @@ import md5 from "react-native-md5";
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 
-class CharacterPage extends React.Component {
+class Dashboard extends React.Component {
   fetchCharacters(ts) {
     axios
       .get(
@@ -21,11 +21,13 @@ class CharacterPage extends React.Component {
       .catch(error => console.log(error));
   }
 
-  componentDidMount() {
-    this.fetchCharacters(new Date().toString());
-  }
+  // componentDidMount() {
+  //   this.fetchCharacters(new Date().toString());
+  // }
 
   render() {
+    console.log(this.props);
+
     const charactersToRender = this.props.characters.charactersCollection;
 
     return (
@@ -44,4 +46,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CharacterPage);
+export default connect(mapStateToProps)(Dashboard);
