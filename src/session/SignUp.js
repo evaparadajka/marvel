@@ -50,7 +50,6 @@ class SignUp extends React.Component {
           }
         })
         .then(response => {
-          console.log(response);
           // this.props.dispatch({
           //   type: "REGISTER",
           //   data: {
@@ -85,7 +84,6 @@ class SignUp extends React.Component {
   showError = () => {};
 
   render() {
-    //console.log(this.props);
     return (
       <div className="text-center">
         <form className="form-group">

@@ -1,7 +1,6 @@
 const session = (state = { email: "", token: "", status: "" }, action) => {
   switch (action.type) {
     case "LOGIN":
-      console.log(action.data);
       return {
         ...state,
         email: action.data.email,

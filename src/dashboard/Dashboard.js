@@ -6,8 +6,8 @@ import md5 from "react-native-md5";
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 
-class CharacterPage extends React.Component {
-  fetchCharacters(ts) {
+class Dashboard extends React.Component {
+  fetchCharacters() {
     axios
       .get(
         "http://gateway.marvel.com/v1/public/characters?apikey=93e03380bbb458e68945c50bdd245b08",
@@ -17,21 +17,33 @@ class CharacterPage extends React.Component {
           }
         }
       )
-      .then(response => console.log(response))
+
+      .then(response => {
+        this.props.dispatch({
+          type: "FETCH_CHAR",
+          payload: response.data.data.results
+        });
+      })
       .catch(error => console.log(error));
   }
 
+  show = id => {
+    this.props.dispatch({ type: "SHOW", id: id });
+    this.props.router.push("/character-details/" + id);
+  };
+
   componentDidMount() {
-    this.fetchCharacters(new Date().toString());
+    if (this.props.characters.charactersCollection.length === 0) {
+      this.fetchCharacters();
+    }
   }
 
   render() {
     const charactersToRender = this.props.characters.charactersCollection;
-
     return (
       <div>
         <StyledDashboard>
-          <CharacterList characters={charactersToRender} />
+          <CharacterList show={this.show} characters={charactersToRender} />
         </StyledDashboard>
       </div>
     );
@@ -44,4 +56,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(CharacterPage);
+export default connect(mapStateToProps)(Dashboard);
