@@ -25,18 +25,24 @@ class Dashboard extends React.Component {
       .catch(error => console.log(error));
   }
 
+  show = id => {
+    this.props.dispatch({ type: "SHOW", id: id });
+    this.props.router.push("/character-details/" + id);
+  };
+
   componentDidMount() {
-    this.fetchCharacters();
+    if (this.props.characters.charactersCollection.length === 0) {
+      this.fetchCharacters();
+    }
   }
 
   render() {
     const charactersToRender = this.props.characters.charactersCollection;
-    console.log(this.props.characters);
 
     return (
       <div>
         <StyledDashboard>
-          <CharacterList characters={charactersToRender} />
+          <CharacterList show={this.show} characters={charactersToRender} />
         </StyledDashboard>
       </div>
     );

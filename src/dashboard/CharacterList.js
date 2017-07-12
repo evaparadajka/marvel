@@ -4,11 +4,11 @@ import Character from "./Character";
 
 class CharacterList extends Component {
   render() {
-    console.log(this.props.characters, "kalosz");
     return (
       <div className={this.props.className}>
         {this.props.characters.map((d, index) =>
           <Character
+            show={this.props.show}
             id={d.id}
             name={d.name}
             description={d.description}

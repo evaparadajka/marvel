@@ -9,6 +9,7 @@ import Layout from "./Layout";
 import SignIn from "./session/SignIn";
 import SignUp from "./session/SignUp";
 import Dashboard from "./dashboard/Dashboard";
+import CharacterDetails from "./character_details/CharacterDetails";
 
 class App extends Component {
   authenticateUser = (nextState, replace) => {
@@ -25,6 +26,7 @@ class App extends Component {
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>
             <IndexRoute path="home" component={Dashboard} />
+            <Route path="character-details/:id" component={CharacterDetails} />
             {/* <Route path="characters" component={CharacterPage} /> */}
             {/* <Route path="comics" component={Comics} /> */}
           </Route>
