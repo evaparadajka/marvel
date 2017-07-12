@@ -4,7 +4,6 @@ import Button from "../user_interface/Button";
 import StyledCharacter from "../user_interface/StyledCharacter";
 
 class Character extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -18,14 +17,14 @@ class Character extends React.Component {
     this.props.show(this.props.id);
   };
 
-  render() {
-    return (
-      <div className="col-md-4">
-        <StyledCharacter>
-          {this.props.img}
-          <div>
-            ID: {this.props.id}
-          </div>
+  // render() {
+  //   return (
+  //     <div className="col-md-4">
+  //       <StyledCharacter>
+  //         {this.props.img}
+  //         <div>
+  //           ID: {this.props.id}
+  //         </div>
 
   onMouseEnterHandler = () => {
     this.setState({
@@ -49,10 +48,13 @@ class Character extends React.Component {
       return (
         <div style={after}>
           <div>
-            Name: {this.props.name}
+            <Button onClick={this.show} label="SHOW DETAILS" />
           </div>
           <div>
-            Description: {this.props.description}
+            {this.props.name}
+          </div>
+          <div style={description}>
+            {this.props.description}
           </div>
         </div>
       );
@@ -73,8 +75,6 @@ class Character extends React.Component {
       >
         <StyledCharacter>
           <img src={this.props.img} />
-
-        <Button onClick={this.show} label="SHOW DETAILS" />
         </StyledCharacter>
         {this.renderOverlay()}
       </div>
@@ -111,6 +111,10 @@ var after = {
   //backgroundColor: "black",
   //opacity: "0.5"
   // border: "solid 1px green"
+};
+
+var description = {
+  margin: "11%"
 };
 
 export default Character;
