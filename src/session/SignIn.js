@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import Button from "../user-interface/Button";
+import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
 import { signIn } from "./session-actions";
 import { Link } from "react-router";
