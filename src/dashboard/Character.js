@@ -20,13 +20,11 @@ class Character extends React.Component {
     this.setState({
       hover: true
     });
-    console.log("enter");
   };
   onMouseLeaveHandler = () => {
     this.setState({
       hover: false
     });
-    console.log("leave");
   };
 
   isHovered = () => {
@@ -59,8 +57,10 @@ class Character extends React.Component {
           <div className="name">
             {this.props.name}
           </div>
+
           {this.isToLong(this.props.description)}
         </StyledOverlay>
+
       );
     } else return null;
   };

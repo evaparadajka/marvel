@@ -4,8 +4,6 @@ import Character from "./Character";
 
 class CharacterList extends Component {
   render() {
-    console.log(this.props);
-
     return (
       <div className="space">
         {this.props.characters.map((d, index) =>
