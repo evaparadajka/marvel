@@ -17,7 +17,6 @@ class Dashboard extends React.Component {
           }
         }
       )
-
       .then(response => {
         this.props.dispatch({
           type: "FETCH_CHAR",
@@ -40,6 +39,7 @@ class Dashboard extends React.Component {
 
   render() {
     const charactersToRender = this.props.characters.charactersCollection;
+    console.log(charactersToRender);
     return (
       <div>
         <StyledDashboard>

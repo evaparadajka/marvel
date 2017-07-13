@@ -14,8 +14,8 @@ class CharacterDetails extends React.Component {
       .post("/marvel/api/v1/create_character", {
         character: {
           name: this.props.character.name,
-          external_id: this.props.character.id,
-          user_id: this.props.session.user_id
+          external_id: this.props.character.id
+          // user_id: this.props.session.user_id
         }
       })
       .then(response => {

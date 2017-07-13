@@ -66,7 +66,7 @@ class Character extends React.Component {
     // if (this.state.hover) {
     //   inner = hover;
     // }
-
+    // console.log("Props charcter", this.props);
     return (
       <div
         className="col-md-4"
