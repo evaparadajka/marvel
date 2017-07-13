@@ -1,8 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import md5 from "react-native-md5";
-
 import CharacterList from "../dashboard/CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 import apiClient from "../lib/api-client";
@@ -39,11 +36,7 @@ class CharactersPage extends React.Component {
   };
 
   componentDidMount() {
-    var favs = this.fetchUserCharacters();
-    // console.log(favs);
-    // this.setState({
-    //   favCharacters: favs
-    // });
+    this.fetchUserCharacters();
   }
 
   render() {

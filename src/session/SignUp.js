@@ -54,7 +54,7 @@ class SignUp extends React.Component {
             password: "",
             passwordRepeat: ""
           });
-          this.props.router.push("posts");
+          this.props.router.push("/sign-in");
         })
         .catch(error => {
           console.log(error);
@@ -67,7 +67,7 @@ class SignUp extends React.Component {
       });
     } else {
       this.setState({
-        error: "Different passwords"
+        error: "Passwords are not the same"
       });
     }
   };
@@ -108,9 +108,9 @@ class SignUp extends React.Component {
               label={"Sign up"}
               className="btn-danger"
             />
-            <h2>
+            <h4>
               {this.state.error}
-            </h2>
+            </h4>
           </StyledLog>
         </form>
       </div>
@@ -118,8 +118,8 @@ class SignUp extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-};
+// const mapStateToProps = state => {
+//   return {};
+// };
 
-export default connect(mapStateToProps)(withRouter(SignUp));
+export default withRouter(SignUp);

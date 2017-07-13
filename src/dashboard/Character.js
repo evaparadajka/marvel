@@ -27,10 +27,6 @@ class Character extends React.Component {
     });
   };
 
-  isHovered = () => {
-    return this.state.hover;
-  };
-
   isToLong = text => {
     if (text.length > 180) {
       return (
@@ -47,6 +43,10 @@ class Character extends React.Component {
     }
   };
 
+  isHovered = () => {
+    return this.state.hover;
+  };
+
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
@@ -60,7 +60,6 @@ class Character extends React.Component {
 
           {this.isToLong(this.props.description)}
         </StyledOverlay>
-
       );
     } else return null;
   };

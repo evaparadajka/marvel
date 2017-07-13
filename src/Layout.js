@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router";
-
-import styled from "styled-components";
 import { connect } from "react-redux";
 
 export class Layout extends React.Component {
@@ -12,20 +10,19 @@ export class Layout extends React.Component {
     });
   };
 
-  isLogged = () => {
-    if (this.props.email !== "") {
+  renderLogout = () => {
+    if (this.isLogged()) {
       return (
         <Link to="/sign-in" onClick={this.logout} className="nav-style">
           Logout
         </Link>
       );
-    } else {
-      return (
-        <Link to="/sign-in" className="nav-style">
-          Login
-        </Link>
-      );
-    }
+    } else return null;
+  };
+
+  isLogged = () => {
+    if (this.props.email !== "") return true;
+    else return false;
   };
 
   render() {
@@ -35,7 +32,7 @@ export class Layout extends React.Component {
           <ul className="nav navbar-nav">
             <li>
               <a className="navbar-left" href="#">
-                <i className="fa fa-paw nav-style" fontaria-hidden="true" />
+                <i className="fa fa-paw nav-style" />
               </a>
             </li>
             <li className="active">
@@ -57,7 +54,7 @@ export class Layout extends React.Component {
                 </Link>}
             </li>
             <li>
-              {this.isLogged()}
+              {this.renderLogout()}
             </li>
           </ul>
         </div>

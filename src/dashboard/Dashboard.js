@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
 
   render() {
     const charactersToRender = this.props.characters.charactersCollection;
-    console.log(charactersToRender);
+
     return (
       <div className="center">
         <StyledDashboard>
