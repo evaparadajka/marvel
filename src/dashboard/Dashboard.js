@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import md5 from "react-native-md5";
 
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";

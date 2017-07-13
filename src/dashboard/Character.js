@@ -9,34 +9,21 @@ class Character extends React.Component {
     this.state = {
       hover: false
     };
-    //this.logDate = this.logDate.bind(this);
-    //this.addPost = this.addPost.bind(this);
   }
 
   show = () => {
     this.props.show(this.props.id);
   };
 
-  // render() {
-  //   return (
-  //     <div className="col-md-4">
-  //       <StyledCharacter>
-  //         {this.props.img}
-  //         <div>
-  //           ID: {this.props.id}
-  //         </div>
-
   onMouseEnterHandler = () => {
     this.setState({
       hover: true
     });
-    console.log("enter");
   };
   onMouseLeaveHandler = () => {
     this.setState({
       hover: false
     });
-    console.log("leave");
   };
 
   isHovered = () => {
@@ -62,11 +49,6 @@ class Character extends React.Component {
   };
 
   render() {
-    // let inner = normal;
-    // if (this.state.hover) {
-    //   inner = hover;
-    // }
-    // console.log("Props charcter", this.props);
     return (
       <div
         className="col-md-4"
@@ -92,13 +74,6 @@ var after = {
   display: "block",
   color: "black",
   background: "rgba(255, 255, 255, 0.6)"
-  //backgroundColor: "black",
-  //opacity: "0.5"
-  // border: "solid 1px green"
 };
-//
-// var description = {
-//   margin: "11%"
-// };
 
 export default Character;
