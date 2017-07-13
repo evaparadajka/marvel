@@ -53,7 +53,7 @@ class Character extends React.Component {
           <div>
             {this.props.name}
           </div>
-          <div style={description}>
+          <div>
             {this.props.description}
           </div>
         </div>
@@ -82,22 +82,6 @@ class Character extends React.Component {
   }
 }
 
-// var normal = {
-//   top: 0,
-//   bottom: 0,
-//   left: 0,
-//   right: 0,
-//   opacity: 1
-// };
-
-// var hover = {
-//   top: 0,
-//   bottom: 0,
-//   left: 0,
-//   right: 0,
-//   opacity: 0.6
-// };
-
 var after = {
   position: "absolute",
   top: "0px",
@@ -112,9 +96,9 @@ var after = {
   //opacity: "0.5"
   // border: "solid 1px green"
 };
-
-var description = {
-  margin: "11%"
-};
+//
+// var description = {
+//   margin: "11%"
+// };
 
 export default Character;

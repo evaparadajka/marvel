@@ -4,7 +4,7 @@ import Character from "./Character";
 
 class CharacterList extends Component {
   render() {
-    console.log(this.props);
+    //console.log(this.props);
 
     return (
       <div>

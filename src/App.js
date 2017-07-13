@@ -10,7 +10,7 @@ import SignIn from "./session/SignIn";
 import SignUp from "./session/SignUp";
 import Dashboard from "./dashboard/Dashboard";
 import CharacterDetails from "./character_details/CharacterDetails";
-
+import CharactersPage from "./user_characters/CharactersPage";
 
 class App extends Component {
   authenticateUser = (nextState, replace) => {
@@ -27,9 +27,9 @@ class App extends Component {
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>
             <IndexRoute component={Dashboard} />
-            <IndexRoute path="home" component={Dashboard} />
+
             <Route path="character-details/:id" component={CharacterDetails} />
-            {/* <Route path="characters" component={CharacterPage} /> */}
+            <Route path="characters" component={CharactersPage} />
             {/* <Route path="comics" component={Comics} /> */}
           </Route>
           <Route path="sign-in" component={SignIn} />

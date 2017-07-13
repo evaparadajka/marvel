@@ -12,8 +12,6 @@ export class Layout extends React.Component {
       type: "LOGOUT",
       data: {}
     });
-    //przejscie do strony posts
-    this.props.router.push("posts");
   };
   isLogged = () => {
     if (this.props.email !== "") {

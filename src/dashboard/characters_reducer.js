@@ -1,5 +1,6 @@
 const initialState = {
   charactersCollection: [],
+  userCharactersCollection: [],
   characterToShow: {}
 };
 //   charactersCollection: [
@@ -53,6 +54,11 @@ const characters = (state = initialState, action) => {
       return {
         ...state,
         charactersCollection: action.payload
+      };
+    case "FETCH_USER_CHAR":
+      return {
+        ...state,
+        userCharactersCollection: action.payload
       };
     case "SHOW":
       return {
