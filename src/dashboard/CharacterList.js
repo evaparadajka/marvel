@@ -7,7 +7,7 @@ class CharacterList extends Component {
     console.log(this.props);
 
     return (
-      <div className="center">
+      <div className="space">
         {this.props.characters.map((d, index) =>
           <Character
             show={this.props.show}

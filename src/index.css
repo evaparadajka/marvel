@@ -37,14 +37,19 @@ hr {
 }
 
 .center {
-  margin: auto 1%;
+}
+
+.space {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .welcome {
 }
 
 .welcome:after {
-  background: rgba(255, 255, 255, 0);
+  background-color: red;
 }
 
 .log-style {
@@ -53,7 +58,9 @@ hr {
 }
 
 .background {
-  background-image: url(../src/img/background.jpg);
+  background-image: url(../src/img/background-log-ok.jpg);
+  background-size: cover;
+  background-position: center;
   height: 1500px;
 }
 
