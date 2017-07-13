@@ -7,3 +7,42 @@ body {
 h1 {
   margin-top: 15%;
 }
+
+hr {
+  color: #c94c4c;
+  border: solid;
+  border-width: 1px;
+  margin: 0;
+}
+
+.sign-up {
+  color: #c94c4c;
+}
+
+.nav-style {
+  color: #c94c4c;
+}
+
+.nav-style:hover {
+  color: #a91c1c;
+}
+
+.nav-style:visited {
+  color: #a91c1c;
+}
+
+.right {
+  float: right;
+  margin-right: 1%;
+}
+
+.welcome {
+}
+
+.welcome:after {
+  background: rgba(255, 255, 255, 0);
+}
+
+.log-style {
+  margin: 5% 30%;
+}

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
+import StyledLog from "../user_interface/StyledLog";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -42,34 +43,23 @@ class SignUp extends React.Component {
     ) {
       apiClient
         .post("/api/v1/registrations", {
-          //dane z naszego formularza w postaci obiektu
-          //axios post zwraca promise
           user: {
             email: this.state.email,
             password: this.state.password
           }
         })
         .then(response => {
-          // this.props.dispatch({
-          //   type: "REGISTER",
-          //   data: {
-          //     email: this.state.email,
-          //     password: this.state.password,
-          //     passwordRepeat: this.state.passwordRepeat
-          //   }
-          // });
           this.setState({
             email: "",
             password: "",
             passwordRepeat: ""
           });
-
           this.props.router.push("posts");
         })
         .catch(error => {
           console.log(error);
           this.setState({
-            error: "Coś poszło nie tak"
+            error: "Something went wrong."
           });
         });
       this.setState({
@@ -77,7 +67,7 @@ class SignUp extends React.Component {
       });
     } else {
       this.setState({
-        error: "Różne hasła"
+        error: "Different passwords"
       });
     }
   };
@@ -85,8 +75,9 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="text-center">
-        <form className="form-group">
+      <form className="form-group log-style">
+        <StyledLog>
+          <br />
           <label>Email: </label>
           <input
             className="form-control"
@@ -94,7 +85,7 @@ class SignUp extends React.Component {
             type="email"
             value={this.state.email}
           />
-
+          <br />
           <label>Password: </label>
           <input
             className="form-control"
@@ -102,6 +93,7 @@ class SignUp extends React.Component {
             type="password"
             value={this.state.password}
           />
+          <br />
           <label>Repeat password: </label>
           <input
             className="form-control"
@@ -118,11 +110,12 @@ class SignUp extends React.Component {
           <h2>
             {this.state.error}
           </h2>
-        </form>
-      </div>
+        </StyledLog>
+      </form>
     );
   }
 }
+
 const mapStateToProps = state => {
   return {};
 };

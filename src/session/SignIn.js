@@ -5,6 +5,7 @@ import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
 import { signIn } from "./session-actions";
 import { Link } from "react-router";
+import StyledLog from "../user_interface/StyledLog";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -42,8 +43,9 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div className="text-center">
-        <form className="form-group">
+      <form className="form-group log-style">
+        <StyledLog>
+          <br />
           <label>Mail: </label>
           <input
             className="form-control"
@@ -51,7 +53,7 @@ class SignIn extends React.Component {
             type="email"
             value={this.state.email}
           />
-
+          <br />
           <label>Password: </label>
           <input
             className="form-control"
@@ -67,15 +69,15 @@ class SignIn extends React.Component {
           />
           <h2>
             Or
-            <Link to="/sign-up" style={{ color: "#c94c4c" }}>
+            <Link to="/sign-up" className="sign-up">
               {" "}Sign up
             </Link>
             <br />
             {this.state.error}
             {this.props.session.status}
           </h2>
-        </form>
-      </div>
+        </StyledLog>
+      </form>
     );
   }
 }
