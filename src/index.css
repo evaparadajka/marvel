@@ -7,3 +7,74 @@ body {
 h1 {
   margin-top: 15%;
 }
+
+hr {
+  color: #c94c4c;
+  border: solid;
+  border-width: 1px;
+  margin: 0;
+}
+
+.sign-up {
+  color: #c94c4c;
+}
+
+.nav-style {
+  color: #c94c4c;
+}
+
+.nav-style:hover {
+  color: #a91c1c;
+}
+
+.nav-style:visited {
+  color: #a91c1c;
+}
+
+.right {
+  float: right;
+  margin-right: 1%;
+}
+
+.center {
+}
+
+.space {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.welcome {
+}
+
+.welcome:after {
+  background-color: red;
+}
+
+.log-style {
+  margin: 10% 30%;
+  background: white;
+}
+
+.background {
+  background-image: url(../src/img/background-log-ok.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 1500px;
+}
+
+.square {
+  width: 300px;
+  height: 300px;
+  margin: 2%;
+}
+
+.name {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.description {
+  margin: 10px 50px;
+}

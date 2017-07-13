@@ -3,74 +3,56 @@ import { Link } from "react-router";
 
 import styled from "styled-components";
 import { connect } from "react-redux";
-/**
- * ComponentName
- */
+
 export class Layout extends React.Component {
   logout = () => {
     this.props.dispatch({
       type: "LOGOUT",
       data: {}
     });
-    //przejscie do strony posts
-    this.props.router.push("posts");
   };
+
   isLogged = () => {
     if (this.props.email !== "") {
       return (
-        <Link style={{ color: "#c94c4c" }} onClick={this.logout}>
+        <Link to="/sign-in" onClick={this.logout} className="nav-style">
           Logout
         </Link>
       );
     } else {
       return (
-        <Link to="/sign-in" style={{ color: "#c94c4c" }}>
+        <Link to="/sign-in" className="nav-style">
           Login
         </Link>
       );
     }
   };
+
   render() {
     return (
-      <StyledComponent className="container-fluid">
-        <div
-          className="row"
-          style={{
-            borderBottom: "solid",
-            borderBottomColor: "#c94c4c",
-            color: "#eee"
-          }}
-        >
+      <div className="container-fluid">
+        <div className="row">
           <ul className="nav navbar-nav">
             <li>
               <a className="navbar-left" href="#">
-                <i
-                  className="fa fa-paw "
-                  style={{ color: "#c94c4c" }}
-                  fontaria-hidden="true"
-                />
+                <i className="fa fa-paw nav-style" fontaria-hidden="true" />
               </a>
             </li>
             <li className="active">
-              <Link to="/" style={{ color: "#c94c4c" }}>
+              <Link to="/" className="nav-style">
                 Dashboard
               </Link>
             </li>
-
             <li className="active">
-              <Link to="/characters" style={{ color: "#c94c4c" }}>
+              <Link to="/characters" className="nav-style">
                 Characters
               </Link>
             </li>
-
-            <li>
-              <Link to="/sign-up" style={{ color: "#c94c4c" }}>
-                {" "}Sign up
-              </Link>
-            </li>
+          </ul>
+          <ul className="nav navbar-nav right">
             <li>
               {this.props.email &&
-                <Link style={{ color: "#c94c4c" }}>
+                <Link className="nav-style welcome">
                   {" "}Hello {this.props.email}
                 </Link>}
             </li>
@@ -79,27 +61,17 @@ export class Layout extends React.Component {
             </li>
           </ul>
         </div>
+        <hr />
         <div className="container-fluid">
           <div className="row">
             {this.props.children}
-            {/* {React.Children.map(this.props.children, c =>
-							React.cloneElement(c, { injectedProp: "props from layout" })
-						)} */}
-            {/* {React.Children.map(this.props.children, c =>
-							React.cloneElement(c, { counter: this.updateCounter })
-						)} */}
           </div>
         </div>
-      </StyledComponent>
+      </div>
     );
   }
 }
 
-const StyledComponent = styled.div`
-  background-color: green,
-  font-size: 20px,
-  color: #fff
-`;
 const mapStateToProps = state => {
   return {
     email: state.session.email

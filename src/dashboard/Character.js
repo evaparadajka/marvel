@@ -2,6 +2,7 @@ import React from "react";
 
 import Button from "../user_interface/Button";
 import StyledCharacter from "../user_interface/StyledCharacter";
+import StyledOverlay from "../user_interface/StyledOverlay";
 
 class Character extends React.Component {
   constructor(props) {
@@ -9,22 +10,11 @@ class Character extends React.Component {
     this.state = {
       hover: false
     };
-    //this.logDate = this.logDate.bind(this);
-    //this.addPost = this.addPost.bind(this);
   }
 
   show = () => {
     this.props.show(this.props.id);
   };
-
-  // render() {
-  //   return (
-  //     <div className="col-md-4">
-  //       <StyledCharacter>
-  //         {this.props.img}
-  //         <div>
-  //           ID: {this.props.id}
-  //         </div>
 
   onMouseEnterHandler = () => {
     this.setState({
@@ -43,33 +33,42 @@ class Character extends React.Component {
     return this.state.hover;
   };
 
+  isToLong = text => {
+    if (text.length > 180) {
+      return (
+        <div className="description">
+          {text.slice(0, 180)}...
+        </div>
+      );
+    } else {
+      return (
+        <div className="description">
+          {text}
+        </div>
+      );
+    }
+  };
+
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
-        <div style={after}>
+        <StyledOverlay>
           <div>
             <Button onClick={this.show} label="SHOW DETAILS" />
           </div>
-          <div>
+          <div className="name">
             {this.props.name}
           </div>
-          <div style={description}>
-            {this.props.description}
-          </div>
-        </div>
+          {this.isToLong(this.props.description)}
+        </StyledOverlay>
       );
     } else return null;
   };
 
   render() {
-    // let inner = normal;
-    // if (this.state.hover) {
-    //   inner = hover;
-    // }
-
     return (
       <div
-        className="col-md-4"
+        className="col-md-4 square"
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
       >
@@ -81,40 +80,5 @@ class Character extends React.Component {
     );
   }
 }
-
-// var normal = {
-//   top: 0,
-//   bottom: 0,
-//   left: 0,
-//   right: 0,
-//   opacity: 1
-// };
-
-// var hover = {
-//   top: 0,
-//   bottom: 0,
-//   left: 0,
-//   right: 0,
-//   opacity: 0.6
-// };
-
-var after = {
-  position: "absolute",
-  top: "0px",
-
-  left: 0,
-  width: "100%",
-  height: "100%",
-  display: "block",
-  color: "black",
-  background: "rgba(255, 255, 255, 0.6)"
-  //backgroundColor: "black",
-  //opacity: "0.5"
-  // border: "solid 1px green"
-};
-
-var description = {
-  margin: "11%"
-};
 
 export default Character;

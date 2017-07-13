@@ -5,6 +5,7 @@ import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
 import { signIn } from "./session-actions";
 import { Link } from "react-router";
+import StyledLog from "../user_interface/StyledLog";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -42,38 +43,41 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <div className="text-center">
+      <div className="container-fluid background">
         <form className="form-group">
-          <label>Mail: </label>
-          <input
-            className="form-control"
-            onChange={this.updateName}
-            type="email"
-            value={this.state.email}
-          />
-
-          <label>Password: </label>
-          <input
-            className="form-control"
-            onChange={this.updateName2}
-            type="password"
-            value={this.state.password}
-          />
-          <br />
-          <Button
-            onClick={this.onSubmit}
-            label={"Sign in"}
-            className="btn-danger"
-          />
-          <h2>
-            Or
-            <Link to="/sign-up" style={{ color: "#c94c4c" }}>
-              {" "}Sign up
-            </Link>
+          <StyledLog className="log-style">
             <br />
-            {this.state.error}
-            {this.props.session.status}
-          </h2>
+            <label>Mail: </label>
+            <input
+              className="form-control"
+              onChange={this.updateName}
+              type="email"
+              value={this.state.email}
+            />
+            <br />
+            <label>Password: </label>
+            <input
+              className="form-control"
+              onChange={this.updateName2}
+              type="password"
+              value={this.state.password}
+            />
+            <br />
+            <Button
+              onClick={this.onSubmit}
+              label={"Sign in"}
+              className="btn-danger"
+            />
+            <h2>
+              Or
+              <Link to="/sign-up" className="sign-up">
+                {" "}Sign up
+              </Link>
+              <br />
+              {this.state.error}
+              {this.props.session.status}
+            </h2>
+          </StyledLog>
         </form>
       </div>
     );

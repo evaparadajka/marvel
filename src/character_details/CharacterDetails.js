@@ -7,7 +7,6 @@ import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 
 class CharacterDetails extends React.Component {
   render() {
-    console.log(this.props.character, "kalosz");
     return (
       <div>
         <StyledCharacterDetails>
@@ -42,7 +41,6 @@ class CharacterDetails extends React.Component {
           <br />
           <div>
             <h4>Stories:</h4>
-            {/* tu wstawić StoriesList */}
             <StoryList stories={this.props.character.stories.items} />
           </div>
         </StyledCharacterDetails>
