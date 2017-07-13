@@ -43,41 +43,43 @@ class SignIn extends React.Component {
 
   render() {
     return (
-      <form className="form-group log-style">
-        <StyledLog>
-          <br />
-          <label>Mail: </label>
-          <input
-            className="form-control"
-            onChange={this.updateName}
-            type="email"
-            value={this.state.email}
-          />
-          <br />
-          <label>Password: </label>
-          <input
-            className="form-control"
-            onChange={this.updateName2}
-            type="password"
-            value={this.state.password}
-          />
-          <br />
-          <Button
-            onClick={this.onSubmit}
-            label={"Sign in"}
-            className="btn-danger"
-          />
-          <h2>
-            Or
-            <Link to="/sign-up" className="sign-up">
-              {" "}Sign up
-            </Link>
+      <div className="container-fluid background">
+        <form className="form-group">
+          <StyledLog className="log-style">
             <br />
-            {this.state.error}
-            {this.props.session.status}
-          </h2>
-        </StyledLog>
-      </form>
+            <label>Mail: </label>
+            <input
+              className="form-control"
+              onChange={this.updateName}
+              type="email"
+              value={this.state.email}
+            />
+            <br />
+            <label>Password: </label>
+            <input
+              className="form-control"
+              onChange={this.updateName2}
+              type="password"
+              value={this.state.password}
+            />
+            <br />
+            <Button
+              onClick={this.onSubmit}
+              label={"Sign in"}
+              className="btn-danger"
+            />
+            <h2>
+              Or
+              <Link to="/sign-up" className="sign-up">
+                {" "}Sign up
+              </Link>
+              <br />
+              {this.state.error}
+              {this.props.session.status}
+            </h2>
+          </StyledLog>
+        </form>
+      </div>
     );
   }
 }

@@ -33,6 +33,22 @@ class Character extends React.Component {
     return this.state.hover;
   };
 
+  isToLong = text => {
+    if (text.length > 180) {
+      return (
+        <div className="description">
+          {text.slice(0, 180)}...
+        </div>
+      );
+    } else {
+      return (
+        <div className="description">
+          {text}
+        </div>
+      );
+    }
+  };
+
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
@@ -40,12 +56,10 @@ class Character extends React.Component {
           <div>
             <Button onClick={this.show} label="SHOW DETAILS" />
           </div>
-          <div>
+          <div className="name">
             {this.props.name}
           </div>
-          <div>
-            {this.props.description}
-          </div>
+          {this.isToLong(this.props.description)}
         </StyledOverlay>
       );
     } else return null;
@@ -54,7 +68,7 @@ class Character extends React.Component {
   render() {
     return (
       <div
-        className="col-md-4"
+        className="col-md-4 square"
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
       >

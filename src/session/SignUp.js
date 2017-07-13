@@ -75,43 +75,45 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <form className="form-group log-style">
-        <StyledLog>
-          <br />
-          <label>Email: </label>
-          <input
-            className="form-control"
-            onChange={this.updateEmail}
-            type="email"
-            value={this.state.email}
-          />
-          <br />
-          <label>Password: </label>
-          <input
-            className="form-control"
-            onChange={this.updatePassword}
-            type="password"
-            value={this.state.password}
-          />
-          <br />
-          <label>Repeat password: </label>
-          <input
-            className="form-control"
-            onChange={this.updatePasswordRepeat}
-            type="password"
-            value={this.state.passwordRepeat}
-          />
-          <br />
-          <Button
-            onClick={this.onSubmit}
-            label={"Sign up"}
-            className="btn-danger"
-          />
-          <h2>
-            {this.state.error}
-          </h2>
-        </StyledLog>
-      </form>
+      <div className="container-fluid background">
+        <form className="form-group">
+          <StyledLog className="log-style">
+            <br />
+            <label>Email: </label>
+            <input
+              className="form-control"
+              onChange={this.updateEmail}
+              type="email"
+              value={this.state.email}
+            />
+            <br />
+            <label>Password: </label>
+            <input
+              className="form-control"
+              onChange={this.updatePassword}
+              type="password"
+              value={this.state.password}
+            />
+            <br />
+            <label>Repeat password: </label>
+            <input
+              className="form-control"
+              onChange={this.updatePasswordRepeat}
+              type="password"
+              value={this.state.passwordRepeat}
+            />
+            <br />
+            <Button
+              onClick={this.onSubmit}
+              label={"Sign up"}
+              className="btn-danger"
+            />
+            <h2>
+              {this.state.error}
+            </h2>
+          </StyledLog>
+        </form>
+      </div>
     );
   }
 }
