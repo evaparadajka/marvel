@@ -7,22 +7,15 @@ import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import apiClient from "../lib/api-client";
 class CharacterDetails extends React.Component {
   addToFav = character => {
-    // this.props.onAddToFav(this.props.id);
-    //console.log("add to fav", this.props.character.id);
-    console.log(this.props.session.user_id, this.props.character.id);
     apiClient
       .post("/marvel/api/v1/create_character", {
         character: {
           name: this.props.character.name,
           external_id: this.props.character.id
-          // user_id: this.props.session.user_id
         }
       })
       .then(response => {
         console.log(response);
-
-        //przejscie do strony posts
-        //this.props.router.push("posts");
       })
       .catch(error => {
         console.error(error);

@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-
-import logo from "./logo.svg";
 import "./App.css";
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
 import Layout from "./Layout";
@@ -11,7 +9,6 @@ import Dashboard from "./dashboard/Dashboard";
 import CharacterDetails from "./character_details/CharacterDetails";
 
 import CharactersPage from "./user_characters/CharactersPage";
-
 
 class App extends Component {
   authenticateUser = (nextState, replace) => {

@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
-import apiClient from "../lib/api-client";
 import { signIn } from "./session-actions";
 import { Link } from "react-router";
 import StyledLog from "../user_interface/StyledLog";
@@ -17,13 +16,13 @@ class SignIn extends React.Component {
     };
   }
 
-  updateName = e => {
+  updateEmail = e => {
     this.setState({
       email: e.target.value
     });
   };
 
-  updateName2 = e => {
+  updatePassword = e => {
     this.setState({
       password: e.target.value
     });
@@ -47,10 +46,10 @@ class SignIn extends React.Component {
         <form className="form-group">
           <StyledLog className="log-style">
             <br />
-            <label>Mail: </label>
+            <label>Email: </label>
             <input
               className="form-control"
-              onChange={this.updateName}
+              onChange={this.updateEmail}
               type="email"
               value={this.state.email}
             />
@@ -58,7 +57,7 @@ class SignIn extends React.Component {
             <label>Password: </label>
             <input
               className="form-control"
-              onChange={this.updateName2}
+              onChange={this.updatePassword}
               type="password"
               value={this.state.password}
             />
