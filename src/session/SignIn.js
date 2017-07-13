@@ -16,12 +16,14 @@ class SignIn extends React.Component {
     };
   }
 
+  // nazwa do zmiany
   updateName = e => {
     this.setState({
       email: e.target.value
     });
   };
 
+  // nazwa do zmiany
   updateName2 = e => {
     this.setState({
       password: e.target.value
@@ -68,6 +70,7 @@ class SignIn extends React.Component {
           />
           <h2>
             Or
+            {/* inline style, wydzielic do styled-components, co to za spacja? */}
             <Link to="/sign-up" style={{ color: "#c94c4c" }}>
               {" "}Sign up
             </Link>

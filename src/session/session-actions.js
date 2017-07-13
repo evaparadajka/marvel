@@ -26,6 +26,7 @@ export const signIn = user => {
           }
         });
         console.log("hash");
+        // słaby pomysł z określaniem stringa jako ta flaga, wystarczy true/false tutaj
         dispatch({
           type: "LOGIN_PROCESSING",
           data: "Success"
@@ -38,6 +39,7 @@ export const signIn = user => {
   };
 };
 
+// komentarze do wywalenia
 // apiClient
 //   .post("/api/v1/sessions", {
 //     //dane z naszego formularza w postaci obiektu

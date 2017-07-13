@@ -42,6 +42,7 @@ class SignUp extends React.Component {
     ) {
       apiClient
         .post("/api/v1/registrations", {
+          // komentarze do wywalenia
           //dane z naszego formularza w postaci obiektu
           //axios post zwraca promise
           user: {
@@ -51,6 +52,7 @@ class SignUp extends React.Component {
         })
         .then(response => {
           console.log(response);
+          // komentarze do wywalenia
           // this.props.dispatch({
           //   type: "REGISTER",
           //   data: {
@@ -69,6 +71,7 @@ class SignUp extends React.Component {
         })
         .catch(error => {
           console.log(error);
+          // po angielsku
           this.setState({
             error: "Coś poszło nie tak"
           });
@@ -77,6 +80,7 @@ class SignUp extends React.Component {
         error: ""
       });
     } else {
+      // po angielsku
       this.setState({
         error: "Różne hasła"
       });
@@ -125,6 +129,8 @@ class SignUp extends React.Component {
     );
   }
 }
+
+// puste mapStateToProps
 const mapStateToProps = state => {
   return {};
 };

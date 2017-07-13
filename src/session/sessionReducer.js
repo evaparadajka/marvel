@@ -1,3 +1,4 @@
+// wydzielic initialState jak osobna zmienna
 const session = (state = { email: "", token: "", status: "" }, action) => {
   switch (action.type) {
     case "LOGIN":

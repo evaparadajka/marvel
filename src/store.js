@@ -1,11 +1,12 @@
-
 import { compose, createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+// do wywalenia
 // import { counter, posts } from "./posts/postsReducer";
 import session from "./session/sessionReducer";
 import persistState from "redux-localstorage";
 import characters from "./dashboard/characters_reducer";
 //polaczone reducery
+// counter do wywalenia
 const counter = (state = 0, action) => {
   switch (action.type) {
     case "INCREMENT":
@@ -23,7 +24,10 @@ const rootReducer = combineReducers({
   characters: characters,
   session: session
 });
-const enhancer = compose(applyMiddleware(thunk), persistState(["session", "characters"]));
+const enhancer = compose(
+  applyMiddleware(thunk),
+  persistState(["session", "characters"])
+);
 const store = createStore(rootReducer, {}, enhancer);
 
 export default store;
