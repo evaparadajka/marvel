@@ -72,7 +72,6 @@ class CharacterDetails extends React.Component {
           <br />
           <div>
             <h4>Stories:</h4>
-            {/* tu wstawić StoriesList */}
             <StoryList stories={this.props.character.stories.items} />
           </div>
         </StyledCharacterDetails>

@@ -5,7 +5,7 @@ import Character from "./Character";
 class CharacterList extends Component {
   render() {
     return (
-      <div>
+      <div className="space">
         {this.props.characters.map((d, index) =>
           <Character
             show={this.props.show}

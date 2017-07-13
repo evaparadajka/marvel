@@ -2,6 +2,7 @@ import React from "react";
 
 import Button from "../user_interface/Button";
 import StyledCharacter from "../user_interface/StyledCharacter";
+import StyledOverlay from "../user_interface/StyledOverlay";
 
 class Character extends React.Component {
   constructor(props) {
@@ -30,20 +31,36 @@ class Character extends React.Component {
     return this.state.hover;
   };
 
+  isToLong = text => {
+    if (text.length > 180) {
+      return (
+        <div className="description">
+          {text.slice(0, 180)}...
+        </div>
+      );
+    } else {
+      return (
+        <div className="description">
+          {text}
+        </div>
+      );
+    }
+  };
+
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
-        <div style={after}>
+        <StyledOverlay>
           <div>
             <Button onClick={this.show} label="SHOW DETAILS" />
           </div>
-          <div>
+          <div className="name">
             {this.props.name}
           </div>
-          <div>
-            {this.props.description}
-          </div>
-        </div>
+
+          {this.isToLong(this.props.description)}
+        </StyledOverlay>
+
       );
     } else return null;
   };
@@ -51,7 +68,7 @@ class Character extends React.Component {
   render() {
     return (
       <div
-        className="col-md-4"
+        className="col-md-4 square"
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
       >
@@ -63,17 +80,5 @@ class Character extends React.Component {
     );
   }
 }
-
-var after = {
-  position: "absolute",
-  top: "0px",
-
-  left: 0,
-  width: "100%",
-  height: "100%",
-  display: "block",
-  color: "black",
-  background: "rgba(255, 255, 255, 0.6)"
-};
 
 export default Character;

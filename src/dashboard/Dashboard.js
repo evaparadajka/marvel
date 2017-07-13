@@ -40,7 +40,7 @@ class Dashboard extends React.Component {
     const charactersToRender = this.props.characters.charactersCollection;
     console.log(charactersToRender);
     return (
-      <div>
+      <div className="center">
         <StyledDashboard>
           <CharacterList show={this.show} characters={charactersToRender} />
         </StyledDashboard>
