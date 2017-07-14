@@ -55,10 +55,11 @@ class Character extends React.Component {
             <Button onClick={this.show} label="SHOW DETAILS" />
           </div>
           <div className="name">
-            {this.props.name}
+            {this.props.name ? this.props.name : this.props.title}
           </div>
-
-          {this.isToLong(this.props.description)}
+          {this.props.description
+            ? this.isToLong(this.props.description)
+            : null}
         </StyledOverlay>
       );
     } else return null;
