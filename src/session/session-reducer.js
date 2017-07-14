@@ -11,7 +11,11 @@ const session = (state = initialState, action) => {
     case "LOGOUT":
       return { email: "", password: "", user_id: "" };
     case "LOGIN_PROCESSING":
-      return { ...state, status: action.data };
+      return { ...state, status: "Signing in progress..." };
+    case "LOGIN_SUCCESS":
+      return { ...state, status: "Success" };
+    case "LOGIN_FAILED":
+      return { ...state, status: "Login failed" };
     default:
       return state;
   }
