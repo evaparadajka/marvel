@@ -40,11 +40,13 @@ class CharactersPage extends React.Component {
   }
 
   render() {
-    const charactersToRender = this.props.characters.userCharactersCollection;
     return (
       <div>
         <StyledDashboard>
-          <CharacterList show={this.show} characters={charactersToRender} />
+          <CharacterList
+            show={this.show}
+            characters={this.props.characters.userCharactersCollection}
+          />
         </StyledDashboard>
       </div>
     );

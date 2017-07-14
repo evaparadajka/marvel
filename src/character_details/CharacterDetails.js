@@ -39,11 +39,9 @@ class CharacterDetails extends React.Component {
                 </h1>
               </div>
               <div className="col-md-6">
-                {/* <h1>Add to favourite</h1> */}
-                <i
+                <button
                   onClick={this.addToFav}
-                  className="fa fa-plus fa-3x"
-                  style={{ color: "#c94c4c" }}
+                  className="fa fa-plus fa-3x nav-style"
                   fontaria-hidden="true"
                 />
               </div>
