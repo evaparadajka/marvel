@@ -6,7 +6,15 @@ import StoryList from "./StoryList";
 import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import apiClient from "../lib/api-client";
 class CharacterDetails extends React.Component {
-  addToFav = character => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      characterStatus: "false"
+    };
+    //this.logDate = this.logDate.bind(this);
+    //this.addPost = this.addPost.bind(this);
+  }
+  addToFav = () => {
     apiClient
       .post("/marvel/api/v1/create_character", {
         character: {
@@ -15,13 +23,71 @@ class CharacterDetails extends React.Component {
         }
       })
       .then(response => {
-        console.log(response);
+        //inform that added
+        //console.log(response);
+        this.setState({
+          characterStatus: "true"
+        });
       })
       .catch(error => {
         console.error(error);
       });
   };
+  delFromFav = () => {
+    let idToBeDeleted = null;
+    this.props.userCharactersCollection.map(c => {
+      if (c.id === this.props.character.id) {
+        idToBeDeleted = c.binarId;
+      }
+    });
+    //console.log(idToBeDeleted);
+    // console.log(this.props.userCharactersCollection.binarId);
+    apiClient
+      .delete("/marvel/api/v1/delete_character/" + idToBeDeleted)
+      .then(response => {
+        //inform that deleted
+        // this.props.router.push("characters");
+        this.setState({
+          characterStatus: "false"
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+  isCharInFavs = () => {
+    let result = false;
+    this.props.userCharactersCollection.map(c => {
+      if (c.id === this.props.character.id) {
+        result = true;
+      }
+    });
+    return result;
+  };
+  renderActionsButton = () => {
+    if (this.isCharInFavs()) {
+      return (
+        <div className="col-md-6">
+          <button
+            onClick={this.delFromFav}
+            className="fa fa-trash-o fa-3x nav-style"
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="col-md-6">
+          <button
+            onClick={this.addToFav}
+            className="fa fa-plus fa-3x nav-style"
+          />
+        </div>
+      );
+    }
+  };
+
   render() {
+    console.log(this.props.userCharactersCollection);
     return (
       <div>
         <StyledCharacterDetails>
@@ -38,13 +104,8 @@ class CharacterDetails extends React.Component {
                   {this.props.character.name}
                 </h1>
               </div>
-              <div className="col-md-6">
-                <button
-                  onClick={this.addToFav}
-                  className="fa fa-plus fa-3x nav-style"
-                  fontaria-hidden="true"
-                />
-              </div>
+              {this.state.characterStatus}
+              {this.renderActionsButton()}
             </div>
           </div>
         </StyledCharacterDetails>
@@ -74,6 +135,7 @@ class CharacterDetails extends React.Component {
 const mapStateToProps = state => {
   return {
     character: state.characters.characterToShow,
+    userCharactersCollection: state.characters.userCharactersCollection,
     session: state.session
   };
 };

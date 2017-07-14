@@ -6,24 +6,52 @@ import apiClient from "../lib/api-client";
 class CharactersPage extends React.Component {
   fetchUserCharacters() {
     const characterArr = [];
+    const characterArrTEST = [];
+    const testCharacters = [];
     apiClient
       .get("/marvel/api/v1/fetch_characters")
       .then(response => {
-        const charactersIdToRender = response.data.characters.map(
-          c => c.external_id
-        );
+        response.data.characters.forEach(char => {
+          let Ids = { id: char.id, external_id: char.external_id };
+          testCharacters.push(Ids);
+        });
 
-        charactersIdToRender.forEach(charId => {
+        testCharacters.forEach(char => {
           this.props.characters.charactersCollection.map(c => {
-            if (c.id === charId) {
-              characterArr.push(c);
+            if (c.id === char.external_id) {
+              let mergedIds = { ...c, binarId: char.id };
+              //console.log(mergedIds);
+              characterArr.push(mergedIds);
             }
           });
         });
+        console.log(characterArr);
         this.props.dispatch({
           type: "FETCH_USER_CHAR",
           payload: characterArr
         });
+        // const charactersExternalIds = response.data.characters.map(
+        //   c => c.external_id
+        // );
+        // const charactersIds = response.data.characters.map(c => c.id);
+        // console.log(charactersIds);
+        // console.log(charactersExternalIds);
+        //
+        // // const charactersIdToRender = response.data.characters.map(
+        // //   c => c.external_id
+        // // );
+        // console.log(response.data.characters);
+        // charactersExternalIds.forEach(charId => {
+        //   this.props.characters.charactersCollection.map(c => {
+        //     if (c.id === charId) {
+        //       characterArr.push(c);
+        //     }
+        //   });
+        // });
+        // this.props.dispatch({
+        //   type: "FETCH_USER_CHAR",
+        //   payload: characterArr
+        // });
       })
       .catch(error => {
         console.log(error);
