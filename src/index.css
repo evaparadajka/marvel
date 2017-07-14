@@ -48,8 +48,8 @@ hr {
 .welcome {
 }
 
-.welcome:after {
-  background-color: red;
+.welcome:hover {
+  background: none;
 }
 
 .log-style {
