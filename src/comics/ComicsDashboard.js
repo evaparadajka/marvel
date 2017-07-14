@@ -8,16 +8,11 @@ import StyledDashboard from "../user_interface/StyledDashboard";
 class ComicsDashboard extends React.Component {
   fetchCharacters(offset) {
     apiMarvel
-      .get(
-        "/comics?limit=20&offset=" +
-          offset +
-          "&apikey=93e03380bbb458e68945c50bdd245b08",
-        {
-          Headers: {
-            Accept: "*/*"
-          }
+      .get("/comics", {
+        params: {
+          offset: offset
         }
-      )
+      })
       .then(response => {
         this.props.dispatch({
           type: "FETCH_COMICS",

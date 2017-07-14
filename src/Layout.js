@@ -38,9 +38,9 @@ export class Layout extends React.Component {
           </ul>
           <ul className="nav navbar-nav right">
             <li>
-              <Link className="nav-style welcome">
+              <spam className="nav-style welcome">
                 {" "}Hello {this.props.email}
-              </Link>
+              </spam>
             </li>
             <Logout email={this.props.email} />
           </ul>
