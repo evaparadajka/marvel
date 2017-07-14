@@ -45,7 +45,7 @@ class CharactersPage extends React.Component {
         <StyledDashboard>
           <CharacterList
             show={this.show}
-            characters={this.props.characters.userCharactersCollection}
+            characters={this.props.characters.userCharactersCollection.reverse()}
           />
         </StyledDashboard>
       </div>

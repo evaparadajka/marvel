@@ -28,10 +28,10 @@ class Character extends React.Component {
   };
 
   isToLong = text => {
-    if (text.length > 180) {
+    if (text.length > 150) {
       return (
         <div className="description">
-          {text.slice(0, 180)}...
+          {text.slice(0, 150)}...
         </div>
       );
     } else {
