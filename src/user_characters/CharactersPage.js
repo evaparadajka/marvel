@@ -19,7 +19,9 @@ class CharactersPage extends React.Component {
     return (
       <div>
         <StyledDashboard>
+
           <CharacterList show={this.show} characters={this.props.characters} />
+
         </StyledDashboard>
       </div>
     );

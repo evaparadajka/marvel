@@ -74,8 +74,10 @@ class SignIn extends React.Component {
               </Link>
               <br />
               {this.state.error}
-              {this.props.session.status}
             </h2>
+            <h4>
+              {this.props.session.status}
+            </h4>
           </StyledLog>
         </form>
       </div>

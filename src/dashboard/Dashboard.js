@@ -1,15 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
+import apiMarvel from "../lib/api-marvel";
 
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 
 class Dashboard extends React.Component {
-  fetchCharacters() {
-    axios
+  fetchCharacters(offset) {
+    apiMarvel
       .get(
-        "http://gateway.marvel.com/v1/public/characters?apikey=93e03380bbb458e68945c50bdd245b08",
+        "/characters?limit=20&offset=" +
+          offset +
+          "&apikey=93e03380bbb458e68945c50bdd245b08",
         {
           Headers: {
             Accept: "*/*"
@@ -31,9 +33,7 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.characters.charactersCollection.length === 0) {
-      this.fetchCharacters();
-    }
+    this.fetchCharacters(this.props.characters.charactersCollection.length);
   }
 
   render() {

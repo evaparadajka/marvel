@@ -4,8 +4,7 @@ import { hashHistory } from "react-router";
 export const signIn = user => {
   return (dispatch, getState) => {
     dispatch({
-      type: "LOGIN_PROCESSING",
-      data: "Signing in progress"
+      type: "LOGIN_PROCESSING"
     });
     return apiClient
       .post("/api/v1/sessions", {
@@ -24,16 +23,14 @@ export const signIn = user => {
           }
         });
         dispatch({
-          type: "LOGIN_PROCESSING",
-          data: "Success"
+          type: "LOGIN_SUCCESS"
         });
         hashHistory.push("/");
       })
       .catch(error => {
         console.error(error);
         dispatch({
-          type: "LOGIN_PROCESSING",
-          data: "Login failed"
+          type: "LOGIN_FAILED"
         });
       });
   };

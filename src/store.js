@@ -1,6 +1,6 @@
 import { compose, createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import session from "./session/sessionReducer";
+import session from "./session/session-reducer";
 import persistState from "redux-localstorage";
 import characters from "./dashboard/characters_reducer";
 
