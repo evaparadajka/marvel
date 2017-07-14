@@ -16,6 +16,21 @@ const characters = (state = initialState, action) => {
         ...state,
         userCharactersCollection: action.payload
       };
+    case "CHARACTERS/ADD_TO_FAVOURITES":
+      return {
+        ...state,
+        userCharactersCollection: [
+          ...state.userCharactersCollection,
+          action.payload
+        ]
+      };
+    case "CHARACTERS/DELETE_FROM_FAVOURITES":
+      return {
+        ...state,
+        userCharactersCollection: state.userCharactersCollection.filter(
+          c => c.id !== action.payload
+        )
+      };
     case "SHOW":
       return {
         ...state,
