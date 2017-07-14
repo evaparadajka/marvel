@@ -6,13 +6,18 @@ import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 
 class Dashboard extends React.Component {
-  fetchCharacters() {
+  fetchCharacters(offset) {
     apiMarvel
-      .get("/characters?apikey=93e03380bbb458e68945c50bdd245b08", {
-        Headers: {
-          Accept: "*/*"
+      .get(
+        "/characters?limit=20&offset=" +
+          offset +
+          "&apikey=93e03380bbb458e68945c50bdd245b08",
+        {
+          Headers: {
+            Accept: "*/*"
+          }
         }
-      })
+      )
       .then(response => {
         this.props.dispatch({
           type: "FETCH_CHAR",
@@ -28,9 +33,7 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.characters.charactersCollection.length === 0) {
-      this.fetchCharacters();
-    }
+    this.fetchCharacters(this.props.characters.charactersCollection.length);
   }
 
   render() {
