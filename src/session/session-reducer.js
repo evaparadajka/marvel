@@ -1,10 +1,14 @@
-const initialState = { email: "", token: "", status: "" };
+const initialState = { email: "", name: "", token: "", status: "" };
 const session = (state = initialState, action) => {
   switch (action.type) {
     case "LOGIN":
       return {
         ...state,
         email: action.data.email,
+        name: action.data.email.substring(
+          0,
+          action.data.email.lastIndexOf("@")
+        ),
         token: action.data.token,
         user_id: action.data.user_id
       };

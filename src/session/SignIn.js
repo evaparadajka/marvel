@@ -43,8 +43,8 @@ class SignIn extends React.Component {
   render() {
     return (
       <div className="container-fluid background">
-        <form className="form-group">
-          <StyledLog className="log-style">
+        <form className="form-group ">
+          <StyledLog className="log-style col-xs-5 ">
             <br />
             <label>Email: </label>
             <input
@@ -53,7 +53,7 @@ class SignIn extends React.Component {
               type="email"
               value={this.state.email}
             />
-            <br />
+
             <label>Password: </label>
             <input
               className="form-control"
@@ -62,6 +62,7 @@ class SignIn extends React.Component {
               value={this.state.password}
             />
             <br />
+
             <Button
               onClick={this.onSubmit}
               label={"Sign in"}

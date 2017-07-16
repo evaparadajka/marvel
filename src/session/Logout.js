@@ -16,11 +16,10 @@ class Logout extends React.Component {
   };
 
   renderLogout = () => {
-    console.log("kalosz");
     if (this.isLogged()) {
       return (
         <Link to="/sign-in" onClick={this.logout} className="nav-style">
-          Logout
+          <i className="fa fa-sign-out" />
         </Link>
       );
     } else return null;
@@ -29,11 +28,7 @@ class Logout extends React.Component {
   render() {
     return (
       <li>
-        {this.isLogged
-          ? <Link to="/sign-in" onClick={this.logout} className="nav-style">
-              Logout
-            </Link>
-          : null}
+        {this.renderLogout()}
       </li>
     );
   }
