@@ -6,9 +6,11 @@ import Layout from "./Layout";
 import SignIn from "./session/SignIn";
 import SignUp from "./session/SignUp";
 import Dashboard from "./dashboard/Dashboard";
+import ComicsDashboard from "./comics/ComicsDashboard";
 import CharacterDetails from "./character_details/CharacterDetails";
-
 import CharactersPage from "./user_characters/CharactersPage";
+import ComicsDetails from "./comic-details/ComicsDetails";
+//import ComicsPage from "/user_comics/ComicsPage";
 
 class App extends Component {
   authenticateUser = (nextState, replace) => {
@@ -27,8 +29,10 @@ class App extends Component {
             <IndexRoute component={Dashboard} />
 
             <Route path="character-details/:id" component={CharacterDetails} />
-            <Route path="characters" component={CharactersPage} />
-            {/* <Route path="comics" component={Comics} /> */}
+            <Route path="fav-characters" component={CharactersPage} />
+            <Route path="comics" component={ComicsDashboard} />
+            <Route path="comics-details/:id" component={ComicsDetails} />
+            {/*<Route path="fav-comics" component={ComicsPage} />*/}
           </Route>
           <Route path="sign-in" component={SignIn} />
           <Route path="sign-up" component={SignUp} />

@@ -2,20 +2,20 @@ import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 
-import CharacterList from "./CharacterList";
+import CharacterList from "../dashboard/CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 
-class Dashboard extends React.Component {
+class ComicsDashboard extends React.Component {
   fetchCharacters(offset) {
     apiMarvel
-      .get("/characters", {
+      .get("/comics", {
         params: {
           offset: offset
         }
       })
       .then(response => {
         this.props.dispatch({
-          type: "FETCH_CHAR",
+          type: "FETCH_COMICS",
           payload: response.data.data.results
         });
       })
@@ -24,20 +24,21 @@ class Dashboard extends React.Component {
 
   show = id => {
     this.props.dispatch({ type: "SHOW", id: id });
-    this.props.router.push("/character-details/" + id);
+    this.props.router.push("/comics-details/" + id);
   };
 
   componentDidMount() {
-    this.fetchCharacters(this.props.characters.charactersCollection.length);
+    this.fetchCharacters(this.props.comics.comicsCollection.length);
   }
 
   render() {
-    const charactersToRender = this.props.characters.charactersCollection;
+    const comicsToRender = this.props.comics.comicsCollection;
+    console.log(comicsToRender, "kalosz");
 
     return (
       <div className="center">
         <StyledDashboard>
-          <CharacterList show={this.show} characters={charactersToRender} />
+          <CharacterList show={this.show} characters={comicsToRender} />
         </StyledDashboard>
       </div>
     );
@@ -46,8 +47,8 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    characters: state.characters
+    comics: state.comics
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(ComicsDashboard);

@@ -28,7 +28,7 @@ hr {
 }
 
 .nav-style:visited {
-  color: #a91c1c;
+  color: #c94c4c;
 }
 
 .right {
@@ -46,10 +46,14 @@ hr {
 }
 
 .welcome {
-}
-
-.welcome:hover {
-  background: none;
+  padding: 15px 10px;
+  line-height: 20px;
+  position: relative;
+  display: block;
+  text-align: center;
+  list-style: none;
+  box-sizing: border-box;
+  background: transparent;
 }
 
 .log-style {
@@ -77,4 +81,10 @@ hr {
 
 .description {
   margin: 10px 50px;
+}
+
+@media only screen and (max-width: 768px) {
+  .right {
+    float: center;
+  }
 }

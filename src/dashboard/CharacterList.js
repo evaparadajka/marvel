@@ -11,6 +11,7 @@ class CharacterList extends Component {
             show={this.props.show}
             id={d.id}
             name={d.name}
+            title={d.title}
             description={d.description}
             img={`${d.thumbnail.path}/standard_fantastic.jpg`}
           />

@@ -17,20 +17,30 @@ export class Layout extends React.Component {
             </li>
             <li className="active">
               <Link to="/" className="nav-style">
-                Dashboard
+                Characters
               </Link>
             </li>
             <li className="active">
-              <Link to="/characters" className="nav-style">
-                Characters
+              <Link to="/comics" className="nav-style">
+                Comics
+              </Link>
+            </li>
+            <li className="active">
+              <Link to="/fav-characters" className="nav-style">
+                Favourite Characters
+              </Link>
+            </li>
+            <li className="active">
+              <Link to="/fav-comics" className="nav-style">
+                Favourite Comics
               </Link>
             </li>
           </ul>
           <ul className="nav navbar-nav right">
             <li>
-              <Link className="nav-style welcome">
+              <spam className="nav-style welcome">
                 {" "}Hello {this.props.email}
-              </Link>
+              </spam>
             </li>
             <Logout email={this.props.email} />
           </ul>
