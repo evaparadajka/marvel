@@ -24,7 +24,7 @@ hr {
 }
 .nav {
   background: white;
-  width: 95%;
+
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -48,7 +48,7 @@ hr {
 }
 
 .right {
-  float: right;
+  flex: end;
   /*margin-right: 1%;*/
 }
 
@@ -100,6 +100,12 @@ hr {
 }
 
 @media only screen and (max-width: 768px) {
+  body {
+    padding: 250px;
+  }
+  .nav {
+    display: block;
+  }
   .right {
     float: center;
   }
