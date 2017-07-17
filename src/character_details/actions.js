@@ -37,18 +37,19 @@ export const deleteFromFavourites = character => {
 };
 
 export const fetchFavouriteCharacters = () => {
-  // return (dispatch, getState) => {
-  apiClient
-    .get("/marvel/api/v1/fetch_characters")
-    .then(response => {
-      console.log(response);
-      this.props.dispatch({
-        type: "FETCH_USER_CHAR",
-        payload: response.data.characters
+  return (dispatch, getState) => {
+    console.log("fetchFavouriteCharacters");
+    apiClient
+      .get("/marvel/api/v1/fetch_characters")
+      .then(response => {
+        console.log(response);
+        dispatch({
+          type: "FETCH_USER_CHAR",
+          payload: response.data.characters
+        });
+      })
+      .catch(error => {
+        console.log(error);
       });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  // };
+  };
 };
