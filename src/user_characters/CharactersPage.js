@@ -11,6 +11,9 @@ class CharactersPage extends React.Component {
     this.props.router.push("/character-details/" + id);
   };
 
+  fetchFromFavCharacters = () => {
+    this.props.dispatch(fetchFavouriteCharacters());
+  };
   // isCharactersDataFetched = () => {
   //   if (this.props.characters.length > 0) return true;
   //   else return false;
@@ -26,21 +29,9 @@ class CharactersPage extends React.Component {
   //     return null;
   //   }
   // };
+
   componentDidMount() {
-    // this.fetchUserCharacters;
-    apiClient
-      .get("/marvel/api/v1/fetch_characters")
-      .then(response => {
-        console.log(response);
-        this.props.dispatch({
-          type: "FETCH_USER_CHAR",
-          payload: response.data.characters
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    // };
+    this.fetchFromFavCharacters();
   }
 
   render() {

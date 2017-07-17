@@ -11,9 +11,11 @@ class ComicsPage extends React.Component {
     this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/comic-details/" + id);
   };
-
+  fetchFromFavComics = () => {
+    this.props.dispatch(fetchFavouriteComics());
+  };
   componentDidMount() {
-    this.fetchUserComics;
+    this.fetchFromFavComics();
   }
 
   render() {
