@@ -36,7 +36,7 @@ class Dashboard extends React.Component {
 
     return (
       <div className="center">
-        <StyledDashboard>
+        <StyledDashboard className="img-container">
           <CharacterList show={this.show} characters={charactersToRender} />
         </StyledDashboard>
       </div>

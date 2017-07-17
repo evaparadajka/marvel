@@ -6,9 +6,11 @@ const StyledOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  display: block;
-  color: black;
-  background: rgba(255, 255, 255, 0.6);
+  color: #a91c1c;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export default StyledOverlay;

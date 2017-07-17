@@ -28,10 +28,10 @@ class Character extends React.Component {
   };
 
   isToLong = text => {
-    if (text.length > 150) {
+    if (text.length > 100) {
       return (
         <div className="description">
-          {text.slice(0, 150)}...
+          {text.slice(0, 100)}...
         </div>
       );
     } else {
@@ -50,17 +50,19 @@ class Character extends React.Component {
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
-        <StyledOverlay>
-          <div>
-            <Button onClick={this.show} label="SHOW DETAILS" />
-          </div>
-          <div className="name">
-            {this.props.name ? this.props.name : this.props.title}
-          </div>
-          {this.props.description
-            ? this.isToLong(this.props.description)
-            : null}
-        </StyledOverlay>
+        <div>
+          <StyledOverlay>
+            <div />
+            <div className="name">
+              {this.props.name ? this.props.name : this.props.title}
+            </div>
+            {this.props.description
+              ? this.isToLong(this.props.description)
+              : null}
+            <Button className="btn-danger" label="Details" />
+            {/* <i className="fa fa-info fa-2x" onClick={this.show} /> */}
+          </StyledOverlay>
+        </div>
       );
     } else return null;
   };
@@ -68,7 +70,7 @@ class Character extends React.Component {
   render() {
     return (
       <div
-        className="col-md-4 square"
+        className="square"
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
       >
