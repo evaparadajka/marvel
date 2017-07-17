@@ -3,23 +3,24 @@ import { connect } from "react-redux";
 import CharacterList from "../dashboard/CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 import apiClient from "../lib/api-client";
-import { getFavouriteCharacters } from "../character_details/selectors";
-import { fetchFavouriteCharacters } from "../character_details/actions";
-class CharactersPage extends React.Component {
+import { getFavouriteComics } from "../comic-details/selectors";
+import { fetchFavouriteComics } from "../comic-details/actions";
+
+class ComicsPage extends React.Component {
   show = id => {
     this.props.dispatch({ type: "SHOW", id: id });
-    this.props.router.push("/character-details/" + id);
+    this.props.router.push("/comic-details/" + id);
   };
 
   componentDidMount() {
-    this.fetchUserCharacters;
+    this.fetchUserComics;
   }
 
   render() {
     return (
       <div>
         <StyledDashboard>
-          <CharacterList show={this.show} characters={this.props.characters} />
+          <CharacterList show={this.show} characters={this.props.comics} />
         </StyledDashboard>
       </div>
     );
@@ -28,8 +29,8 @@ class CharactersPage extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    characters: getFavouriteCharacters(state)
+    comics: getFavouriteComics(state)
   };
 };
 
-export default connect(mapStateToProps)(CharactersPage);
+export default connect(mapStateToProps)(ComicsPage);
