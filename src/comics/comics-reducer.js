@@ -16,6 +16,18 @@ const comics = (state = initialState, action) => {
         ...state,
         userComicsCollection: action.payload
       };
+    case "COMICS/ADD_TO_FAVOURITES":
+      return {
+        ...state,
+        userComicsCollection: [...state.userComicsCollection, action.payload]
+      };
+    case "COMICS/DELETE_FROM_FAVOURITES":
+      return {
+        ...state,
+        userComicsCollection: state.userComicsCollection.filter(
+          c => c.id !== action.payload
+        )
+      };
     case "SHOW":
       return {
         ...state,
