@@ -85,6 +85,8 @@ hr {
 .square {
   position: relative;
   padding: 2px;
+  width: 255px;
+  heigh: 255px;
 }
 
 .name {
