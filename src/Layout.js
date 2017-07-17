@@ -11,9 +11,6 @@ export class Layout extends React.Component {
         <nav className="navbar-fixed-top">
           <div className="nav ">
             <ul className="nav navbar-nav">
-              <li className="nav-style">
-                <i className="fa fa-paw nav-style" />
-              </li>
               <li className="active">
                 <Link to="/" className="nav-style">
                   Characters
