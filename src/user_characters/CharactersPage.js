@@ -18,7 +18,7 @@ class CharactersPage extends React.Component {
   render() {
     return (
       <div>
-        <StyledDashboard>
+        <StyledDashboard className="img-container">
           <CharacterList show={this.show} characters={this.props.characters} />
         </StyledDashboard>
       </div>

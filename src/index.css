@@ -52,24 +52,10 @@ hr {
   /*margin-right: 1%;*/
 }
 
-.center {
-}
-
 .space {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-}
-
-.welcome {
-  padding: 15px 10px;
-  line-height: 20px;
-  position: relative;
-  display: block;
-  text-align: center;
-  list-style: none;
-  box-sizing: border-box;
-  background: transparent;
 }
 
 .log-style {
@@ -85,13 +71,12 @@ hr {
 }
 
 .square {
-  width: 300px;
-  height: 300px;
-  margin: 2%;
+  position: relative;
 }
 
 .name {
   font-weight: bold;
+  font-size: 1.2em;
   margin: 10px 50px;
 }
 
@@ -100,8 +85,8 @@ hr {
 }
 
 @media only screen and (max-width: 768px) {
-  body {
-    padding: 250px;
+  .img-container {
+    padding-top: 250px;
   }
   .nav {
     display: block;

@@ -36,7 +36,7 @@ class ComicsDashboard extends React.Component {
 
     return (
       <div className="center">
-        <StyledDashboard>
+        <StyledDashboard className="img-container">
           <CharacterList show={this.show} characters={comicsToRender} />
         </StyledDashboard>
       </div>
