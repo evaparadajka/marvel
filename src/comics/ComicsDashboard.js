@@ -24,7 +24,7 @@ class ComicsDashboard extends React.Component {
 
   show = id => {
     this.props.dispatch({ type: "SHOW", id: id });
-    this.props.router.push("/comics-details/" + id);
+    this.props.router.push("/comic-details/" + id);
   };
 
   componentDidMount() {
@@ -33,7 +33,6 @@ class ComicsDashboard extends React.Component {
 
   render() {
     const comicsToRender = this.props.comics.comicsCollection;
-    console.log(comicsToRender, "kalosz");
 
     return (
       <div className="center">
