@@ -4,6 +4,7 @@ import apiMarvel from "../lib/api-marvel";
 
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
+import Button from "../user_interface/Button";
 
 class Dashboard extends React.Component {
   fetchCharacters(offset) {
@@ -28,8 +29,15 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchCharacters(this.props.characters.charactersCollection.length);
+    //this.fetchCharacters(this.props.characters.charactersCollection.length);
   }
+
+  clickNewChar = e => {
+    e.preventDefault();
+    const charactersAmmount = this.props.characters.charactersCollection.length;
+    this.fetchCharacters(charactersAmmount);
+    console.log("klik");
+  };
 
   render() {
     const charactersToRender = this.props.characters.charactersCollection;
@@ -39,6 +47,9 @@ class Dashboard extends React.Component {
         <StyledDashboard className="img-container">
           <CharacterList show={this.show} characters={charactersToRender} />
         </StyledDashboard>
+        <br />
+        <Button onClick={this.clickNewChar} label="get new Characters" />
+        <br />
       </div>
     );
   }

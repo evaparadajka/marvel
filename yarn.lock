@@ -5020,6 +5020,10 @@ react-error-overlay@^1.0.9:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
+react-infinite-scroll@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-infinite-scroll/-/react-infinite-scroll-0.1.5.tgz#18204e4a238b1a69cabd43c2b26db94a5941f81a"
+
 react-native-md5@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-md5/-/react-native-md5-1.0.0.tgz#2320be24d674938ae5ef4f492698edbbfa0e0205"
