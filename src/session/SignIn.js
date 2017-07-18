@@ -69,9 +69,9 @@ class SignIn extends React.Component {
               className="btn-danger"
             />
             <h2>
-              Or
+              or
               <Link to="/sign-up" className="sign-up">
-                {" "}Sign up
+                {" "}sign up!
               </Link>
               <br />
               {this.state.error}

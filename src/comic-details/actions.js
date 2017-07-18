@@ -39,16 +39,19 @@ export const deleteFromFavourites = comic => {
 };
 
 export const fetchFavouriteComics = () => {
-  apiClient
-    .get("/marvel/api/v1/fetch_comics")
-    .then(response => {
-      console.log(response);
-      this.props.dispatch({
-        type: "FETCH_USER_COMICS",
-        payload: response.data.comics
+  return (dispatch, getState) => {
+    console.log("fetchFavouriteComics");
+    apiClient
+      .get("/marvel/api/v1/fetch_comics")
+      .then(response => {
+        console.log(response);
+        dispatch({
+          type: "FETCH_USER_COMICS",
+          payload: response.data.comics
+        });
+      })
+      .catch(error => {
+        console.log(error);
       });
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  };
 };

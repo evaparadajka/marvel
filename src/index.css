@@ -22,6 +22,11 @@ hr {
 .sign-up {
   color: #c94c4c;
 }
+
+.sign-up:hover {
+  color: #a91c1c;
+  text-decoration: none;
+}
 .nav {
   background: white;
 
@@ -64,14 +69,24 @@ hr {
 }
 
 .background {
-  background-image: url(../src/img/background-log-ok.jpg);
+  background-image: url(../src/img/marvel.jpg);
   background-size: cover;
   background-position: center;
-  height: 1500px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .square {
   position: relative;
+  padding: 2px;
+  width: 255px;
+  heigh: 255px;
 }
 
 .name {

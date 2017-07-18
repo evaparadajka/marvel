@@ -76,7 +76,7 @@ class Character extends React.Component {
         onMouseLeave={this.onMouseLeaveHandler}
       >
         <StyledCharacter>
-          <img src={this.props.img} />
+          <img src={this.props.img} alt="Image not found" />
         </StyledCharacter>
         {this.renderOverlay()}
       </div>

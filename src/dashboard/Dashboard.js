@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
-//import InfiniteScroll from "react-infinite-scroll";
 
+//import InfiniteScroll from "react-infinite-scroll";
+import Button from "../user_interface/Button";
+import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
-import Button from "../user_interface/Button";
+import { fetchFavouriteCharacters } from "../character_details/actions";
 
 class Dashboard extends React.Component {
   fetchCharacters(offset) {
@@ -28,6 +30,12 @@ class Dashboard extends React.Component {
     this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/character-details/" + id);
   };
+
+  // isUserCharactersCollectionEmpty = () => {
+  //   if ((this.props.characters.userCharactersCollection.length = 0))
+  //     return true;
+  //   else return false;
+  // };
 
   componentDidMount() {
     //this.fetchCharacters(this.props.characters.charactersCollection.length);

@@ -6,7 +6,7 @@ import CharacterList from "../dashboard/CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 
 class ComicsDashboard extends React.Component {
-  fetchCharacters(offset) {
+  fetchComics(offset) {
     apiMarvel
       .get("/comics", {
         params: {
@@ -28,7 +28,7 @@ class ComicsDashboard extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchCharacters(this.props.comics.comicsCollection.length);
+    this.fetchComics(this.props.comics.comicsCollection.length);
   }
 
   render() {
