@@ -45,7 +45,6 @@ class Dashboard extends React.Component {
     e.preventDefault();
     const charactersAmmount = this.props.characters.charactersCollection.length;
     this.fetchCharacters(charactersAmmount);
-    console.log("klik");
   };
 
   render() {
@@ -58,6 +57,7 @@ class Dashboard extends React.Component {
         </StyledDashboard>
         <br />
         <Button onClick={this.clickNewChar} label="get new Characters" />
+        <br />
         <br />
       </div>
     );

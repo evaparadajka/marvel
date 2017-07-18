@@ -63,6 +63,13 @@ hr {
   flex-wrap: wrap;
 }
 
+.space-in-details {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .log-style {
   margin: 10% 30%;
   background: white;
@@ -86,7 +93,16 @@ hr {
   position: relative;
   padding: 2px;
   width: 255px;
-  heigh: 255px;
+  height: 255px;
+}
+
+.rectangle {
+  position: relative;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200%;
 }
 
 .name {
@@ -108,5 +124,8 @@ hr {
   }
   .right {
     float: center;
+  }
+  .rectangle {
+    width: 300px;
   }
 }

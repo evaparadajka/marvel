@@ -21,7 +21,7 @@ class ComicDetails extends React.Component {
   renderActionButton = () => {
     if (this.isComicInFavs()) {
       return (
-        <div className="col-md-6">
+        <div>
           <button
             onClick={this.delFromFav}
             className="fa fa-trash-o fa-3x nav-style"
@@ -30,7 +30,7 @@ class ComicDetails extends React.Component {
       );
     } else {
       return (
-        <div className="col-md-6">
+        <div>
           <button
             onClick={this.addToFav}
             className="fa fa-plus fa-3x nav-style"
@@ -41,24 +41,21 @@ class ComicDetails extends React.Component {
   };
   render() {
     return (
-      <div>
-        <StyledCharacterDetails>
-          <div>
-            <div className="row">
-              <div className="col-md-6">
-                <img
-                  src={`${this.props.comic.thumbnail
-                    .path}/standard_amazing.jpg`}
-                />
-              </div>
-              <div className="col-md-6">
-                <h1>
-                  {this.props.comic.title}
-                </h1>
-              </div>
-
-              {this.renderActionButton()}
+      <div className="img-container">
+        <StyledCharacterDetails className="center">
+          <div className="space-in-details">
+            <div>
+              <img
+                src={`${this.props.comic.thumbnail.path}/standard_amazing.jpg`}
+              />
             </div>
+            <div>
+              <div className="rectangle">
+                {this.props.comic.title}
+              </div>
+            </div>
+
+            {this.renderActionButton()}
           </div>
         </StyledCharacterDetails>
         <StyledCharacterDetails>
