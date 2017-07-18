@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
+import StyledLog from "../user_interface/StyledLog";
+import { showNotification } from "../lib/functions";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -42,35 +44,23 @@ class SignUp extends React.Component {
     ) {
       apiClient
         .post("/api/v1/registrations", {
-          //dane z naszego formularza w postaci obiektu
-          //axios post zwraca promise
           user: {
             email: this.state.email,
             password: this.state.password
           }
         })
         .then(response => {
-          console.log(response);
-          // this.props.dispatch({
-          //   type: "REGISTER",
-          //   data: {
-          //     email: this.state.email,
-          //     password: this.state.password,
-          //     passwordRepeat: this.state.passwordRepeat
-          //   }
-          // });
           this.setState({
             email: "",
             password: "",
             passwordRepeat: ""
           });
-
-          this.props.router.push("posts");
+          this.props.router.push("/sign-in");
         })
         .catch(error => {
           console.log(error);
           this.setState({
-            error: "Coś poszło nie tak"
+            error: "Something went wrong."
           });
         });
       this.setState({
@@ -78,55 +68,59 @@ class SignUp extends React.Component {
       });
     } else {
       this.setState({
-        error: "Różne hasła"
+        error: "Passwords are not the same"
       });
     }
   };
   showError = () => {};
 
   render() {
-    //console.log(this.props);
     return (
-      <div className="text-center">
+      <div className="container-fluid background">
         <form className="form-group">
-          <label>Email: </label>
-          <input
-            className="form-control"
-            onChange={this.updateEmail}
-            type="email"
-            value={this.state.email}
-          />
-
-          <label>Password: </label>
-          <input
-            className="form-control"
-            onChange={this.updatePassword}
-            type="password"
-            value={this.state.password}
-          />
-          <label>Repeat password: </label>
-          <input
-            className="form-control"
-            onChange={this.updatePasswordRepeat}
-            type="password"
-            value={this.state.passwordRepeat}
-          />
-          <br />
-          <Button
-            onClick={this.onSubmit}
-            label={"Sign up"}
-            className="btn-danger"
-          />
-          <h2>
-            {this.state.error}
-          </h2>
+          <StyledLog className="log-style">
+            <br />
+            <label>Email: </label>
+            <input
+              className="form-control"
+              onChange={this.updateEmail}
+              type="email"
+              value={this.state.email}
+            />
+            <br />
+            <label>Password: </label>
+            <input
+              className="form-control"
+              onChange={this.updatePassword}
+              type="password"
+              value={this.state.password}
+            />
+            <br />
+            <label>Repeat password: </label>
+            <input
+              className="form-control"
+              onChange={this.updatePasswordRepeat}
+              type="password"
+              value={this.state.passwordRepeat}
+            />
+            <br />
+            <Button
+              onClick={this.onSubmit}
+              label={"Sign up"}
+              className="btn-danger"
+            />
+            <h4>
+              {this.state.error}
+            </h4>
+          </StyledLog>
         </form>
       </div>
     );
   }
 }
-const mapStateToProps = state => {
-  return {};
-};
 
-export default connect(mapStateToProps)(withRouter(SignUp));
+// const mapStateToProps = state => {
+//   return {};
+// };
+
+export default withRouter(SignUp);

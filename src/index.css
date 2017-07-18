@@ -1,5 +1,112 @@
 body {
   margin: 0;
-  padding: 0;
+  padding-top: 0px;
   font-family: sans-serif;
+}
+
+hr {
+  color: #c94c4c;
+  border: solid;
+  border-width: 1px;
+  margin: 0;
+}
+.nav > li {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sign-up {
+  color: #c94c4c;
+}
+
+.sign-up:hover {
+  color: #a91c1c;
+  text-decoration: none;
+}
+.nav {
+  background: white;
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.nav-style {
+  color: #c94c4c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.nav-style:hover {
+  color: #9e0606;
+}
+
+.nav-style:visited {
+  color: #c94c4c;
+}
+
+.right {
+  flex: end;
+  /*margin-right: 1%;*/
+}
+
+.space {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.log-style {
+  margin: 10% 30%;
+  background: white;
+}
+
+.background {
+  background-image: url(../src/img/marvel.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.square {
+  position: relative;
+  padding: 2px;
+  width: 255px;
+  height: 255px;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 10px 50px;
+}
+
+.description {
+  margin: 10px 50px;
+}
+
+.img-container {
+  padding-top: 35px;
+}
+
+@media only screen and (max-width: 768px) {
+  .img-container {
+    padding-top: 250px;
+  }
+  .nav {
+    display: block;
+  }
+  .right {
+    float: center;
+  }
 }
