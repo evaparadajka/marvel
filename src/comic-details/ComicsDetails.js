@@ -7,13 +7,16 @@ import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import apiClient from "../lib/api-client";
 import { getComicDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
+import { showNotification } from "../lib/functions";
 
 class ComicDetails extends React.Component {
   addToFav = () => {
     this.props.dispatch(addToFavourites(this.props.comic));
+    showNotification("Comic added!");
   };
   delFromFav = () => {
     this.props.dispatch(deleteFromFavourites(this.props.comic));
+    showNotification("Comic deleted!");
   };
   isComicInFavs = () => {
     return this.props.comic.isFavourite;
