@@ -39,6 +39,7 @@ class SignUp extends React.Component {
     e.preventDefault();
 
     if (
+      // wydzielilbym to do osobnej metody ktora zwaliduje formularz
       this.state.password === this.state.passwordRepeat &&
       this.state.password !== ""
     ) {
@@ -50,6 +51,7 @@ class SignUp extends React.Component {
           }
         })
         .then(response => {
+          // wydzielilbym to do metody typu resetForm
           this.setState({
             email: "",
             password: "",
@@ -63,6 +65,7 @@ class SignUp extends React.Component {
             error: "Something went wrong."
           });
         });
+      // lepiej wyczyscic error na samym poczatku, przed wyslaniem requesta
       this.setState({
         error: ""
       });
@@ -78,9 +81,11 @@ class SignUp extends React.Component {
     return (
       <div className="container-fluid background">
         <form className="form-group">
+          {/* co to jest StyledLog? */}
           <StyledLog className="log-style">
             <br />
             <label>Email: </label>
+            {/* Inputy mozna wydzielic do komponentu z className 'form-control'  */}
             <input
               className="form-control"
               onChange={this.updateEmail}
@@ -119,6 +124,7 @@ class SignUp extends React.Component {
   }
 }
 
+// zbedny komentarz
 // const mapStateToProps = state => {
 //   return {};
 // };

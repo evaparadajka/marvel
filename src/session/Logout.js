@@ -11,6 +11,7 @@ class Logout extends React.Component {
   logout = () => {
     this.props.dispatch({
       type: "LOGOUT",
+      // puste data?
       data: {}
     });
   };

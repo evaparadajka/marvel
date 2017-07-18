@@ -23,6 +23,7 @@ export const addToFavourites = comic => {
 
 export const deleteFromFavourites = comic => {
   return (dispatch, getState) => {
+    // console.log
     console.log(comic.binarId, "binarId");
     apiClient
       .delete("/marvel/api/v1/delete_comic/" + comic.binarId)
@@ -40,10 +41,12 @@ export const deleteFromFavourites = comic => {
 
 export const fetchFavouriteComics = () => {
   return (dispatch, getState) => {
+    // console.log
     console.log("fetchFavouriteComics");
     apiClient
       .get("/marvel/api/v1/fetch_comics")
       .then(response => {
+        // console.log
         console.log(response);
         dispatch({
           type: "FETCH_USER_COMICS",

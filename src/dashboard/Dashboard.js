@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 
+// zbedny komentarz
 //import InfiniteScroll from "react-infinite-scroll";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
@@ -31,6 +32,7 @@ class Dashboard extends React.Component {
     this.props.router.push("/character-details/" + id);
   };
 
+  // zbedny komentarz
   // isUserCharactersCollectionEmpty = () => {
   //   if ((this.props.characters.userCharactersCollection.length = 0))
   //     return true;
@@ -38,6 +40,7 @@ class Dashboard extends React.Component {
   // };
 
   componentDidMount() {
+    // zbedny komentarz i metoda
     //this.fetchCharacters(this.props.characters.charactersCollection.length);
   }
 
@@ -45,6 +48,7 @@ class Dashboard extends React.Component {
     e.preventDefault();
     const charactersAmount = this.props.characters.length;
     this.fetchCharacters(charactersAmount);
+    // console.log
     console.log("klik");
   };
 

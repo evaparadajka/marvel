@@ -14,6 +14,7 @@ export const signIn = user => {
         }
       })
       .then(response => {
+        // czemu 2 oddzielne dispatche tutaj?
         dispatch({
           type: "LOGIN",
           data: {

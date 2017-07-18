@@ -1,3 +1,4 @@
+// przenioslbym to do jakiegos modulu 'alert'/'notifications' a nie 'functions'
 import Notifications, { notify } from "react-notify-toast";
 
 export const showNotification = message => {

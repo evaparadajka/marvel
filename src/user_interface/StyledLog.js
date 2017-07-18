@@ -1,3 +1,4 @@
+// czemu to jest osobny plik
 import styled from "styled-components";
 
 const StyledLog = styled.div`
@@ -6,6 +7,7 @@ const StyledLog = styled.div`
   border-radius: 3%;
   padding: 2%;
   margin-bottom: 5px;
+  // zbedny komentarz
   ${"" /* width: 70%; */} ${"" /* display: flex;
   justify-content: space-around;
   flex-wrap: wrap; */};

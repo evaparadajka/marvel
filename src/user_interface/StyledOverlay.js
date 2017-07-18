@@ -1,3 +1,4 @@
+// czemu to jest osobny plik
 import styled from "styled-components";
 
 const StyledOverlay = styled.div`

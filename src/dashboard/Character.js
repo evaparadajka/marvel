@@ -8,6 +8,7 @@ import {
 } from "../character_details/actions";
 import { showNotification } from "../lib/functions";
 import { connect } from "react-redux";
+// zbedny komentarz
 // import { getCharDetailsByID } from "../character_details/selectors";
 class Character extends React.Component {
   constructor(props) {
@@ -53,7 +54,9 @@ class Character extends React.Component {
   };
 
   addToFav = () => {
+    // const zamiast let
     let character = { name: this.props.name, id: this.props.id };
+    // console.log
     console.log(this.props.character);
     this.props.dispatch(addToFavourites(character));
     showNotification("Character added!");
@@ -64,10 +67,12 @@ class Character extends React.Component {
   };
   isCharInFavs = () => {
     return this.props.isFavourite;
+    // zbedny komentarz
     // return getCharDetailsByID(this.props.id);
   };
   renderActionButton = () => {
     if (this.isCharInFavs()) {
+      // zbedny komentarz
       return (
         // <div className="col-md-6">
         //   <Button
@@ -118,8 +123,7 @@ class Character extends React.Component {
       <div
         className="square"
         onMouseEnter={this.onMouseEnterHandler}
-        onMouseLeave={this.onMouseLeaveHandler}
-      >
+        onMouseLeave={this.onMouseLeaveHandler}>
         <StyledCharacter>
           <img src={this.props.img} alt="Image not found" />
         </StyledCharacter>
@@ -129,6 +133,7 @@ class Character extends React.Component {
   }
 }
 
+// zbedne mapStateToProps
 const mapStateToProps = state => {
   return {
     //character: getCharDetails(state, state.characters.characterToShow.id),

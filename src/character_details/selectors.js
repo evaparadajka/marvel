@@ -24,17 +24,20 @@ export const getFavouriteCharacters = state => {
 };
 
 export const appendFavourites = state => {
+  // zbedny komentarz
   // console.log("userChars", state.characters.userCharactersCollection);
   const characters = state.characters.charactersCollection.map(c => {
     state.characters.userCharactersCollection.map(userChar => {
       if (c.id === userChar.external_id) {
         c = { ...c, isFavourite: true };
       }
+      // zbedny komentarz
       // return c;
     });
     return c;
   });
   console.log(characters);
+  // zbedny komentarz
   //append isFavourite key
   // const charactersResult = userCharacters.map(c => {
   //   return { ...c, isFavourite: true };
