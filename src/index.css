@@ -4,10 +4,6 @@ body {
   font-family: sans-serif;
 }
 
-h1 {
-  margin-top: 15%;
-}
-
 hr {
   color: #c94c4c;
   border: solid;
@@ -45,7 +41,7 @@ hr {
 }
 
 .nav-style:hover {
-  color: #a91c1c;
+  color: #9e0606;
 }
 
 .nav-style:visited {
@@ -86,7 +82,7 @@ hr {
   position: relative;
   padding: 2px;
   width: 255px;
-  heigh: 255px;
+  height: 255px;
 }
 
 .name {
@@ -97,6 +93,10 @@ hr {
 
 .description {
   margin: 10px 50px;
+}
+
+.img-container {
+  padding-top: 35px;
 }
 
 @media only screen and (max-width: 768px) {

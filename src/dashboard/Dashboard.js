@@ -43,8 +43,8 @@ class Dashboard extends React.Component {
 
   clickNewChar = e => {
     e.preventDefault();
-    const charactersAmmount = this.props.characters.charactersCollection.length;
-    this.fetchCharacters(charactersAmmount);
+    const charactersAmount = this.props.characters.length;
+    this.fetchCharacters(charactersAmount);
     console.log("klik");
   };
 
