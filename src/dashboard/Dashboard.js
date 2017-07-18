@@ -8,7 +8,7 @@ import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 import { fetchFavouriteCharacters } from "../character_details/actions";
-
+import { appendFavourites } from "../character_details/selectors";
 class Dashboard extends React.Component {
   fetchCharacters(offset) {
     apiMarvel
@@ -49,7 +49,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const charactersToRender = this.props.characters.charactersCollection;
+    const charactersToRender = this.props.characters;
 
     return (
       <div className="center">
@@ -66,7 +66,8 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    characters: state.characters
+    characters: appendFavourites(state)
+    // favCharacters: getFavouriteCharacters(state)
   };
 };
 

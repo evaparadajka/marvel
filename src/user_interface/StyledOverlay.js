@@ -10,7 +10,7 @@ const StyledOverlay = styled.div`
   background: rgba(255, 255, 255, 0.8);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
 `;
 
 export default StyledOverlay;

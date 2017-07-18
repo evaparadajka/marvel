@@ -16,6 +16,7 @@ class CharacterList extends Component {
             title={d.title}
             description={d.description}
             img={`${d.thumbnail.path}/standard_fantastic.jpg`}
+            isFavourite={d.isFavourite}
           />
         )}
       </div>
