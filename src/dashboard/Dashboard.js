@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
-import InfiniteScroll from "react-infinite-scroll";
+//import InfiniteScroll from "react-infinite-scroll";
 
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
@@ -45,14 +45,12 @@ class Dashboard extends React.Component {
 
     return (
       <div className="center">
-        <InfiniteScroll loadMore={this.clickNewChar}>
-          <StyledDashboard className="img-container">
-            <CharacterList show={this.show} characters={charactersToRender} />
-          </StyledDashboard>
-          <br />
-          <Button onClick={this.clickNewChar} label="get new Characters" />
-          <br />
-        </InfiniteScroll>
+        <StyledDashboard className="img-container">
+          <CharacterList show={this.show} characters={charactersToRender} />
+        </StyledDashboard>
+        <br />
+        <Button onClick={this.clickNewChar} label="get new Characters" />
+        <br />
       </div>
     );
   }
