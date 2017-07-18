@@ -38,10 +38,12 @@ export const deleteFromFavourites = character => {
 
 export const fetchFavouriteCharacters = () => {
   return (dispatch, getState) => {
+    // console.log
     console.log("fetchFavouriteCharacters");
     apiClient
       .get("/marvel/api/v1/fetch_characters")
       .then(response => {
+        // console.log
         console.log(response);
         dispatch({
           type: "FETCH_USER_CHAR",

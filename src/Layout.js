@@ -8,6 +8,7 @@ export class Layout extends React.Component {
   render() {
     return (
       <div>
+        {/* navbar wydzielcie do osobnego komponentu i ten komponent powinien miec connect */}
         <nav className="navbar-fixed-top">
           <div className="nav ">
             <ul className="nav navbar-nav">
@@ -31,6 +32,7 @@ export class Layout extends React.Component {
                   Favourite Comics
                 </Link>
               </li>
+              {/* zbedny komentarz */}
               {/* </ul>
               <ul className="nav right "> */}
               <li className="nav-style ">

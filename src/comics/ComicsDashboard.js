@@ -23,6 +23,7 @@ class ComicsDashboard extends React.Component {
   }
 
   show = id => {
+    // id powinno byc wziete z url a nie store
     this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/comic-details/" + id);
   };
@@ -32,6 +33,7 @@ class ComicsDashboard extends React.Component {
   }
 
   render() {
+    // czemu takie przypisanie?
     const comicsToRender = this.props.comics.comicsCollection;
 
     return (

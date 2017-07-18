@@ -95,6 +95,7 @@ class ComicDetails extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    // zbedny komentarz
     // userComicsCollection: state.comics.userComicsCollection,
     comic: getComicDetails(state, state.comics.comicsToShow.id),
     session: state.session

@@ -8,6 +8,7 @@ import { fetchFavouriteComics } from "../comic-details/actions";
 
 class ComicsPage extends React.Component {
   show = id => {
+    // id komiksu do wyswietlenia powinno byc przekazane przez url a nie store
     this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/comic-details/" + id);
   };
