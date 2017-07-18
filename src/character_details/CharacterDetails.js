@@ -22,8 +22,8 @@ class CharacterDetails extends React.Component {
   renderActionButton = () => {
     if (this.isCharInFavs()) {
       return (
-        <div className="col-md-6">
-          <button
+        <div>
+          <i
             onClick={this.delFromFav}
             className="fa fa-trash-o fa-3x nav-style"
           />
@@ -31,11 +31,8 @@ class CharacterDetails extends React.Component {
       );
     } else {
       return (
-        <div className="col-md-6">
-          <button
-            onClick={this.addToFav}
-            className="fa fa-plus fa-3x nav-style"
-          />
+        <div>
+          <i onClick={this.addToFav} className="fa fa-plus fa-3x nav-style" />
         </div>
       );
     }
@@ -43,27 +40,26 @@ class CharacterDetails extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="img-container">
         <StyledCharacterDetails>
           <div>
-            <div className="row">
-              <div className="col-md-6">
-                <img
-                  src={`${this.props.character.thumbnail
-                    .path}/standard_amazing.jpg`}
-                />
-              </div>
-              <div className="col-md-6">
-                <h1>
-                  {this.props.character.name}
-                </h1>
-              </div>
-
-              {this.renderActionButton()}
+            <div>
+              <img
+                className="img-responsive"
+                src={`${this.props.character.thumbnail
+                  .path}/landscape_incredible.jpg`}
+              />
             </div>
+            <div>
+              <h1>
+                {this.props.character.name}
+              </h1>
+            </div>
+
+            {this.renderActionButton()}
           </div>
         </StyledCharacterDetails>
-
+        <hr />
         <StyledCharacterDetails>
           <h3>DETAILS</h3>
           <br />
