@@ -1,13 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import ComicList from "./ComicList";
 import StoryList from "./StoryList";
 import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
-
 import { showNotification } from "../lib/functions";
 class CharacterDetails extends React.Component {
   addToFav = () => {
@@ -42,14 +40,6 @@ class CharacterDetails extends React.Component {
       );
     }
   };
-
-  // showNotification = message => {
-  //   let navStyleColor = {
-  //     background: "#c94c4c",
-  //     text: "white"
-  //   };
-  //   notify.show(message, "custom", 5000, navStyleColor);
-  // };
 
   render() {
     return (

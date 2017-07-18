@@ -1,9 +1,14 @@
 import React from "react";
-
 import Button from "../user_interface/Button";
 import StyledCharacter from "../user_interface/StyledCharacter";
 import StyledOverlay from "../user_interface/StyledOverlay";
-
+import {
+  addToFavourites,
+  deleteFromFavourites
+} from "../character_details/actions";
+import { showNotification } from "../lib/functions";
+import { connect } from "react-redux";
+// import { getCharDetailsByID } from "../character_details/selectors";
 class Character extends React.Component {
   constructor(props) {
     super(props);
@@ -47,6 +52,45 @@ class Character extends React.Component {
     return this.state.hover;
   };
 
+  addToFav = () => {
+    let character = { name: this.props.name, id: this.props.id };
+    console.log(this.props.character);
+    this.props.dispatch(addToFavourites(character));
+    showNotification("Character added!");
+  };
+  delFromFav = () => {
+    this.props.dispatch(deleteFromFavourites(this.props.character));
+    showNotification("Character deleted!");
+  };
+  isCharInFavs = () => {
+    return this.props.isFavourite;
+    // return getCharDetailsByID(this.props.id);
+  };
+  renderActionButton = () => {
+    if (this.isCharInFavs()) {
+      return (
+        // <div className="col-md-6">
+        //   <Button
+        //     className="btn-danger"
+        //     label="Delete from favourites!"
+        //     onClick={this.delFromFav}
+        //   />
+        // </div>
+        null
+      );
+    } else {
+      return (
+        <div className="col-md-6">
+          <Button
+            className="btn-danger"
+            label="Add to favourites!"
+            onClick={this.addToFav}
+          />
+        </div>
+      );
+    }
+  };
+
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
@@ -62,6 +106,7 @@ class Character extends React.Component {
               label="Details"
               onClick={this.show}
             />
+            {this.renderActionButton()}
           </StyledOverlay>
         </div>
       );
@@ -84,4 +129,11 @@ class Character extends React.Component {
   }
 }
 
-export default Character;
+const mapStateToProps = state => {
+  return {
+    //character: getCharDetails(state, state.characters.characterToShow.id),
+    // session: state.session
+  };
+};
+
+export default connect(mapStateToProps)(Character);
