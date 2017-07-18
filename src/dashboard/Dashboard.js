@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
+
+//import InfiniteScroll from "react-infinite-scroll";
+import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
@@ -35,28 +38,15 @@ class Dashboard extends React.Component {
   // };
 
   componentDidMount() {
-    this.fetchCharacters(this.props.characters.charactersCollection.length);
-    // fetchFavouriteCharacters();
-    // if (this.isUserCharactersCollectionEmpty()) {
-    //   fetchFavouriteCharacters();
-    // }
-
-    // console.log("nie sciagaj");
-    // fetchFavouriteCharacters();
-    // apiClient
-    //   .get("/marvel/api/v1/fetch_characters")
-    //   .then(response => {
-    //     console.log(response);
-    //     this.props.dispatch({
-    //       type: "FETCH_USER_CHAR",
-    //       payload: response.data.characters
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-    // };
+    //this.fetchCharacters(this.props.characters.charactersCollection.length);
   }
+
+  clickNewChar = e => {
+    e.preventDefault();
+    const charactersAmmount = this.props.characters.charactersCollection.length;
+    this.fetchCharacters(charactersAmmount);
+    console.log("klik");
+  };
 
   render() {
     const charactersToRender = this.props.characters.charactersCollection;
@@ -66,6 +56,9 @@ class Dashboard extends React.Component {
         <StyledDashboard className="img-container">
           <CharacterList show={this.show} characters={charactersToRender} />
         </StyledDashboard>
+        <br />
+        <Button onClick={this.clickNewChar} label="get new Characters" />
+        <br />
       </div>
     );
   }

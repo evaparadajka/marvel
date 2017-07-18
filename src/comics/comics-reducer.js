@@ -9,7 +9,7 @@ const comics = (state = initialState, action) => {
     case "FETCH_COMICS":
       return {
         ...state,
-        comicsCollection: [...action.payload, ...state.comicsCollection]
+        comicsCollection: [...state.comicsCollection, ...action.payload]
       };
     case "FETCH_USER_COMICS":
       return {

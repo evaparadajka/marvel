@@ -9,7 +9,7 @@ const characters = (state = initialState, action) => {
     case "FETCH_CHAR":
       return {
         ...state,
-        charactersCollection: [...action.payload, ...state.charactersCollection]
+        charactersCollection: [...state.charactersCollection, ...action.payload]
       };
     case "FETCH_USER_CHAR":
       return {
