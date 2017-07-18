@@ -7,13 +7,16 @@ import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
-// import {s } from "./actions";
+
+import { showNotification } from "../lib/functions";
 class CharacterDetails extends React.Component {
   addToFav = () => {
     this.props.dispatch(addToFavourites(this.props.character));
+    showNotification("Character added!");
   };
   delFromFav = () => {
     this.props.dispatch(deleteFromFavourites(this.props.character));
+    showNotification("Character deleted!");
   };
   isCharInFavs = () => {
     return this.props.character.isFavourite;
@@ -40,6 +43,14 @@ class CharacterDetails extends React.Component {
     }
   };
 
+  // showNotification = message => {
+  //   let navStyleColor = {
+  //     background: "#c94c4c",
+  //     text: "white"
+  //   };
+  //   notify.show(message, "custom", 5000, navStyleColor);
+  // };
+
   render() {
     return (
       <div>
@@ -62,6 +73,7 @@ class CharacterDetails extends React.Component {
             </div>
           </div>
         </StyledCharacterDetails>
+
         <StyledCharacterDetails>
           <h3>DETAILS</h3>
           <br />

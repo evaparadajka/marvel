@@ -4,6 +4,7 @@ import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
 import StyledLog from "../user_interface/StyledLog";
+import { showNotification } from "../lib/functions";
 
 class SignUp extends React.Component {
   constructor(props) {
