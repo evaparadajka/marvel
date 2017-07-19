@@ -47,7 +47,11 @@ class ComicsDashboard extends React.Component {
           <CharacterList show={this.show} characters={comicsToRender} />
         </StyledDashboard>
         <br />
-        <Button onClick={this.clickNewComics} label="get new Comics" />
+        <Button
+          className="btn-danger"
+          onClick={this.clickNewComics}
+          label="Load more..."
+        />
         <br />
         <br />
       </div>

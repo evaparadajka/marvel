@@ -7,6 +7,7 @@ const StyledCharacterBase = styled.div`
   display: flex;
   color: #c94c4c;
   justify-content: space-around;
+  flex-direction: row;
 `;
 
 export default StyledCharacterBase;

@@ -108,8 +108,9 @@ hr {
 }
 
 .description {
+  padding: 2%;
   text-align: justify;
-  margin: 10px 50px;
+  margin: 0px 15px;
 }
 
 .table {
@@ -125,20 +126,23 @@ hr {
 
 .tab {
   display: inline-block;
-  border-left: 1px solid;
-  border-right: 1px solid;
+  border: 2px solid transparent;
+  border-radius: 5px 5px 0 0;
   /*border-bottom: none;*/
-  /*bottom: -2px;*/
+  bottom: -2px;
   position: relative;
   list-style: none;
   padding: 6px 12px;
   cursor: pointer;
   position: relative;
-  background-color: white;
-  border-color: #c94c4c;
 }
 .active {
   border-bottom: none;
+  border-color: #c94c4c;
+  background-color: white;
+}
+.inactive {
+  border: transparent;
 }
 .tab:hover {
   color: #9e0606;

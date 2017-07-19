@@ -81,23 +81,21 @@ class CharacterDetails extends React.Component {
               </h1>
             </div>
 
-            <div>
+            <div className="description">
               <h4>Description:</h4>
-              <p className="description">
+              <p>
                 {this.renderDescription()}
               </p>
 
               {this.renderActionButton()}
             </div>
           </StyledCharacterBase>
-          <hr />
 
           <Tabs
             selectedIndex={this.state.selectedTab}
             onSelect={selectedTab => this.setState({ selectedTab })}
           >
             <TabList className="tablist">
-              {/* <Tab style={() ? styles.selected : {}}className="tab">Comics</Tab> */}
               <Tab className={`tab ${this.getActiveClass(0)}`}>Comics</Tab>
               <Tab className={`tab ${this.getActiveClass(1)}`}>Stories</Tab>
               <Tab className={`tab ${this.getActiveClass(2)}`}>Series</Tab>
@@ -120,7 +118,7 @@ class CharacterDetails extends React.Component {
 
   getActiveClass = id => {
     if (this.state.selectedTab === id) return "active";
-    else return null;
+    else return "inactive";
   };
   componentDidMount() {
     console.log(this.props.character, "charactertoshow");
