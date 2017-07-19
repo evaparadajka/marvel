@@ -47,7 +47,6 @@ class ComicsDashboard extends React.Component {
           />
         </div>
         <br />
-
         <Button
           className="btn-danger"
           onClick={this.clickNewComics}

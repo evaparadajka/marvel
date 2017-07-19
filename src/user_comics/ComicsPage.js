@@ -19,8 +19,12 @@ class ComicsPage extends React.Component {
 
   render() {
     return (
-      <div className="img-container styled-dashboard">
-        <CharacterList show={this.show} characters={this.props.comics} />
+
+      <div>
+        <StyledDashboard className="img-container">
+          <CharacterList show={this.show} characters={this.props.comics} />
+        </StyledDashboard>
+
       </div>
     );
   }

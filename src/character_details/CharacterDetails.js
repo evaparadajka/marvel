@@ -9,8 +9,13 @@ import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
 import { showNotification } from "../lib/functions";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 class CharacterDetails extends React.Component {
+  constructor() {
+    super();
+    this.state = { selectedTab: 0 };
+  }
   addToFav = () => {
     this.props.dispatch(addToFavourites(this.props.character));
     showNotification("Character added!");
@@ -65,47 +70,58 @@ class CharacterDetails extends React.Component {
       return (
         <div className="img-container">
           <StyledCharacterBase>
-            <div>
-              <div>
-                <img
-                  className="img-responsive"
-                  src={`${this.props.character.thumbnail
-                    .path}/landscape_incredible.jpg`}
-                />
-              </div>
-              <div>
-                <h1>
-                  {this.props.character.name}
-                </h1>
-              </div>
+
+            <div className="square">
+              <img
+                // className="img-responsive"
+                src={`${this.props.character.thumbnail
+                  .path}/standard_fantastic.jpg`}
+              />
+              <h1 className="bottom-overlay">
+                {this.props.character.name}
+              </h1>
+            </div>
+
+            <div className="description">
+              <h4>Description:</h4>
+              <p>
+                {this.renderDescription()}
+              </p>
 
               {this.renderActionButton()}
             </div>
           </StyledCharacterBase>
-          <hr />
-          <h3>DETAILS</h3>
-          <StyledCharacterDetails>
-            <div>
-              <h4>Description:</h4>
-              {this.renderDescription()}
-            </div>
 
-            <div>
-              <h4>Comics:</h4>
+          <Tabs
+            selectedIndex={this.state.selectedTab}
+            onSelect={selectedTab => this.setState({ selectedTab })}
+          >
+            <TabList className="tablist">
+              <Tab className={`tab ${this.getActiveClass(0)}`}>Comics</Tab>
+              <Tab className={`tab ${this.getActiveClass(1)}`}>Stories</Tab>
+              <Tab className={`tab ${this.getActiveClass(2)}`}>Series</Tab>
+            </TabList>
 
+            <TabPanel className="tabpanel">
               <ComicList comics={this.props.character.comics.items} />
-            </div>
-
-            <div>
-              <h4>Stories:</h4>
+            </TabPanel>
+            <TabPanel className="tabpanel">
               <StoryList stories={this.props.character.stories.items} />
-            </div>
-          </StyledCharacterDetails>
+            </TabPanel>
+            <TabPanel className="tabpanel">
+              <StoryList stories={this.props.character.series.items} />
+            </TabPanel>
+          </Tabs>
+
         </div>
       );
     }
   };
 
+  getActiveClass = id => {
+    if (this.state.selectedTab === id) return "active";
+    else return "inactive";
+  };
   componentDidMount() {
     this.doIHaveCharacter(
       this.props.router.location.pathname.slice(
@@ -132,6 +148,7 @@ class CharacterDetails extends React.Component {
   };
 
   render() {
+    console.log("Wybrany tab", this.state.selectedTab);
     return (
       <div>
         {this.doIHaveSomethingToRender()}
