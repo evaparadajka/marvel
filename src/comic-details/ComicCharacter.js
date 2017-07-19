@@ -6,6 +6,7 @@ import { withRouter } from "react-router";
 
 class ComicCharacter extends React.Component {
   show = id => {
+    this.props.dispatch({ type: "SHOW", id: parseFloat(id) });
     this.props.router.push("/character-details/" + id);
   };
 

@@ -105,6 +105,7 @@ class CharacterDetails extends React.Component {
   };
 
   componentDidMount() {
+    console.log(this.props.character, "charactertoshow");
     this.doIHaveCharacter(
       this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 7,
@@ -124,10 +125,11 @@ class CharacterDetails extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    character: state.characters.characterToShow,
-    // typeof state.characters.characterToShow === "undefined"
-    //   ? getCharDetails(state)
-    //   : getCharDetails(state, state.characters.characterToShow.id),
+    //state.characters.characterToShow,
+    character:
+      typeof state.characters.characterToShow === "undefined"
+        ? state.characters.characterToShow
+        : getCharDetails(state, state.characters.characterToShow.id),
     session: state.session
   };
 };
