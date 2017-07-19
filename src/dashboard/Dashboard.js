@@ -57,7 +57,11 @@ class Dashboard extends React.Component {
           <CharacterList show={this.show} characters={charactersToRender} />
         </StyledDashboard>
         <br />
-        <Button onClick={this.clickNewChar} label="get new Characters" />
+        <Button
+          className="btn-danger"
+          onClick={this.clickNewChar}
+          label="Load more..."
+        />
         <br />
       </div>
     );

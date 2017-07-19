@@ -80,13 +80,11 @@ class Character extends React.Component {
       );
     } else {
       return (
-        <div className="col-md-6">
-          <Button
-            className="btn-danger"
-            label="Add to favourites!"
-            onClick={this.addToFav}
-          />
-        </div>
+        <Button
+          className="btn-danger"
+          label="Add to favourites!"
+          onClick={this.addToFav}
+        />
       );
     }
   };
@@ -94,21 +92,19 @@ class Character extends React.Component {
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
-        <div>
-          <StyledOverlay>
-            <div />
-            <div className="name">
-              {this.props.name ? this.props.name : this.props.title}
-            </div>
-
+        <StyledOverlay>
+          <div className="name">
+            {this.props.name ? this.props.name : this.props.title}
+          </div>
+          <div>
             <Button
               className="btn-danger"
               label="Details"
               onClick={this.show}
             />
             {this.renderActionButton()}
-          </StyledOverlay>
-        </div>
+          </div>
+        </StyledOverlay>
       );
     } else return null;
   };
