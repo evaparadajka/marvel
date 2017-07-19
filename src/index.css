@@ -115,6 +115,14 @@ hr {
   margin: 10px 50px;
 }
 
+.table {
+  padding: 2px;
+}
+
+.table-style {
+  margin: 1% 30%;
+}
+
 @media only screen and (max-width: 768px) {
   .img-container {
     padding-top: 250px;

@@ -7,6 +7,7 @@ import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
+import apiMarvelId from "../lib/api-marvel-id";
 // import {s } from "./actions";
 class CharacterDetails extends React.Component {
   addToFav = () => {
@@ -39,6 +40,32 @@ class CharacterDetails extends React.Component {
       );
     }
   };
+
+  doIHaveCharacter = id => {
+    if (typeof this.props.character.thumbnail === "undefined") {
+      console.log(id);
+      apiMarvelId
+        .get(id)
+        .then(response => {
+          console.log(response.data.data.results[0]);
+          this.props.dispatch({
+            type: "SHOW/FETCH",
+            payload: response.data.data.results[0]
+          });
+          //this.props.router.push("/character-details/" + id);
+        })
+        .catch(error => console.log(error));
+    }
+  };
+
+  componentDidMount() {
+    this.doIHaveCharacter(
+      this.props.router.location.pathname.slice(
+        this.props.router.location.pathname.length - 7,
+        this.props.router.location.pathname.length
+      )
+    );
+  }
 
   render() {
     return (
@@ -85,7 +112,10 @@ class CharacterDetails extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    character: getCharDetails(state, state.characters.characterToShow.id),
+    character:
+      typeof state.characters.characterToShow === "undefined"
+        ? getCharDetails(state)
+        : getCharDetails(state, state.characters.characterToShow.id),
     session: state.session
   };
 };

@@ -7,6 +7,11 @@ import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import apiClient from "../lib/api-client";
 import { getComicDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
+// import CharacterInComic from "./CharacterInComic";
+// import CharacterListInComic from "./CharacterListInComic";
+// import CharactersDashboardInComic from "./CharactersDashboardInComic";
+import ComicCharacter from "./ComicCharacter";
+import ComicCharacterList from "./ComicCharacterList";
 
 class ComicDetails extends React.Component {
   addToFav = () => {
@@ -39,6 +44,21 @@ class ComicDetails extends React.Component {
       );
     }
   };
+
+  getID = (e, i, a) => {
+    console.log(
+      this.props.comic.characters.items[i].resourceURI.slice(
+        this.props.comic.characters.items[i].resourceURI.length - 7,
+        this.props.comic.characters.items[i].resourceURI.length
+      ),
+      "bla"
+    );
+  };
+
+  getCharIDs = (i = 0) => {
+    //this.props.comic.characters.items.forEach(this.getID);
+  };
+
   render() {
     return (
       <div className="img-container">
@@ -58,6 +78,14 @@ class ComicDetails extends React.Component {
             {this.renderActionButton()}
           </div>
         </StyledCharacterDetails>
+
+        <StyledCharacterDetails>
+          <h3>CHARACTERS</h3>
+
+          <br />
+          <ComicCharacterList characters={this.props.comic.characters.items} />
+        </StyledCharacterDetails>
+
         <StyledCharacterDetails>
           <h3>DETAILS</h3>
           <br />

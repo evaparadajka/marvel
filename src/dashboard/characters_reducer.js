@@ -38,6 +38,11 @@ const characters = (state = initialState, action) => {
           p => p.id === action.id
         )
       };
+    case "SHOW/FETCH":
+      return {
+        ...state,
+        characterToShow: action.payload
+      };
     default:
       return state;
   }
