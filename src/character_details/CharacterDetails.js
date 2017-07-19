@@ -107,7 +107,6 @@ class CharacterDetails extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.character, "charactertoshow");
     this.doIHaveCharacter(
       this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 7,

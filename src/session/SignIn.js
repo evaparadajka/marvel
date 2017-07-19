@@ -71,7 +71,7 @@ class SignIn extends React.Component {
             <h2>
               or
               <Link to="/sign-up" className="sign-up">
-                {" "}sign up!
+                sign up!
               </Link>
               <br />
               {this.state.error}

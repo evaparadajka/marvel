@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 
 import CharacterList from "../dashboard/CharacterList";
-import StyledDashboard from "../user_interface/StyledDashboard";
 import Button from "../user_interface/Button";
 
 class ComicsDashboard extends React.Component {
@@ -39,13 +38,14 @@ class ComicsDashboard extends React.Component {
   };
 
   render() {
-    const comicsToRender = this.props.comics.comicsCollection;
-
     return (
       <div className="center">
-        <StyledDashboard className="img-container">
-          <CharacterList show={this.show} characters={comicsToRender} />
-        </StyledDashboard>
+        <div className="img-container styled-dashboard">
+          <CharacterList
+            show={this.show}
+            characters={this.props.comics.comicsCollection}
+          />
+        </div>
         <br />
 
         <Button

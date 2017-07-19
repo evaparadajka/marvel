@@ -123,6 +123,10 @@ hr {
   padding-top: 35px;
 }
 
+.styled-dashboard {
+  margin-top: 10%;
+}
+
 @media only screen and (max-width: 768px) {
   .img-container {
     padding-top: 250px;

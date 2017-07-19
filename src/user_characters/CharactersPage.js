@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import CharacterList from "../dashboard/CharacterList";
-import StyledDashboard from "../user_interface/StyledDashboard";
 import apiClient from "../lib/api-client";
 import { getFavouriteCharacters } from "../character_details/selectors";
 import { fetchFavouriteCharacters } from "../character_details/actions";
+
 class CharactersPage extends React.Component {
   show = id => {
     this.props.dispatch({ type: "SHOW", id: id });
@@ -21,10 +21,8 @@ class CharactersPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <StyledDashboard className="img-container">
-          <CharacterList show={this.show} characters={this.props.characters} />
-        </StyledDashboard>
+      <div className="img-container styled-dashboard">
+        <CharacterList show={this.show} characters={this.props.characters} />
       </div>
     );
   }
