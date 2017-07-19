@@ -63,81 +63,44 @@ class CharacterDetails extends React.Component {
       return <div />;
     } else {
       return (
-//         <div className="img-container">
-//           <StyledCharacterDetails className="center">
-//             <div className="space-in-details">
-//               <div>
-//                 <img
-//                   src={`${this.props.character.thumbnail
-//                     .path}/standard_amazing.jpg`}
-//                 />
-//               </div>
-//               <div>
-//                 <div className="rectangle">
-//                   {this.props.character.name}
-//                 </div>
-//               </div>
-
-//               {this.renderActionButton()}
-//             </div>
-//           </StyledCharacterDetails>
-//           <StyledCharacterDetails>
-//             <h3>DETAILS</h3>
-//             <br />
-//             <div>
-//               <h4>Description:</h4>
-//               {this.props.character.description}
-//             </div>
-//             <br />
-//             <div>
-//               <h4>Comics:</h4>
-//               <ComicList comics={this.props.character.comics.items} />
-//             </div>
-//             <br />
-//             <div>
-//               <h4>Stories:</h4>
-//               <StoryList stories={this.props.character.stories.items} />
-//             </div>
-//           </StyledCharacterDetails>
-//         </div>
         <div className="img-container">
-        <StyledCharacterBase>
-          <div>
+          <StyledCharacterBase>
             <div>
-              <img
-                className="img-responsive"
-                src={`${this.props.character.thumbnail
-                  .path}/landscape_incredible.jpg`}
-              />
+              <div>
+                <img
+                  className="img-responsive"
+                  src={`${this.props.character.thumbnail
+                    .path}/landscape_incredible.jpg`}
+                />
+              </div>
+              <div>
+                <h1>
+                  {this.props.character.name}
+                </h1>
+              </div>
+
+              {this.renderActionButton()}
             </div>
+          </StyledCharacterBase>
+          <hr />
+          <h3>DETAILS</h3>
+          <StyledCharacterDetails>
             <div>
-              <h1>
-                {this.props.character.name}
-              </h1>
+              <h4>Description:</h4>
+              {this.renderDescription()}
             </div>
 
-            {this.renderActionButton()}
-          </div>
-        </StyledCharacterBase>
-        <hr />
-        <h3>DETAILS</h3>
-        <StyledCharacterDetails>
-          <div>
-            <h4>Description:</h4>
-            {this.renderDescription()}
-          </div>
+            <div>
+              <h4>Comics:</h4>
 
-          <div>
-            <h4>Comics:</h4>
+              <ComicList comics={this.props.character.comics.items} />
+            </div>
 
-            <ComicList comics={this.props.character.comics.items} />
-          </div>
-
-          <div>
-            <h4>Stories:</h4>
-            <StoryList stories={this.props.character.stories.items} />
-          </div>
-        </StyledCharacterDetails>
+            <div>
+              <h4>Stories:</h4>
+              <StoryList stories={this.props.character.stories.items} />
+            </div>
+          </StyledCharacterDetails>
         </div>
       );
     }
@@ -153,7 +116,7 @@ class CharacterDetails extends React.Component {
     );
   }
 
-renderDescription = () => {
+  renderDescription = () => {
     if (this.props.character.description === "") {
       return (
         <div>
@@ -168,7 +131,6 @@ renderDescription = () => {
         </div>
       );
   };
-
 
   render() {
     return (
