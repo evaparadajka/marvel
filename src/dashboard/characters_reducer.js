@@ -32,11 +32,22 @@ const characters = (state = initialState, action) => {
         )
       };
     case "SHOW":
+      console.log(
+        typeof action.id,
+        "show",
+        state.charactersCollection.find(p => p.id === action.id)
+      );
       return {
         ...state,
         characterToShow: state.charactersCollection.find(
           p => p.id === action.id
         )
+      };
+    case "SHOW/FETCH":
+      return {
+        ...state,
+        characterToShow: action.payload,
+        charactersCollection: [...state.charactersCollection, action.payload]
       };
     default:
       return state;

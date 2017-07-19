@@ -7,6 +7,11 @@ import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import apiClient from "../lib/api-client";
 import { getComicDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
+// import CharacterInComic from "./CharacterInComic";
+// import CharacterListInComic from "./CharacterListInComic";
+// import CharactersDashboardInComic from "./CharactersDashboardInComic";
+import ComicCharacter from "./ComicCharacter";
+import ComicCharacterList from "./ComicCharacterList";
 import { showNotification } from "../lib/functions";
 
 class ComicDetails extends React.Component {
@@ -24,7 +29,7 @@ class ComicDetails extends React.Component {
   renderActionButton = () => {
     if (this.isComicInFavs()) {
       return (
-        <div className="col-md-6">
+        <div>
           <button
             onClick={this.delFromFav}
             className="fa fa-trash-o fa-3x nav-style"
@@ -33,7 +38,7 @@ class ComicDetails extends React.Component {
       );
     } else {
       return (
-        <div className="col-md-6">
+        <div>
           <button
             onClick={this.addToFav}
             className="fa fa-plus fa-3x nav-style"
@@ -42,28 +47,48 @@ class ComicDetails extends React.Component {
       );
     }
   };
+
+  getID = (e, i, a) => {
+    console.log(
+      this.props.comic.characters.items[i].resourceURI.slice(
+        this.props.comic.characters.items[i].resourceURI.length - 7,
+        this.props.comic.characters.items[i].resourceURI.length
+      ),
+      "bla"
+    );
+  };
+
+  getCharIDs = (i = 0) => {
+    //this.props.comic.characters.items.forEach(this.getID);
+  };
+
   render() {
     return (
-      <div>
-        <StyledCharacterDetails>
-          <div>
-            <div className="row">
-              <div className="col-md-6">
-                <img
-                  src={`${this.props.comic.thumbnail
-                    .path}/standard_amazing.jpg`}
-                />
-              </div>
-              <div className="col-md-6">
-                <h1>
-                  {this.props.comic.title}
-                </h1>
-              </div>
-
-              {this.renderActionButton()}
+      <div className="img-container">
+        <StyledCharacterDetails className="center">
+          <div className="space-in-details">
+            <div>
+              <img
+                src={`${this.props.comic.thumbnail.path}/standard_amazing.jpg`}
+              />
             </div>
+            <div>
+              <div className="rectangle">
+                {this.props.comic.title}
+              </div>
+            </div>
+
+            {this.renderActionButton()}
           </div>
         </StyledCharacterDetails>
+
+        <StyledCharacterDetails>
+          <h3>CHARACTERS</h3>
+
+          <br />
+          <ComicCharacterList characters={this.props.comic.characters.items} />
+        </StyledCharacterDetails>
+
         <StyledCharacterDetails>
           <h3>DETAILS</h3>
           <br />

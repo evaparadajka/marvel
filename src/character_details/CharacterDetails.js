@@ -7,7 +7,9 @@ import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
+import apiMarvelId from "../lib/api-marvel-id";
 import { showNotification } from "../lib/functions";
+
 class CharacterDetails extends React.Component {
   addToFav = () => {
     this.props.dispatch(addToFavourites(this.props.character));
@@ -39,25 +41,66 @@ class CharacterDetails extends React.Component {
     }
   };
 
-  renderDescription = () => {
-    if (this.props.character.description === "") {
-      return (
-        <div>
-          Character description is not yet provided. Thank you for your
-          patience.
-        </div>
-      );
-    } else
-      return (
-        <div>
-          {this.props.character.description}
-        </div>
-      );
+  doIHaveCharacter = id => {
+    if (typeof this.props.character === "undefined") {
+      apiMarvelId
+        .get(id)
+        .then(response => {
+          this.props.dispatch({
+            type: "SHOW/FETCH",
+            payload: response.data.data.results[0]
+          });
+          //this.props.router.push("/character-details/" + id);
+        })
+        .catch(error => console.log(error));
+    } else {
+      //this.props.router.push("/character-details/" + id);
+    }
   };
 
-  render() {
-    return (
-      <div className="img-container">
+  doIHaveSomethingToRender = () => {
+    if (typeof this.props.character === "undefined") {
+      return <div />;
+    } else {
+      return (
+//         <div className="img-container">
+//           <StyledCharacterDetails className="center">
+//             <div className="space-in-details">
+//               <div>
+//                 <img
+//                   src={`${this.props.character.thumbnail
+//                     .path}/standard_amazing.jpg`}
+//                 />
+//               </div>
+//               <div>
+//                 <div className="rectangle">
+//                   {this.props.character.name}
+//                 </div>
+//               </div>
+
+//               {this.renderActionButton()}
+//             </div>
+//           </StyledCharacterDetails>
+//           <StyledCharacterDetails>
+//             <h3>DETAILS</h3>
+//             <br />
+//             <div>
+//               <h4>Description:</h4>
+//               {this.props.character.description}
+//             </div>
+//             <br />
+//             <div>
+//               <h4>Comics:</h4>
+//               <ComicList comics={this.props.character.comics.items} />
+//             </div>
+//             <br />
+//             <div>
+//               <h4>Stories:</h4>
+//               <StoryList stories={this.props.character.stories.items} />
+//             </div>
+//           </StyledCharacterDetails>
+//         </div>
+        <div className="img-container">
         <StyledCharacterBase>
           <div>
             <div>
@@ -95,6 +138,42 @@ class CharacterDetails extends React.Component {
             <StoryList stories={this.props.character.stories.items} />
           </div>
         </StyledCharacterDetails>
+        </div>
+      );
+    }
+  };
+
+  componentDidMount() {
+    console.log(this.props.character, "charactertoshow");
+    this.doIHaveCharacter(
+      this.props.router.location.pathname.slice(
+        this.props.router.location.pathname.length - 7,
+        this.props.router.location.pathname.length
+      )
+    );
+  }
+
+renderDescription = () => {
+    if (this.props.character.description === "") {
+      return (
+        <div>
+          Character description is not yet provided. Thank you for your
+          patience.
+        </div>
+      );
+    } else
+      return (
+        <div>
+          {this.props.character.description}
+        </div>
+      );
+  };
+
+
+  render() {
+    return (
+      <div>
+        {this.doIHaveSomethingToRender()}
       </div>
     );
   }
@@ -102,7 +181,11 @@ class CharacterDetails extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    character: getCharDetails(state, state.characters.characterToShow.id),
+    //state.characters.characterToShow,
+    character:
+      typeof state.characters.characterToShow === "undefined"
+        ? state.characters.characterToShow
+        : getCharDetails(state, state.characters.characterToShow.id),
     session: state.session
   };
 };

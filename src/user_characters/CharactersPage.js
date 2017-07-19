@@ -20,7 +20,6 @@ class CharactersPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.characters);
     return (
       <div>
         <StyledDashboard className="img-container">
@@ -32,7 +31,6 @@ class CharactersPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     characters: getFavouriteCharacters(state)
   };

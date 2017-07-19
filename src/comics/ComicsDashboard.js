@@ -4,6 +4,7 @@ import apiMarvel from "../lib/api-marvel";
 
 import CharacterList from "../dashboard/CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
+import Button from "../user_interface/Button";
 
 class ComicsDashboard extends React.Component {
   fetchComics(offset) {
@@ -28,8 +29,14 @@ class ComicsDashboard extends React.Component {
   };
 
   componentDidMount() {
-    this.fetchComics(this.props.comics.comicsCollection.length);
+    //this.fetchComics(this.props.comics.comicsCollection.length);
   }
+
+  clickNewComics = e => {
+    e.preventDefault();
+    const comicsAmmount = this.props.comics.comicsCollection.length;
+    this.fetchComics(comicsAmmount);
+  };
 
   render() {
     const comicsToRender = this.props.comics.comicsCollection;
@@ -39,6 +46,10 @@ class ComicsDashboard extends React.Component {
         <StyledDashboard className="img-container">
           <CharacterList show={this.show} characters={comicsToRender} />
         </StyledDashboard>
+        <br />
+        <Button onClick={this.clickNewComics} label="get new Comics" />
+        <br />
+        <br />
       </div>
     );
   }

@@ -59,6 +59,13 @@ hr {
   flex-wrap: wrap;
 }
 
+.space-in-details {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 .log-style {
   margin: 10% 30%;
   background: white;
@@ -85,6 +92,15 @@ hr {
   height: 255px;
 }
 
+.rectangle {
+  position: relative;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200%;
+}
+
 .name {
   font-weight: bold;
   font-size: 1.2em;
@@ -94,6 +110,13 @@ hr {
 .description {
   margin: 10px 50px;
 }
+
+.table {
+  padding: 2px;
+}
+
+.table-style {
+  margin: 1% 30%;
 
 .img-container {
   padding-top: 35px;
@@ -108,5 +131,8 @@ hr {
   }
   .right {
     float: center;
+  }
+  .rectangle {
+    width: 300px;
   }
 }
