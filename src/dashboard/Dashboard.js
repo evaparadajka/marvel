@@ -1,12 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
-
-//import InfiniteScroll from "react-infinite-scroll";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
-import StyledDashboard from "../user_interface/StyledDashboard";
 import { fetchFavouriteCharacters } from "../character_details/actions";
 import { appendFavourites } from "../character_details/selectors";
 class Dashboard extends React.Component {
@@ -31,16 +28,6 @@ class Dashboard extends React.Component {
     this.props.router.push("/character-details/" + id);
   };
 
-  // isUserCharactersCollectionEmpty = () => {
-  //   if ((this.props.characters.userCharactersCollection.length = 0))
-  //     return true;
-  //   else return false;
-  // };
-
-  componentDidMount() {
-    //this.fetchCharacters(this.props.characters.charactersCollection.length);
-  }
-
   clickNewChar = e => {
     e.preventDefault();
     const charactersAmount = this.props.characters.length;
@@ -52,9 +39,9 @@ class Dashboard extends React.Component {
 
     return (
       <div className="center">
-        <StyledDashboard className="img-container">
+        <div className="img-container styled-dashboard">
           <CharacterList show={this.show} characters={charactersToRender} />
-        </StyledDashboard>
+        </div>
         <br />
         <Button
           className="btn-danger"
@@ -71,7 +58,6 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     characters: appendFavourites(state)
-    // favCharacters: getFavouriteCharacters(state)
   };
 };
 

@@ -4,7 +4,6 @@ import CharacterInComic from "./CharacterInComic";
 
 class CharacterList extends Component {
   render() {
-    //console.log(this.props.characters);
     return (
       <div className="space">
         {this.props.characters.map((d, index) =>

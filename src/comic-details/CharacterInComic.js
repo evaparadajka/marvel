@@ -1,7 +1,5 @@
 import React from "react";
-
 import Button from "../user_interface/Button";
-import StyledCharacter from "../user_interface/StyledCharacter";
 import StyledOverlay from "../user_interface/StyledOverlay";
 
 class Character extends React.Component {
@@ -75,9 +73,7 @@ class Character extends React.Component {
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
       >
-        <StyledCharacter>
-          <img src={this.props.img} alt="Image not found" />
-        </StyledCharacter>
+        <img src={this.props.img} alt="Image not found" />
         {this.renderOverlay()}
       </div>
     );
