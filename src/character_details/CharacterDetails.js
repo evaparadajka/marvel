@@ -9,8 +9,13 @@ import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
 import { showNotification } from "../lib/functions";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 class CharacterDetails extends React.Component {
+  constructor() {
+    super();
+    this.state = { selectedTab: 0 };
+  }
   addToFav = () => {
     this.props.dispatch(addToFavourites(this.props.character));
     showNotification("Character added!");
@@ -63,86 +68,60 @@ class CharacterDetails extends React.Component {
       return <div />;
     } else {
       return (
-//         <div className="img-container">
-//           <StyledCharacterDetails className="center">
-//             <div className="space-in-details">
-//               <div>
-//                 <img
-//                   src={`${this.props.character.thumbnail
-//                     .path}/standard_amazing.jpg`}
-//                 />
-//               </div>
-//               <div>
-//                 <div className="rectangle">
-//                   {this.props.character.name}
-//                 </div>
-//               </div>
-
-//               {this.renderActionButton()}
-//             </div>
-//           </StyledCharacterDetails>
-//           <StyledCharacterDetails>
-//             <h3>DETAILS</h3>
-//             <br />
-//             <div>
-//               <h4>Description:</h4>
-//               {this.props.character.description}
-//             </div>
-//             <br />
-//             <div>
-//               <h4>Comics:</h4>
-//               <ComicList comics={this.props.character.comics.items} />
-//             </div>
-//             <br />
-//             <div>
-//               <h4>Stories:</h4>
-//               <StoryList stories={this.props.character.stories.items} />
-//             </div>
-//           </StyledCharacterDetails>
-//         </div>
         <div className="img-container">
-        <StyledCharacterBase>
-          <div>
-            <div>
+          <StyledCharacterBase>
+            <div className="square">
               <img
-                className="img-responsive"
+                // className="img-responsive"
                 src={`${this.props.character.thumbnail
-                  .path}/landscape_incredible.jpg`}
+                  .path}/standard_fantastic.jpg`}
               />
-            </div>
-            <div>
-              <h1>
+              <h1 className="bottom-overlay">
                 {this.props.character.name}
               </h1>
             </div>
 
-            {this.renderActionButton()}
-          </div>
-        </StyledCharacterBase>
-        <hr />
-        <h3>DETAILS</h3>
-        <StyledCharacterDetails>
-          <div>
-            <h4>Description:</h4>
-            {this.renderDescription()}
-          </div>
+            <div>
+              <h4>Description:</h4>
+              <p className="description">
+                {this.renderDescription()}
+              </p>
 
-          <div>
-            <h4>Comics:</h4>
+              {this.renderActionButton()}
+            </div>
+          </StyledCharacterBase>
+          <hr />
 
-            <ComicList comics={this.props.character.comics.items} />
-          </div>
+          <Tabs
+            selectedIndex={this.state.selectedTab}
+            onSelect={selectedTab => this.setState({ selectedTab })}
+          >
+            <TabList className="tablist">
+              {/* <Tab style={() ? styles.selected : {}}className="tab">Comics</Tab> */}
+              <Tab className={`tab ${this.getActiveClass(0)}`}>Comics</Tab>
+              <Tab className={`tab ${this.getActiveClass(1)}`}>Stories</Tab>
+              <Tab className={`tab ${this.getActiveClass(2)}`}>Series</Tab>
+            </TabList>
 
-          <div>
-            <h4>Stories:</h4>
-            <StoryList stories={this.props.character.stories.items} />
-          </div>
-        </StyledCharacterDetails>
+            <TabPanel className="tabpanel">
+              <ComicList comics={this.props.character.comics.items} />
+            </TabPanel>
+            <TabPanel className="tabpanel">
+              <StoryList stories={this.props.character.stories.items} />
+            </TabPanel>
+            <TabPanel className="tabpanel">
+              <StoryList stories={this.props.character.series.items} />
+            </TabPanel>
+          </Tabs>
         </div>
       );
     }
   };
 
+  getActiveClass = id => {
+    if (this.state.selectedTab === id) return "active";
+    else return null;
+  };
   componentDidMount() {
     console.log(this.props.character, "charactertoshow");
     this.doIHaveCharacter(
@@ -153,7 +132,7 @@ class CharacterDetails extends React.Component {
     );
   }
 
-renderDescription = () => {
+  renderDescription = () => {
     if (this.props.character.description === "") {
       return (
         <div>
@@ -169,8 +148,8 @@ renderDescription = () => {
       );
   };
 
-
   render() {
+    console.log("Wybrany tab", this.state.selectedTab);
     return (
       <div>
         {this.doIHaveSomethingToRender()}
