@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledCharacterDetails = styled.div`
+const StyledCharacterBase = styled.div`
   background-color: #fff;
   margin: 2%;
   margin-top: 5%;
@@ -9,4 +9,4 @@ const StyledCharacterDetails = styled.div`
   justify-content: space-around;
 `;
 
-export default StyledCharacterDetails;
+export default StyledCharacterBase;

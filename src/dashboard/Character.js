@@ -1,8 +1,13 @@
 import React from "react";
-
 import Button from "../user_interface/Button";
 import StyledCharacter from "../user_interface/StyledCharacter";
 import StyledOverlay from "../user_interface/StyledOverlay";
+import {
+  addToFavourites,
+  deleteFromFavourites
+} from "../character_details/actions";
+import { showNotification } from "../lib/functions";
+import { connect } from "react-redux";
 
 class Character extends React.Component {
   constructor(props) {
@@ -27,48 +32,69 @@ class Character extends React.Component {
     });
   };
 
-  isToLong = text => {
-    if (text.length > 100) {
+  isHovered = () => {
+    return this.state.hover;
+  };
+
+  addToFav = () => {
+    let character = { name: this.props.name, id: this.props.id };
+    console.log(this.props.character);
+    this.props.dispatch(addToFavourites(character));
+    showNotification("Character added!");
+  };
+  delFromFav = () => {
+    let character = { name: this.props.name, binarId: this.props.binarId };
+    this.props.dispatch(deleteFromFavourites(character));
+    showNotification("Character deleted!");
+  };
+  isCharInFavs = () => {
+    return this.props.isFavourite;
+    // return getCharDetailsByID(this.props.id);
+  };
+  renderActionButton = () => {
+    if (this.isCharInFavs()) {
       return (
-        <div className="description">
-          {text.slice(0, 100)}...
-        </div>
+        // <div className="col-md-6">
+        <Button
+          className="btn-danger"
+          label="Delete from favourites!"
+          onClick={this.delFromFav}
+        />
+        // </div>
       );
     } else {
       return (
-        <div className="description">
-          {text}
-        </div>
+        <Button
+          className="btn-danger"
+          label="Add to favourites!"
+          onClick={this.addToFav}
+        />
       );
     }
-  };
-
-  isHovered = () => {
-    return this.state.hover;
   };
 
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
-        <div>
-          <StyledOverlay>
-            <div />
-            <div className="name">
-              {this.props.name ? this.props.name : this.props.title}
-            </div>
-
+        <StyledOverlay>
+          <div className="name">
+            {this.props.name ? this.props.name : this.props.title}
+          </div>
+          <div>
             <Button
               className="btn-danger"
               label="Details"
               onClick={this.show}
             />
-          </StyledOverlay>
-        </div>
+            {this.renderActionButton()}
+          </div>
+        </StyledOverlay>
       );
     } else return null;
   };
 
   render() {
+    //console.log(this.props.binarId);
     return (
       <div
         className="square"
@@ -84,4 +110,13 @@ class Character extends React.Component {
   }
 }
 
-export default Character;
+const mapStateToProps = state => {
+  //console.log(state);
+  //console.log(state.characters.characterToShow);
+  return {
+    // character: getCharDetails(state, state.characters.characterToShow.id),
+    // session: state.session
+  };
+};
+
+export default connect(mapStateToProps)(Character);

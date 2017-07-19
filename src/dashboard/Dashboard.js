@@ -8,7 +8,7 @@ import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
 import StyledDashboard from "../user_interface/StyledDashboard";
 import { fetchFavouriteCharacters } from "../character_details/actions";
-
+import { appendFavourites } from "../character_details/selectors";
 class Dashboard extends React.Component {
   fetchCharacters(offset) {
     apiMarvel
@@ -43,12 +43,12 @@ class Dashboard extends React.Component {
 
   clickNewChar = e => {
     e.preventDefault();
-    const charactersAmmount = this.props.characters.charactersCollection.length;
-    this.fetchCharacters(charactersAmmount);
+    const charactersAmount = this.props.characters.length;
+    this.fetchCharacters(charactersAmount);
   };
 
   render() {
-    const charactersToRender = this.props.characters.charactersCollection;
+    const charactersToRender = this.props.characters;
 
     return (
       <div className="center">
@@ -56,7 +56,11 @@ class Dashboard extends React.Component {
           <CharacterList show={this.show} characters={charactersToRender} />
         </StyledDashboard>
         <br />
-        <Button onClick={this.clickNewChar} label="get new Characters" />
+        <Button
+          className="btn-danger"
+          onClick={this.clickNewChar}
+          label="Load more..."
+        />
         <br />
         <br />
       </div>
@@ -66,7 +70,8 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    characters: state.characters
+    characters: appendFavourites(state)
+    // favCharacters: getFavouriteCharacters(state)
   };
 };
 

@@ -12,13 +12,16 @@ import { addToFavourites, deleteFromFavourites } from "./actions";
 // import CharactersDashboardInComic from "./CharactersDashboardInComic";
 import ComicCharacter from "./ComicCharacter";
 import ComicCharacterList from "./ComicCharacterList";
+import { showNotification } from "../lib/functions";
 
 class ComicDetails extends React.Component {
   addToFav = () => {
     this.props.dispatch(addToFavourites(this.props.comic));
+    showNotification("Comic added!");
   };
   delFromFav = () => {
     this.props.dispatch(deleteFromFavourites(this.props.comic));
+    showNotification("Comic deleted!");
   };
   isComicInFavs = () => {
     return this.props.comic.isFavourite;

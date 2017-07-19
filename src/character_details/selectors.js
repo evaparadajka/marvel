@@ -22,3 +22,22 @@ export const getFavouriteCharacters = state => {
     return getCharDetails(state, id);
   });
 };
+
+export const appendFavourites = state => {
+  // console.log("userChars", state.characters.userCharactersCollection);
+  const characters = state.characters.charactersCollection.map(c => {
+    state.characters.userCharactersCollection.map(userChar => {
+      if (c.id === userChar.external_id) {
+        c = { ...c, isFavourite: true, binarId: userChar.id };
+      }
+      // return c;
+    });
+    return c;
+  });
+  console.log(characters);
+  //append isFavourite key
+  // const charactersResult = userCharacters.map(c => {
+  //   return { ...c, isFavourite: true };
+  // });
+  return characters;
+};

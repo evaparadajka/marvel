@@ -5,7 +5,7 @@ import Button from "../user_interface/Button";
 import { signIn } from "./session-actions";
 import { Link } from "react-router";
 import StyledLog from "../user_interface/StyledLog";
-
+import { showNotification } from "../lib/functions";
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
