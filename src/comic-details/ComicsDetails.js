@@ -69,16 +69,14 @@ class ComicDetails extends React.Component {
   };
 
   getID = (e, i, a) => {
-    console.log(
-      this.props.comic.characters.items[i].resourceURI.slice(
-        this.props.comic.characters.items[i].resourceURI.length - 7,
-        this.props.comic.characters.items[i].resourceURI.length
-      ),
-      "bla"
-    );
+    //to jeszcze mi będzie potrzebne na 90% ~Ewa
+    // this.props.comic.characters.items[i].resourceURI.slice(
+    // this.props.comic.characters.items[i].resourceURI.length - 7,
+    // this.props.comic.characters.items[i].resourceURI.length
   };
 
   getCharIDs = (i = 0) => {
+    //to jeszcze mi będzie potrzebne na 90% ~Ewa
     //this.props.comic.characters.items.forEach(this.getID);
   };
   getActiveClass = id => {
@@ -189,7 +187,6 @@ class ComicDetails extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    // userComicsCollection: state.comics.userComicsCollection,
     comic: getComicDetails(state, state.comics.comicsToShow.id),
     session: state.session
   };

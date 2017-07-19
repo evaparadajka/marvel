@@ -70,6 +70,7 @@ class CharacterDetails extends React.Component {
       return (
         <div className="img-container">
           <StyledCharacterBase>
+
             <div className="square">
               <img
                 // className="img-responsive"
@@ -111,6 +112,7 @@ class CharacterDetails extends React.Component {
               <StoryList stories={this.props.character.series.items} />
             </TabPanel>
           </Tabs>
+
         </div>
       );
     }
@@ -121,7 +123,6 @@ class CharacterDetails extends React.Component {
     else return "inactive";
   };
   componentDidMount() {
-    console.log(this.props.character, "charactertoshow");
     this.doIHaveCharacter(
       this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 7,

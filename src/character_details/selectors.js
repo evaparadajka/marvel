@@ -1,8 +1,11 @@
 export const getCharDetails = (state, charID) => {
   const charResult = state.characters.charactersCollection.find(c => {
     return c.id === charID;
-  });
-
+  })
+    ? state.characters.charactersCollection.find(c => {
+        return c.id === charID;
+      })
+    : {};
   const userCharResult = state.characters.userCharactersCollection.find(
     c => c.external_id === charID
   );
@@ -24,20 +27,13 @@ export const getFavouriteCharacters = state => {
 };
 
 export const appendFavourites = state => {
-  // console.log("userChars", state.characters.userCharactersCollection);
   const characters = state.characters.charactersCollection.map(c => {
     state.characters.userCharactersCollection.map(userChar => {
       if (c.id === userChar.external_id) {
         c = { ...c, isFavourite: true, binarId: userChar.id };
       }
-      // return c;
     });
     return c;
   });
-  console.log(characters);
-  //append isFavourite key
-  // const charactersResult = userCharacters.map(c => {
-  //   return { ...c, isFavourite: true };
-  // });
   return characters;
 };

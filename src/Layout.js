@@ -31,8 +31,6 @@ export class Layout extends React.Component {
                   Favourite Comics
                 </Link>
               </li>
-              {/* </ul>
-              <ul className="nav right "> */}
               <li className="nav-style ">
                 <b>
                   Hello, {this.props.name}!

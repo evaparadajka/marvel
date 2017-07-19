@@ -120,9 +120,11 @@ hr {
 .table-style {
   margin: 1% 30%;
 }
+
 .img-container {
   padding-top: 35px;
 }
+
 
 .tab {
   display: inline-block;
@@ -177,6 +179,7 @@ hr {
   height: 250px;
   width: 250px;
   position: relative;
+
 }
 
 @media only screen and (max-width: 768px) {
