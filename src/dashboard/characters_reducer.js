@@ -41,7 +41,8 @@ const characters = (state = initialState, action) => {
     case "SHOW/FETCH":
       return {
         ...state,
-        characterToShow: action.payload
+        characterToShow: action.payload,
+        charactersCollection: [...state.charactersCollection, action.payload]
       };
     default:
       return state;

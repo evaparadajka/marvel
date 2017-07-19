@@ -10,12 +10,6 @@ class ComicCharacter extends React.Component {
   };
 
   getID = () => {
-    console.log(
-      this.props.resourceURI.slice(
-        this.props.resourceURI.length - 7,
-        this.props.resourceURI.length
-      )
-    );
     this.show(
       this.props.resourceURI.slice(
         this.props.resourceURI.length - 7,

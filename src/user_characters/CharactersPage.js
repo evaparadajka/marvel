@@ -14,28 +14,12 @@ class CharactersPage extends React.Component {
   fetchFromFavCharacters = () => {
     this.props.dispatch(fetchFavouriteCharacters());
   };
-  // isCharactersDataFetched = () => {
-  //   if (this.props.characters.length > 0) return true;
-  //   else return false;
-  // };
-  //
-  // renderCharacterList = () => {
-  //   if (this.isCharactersDataFetched()) {
-  //     console.log("Przed renderem ", this.props.characters);
-  //     return (
-  //
-  //     );
-  //   } else {
-  //     return null;
-  //   }
-  // };
 
   componentDidMount() {
     this.fetchFromFavCharacters();
   }
 
   render() {
-    console.log(this.props.characters);
     return (
       <div>
         <StyledDashboard className="img-container">
@@ -47,7 +31,6 @@ class CharactersPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     characters: getFavouriteCharacters(state)
   };
