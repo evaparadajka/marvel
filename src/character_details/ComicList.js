@@ -5,9 +5,9 @@ import Comic from "./Comic";
 class ComicList extends Component {
   render() {
     return (
-      <div>
+      <ol>
         {this.props.comics.map((d, index) => <Comic name={d.name} />)}
-      </div>
+      </ol>
     );
   }
 }

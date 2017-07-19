@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ComicList from "./ComicList";
 import StoryList from "./StoryList";
 import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
+import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
@@ -38,10 +39,26 @@ class CharacterDetails extends React.Component {
     }
   };
 
+  renderDescription = () => {
+    if (this.props.character.description === "") {
+      return (
+        <div>
+          Character description is not yet provided. Thank you for your
+          patience.
+        </div>
+      );
+    } else
+      return (
+        <div>
+          {this.props.character.description}
+        </div>
+      );
+  };
+
   render() {
     return (
       <div className="img-container">
-        <StyledCharacterDetails>
+        <StyledCharacterBase>
           <div>
             <div>
               <img
@@ -58,21 +75,21 @@ class CharacterDetails extends React.Component {
 
             {this.renderActionButton()}
           </div>
-        </StyledCharacterDetails>
+        </StyledCharacterBase>
         <hr />
+        <h3>DETAILS</h3>
         <StyledCharacterDetails>
-          <h3>DETAILS</h3>
-          <br />
           <div>
             <h4>Description:</h4>
-            {this.props.character.description}
+            {this.renderDescription()}
           </div>
-          <br />
+
           <div>
             <h4>Comics:</h4>
+
             <ComicList comics={this.props.character.comics.items} />
           </div>
-          <br />
+
           <div>
             <h4>Stories:</h4>
             <StoryList stories={this.props.character.stories.items} />
