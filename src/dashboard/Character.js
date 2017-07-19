@@ -8,7 +8,7 @@ import {
 } from "../character_details/actions";
 import { showNotification } from "../lib/functions";
 import { connect } from "react-redux";
-// import { getCharDetailsByID } from "../character_details/selectors";
+
 class Character extends React.Component {
   constructor(props) {
     super(props);
@@ -32,22 +32,6 @@ class Character extends React.Component {
     });
   };
 
-  isToLong = text => {
-    if (text.length > 100) {
-      return (
-        <div className="description">
-          {text.slice(0, 100)}...
-        </div>
-      );
-    } else {
-      return (
-        <div className="description">
-          {text}
-        </div>
-      );
-    }
-  };
-
   isHovered = () => {
     return this.state.hover;
   };
@@ -59,7 +43,8 @@ class Character extends React.Component {
     showNotification("Character added!");
   };
   delFromFav = () => {
-    this.props.dispatch(deleteFromFavourites(this.props.character));
+    let character = { name: this.props.name, binarId: this.props.binarId };
+    this.props.dispatch(deleteFromFavourites(character));
     showNotification("Character deleted!");
   };
   isCharInFavs = () => {
@@ -70,13 +55,12 @@ class Character extends React.Component {
     if (this.isCharInFavs()) {
       return (
         // <div className="col-md-6">
-        //   <Button
-        //     className="btn-danger"
-        //     label="Delete from favourites!"
-        //     onClick={this.delFromFav}
-        //   />
+        <Button
+          className="btn-danger"
+          label="Delete from favourites!"
+          onClick={this.delFromFav}
+        />
         // </div>
-        null
       );
     } else {
       return (
@@ -110,6 +94,7 @@ class Character extends React.Component {
   };
 
   render() {
+    //console.log(this.props.binarId);
     return (
       <div
         className="square"
@@ -126,8 +111,10 @@ class Character extends React.Component {
 }
 
 const mapStateToProps = state => {
+  //console.log(state);
+  //console.log(state.characters.characterToShow);
   return {
-    //character: getCharDetails(state, state.characters.characterToShow.id),
+    // character: getCharDetails(state, state.characters.characterToShow.id),
     // session: state.session
   };
 };
