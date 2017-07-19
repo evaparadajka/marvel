@@ -5,9 +5,9 @@ import Story from "./Story";
 class StoryList extends Component {
   render() {
     return (
-      <div>
+      <ol>
         {this.props.stories.map((d, index) => <Story name={d.name} />)}
-      </div>
+      </ol>
     );
   }
 }
