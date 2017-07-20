@@ -35,5 +35,6 @@ export const appendFavourites = state => {
     });
     return c;
   });
+
   return characters;
 };

@@ -21,7 +21,9 @@ class CharactersPage extends React.Component {
 
   render() {
     return (
-      <div className="img-container styled-dashboard">
+
+      <div className="img-container">
+
         <CharacterList show={this.show} characters={this.props.characters} />
       </div>
     );

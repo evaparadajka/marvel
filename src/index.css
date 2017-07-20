@@ -67,6 +67,10 @@ hr {
 .log-style {
   margin: 10% 30%;
   background: white;
+  border: 5px solid black;
+  border-radius: 3%;
+  padding: 2%;
+  margin-bottom: 5px;
 }
 
 .background {
@@ -118,7 +122,7 @@ hr {
 }
 
 .img-container {
-  padding-top: 35px;
+  padding-top: 80px;
 }
 
 .styled-dashboard {

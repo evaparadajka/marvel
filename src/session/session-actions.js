@@ -22,9 +22,7 @@ export const signIn = user => {
             user_id: response.data.data.user_id
           }
         });
-        dispatch({
-          type: "LOGIN_SUCCESS"
-        });
+
         hashHistory.push("/");
       })
       .catch(error => {

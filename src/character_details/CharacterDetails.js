@@ -8,7 +8,7 @@ import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
-import { showNotification } from "../lib/functions";
+import { showNotification } from "../alert/notifications";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 class CharacterDetails extends React.Component {
@@ -73,7 +73,6 @@ class CharacterDetails extends React.Component {
 
             <div className="square">
               <img
-                // className="img-responsive"
                 src={`${this.props.character.thumbnail
                   .path}/standard_fantastic.jpg`}
               />
@@ -148,7 +147,6 @@ class CharacterDetails extends React.Component {
   };
 
   render() {
-    console.log("Wybrany tab", this.state.selectedTab);
     return (
       <div>
         {this.doIHaveSomethingToRender()}
@@ -159,7 +157,6 @@ class CharacterDetails extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    //state.characters.characterToShow,
     character:
       typeof state.characters.characterToShow === "undefined"
         ? state.characters.characterToShow

@@ -35,6 +35,7 @@ class Dashboard extends React.Component {
     this.props.router.push("/character-details/" + id);
   };
 
+
   clickNewChar = e => {
     e.preventDefault();
     const charactersAmount = this.props.characters.length;
@@ -46,7 +47,10 @@ class Dashboard extends React.Component {
 
     return (
       <div className="center">
-        <div className="img-container styled-dashboard">
+
+        <div className="img-container">
+
+
           <CharacterList show={this.show} characters={charactersToRender} />
         </div>
         <br />
