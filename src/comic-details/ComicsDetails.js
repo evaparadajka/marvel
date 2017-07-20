@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Creator from "./Creator";
 import CreatorList from "./CreatorList";
-import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
+// import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import apiClient from "../lib/api-client";
 import { getComicDetails } from "./selectors";

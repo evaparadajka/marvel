@@ -6,8 +6,6 @@ import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
 import { fetchFavouriteCharacters } from "../character_details/actions";
 import { appendFavourites } from "../character_details/selectors";
-// import { InfiniteScroll } from "react-infinite-scroller";
-// import ReactDOM from "react-dom";
 
 class Dashboard extends React.Component {
   fetchCharacters(offset) {
@@ -42,6 +40,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     const charactersToRender = this.props.characters;
 
     return (

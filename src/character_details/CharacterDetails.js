@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import ComicList from "./ComicList";
 import StoryList from "./StoryList";
-import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
+// import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
@@ -70,7 +70,6 @@ class CharacterDetails extends React.Component {
       return (
         <div className="img-container">
           <StyledCharacterBase>
-
             <div className="square">
               <img
                 src={`${this.props.character.thumbnail
@@ -111,7 +110,6 @@ class CharacterDetails extends React.Component {
               <StoryList stories={this.props.character.series.items} />
             </TabPanel>
           </Tabs>
-
         </div>
       );
     }
