@@ -5,7 +5,7 @@ import {
   addToFavourites,
   deleteFromFavourites
 } from "../comic-details/actions";
-import { showNotification } from "../lib/functions";
+import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
 
 class Comic extends React.Component {
