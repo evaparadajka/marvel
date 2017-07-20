@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
-import StyledLog from "../user_interface/StyledLog";
-import { showNotification } from "../lib/functions";
+import { showNotification } from "../alert/notifications";
+import StyledInput from "../user_interface/StyledInput";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -35,13 +35,32 @@ class SignUp extends React.Component {
     });
   };
 
-  onSubmit = e => {
-    e.preventDefault();
-
+  isInputFormValid = () => {
     if (
       this.state.password === this.state.passwordRepeat &&
       this.state.password !== ""
-    ) {
+    )
+      return true;
+    else return false;
+  };
+
+  resetForm = () => {
+    this.setState({
+      email: "",
+      password: "",
+      passwordRepeat: ""
+    });
+  };
+  resetErrorMsg = () => {
+    this.setState({
+      error: ""
+    });
+  };
+  onSubmit = e => {
+    e.preventDefault();
+    this.resetErrorMsg();
+
+    if (this.isInputFormValid()) {
       apiClient
         .post("/api/v1/registrations", {
           user: {
@@ -50,11 +69,7 @@ class SignUp extends React.Component {
           }
         })
         .then(response => {
-          this.setState({
-            email: "",
-            password: "",
-            passwordRepeat: ""
-          });
+          this.resetForm();
           this.props.router.push("/sign-in");
         })
         .catch(error => {
@@ -63,12 +78,9 @@ class SignUp extends React.Component {
             error: "Something went wrong."
           });
         });
-      this.setState({
-        error: ""
-      });
     } else {
       this.setState({
-        error: "Passwords are not the same"
+        error: "Passwords are invalid"
       });
     }
   };
@@ -78,27 +90,24 @@ class SignUp extends React.Component {
     return (
       <div className="container-fluid background">
         <form className="form-group">
-          <StyledLog className="log-style">
+          <div className="log-style">
             <br />
             <label>Email: </label>
-            <input
-              className="form-control"
+            <StyledInput
               onChange={this.updateEmail}
               type="email"
               value={this.state.email}
             />
             <br />
             <label>Password: </label>
-            <input
-              className="form-control"
+            <StyledInput
               onChange={this.updatePassword}
               type="password"
               value={this.state.password}
             />
             <br />
             <label>Repeat password: </label>
-            <input
-              className="form-control"
+            <StyledInput
               onChange={this.updatePasswordRepeat}
               type="password"
               value={this.state.passwordRepeat}
@@ -112,15 +121,11 @@ class SignUp extends React.Component {
             <h4>
               {this.state.error}
             </h4>
-          </StyledLog>
+          </div>
         </form>
       </div>
     );
   }
 }
-
-// const mapStateToProps = state => {
-//   return {};
-// };
 
 export default withRouter(SignUp);

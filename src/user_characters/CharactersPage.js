@@ -5,6 +5,7 @@ import StyledDashboard from "../user_interface/StyledDashboard";
 import apiClient from "../lib/api-client";
 import { getFavouriteCharacters } from "../character_details/selectors";
 import { fetchFavouriteCharacters } from "../character_details/actions";
+
 class CharactersPage extends React.Component {
   show = id => {
     this.props.dispatch({ type: "SHOW", id: id });

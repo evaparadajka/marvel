@@ -8,7 +8,7 @@ import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
-import { showNotification } from "../lib/functions";
+import { showNotification } from "../alert/notifications";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 class CharacterDetails extends React.Component {

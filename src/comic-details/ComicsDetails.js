@@ -10,7 +10,7 @@ import { getComicDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import ComicCharacter from "./ComicCharacter";
 import ComicCharacterList from "./ComicCharacterList";
-import { showNotification } from "../lib/functions";
+import { showNotification } from "../alert/notifications";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 class ComicDetails extends React.Component {
@@ -78,9 +78,6 @@ class ComicDetails extends React.Component {
     );
   };
 
-  getCharIDs = (i = 0) => {
-    //this.props.comic.characters.items.forEach(this.getID);
-  };
   getActiveClass = id => {
     if (this.state.selectedTab === id) return "active";
     else return "inactive";

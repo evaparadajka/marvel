@@ -6,7 +6,7 @@ import {
   addToFavourites,
   deleteFromFavourites
 } from "../character_details/actions";
-import { showNotification } from "../lib/functions";
+import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
 
 class Character extends React.Component {
