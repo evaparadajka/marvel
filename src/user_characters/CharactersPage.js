@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import CharacterList from "../dashboard/CharacterList";
-import StyledDashboard from "../user_interface/StyledDashboard";
 import apiClient from "../lib/api-client";
 import { getFavouriteCharacters } from "../character_details/selectors";
 import { fetchFavouriteCharacters } from "../character_details/actions";
@@ -22,7 +21,9 @@ class CharactersPage extends React.Component {
 
   render() {
     return (
+
       <div className="img-container">
+
         <CharacterList show={this.show} characters={this.props.characters} />
       </div>
     );

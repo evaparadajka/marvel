@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
-
-//import InfiniteScroll from "react-infinite-scroll";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
-import StyledDashboard from "../user_interface/StyledDashboard";
 import { fetchFavouriteCharacters } from "../character_details/actions";
 import { appendFavourites } from "../character_details/selectors";
+// import { InfiniteScroll } from "react-infinite-scroller";
+// import ReactDOM from "react-dom";
+
 class Dashboard extends React.Component {
   fetchCharacters(offset) {
     apiMarvel
@@ -26,12 +26,15 @@ class Dashboard extends React.Component {
       .catch(error => console.log(error));
   }
 
+  loadMore = () => {
+    console.log("loadMore");
+  };
+
   show = id => {
     this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/character-details/" + id);
   };
 
-  componentDidMount() {}
 
   clickNewChar = e => {
     e.preventDefault();
@@ -44,7 +47,10 @@ class Dashboard extends React.Component {
 
     return (
       <div className="center">
+
         <div className="img-container">
+
+
           <CharacterList show={this.show} characters={charactersToRender} />
         </div>
         <br />
@@ -53,6 +59,9 @@ class Dashboard extends React.Component {
           onClick={this.clickNewChar}
           label="Load more..."
         />
+        <div className="infinitive-scroll" onMouseEnter={this.loadMore}>
+          Loading more ...
+        </div>
         <br />
         <br />
       </div>

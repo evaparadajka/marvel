@@ -25,7 +25,6 @@ hr {
 }
 .nav {
   background: white;
-
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -50,7 +49,6 @@ hr {
 
 .right {
   flex: end;
-  /*margin-right: 1%;*/
 }
 
 .space {
@@ -83,8 +81,6 @@ hr {
   position: fixed;
   top: 0;
   left: 0;
-
-  /* Preserve aspet ratio */
   min-width: 100%;
   min-height: 100%;
 }
@@ -124,15 +120,19 @@ hr {
 .table-style {
   margin: 1% 30%;
 }
+
 .img-container {
   padding-top: 80px;
+}
+
+.styled-dashboard {
+  margin-top: 50px;
 }
 
 .tab {
   display: inline-block;
   border: 2px solid transparent;
   border-radius: 5px 5px 0 0;
-  /*border-bottom: none;*/
   bottom: -2px;
   position: relative;
   list-style: none;
@@ -164,6 +164,9 @@ hr {
 
 .tabpanel {
   text-align: left;
+}
+
+.infinitive-scroll {
 }
 
 .bottom-overlay {

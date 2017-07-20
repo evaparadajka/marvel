@@ -32,11 +32,6 @@ const characters = (state = initialState, action) => {
         )
       };
     case "SHOW":
-      console.log(
-        typeof action.id,
-        "show",
-        state.charactersCollection.find(p => p.id === action.id)
-      );
       return {
         ...state,
         characterToShow: state.charactersCollection.find(

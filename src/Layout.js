@@ -8,8 +8,10 @@ export class Layout extends React.Component {
   render() {
     return (
       <div>
+
         <Navbar name={this.props.name} email={this.props.email} />
         
+
         <section className="container-fluid">
           <div className="row">
             {this.props.children}

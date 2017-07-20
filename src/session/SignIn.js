@@ -68,7 +68,10 @@ class SignIn extends React.Component {
             />
             <h2>
               <Link to="/sign-up" className="sign-up">
+
                 or sign up!
+
+
               </Link>
               <br />
               {this.state.error}

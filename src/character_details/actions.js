@@ -21,7 +21,6 @@ export const addToFavourites = character => {
 };
 
 export const deleteFromFavourites = character => {
-  console.log(character);
   return (dispatch, getState) => {
     apiClient
       .delete("/marvel/api/v1/delete_character/" + character.binarId)

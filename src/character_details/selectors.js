@@ -1,8 +1,11 @@
 export const getCharDetails = (state, charID) => {
   const charResult = state.characters.charactersCollection.find(c => {
     return c.id === charID;
-  });
-
+  })
+    ? state.characters.charactersCollection.find(c => {
+        return c.id === charID;
+      })
+    : {};
   const userCharResult = state.characters.userCharactersCollection.find(
     c => c.external_id === charID
   );
@@ -32,7 +35,6 @@ export const appendFavourites = state => {
     });
     return c;
   });
-  console.log(characters);
 
   return characters;
 };

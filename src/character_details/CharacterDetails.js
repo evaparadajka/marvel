@@ -70,6 +70,7 @@ class CharacterDetails extends React.Component {
       return (
         <div className="img-container">
           <StyledCharacterBase>
+
             <div className="square">
               <img
                 src={`${this.props.character.thumbnail
@@ -110,6 +111,7 @@ class CharacterDetails extends React.Component {
               <StoryList stories={this.props.character.series.items} />
             </TabPanel>
           </Tabs>
+
         </div>
       );
     }
