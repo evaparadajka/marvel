@@ -73,7 +73,7 @@ class Character extends React.Component {
       return (
         <StyledOverlay>
           <div className="name">
-            {this.props.name ? this.props.name : this.props.title}
+            {this.props.name}
           </div>
           <div>
             <Button

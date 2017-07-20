@@ -6,6 +6,9 @@ import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
 import { fetchFavouriteCharacters } from "../character_details/actions";
 import { appendFavourites } from "../character_details/selectors";
+// import { InfiniteScroll } from "react-infinite-scroller";
+// import ReactDOM from "react-dom";
+
 class Dashboard extends React.Component {
   fetchCharacters(offset) {
     apiMarvel
@@ -22,6 +25,10 @@ class Dashboard extends React.Component {
       })
       .catch(error => console.log(error));
   }
+
+  loadMore = () => {
+    console.log("loadMore");
+  };
 
   show = id => {
     this.props.dispatch({ type: "SHOW", id: id });
@@ -48,6 +55,9 @@ class Dashboard extends React.Component {
           onClick={this.clickNewChar}
           label="Load more..."
         />
+        <div className="infinitive-scroll" onMouseEnter={this.loadMore}>
+          Loading more ...
+        </div>
         <br />
         <br />
       </div>
