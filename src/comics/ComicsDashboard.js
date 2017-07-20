@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 import ComicList from "./ComicList";
 import Button from "../user_interface/Button";
+import { appendFavouritesComics } from "../character_details/selectors";
 
 class ComicsDashboard extends React.Component {
   fetchComics(offset) {
@@ -33,6 +34,7 @@ class ComicsDashboard extends React.Component {
   };
 
   render() {
+    console.log(this.props.comics);
     return (
       <div className="center">
         <div className="img-container">

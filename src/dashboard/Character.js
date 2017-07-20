@@ -7,6 +7,12 @@ import {
 } from "../character_details/actions";
 import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
+import Notifications, { success } from "react-notification-system-redux";
+import PropTypes from "prop-types";
+import {
+  notificationCharacterAdded,
+  notificationCharacterDeleted
+} from "../alert/notifications";
 
 class Character extends React.Component {
   constructor(props) {
@@ -15,6 +21,10 @@ class Character extends React.Component {
       hover: false
     };
   }
+
+  showNotification = notificationOpts => {
+    this.context.store.dispatch(success(notificationOpts));
+  };
 
   show = () => {
     this.props.show(this.props.id);
@@ -36,14 +46,14 @@ class Character extends React.Component {
   };
 
   addToFav = () => {
+    this.showNotification(notificationCharacterAdded);
     const character = { name: this.props.name, id: this.props.id };
     this.props.dispatch(addToFavourites(character));
-    showNotification("Character added!");
   };
   delFromFav = () => {
+    this.showNotification(notificationCharacterDeleted);
     const character = { name: this.props.name, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(character));
-    showNotification("Character deleted!");
   };
   isCharInFavs = () => {
     return this.props.isFavourite;
@@ -103,4 +113,7 @@ class Character extends React.Component {
   }
 }
 
+Character.contextTypes = {
+  store: PropTypes.object
+};
 export default connect()(Character);

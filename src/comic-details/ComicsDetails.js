@@ -5,21 +5,32 @@ import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import { getComicDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import ComicCharacterList from "./ComicCharacterList";
-import { showNotification } from "../alert/notifications";
+// import { showNotification } from "../alert/notifications";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import {
+  notificationComicAdded,
+  notificationComicDeleted
+} from "../alert/notifications";
+import PropTypes from "prop-types";
+import Notifications, { success } from "react-notification-system-redux";
 
 class ComicDetails extends React.Component {
   constructor() {
     super();
     this.state = { selectedTab: 0 };
   }
+  showNotification = notificationOpts => {
+    this.context.store.dispatch(success(notificationOpts));
+  };
   addToFav = () => {
+    this.showNotification(notificationComicAdded);
     this.props.dispatch(addToFavourites(this.props.comic));
-    showNotification("Comic added!");
+    // showNotification("Comic added!");
   };
   delFromFav = () => {
+    this.showNotification(notificationComicDeleted);
     this.props.dispatch(deleteFromFavourites(this.props.comic));
-    showNotification("Comic deleted!");
+    // showNotification("Comic deleted!");
   };
   isComicInFavs = () => {
     return this.props.comic.isFavourite;
@@ -130,6 +141,10 @@ const mapStateToProps = state => {
     comic: getComicDetails(state, state.comics.comicsToShow.id),
     session: state.session
   };
+};
+
+ComicDetails.contextTypes = {
+  store: PropTypes.object
 };
 
 export default connect(mapStateToProps)(ComicDetails);

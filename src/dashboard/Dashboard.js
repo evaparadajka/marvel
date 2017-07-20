@@ -4,8 +4,27 @@ import apiMarvel from "../lib/api-marvel";
 import Button from "../user_interface/Button";
 import CharacterList from "./CharacterList";
 import { appendFavourites } from "../character_details/selectors";
+import PropTypes from "prop-types";
+import Notifications, { success } from "react-notification-system-redux";
+// import DemoComponent from "../DemoComponent";
+import { notificationLoadCharacters } from "../alert/notifications";
+// const notificationOpts = {
+//   // uid: 'once-please', // you can specify your own uid if required
+//   title: "Loading new characters",
+//   message: "",
+//   position: "tr",
+//   autoDismiss: 0,
+//   action: {
+//     label: "Click me!!",
+//     callback: () => alert("clicked!")
+//   }
+// };
 
 class Dashboard extends React.Component {
+  showNotification = notificationOpts => {
+    this.context.store.dispatch(success(notificationOpts));
+  };
+
   fetchCharacters(offset) {
     apiMarvel
       .get("/characters", {
@@ -28,6 +47,7 @@ class Dashboard extends React.Component {
 
   clickNewChar = e => {
     e.preventDefault();
+    this.showNotification(notificationLoadCharacters);
     const charactersAmount = this.props.characters.length;
     this.fetchCharacters(charactersAmount);
   };
@@ -54,7 +74,9 @@ class Dashboard extends React.Component {
     );
   }
 }
-
+Dashboard.contextTypes = {
+  store: PropTypes.object
+};
 const mapStateToProps = state => {
   return {
     characters: appendFavourites(state)

@@ -5,8 +5,14 @@ import {
   addToFavourites,
   deleteFromFavourites
 } from "../comic-details/actions";
-import { showNotification } from "../alert/notifications";
+// import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
+import {
+  notificationComicAdded,
+  notificationComicDeleted
+} from "../alert/notifications";
+import PropTypes from "prop-types";
+import Notifications, { success } from "react-notification-system-redux";
 
 class Comic extends React.Component {
   constructor(props) {
@@ -15,7 +21,9 @@ class Comic extends React.Component {
       hover: false
     };
   }
-
+  showNotification = notificationOpts => {
+    this.context.store.dispatch(success(notificationOpts));
+  };
   show = () => {
     this.props.show(this.props.id);
   };
@@ -36,16 +44,19 @@ class Comic extends React.Component {
   };
 
   addToFav = () => {
+    this.showNotification(notificationComicAdded);
     const comic = { title: this.props.title, id: this.props.id };
     this.props.dispatch(addToFavourites(comic));
-    showNotification("Comic added!");
+    // showNotification("Comic added!");
   };
   delFromFav = () => {
+    this.showNotification(notificationComicDeleted);
     const comic = { title: this.props.title, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(comic));
-    showNotification("Comic deleted!");
+    // showNotification("Comic deleted!");
   };
   isComicInFavs = () => {
+    console.log(this.props.isFavourite);
     return this.props.isFavourite;
   };
   renderActionButton = () => {
@@ -103,4 +114,7 @@ class Comic extends React.Component {
   }
 }
 
+Comic.contextTypes = {
+  store: PropTypes.object
+};
 export default connect()(Comic);
