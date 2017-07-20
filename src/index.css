@@ -162,6 +162,9 @@ hr {
   text-align: left;
 }
 
+.infinitive-scroll {
+}
+
 .bottom-overlay {
   display: flex;
   justify-content: space-around;
