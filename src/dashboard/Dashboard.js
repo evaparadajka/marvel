@@ -31,15 +31,7 @@ class Dashboard extends React.Component {
     this.props.router.push("/character-details/" + id);
   };
 
-  // isUserCharactersCollectionEmpty = () => {
-  //   if ((this.props.characters.userCharactersCollection.length = 0))
-  //     return true;
-  //   else return false;
-  // };
-
-  componentDidMount() {
-    //this.fetchCharacters(this.props.characters.charactersCollection.length);
-  }
+  componentDidMount() {}
 
   clickNewChar = e => {
     e.preventDefault();
@@ -52,9 +44,9 @@ class Dashboard extends React.Component {
 
     return (
       <div className="center">
-        <StyledDashboard className="img-container">
+        <div className="img-container">
           <CharacterList show={this.show} characters={charactersToRender} />
-        </StyledDashboard>
+        </div>
         <br />
         <Button
           className="btn-danger"
@@ -71,7 +63,6 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     characters: appendFavourites(state)
-    // favCharacters: getFavouriteCharacters(state)
   };
 };
 

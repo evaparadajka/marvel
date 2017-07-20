@@ -129,56 +129,6 @@ class ComicDetails extends React.Component {
             <CreatorList creators={this.props.comic.creators.items} />
           </TabPanel>
         </Tabs>
-
-        {/* <StyledCharacterDetails className="center">
-          <div className="space-in-details">
-            <div>
-          <img
-          src={`${this.props.comic.thumbnail
-          .path}/standard_fantastic.jpg`}
-          />
-            </div>
-            <div>
-          <div className="rectangle">
-          {this.props.comic.title}
-          </div>
-            </div>
-
-            {this.renderActionButton()}
-          </div>
-          </StyledCharacterDetails>
-
-          <StyledCharacterDetails>
-          <h3>CHARACTERS</h3>
-
-          <br />
-          <ComicCharacterList characters={this.props.comic.characters.items} />
-          </StyledCharacterDetails>
-
-          <StyledCharacterDetails>
-          <h3>DETAILS</h3>
-          <br />
-          <div>
-            <h4>Description:</h4>
-            {this.props.comic.description}
-          </div>
-          <br />
-          <div>
-            <h4>Pages:</h4>
-            {this.props.comic.pageCount}
-          </div>
-          <br />
-          <div>
-            <h4>Series:</h4>
-            {this.props.comic.series.name}
-          </div>
-          <br />
-          <div>
-            <h4>Creators:</h4>
-            <CreatorList creators={this.props.comic.creators.items} />
-          </div>
-          <br />
-        </StyledCharacterDetails> */}
       </div>
     );
   }

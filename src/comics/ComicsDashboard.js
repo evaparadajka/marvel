@@ -28,9 +28,7 @@ class ComicsDashboard extends React.Component {
     this.props.router.push("/comic-details/" + id);
   };
 
-  componentDidMount() {
-    //this.fetchComics(this.props.comics.comicsCollection.length);
-  }
+  componentDidMount() {}
 
   clickNewComics = e => {
     e.preventDefault();
@@ -43,9 +41,9 @@ class ComicsDashboard extends React.Component {
 
     return (
       <div className="center">
-        <StyledDashboard className="img-container">
+        <div className="img-container">
           <CharacterList show={this.show} characters={comicsToRender} />
-        </StyledDashboard>
+        </div>
         <br />
         <Button
           className="btn-danger"

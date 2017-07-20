@@ -72,7 +72,6 @@ class CharacterDetails extends React.Component {
           <StyledCharacterBase>
             <div className="square">
               <img
-                // className="img-responsive"
                 src={`${this.props.character.thumbnail
                   .path}/standard_fantastic.jpg`}
               />
@@ -121,7 +120,6 @@ class CharacterDetails extends React.Component {
     else return "inactive";
   };
   componentDidMount() {
-    console.log(this.props.character, "charactertoshow");
     this.doIHaveCharacter(
       this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 7,
@@ -147,7 +145,6 @@ class CharacterDetails extends React.Component {
   };
 
   render() {
-    console.log("Wybrany tab", this.state.selectedTab);
     return (
       <div>
         {this.doIHaveSomethingToRender()}
@@ -158,7 +155,6 @@ class CharacterDetails extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    //state.characters.characterToShow,
     character:
       typeof state.characters.characterToShow === "undefined"
         ? state.characters.characterToShow
