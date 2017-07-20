@@ -45,19 +45,27 @@ class CharacterDetails extends React.Component {
   };
 
   doIHaveCharacter = id => {
-    if (typeof this.props.character === "undefined") {
-      apiMarvelId
-        .get(id)
-        .then(response => {
-          this.props.dispatch({
-            type: "SHOW/FETCH",
-            payload: response.data.data.results[0]
-          });
-          //this.props.router.push("/character-details/" + id);
-        })
-        .catch(error => console.log(error));
+    if (
+      typeof this.props.character === "undefined" ||
+      this.props.character.id !== Number(id)
+    ) {
+      if (typeof this.props.character === "undefined") {
+        console.log("pobieram");
+        apiMarvelId
+          .get(id)
+          .then(response => {
+            this.props.dispatch({
+              type: "SHOW/FETCH",
+              payload: response.data.data.results[0]
+            });
+          })
+          .catch(error => console.log(error));
+      } else {
+        console.log("szukam w storze");
+        this.props.dispatch({ type: "SHOW", id: Number(id) });
+      }
     } else {
-      //this.props.router.push("/character-details/" + id);
+      console.log("nie pobieram");
     }
   };
 
@@ -118,7 +126,17 @@ class CharacterDetails extends React.Component {
     if (this.state.selectedTab === id) return "active";
     else return "inactive";
   };
+
   componentDidMount() {
+    this.doIHaveCharacter(
+      this.props.router.location.pathname.slice(
+        this.props.router.location.pathname.length - 7,
+        this.props.router.location.pathname.length
+      )
+    );
+  }
+
+  componentDidUpdate() {
     this.doIHaveCharacter(
       this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 7,

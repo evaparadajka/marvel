@@ -6,7 +6,6 @@ import { fetchFavouriteCharacters } from "../character_details/actions";
 
 class CharactersPage extends React.Component {
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/character-details/" + id);
   };
 
