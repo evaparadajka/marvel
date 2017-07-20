@@ -26,15 +26,10 @@ class Dashboard extends React.Component {
       .catch(error => console.log(error));
   }
 
-  loadMore = () => {
-    console.log("loadMore");
-  };
-
   show = id => {
     this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/character-details/" + id);
   };
-
 
   clickNewChar = e => {
     e.preventDefault();
@@ -47,11 +42,9 @@ class Dashboard extends React.Component {
 
     return (
       <div className="center">
-
         <div className="img-container">
-
-
           <CharacterList show={this.show} characters={charactersToRender} />
+          <div className="infinitive-scroll" onMouseMove={this.clickNewChar} />
         </div>
         <br />
         <Button
@@ -59,9 +52,7 @@ class Dashboard extends React.Component {
           onClick={this.clickNewChar}
           label="Load more..."
         />
-        <div className="infinitive-scroll" onMouseEnter={this.loadMore}>
-          Loading more ...
-        </div>
+
         <br />
         <br />
       </div>
