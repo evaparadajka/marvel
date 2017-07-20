@@ -43,7 +43,7 @@ class Dashboard extends React.Component {
       <div className="center">
         <div className="img-container">
           <CharacterList show={this.show} characters={charactersToRender} />
-          <div className="infinitive-scroll" onMouseMove={this.clickNewChar} />
+          {/* <div className="infinitive-scroll" onMouseMove={this.clickNewChar} /> */}
         </div>
         <br />
         <Button
