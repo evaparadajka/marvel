@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 
-import CharacterList from "../dashboard/CharacterList";
+import ComicList from "./ComicList";
 import Button from "../user_interface/Button";
 
 class ComicsDashboard extends React.Component {
@@ -27,10 +27,6 @@ class ComicsDashboard extends React.Component {
     this.props.router.push("/comic-details/" + id);
   };
 
-  componentDidMount() {
-    //this.fetchComics(this.props.comics.comicsCollection.length);
-  }
-
   clickNewComics = e => {
     e.preventDefault();
     const comicsAmmount = this.props.comics.comicsCollection.length;
@@ -41,9 +37,9 @@ class ComicsDashboard extends React.Component {
     return (
       <div className="center">
         <div className="img-container styled-dashboard">
-          <CharacterList
+          <ComicList
             show={this.show}
-            characters={this.props.comics.comicsCollection}
+            comics={this.props.comics.comicsCollection}
           />
         </div>
         <br />

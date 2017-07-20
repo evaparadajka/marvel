@@ -25,7 +25,6 @@ hr {
 }
 .nav {
   background: white;
-
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -50,7 +49,6 @@ hr {
 
 .right {
   flex: end;
-  /*margin-right: 1%;*/
 }
 
 .space {
@@ -79,8 +77,6 @@ hr {
   position: fixed;
   top: 0;
   left: 0;
-
-  /* Preserve aspet ratio */
   min-width: 100%;
   min-height: 100%;
 }
@@ -125,7 +121,6 @@ hr {
   padding-top: 35px;
 }
 
-
 .styled-dashboard {
   margin-top: 50px;
 }
@@ -134,7 +129,6 @@ hr {
   display: inline-block;
   border: 2px solid transparent;
   border-radius: 5px 5px 0 0;
-  /*border-bottom: none;*/
   bottom: -2px;
   position: relative;
   list-style: none;
@@ -183,8 +177,6 @@ hr {
   height: 250px;
   width: 250px;
   position: relative;
-
->>>>>>> 3b8e7b7e301d1a27bf99e36c7200549969a6ecad
 }
 
 @media only screen and (max-width: 768px) {

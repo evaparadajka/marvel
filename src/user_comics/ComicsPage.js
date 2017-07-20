@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import CharacterList from "../dashboard/CharacterList";
+import ComicList from "../comics/ComicList";
 import apiClient from "../lib/api-client";
 import { getFavouriteComics } from "../comic-details/selectors";
 import { fetchFavouriteComics } from "../comic-details/actions";
@@ -19,12 +19,8 @@ class ComicsPage extends React.Component {
 
   render() {
     return (
-
-      <div>
-        <StyledDashboard className="img-container">
-          <CharacterList show={this.show} characters={this.props.comics} />
-        </StyledDashboard>
-
+      <div className="img-container styled-dashboard">
+        <ComicList show={this.show} comics={this.props.comics} />
       </div>
     );
   }
