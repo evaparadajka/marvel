@@ -1,14 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-
-import Creator from "./Creator";
 import CreatorList from "./CreatorList";
-// import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import StyledCharacterBase from "../user_interface/StyledCharacterBase";
-import apiClient from "../lib/api-client";
 import { getComicDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
-import ComicCharacter from "./ComicCharacter";
 import ComicCharacterList from "./ComicCharacterList";
 import { showNotification } from "../alert/notifications";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -88,8 +83,8 @@ class ComicDetails extends React.Component {
         <StyledCharacterBase>
           <div className="square">
             <img
-              // className="img-responsive"
               src={`${this.props.comic.thumbnail.path}/standard_fantastic.jpg`}
+              alt="image not found"
             />
             <h1 className="bottom-overlay">
               {this.props.comic.title}
@@ -98,10 +93,7 @@ class ComicDetails extends React.Component {
 
           <div className="description">
             <h4>Description:</h4>
-            <p>
-              {this.renderDescription()}
-            </p>
-
+            {this.renderDescription()}
             {this.renderActionButton()}
           </div>
         </StyledCharacterBase>

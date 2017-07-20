@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import ComicList from "./ComicList";
 import StoryList from "./StoryList";
-// import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import StyledCharacterBase from "../user_interface/StyledCharacterBase";
-import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
@@ -47,19 +45,28 @@ class CharacterDetails extends React.Component {
   };
 
   doIHaveCharacter = id => {
-    if (typeof this.props.character === "undefined") {
-      apiMarvelId
-        .get(id)
-        .then(response => {
-          this.props.dispatch({
-            type: "SHOW/FETCH",
-            payload: response.data.data.results[0]
+    if (
+      typeof this.props.character === "undefined" ||
+      this.props.character.id !== Number(id)
+    ) {
+      if (typeof this.props.character === "undefined") {
+        console.log("pobieram");
+        apiMarvelId
+          .get(id)
+          .then(response => {
+            this.props.dispatch({
+              type: "SHOW/FETCH",
+              payload: response.data.data.results[0]
+            });
+          })
+          .catch(error => {
+            console.log(error);
+            this.props.router.push("/not-found/");
           });
-          //this.props.router.push("/character-details/" + id);
-        })
-        .catch(error => console.log(error));
+      } else {
+        this.props.dispatch({ type: "SHOW", id: Number(id) });
+      }
     } else {
-      //this.props.router.push("/character-details/" + id);
     }
   };
 
@@ -74,6 +81,7 @@ class CharacterDetails extends React.Component {
               <img
                 src={`${this.props.character.thumbnail
                   .path}/standard_fantastic.jpg`}
+                alt="image not found"
               />
               <h1 className="bottom-overlay">
                 {this.props.character.name}
@@ -119,7 +127,17 @@ class CharacterDetails extends React.Component {
     if (this.state.selectedTab === id) return "active";
     else return "inactive";
   };
+
   componentDidMount() {
+    this.doIHaveCharacter(
+      this.props.router.location.pathname.slice(
+        this.props.router.location.pathname.length - 7,
+        this.props.router.location.pathname.length
+      )
+    );
+  }
+
+  componentDidUpdate() {
     this.doIHaveCharacter(
       this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 7,

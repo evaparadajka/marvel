@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import ComicList from "../comics/ComicList";
-import apiClient from "../lib/api-client";
 import { getFavouriteComics } from "../comic-details/selectors";
 import { fetchFavouriteComics } from "../comic-details/actions";
 
