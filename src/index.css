@@ -125,7 +125,6 @@ hr {
   padding-top: 35px;
 }
 
-
 .styled-dashboard {
   margin-top: 50px;
 }
@@ -183,8 +182,6 @@ hr {
   height: 250px;
   width: 250px;
   position: relative;
-
->>>>>>> 3b8e7b7e301d1a27bf99e36c7200549969a6ecad
 }
 
 @media only screen and (max-width: 768px) {
