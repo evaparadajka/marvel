@@ -1,108 +1,61 @@
 import React from "react";
 import { Link } from "react-router";
-
-import styled from "styled-components";
 import { connect } from "react-redux";
-/**
- * ComponentName
- */
+
+import Logout from "./session/Logout";
+
 export class Layout extends React.Component {
-  logout = () => {
-    this.props.dispatch({
-      type: "LOGOUT",
-      data: {}
-    });
-    //przejscie do strony posts
-    this.props.router.push("posts");
-  };
-  isLogged = () => {
-    if (this.props.email !== "") {
-      return (
-        <Link style={{ color: "#c94c4c" }} onClick={this.logout}>
-          Logout
-        </Link>
-      );
-    } else {
-      return (
-        <Link to="/sign-in" style={{ color: "#c94c4c" }}>
-          Login
-        </Link>
-      );
-    }
-  };
   render() {
     return (
-      <StyledComponent className="container-fluid">
-        <div
-          className="row"
-          style={{
-            borderBottom: "solid",
-            borderBottomColor: "#c94c4c",
-            color: "#eee"
-          }}
-        >
-          <ul className="nav navbar-nav">
-            <li>
-              <a className="navbar-left" href="#">
-                <i
-                  className="fa fa-paw "
-                  style={{ color: "#c94c4c" }}
-                  fontaria-hidden="true"
-                />
-              </a>
-            </li>
-            <li className="active">
-              <Link to="/" style={{ color: "#c94c4c" }}>
-                Dashboard
-              </Link>
-            </li>
+      <div>
+        <nav className="navbar-fixed-top">
+          <div className="nav ">
+            <ul className="nav navbar-nav">
+              <li className="active">
+                <Link to="/" className="nav-style">
+                  Characters
+                </Link>
+              </li>
+              <li className="active">
+                <Link to="/comics" className="nav-style">
+                  Comics
+                </Link>
+              </li>
+              <li className="active">
+                <Link to="/fav-characters" className="nav-style">
+                  Favourite Characters
+                </Link>
+              </li>
+              <li className="active">
+                <Link to="/fav-comics" className="nav-style">
+                  Favourite Comics
+                </Link>
+              </li>
+              <li className="nav-style ">
+                <b>
+                  Hello, {this.props.name}!
+                </b>
+              </li>
+              <Logout email={this.props.email} />
+            </ul>
+          </div>
+          <hr />
+        </nav>
 
-            <li className="active">
-              <Link to="/" style={{ color: "#c94c4c" }}>
-                Characters
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/sign-up" style={{ color: "#c94c4c" }}>
-                {" "}Sign up
-              </Link>
-            </li>
-            <li>
-              {this.props.email &&
-                <Link style={{ color: "#c94c4c" }}>
-                  {" "}Hello {this.props.email}
-                </Link>}
-            </li>
-            <li>
-              {this.isLogged()}
-            </li>
-          </ul>
-        </div>
-        <div className="container-fluid">
+        <section className="container-fluid">
           <div className="row">
             {this.props.children}
-            {/* {React.Children.map(this.props.children, c =>
-							React.cloneElement(c, { injectedProp: "props from layout" })
-						)} */}
-            {/* {React.Children.map(this.props.children, c =>
-							React.cloneElement(c, { counter: this.updateCounter })
-						)} */}
           </div>
-        </div>
-      </StyledComponent>
+        </section>
+      </div>
     );
   }
 }
 
-const StyledComponent = styled.div`
-  background-color: green,
-  font-size: 20px,
-  color: #fff
-`;
 const mapStateToProps = state => {
   return {
-    email: state.session.email
+    email: state.session.email,
+    name: state.session.name
   };
 };
 export default connect(mapStateToProps)(Layout);

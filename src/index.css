@@ -1,5 +1,195 @@
 body {
   margin: 0;
-  padding: 0;
+  padding-top: 0px;
   font-family: sans-serif;
+}
+
+hr {
+  color: #c94c4c;
+  border: solid;
+  border-width: 1px;
+  margin: 0;
+}
+.nav > li {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sign-up {
+  color: #c94c4c;
+}
+
+.sign-up:hover {
+  color: #a91c1c;
+  text-decoration: none;
+}
+.nav {
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.nav-style {
+  color: #c94c4c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.nav-style:hover {
+  color: #9e0606;
+}
+
+.nav-style:visited {
+  color: #c94c4c;
+}
+
+.right {
+  flex: end;
+}
+
+.space {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.space-in-details {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.log-style {
+  margin: 10% 30%;
+  background: white;
+}
+
+.background {
+  background-image: url(../src/img/marvel.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.square {
+  position: relative;
+  padding: 2px;
+  width: 255px;
+  height: 255px;
+}
+
+.rectangle {
+  position: relative;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200%;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 10px 50px;
+}
+
+.description {
+  padding: 2%;
+  text-align: justify;
+  margin: 0px 15px;
+}
+
+.table {
+  padding: 2px;
+}
+
+.table-style {
+  margin: 1% 30%;
+}
+
+.img-container {
+  padding-top: 35px;
+}
+
+.styled-dashboard {
+  margin-top: 50px;
+}
+
+.tab {
+  display: inline-block;
+  border: 2px solid transparent;
+  border-radius: 5px 5px 0 0;
+  bottom: -2px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  position: relative;
+}
+.active {
+  border-bottom: none;
+  border-color: #c94c4c;
+  background-color: white;
+}
+.inactive {
+  border: transparent;
+}
+.tab:hover {
+  color: #9e0606;
+}
+
+.tab:visited {
+  border-bottom: none;
+}
+
+.tablist {
+  border-bottom: 2px solid #c94c4c;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.tabpanel {
+  text-align: left;
+}
+
+.bottom-overlay {
+  display: flex;
+  justify-content: space-around;
+  font-size: 120%;
+  background-color: white;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  color: #a91c1c;
+}
+.img-details {
+  height: 250px;
+  width: 250px;
+  position: relative;
+}
+
+@media only screen and (max-width: 768px) {
+  .img-container {
+    padding-top: 250px;
+  }
+  .nav {
+    display: block;
+  }
+  .right {
+    float: center;
+  }
+  .rectangle {
+    width: 300px;
+  }
 }

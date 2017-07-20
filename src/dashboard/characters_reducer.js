@@ -1,16 +1,49 @@
 const initialState = {
-  charactersCollection: [
-    { id: 1, name: "name1", description: "desc1" },
-    { id: 2, name: "name2", description: "desc2" },
-    { id: 3, name: "name3", description: "desc3" },
-    { id: 4, name: "name4", description: "desc4" },
-    { id: 5, name: "name5", description: "desc5" },
-    { id: 6, name: "name6", description: "desc6" }
-  ]
+  charactersCollection: [],
+  userCharactersCollection: [],
+  characterToShow: {}
 };
 
 const characters = (state = initialState, action) => {
   switch (action.type) {
+    case "FETCH_CHAR":
+      return {
+        ...state,
+        charactersCollection: [...state.charactersCollection, ...action.payload]
+      };
+    case "FETCH_USER_CHAR":
+      return {
+        ...state,
+        userCharactersCollection: action.payload
+      };
+    case "CHARACTERS/ADD_TO_FAVOURITES":
+      return {
+        ...state,
+        userCharactersCollection: [
+          ...state.userCharactersCollection,
+          action.payload
+        ]
+      };
+    case "CHARACTERS/DELETE_FROM_FAVOURITES":
+      return {
+        ...state,
+        userCharactersCollection: state.userCharactersCollection.filter(
+          c => c.id !== action.payload
+        )
+      };
+    case "SHOW":
+      return {
+        ...state,
+        characterToShow: state.charactersCollection.find(
+          p => p.id === action.id
+        )
+      };
+    case "SHOW/FETCH":
+      return {
+        ...state,
+        characterToShow: action.payload,
+        charactersCollection: [...state.charactersCollection, action.payload]
+      };
     default:
       return state;
   }

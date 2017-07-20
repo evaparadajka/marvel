@@ -4,11 +4,11 @@ import StyledOverlay from "../user_interface/StyledOverlay";
 import {
   addToFavourites,
   deleteFromFavourites
-} from "../character_details/actions";
+} from "../comic-details/actions";
 import { showNotification } from "../lib/functions";
 import { connect } from "react-redux";
 
-class Character extends React.Component {
+class Comic extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,20 +36,20 @@ class Character extends React.Component {
   };
 
   addToFav = () => {
-    const character = { name: this.props.name, id: this.props.id };
-    this.props.dispatch(addToFavourites(character));
-    showNotification("Character added!");
+    const comic = { title: this.props.title, id: this.props.id };
+    this.props.dispatch(addToFavourites(comic));
+    showNotification("Comic added!");
   };
   delFromFav = () => {
-    const character = { name: this.props.name, binarId: this.props.binarId };
-    this.props.dispatch(deleteFromFavourites(character));
-    showNotification("Character deleted!");
+    const comic = { title: this.props.title, binarId: this.props.binarId };
+    this.props.dispatch(deleteFromFavourites(comic));
+    showNotification("Comic deleted!");
   };
-  isCharInFavs = () => {
+  isComicInFavs = () => {
     return this.props.isFavourite;
   };
   renderActionButton = () => {
-    if (this.isCharInFavs()) {
+    if (this.isComicInFavs()) {
       return (
         <Button
           className="btn-danger"
@@ -73,7 +73,7 @@ class Character extends React.Component {
       return (
         <StyledOverlay>
           <div className="name">
-            {this.props.name ? this.props.name : this.props.title}
+            {this.props.title}
           </div>
           <div>
             <Button
@@ -103,4 +103,4 @@ class Character extends React.Component {
   }
 }
 
-export default connect()(Character);
+export default connect()(Comic);
