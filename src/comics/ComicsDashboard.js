@@ -26,7 +26,6 @@ class ComicsDashboard extends React.Component {
     this.props.router.push("/comic-details/" + id);
   };
 
-
   clickNewComics = e => {
     e.preventDefault();
     const comicsAmmount = this.props.comics.comicsCollection.length;
@@ -36,14 +35,11 @@ class ComicsDashboard extends React.Component {
   render() {
     return (
       <div className="center">
-
         <div className="img-container">
-        
           <ComicList
             show={this.show}
             comics={this.props.comics.comicsCollection}
           />
-
         </div>
         <br />
         <Button

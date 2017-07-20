@@ -50,7 +50,7 @@ class ComicDetails extends React.Component {
     if (this.isComicInFavs()) {
       return (
         <div>
-          <button
+          <i
             onClick={this.delFromFav}
             className="fa fa-trash-o fa-3x nav-style"
           />
@@ -59,10 +59,7 @@ class ComicDetails extends React.Component {
     } else {
       return (
         <div>
-          <button
-            onClick={this.addToFav}
-            className="fa fa-plus fa-3x nav-style"
-          />
+          <i onClick={this.addToFav} className="fa fa-plus fa-3x nav-style" />
         </div>
       );
     }
@@ -74,7 +71,6 @@ class ComicDetails extends React.Component {
     // this.props.comic.characters.items[i].resourceURI.length - 7,
     // this.props.comic.characters.items[i].resourceURI.length
   };
-
 
   getCharIDs = (i = 0) => {
     //to jeszcze mi będzie potrzebne na 90% ~Ewa
