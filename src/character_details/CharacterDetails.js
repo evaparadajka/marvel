@@ -8,21 +8,32 @@ import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
-import { showNotification } from "../alert/notifications";
+// import { showNotification } from "../alert/notifications";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import Notifications, { success } from "react-notification-system-redux";
+import PropTypes from "prop-types";
+import {
+  notificationCharacterAdded,
+  notificationCharacterDeleted
+} from "../alert/notifications";
 
 class CharacterDetails extends React.Component {
   constructor() {
     super();
     this.state = { selectedTab: 0 };
   }
+  showNotification = notificationOpts => {
+    this.context.store.dispatch(success(notificationOpts));
+  };
   addToFav = () => {
+    this.showNotification(notificationCharacterAdded);
     this.props.dispatch(addToFavourites(this.props.character));
-    showNotification("Character added!");
+    // showNotification("Character added!");
   };
   delFromFav = () => {
+    this.showNotification(notificationCharacterDeleted);
     this.props.dispatch(deleteFromFavourites(this.props.character));
-    showNotification("Character deleted!");
+    // showNotification("Character deleted!");
   };
   isCharInFavs = () => {
     return this.props.character.isFavourite;
@@ -161,6 +172,10 @@ const mapStateToProps = state => {
         : getCharDetails(state, state.characters.characterToShow.id),
     session: state.session
   };
+};
+
+CharacterDetails.contextTypes = {
+  store: PropTypes.object
 };
 
 export default connect(mapStateToProps)(CharacterDetails);

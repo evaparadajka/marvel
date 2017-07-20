@@ -11,6 +11,7 @@ import CharacterDetails from "./character_details/CharacterDetails";
 import CharactersPage from "./user_characters/CharactersPage";
 import ComicsDetails from "./comic-details/ComicsDetails";
 import ComicsPage from "./user_comics/ComicsPage";
+import NotificationComponent from "./alert/NotificationComponent";
 
 class App extends Component {
   authenticateUser = (nextState, replace) => {
@@ -24,7 +25,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Notifications options={{ zIndex: 5000 }} />
+        {/* <Notifications options={{ zIndex: 5000 }} /> */}
+        <NotificationComponent />
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>
             <IndexRoute component={Dashboard} />

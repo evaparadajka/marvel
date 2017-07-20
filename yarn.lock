@@ -5057,6 +5057,21 @@ react-native-md5@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-md5/-/react-native-md5-1.0.0.tgz#2320be24d674938ae5ef4f492698edbbfa0e0205"
 
+react-notification-system-redux@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-notification-system-redux/-/react-notification-system-redux-1.1.4.tgz#abda4f847223a18d39687d4ff4c9bbd3b0d738ce"
+  dependencies:
+    prop-types "^15.5.8"
+    react-notification-system "^0.2.x"
+
+react-notification-system@^0.2.14, react-notification-system@^0.2.x:
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/react-notification-system/-/react-notification-system-0.2.14.tgz#21f917f39feee145516864350875041433c4d5c0"
+  dependencies:
+    create-react-class "^15.5.1"
+    object-assign "^4.0.1"
+    prop-types "^15.5.6"
+
 react-notify-toast@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/react-notify-toast/-/react-notify-toast-0.3.0.tgz#592e5a1869052a71be4a9e1a07500f55a590b337"

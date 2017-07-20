@@ -1,9 +1,61 @@
-import Notifications, { notify } from "react-notify-toast";
+import { success } from "react-notification-system-redux";
 
-export const showNotification = message => {
-  let navStyleColor = {
-    background: "#c94c4c",
-    text: "white"
-  };
-  notify.show(message, "custom", 5000, navStyleColor);
+export const notificationLoadCharacters = {
+  // uid: 'once-please', // you can specify your own uid if required
+  title: "Loading new characters",
+  message: "",
+  position: "tr",
+  autoDismiss: 0,
+  action: {
+    label: "Click me!!",
+    callback: () => alert("clicked!")
+  }
+};
+
+export const notificationCharacterAdded = {
+  // uid: 'once-please', // you can specify your own uid if required
+  title: "New character added to favourites!",
+  // message: `${this.props.name}, please welcome!`,
+  position: "tr",
+  autoDismiss: 2
+  // action: {
+  //   label: "Click me!!",
+  //   callback: () => alert("clicked!")
+  // }
+};
+
+export const notificationCharacterDeleted = {
+  // uid: 'once-please', // you can specify your own uid if required
+  title: "Character deleted from favourites!",
+  // message: `${this.props.name}, please welcome!`,
+  position: "tr",
+  autoDismiss: 2
+  // action: {
+  //   label: "Click me!!",
+  //   callback: () => alert("clicked!")
+  // }
+};
+
+export const notificationComicAdded = {
+  // uid: 'once-please', // you can specify your own uid if required
+  title: "New comic added to favourites!",
+  // message: `${this.props.name}, please welcome!`,
+  position: "tr",
+  autoDismiss: 2
+  // action: {
+  //   label: "Click me!!",
+  //   callback: () => alert("clicked!")
+  // }
+};
+
+export const notificationComicDeleted = {
+  // uid: 'once-please', // you can specify your own uid if required
+  title: "Comic deleted from favourites!",
+  // message: `${this.props.name}, please welcome!`,
+  position: "tr",
+  autoDismiss: 2
+  // action: {
+  //   label: "Click me!!",
+  //   callback: () => alert("clicked!")
+  // }
 };
