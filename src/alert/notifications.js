@@ -1,3 +1,4 @@
+
 import { success } from "react-notification-system-redux";
 
 export const notificationLoadCharacters = {
@@ -58,4 +59,5 @@ export const notificationComicDeleted = {
   //   label: "Click me!!",
   //   callback: () => alert("clicked!")
   // }
+
 };

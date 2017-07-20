@@ -1,9 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
-import { showNotification } from "../alert/notifications";
 import StyledInput from "../user_interface/StyledInput";
 
 class SignUp extends React.Component {

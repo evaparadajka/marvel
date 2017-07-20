@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 import Button from "../user_interface/Button";
-import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
-import { fetchFavouriteCharacters } from "../character_details/actions";
 import { appendFavourites } from "../character_details/selectors";
 import PropTypes from "prop-types";
 import Notifications, { success } from "react-notification-system-redux";
@@ -44,7 +42,6 @@ class Dashboard extends React.Component {
   }
 
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/character-details/" + id);
   };
 
@@ -56,7 +53,6 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const charactersToRender = this.props.characters;
 
     return (
