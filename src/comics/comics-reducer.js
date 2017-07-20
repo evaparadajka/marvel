@@ -33,6 +33,12 @@ const comics = (state = initialState, action) => {
         ...state,
         comicsToShow: state.comicsCollection.find(p => p.id === action.id)
       };
+    case "SHOW/FETCH":
+      return {
+        ...state,
+        comicToShow: action.payload,
+        comicsCollection: [...state.comicsCollection, action.payload]
+      };
     default:
       return state;
   }

@@ -59,13 +59,14 @@ class CharacterDetails extends React.Component {
               payload: response.data.data.results[0]
             });
           })
-          .catch(error => console.log(error));
+          .catch(error => {
+            console.log(error);
+            this.props.router.push("/not-found/");
+          });
       } else {
-        console.log("szukam w storze");
         this.props.dispatch({ type: "SHOW", id: Number(id) });
       }
     } else {
-      console.log("nie pobieram");
     }
   };
 
