@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 import Button from "../user_interface/Button";
-import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
-import { fetchFavouriteCharacters } from "../character_details/actions";
 import { appendFavourites } from "../character_details/selectors";
 
 class Dashboard extends React.Component {
@@ -36,7 +34,6 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const charactersToRender = this.props.characters;
 
     return (

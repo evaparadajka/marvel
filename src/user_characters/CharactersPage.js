@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import CharacterList from "../dashboard/CharacterList";
-import apiClient from "../lib/api-client";
 import { getFavouriteCharacters } from "../character_details/selectors";
 import { fetchFavouriteCharacters } from "../character_details/actions";
 

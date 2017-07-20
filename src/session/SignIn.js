@@ -4,8 +4,6 @@ import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
 import { signIn } from "./session-actions";
 import { Link } from "react-router";
-import StyledLog from "../user_interface/StyledLog";
-import { showNotification } from "../alert/notifications";
 import StyledInput from "../user_interface/StyledInput";
 class SignIn extends React.Component {
   constructor(props) {
@@ -68,10 +66,7 @@ class SignIn extends React.Component {
             />
             <h2>
               <Link to="/sign-up" className="sign-up">
-
                 or sign up!
-
-
               </Link>
               <br />
               {this.state.error}

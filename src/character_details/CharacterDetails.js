@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import ComicList from "./ComicList";
 import StoryList from "./StoryList";
-// import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import StyledCharacterBase from "../user_interface/StyledCharacterBase";
-import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
@@ -74,6 +72,7 @@ class CharacterDetails extends React.Component {
               <img
                 src={`${this.props.character.thumbnail
                   .path}/standard_fantastic.jpg`}
+                alt="image not found"
               />
               <h1 className="bottom-overlay">
                 {this.props.character.name}
