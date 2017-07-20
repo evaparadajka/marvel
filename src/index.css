@@ -123,6 +123,9 @@ hr {
 
 .img-container {
   padding-top: 80px;
+  position: relative;
+  z-index: 1;
+  top: 0;
 }
 
 .styled-dashboard {
@@ -167,6 +170,11 @@ hr {
 }
 
 .infinitive-scroll {
+  position: relative;
+  z-index: 2;
+  bottom: 255px;
+  height: 5px;
+  /*margin-bottom: -400px;*/
 }
 
 .bottom-overlay {
