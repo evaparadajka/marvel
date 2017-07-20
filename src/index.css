@@ -108,7 +108,9 @@ hr {
 }
 
 .description {
-  margin: 10px 50px;
+  padding: 2%;
+  text-align: justify;
+  margin: 0px 15px;
 }
 
 .table {
@@ -123,8 +125,66 @@ hr {
   padding-top: 35px;
 }
 
+
 .styled-dashboard {
   margin-top: 50px;
+}
+
+.tab {
+  display: inline-block;
+  border: 2px solid transparent;
+  border-radius: 5px 5px 0 0;
+  /*border-bottom: none;*/
+  bottom: -2px;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  position: relative;
+}
+.active {
+  border-bottom: none;
+  border-color: #c94c4c;
+  background-color: white;
+}
+.inactive {
+  border: transparent;
+}
+.tab:hover {
+  color: #9e0606;
+}
+
+.tab:visited {
+  border-bottom: none;
+}
+
+.tablist {
+  border-bottom: 2px solid #c94c4c;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.tabpanel {
+  text-align: left;
+}
+
+.bottom-overlay {
+  display: flex;
+  justify-content: space-around;
+  font-size: 120%;
+  background-color: white;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  color: #a91c1c;
+}
+.img-details {
+  height: 250px;
+  width: 250px;
+  position: relative;
+
+>>>>>>> 3b8e7b7e301d1a27bf99e36c7200549969a6ecad
 }
 
 @media only screen and (max-width: 768px) {

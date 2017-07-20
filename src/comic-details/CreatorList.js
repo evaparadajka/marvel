@@ -5,9 +5,9 @@ import Creator from "./Creator";
 class CreatorList extends Component {
   render() {
     return (
-      <div>
+      <ol>
         {this.props.creators.map((d, index) => <Creator name={d.name} />)}
-      </div>
+      </ol>
     );
   }
 }
