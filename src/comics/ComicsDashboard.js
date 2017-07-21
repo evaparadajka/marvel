@@ -4,8 +4,14 @@ import apiMarvel from "../lib/api-marvel";
 import ComicList from "./ComicList";
 import Button from "../user_interface/Button";
 import { appendFavouritesComics } from "../comic-details/selectors";
+import PropTypes from "prop-types";
+import Notifications, { success } from "react-notification-system-redux";
+import { notificationLoadComics } from "../alert/notifications";
 
 class ComicsDashboard extends React.Component {
+  showNotification = message => {
+    this.context.store.dispatch(message);
+  };
   fetchComics(offset) {
     apiMarvel
       .get("/comics", {
@@ -29,7 +35,11 @@ class ComicsDashboard extends React.Component {
   clickNewComics = e => {
     e.preventDefault();
 
+    this.showNotification(success(notificationLoadComics));
+   
+
     this.fetchComics(this.props.comicsToSkip);
+
   };
 
   render() {
@@ -50,6 +60,9 @@ class ComicsDashboard extends React.Component {
     );
   }
 }
+ComicsDashboard.contextTypes = {
+  store: PropTypes.object
+};
 
 const mapStateToProps = state => {
   return {

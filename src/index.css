@@ -12,7 +12,6 @@ hr {
 }
 .nav > li {
   height: 50px;
-  /*width: 250px;*/
   display: flex;
   justify-content: space-around;
 }
@@ -56,6 +55,8 @@ hr {
 
 .right {
   flex: end;
+}
+.center {
 }
 
 .space {
@@ -116,6 +117,7 @@ hr {
 
 .description {
   padding: 2%;
+  font-size: 1.3em;
   text-align: justify;
   margin: 0px 15px;
 }
@@ -130,9 +132,12 @@ hr {
 
 .img-container {
   padding-top: 80px;
+  max-width: 1200px;
   position: relative;
   z-index: 1;
   top: 0;
+  display: table;
+  margin: 0 auto;
 }
 
 .styled-dashboard {
@@ -170,9 +175,12 @@ hr {
   border-bottom: 2px solid #c94c4c;
   margin: 0 0 10px;
   padding: 0;
+
+  font-size: 1.5em;
 }
 
 .tabpanel {
+  font-size: 1.3em;
   text-align: left;
 }
 
@@ -181,7 +189,6 @@ hr {
   z-index: 2;
   bottom: 255px;
   height: 5px;
-  /*margin-bottom: -400px;*/
 }
 
 .bottom-overlay {
@@ -208,7 +215,7 @@ hr {
     margin: 0 auto;
   }
   .img-container {
-    padding-top: 250px;
+    padding-top: 400px;
   }
   .nav {
     display: block;

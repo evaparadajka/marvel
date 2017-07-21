@@ -19,7 +19,7 @@ export class Layout extends React.Component {
                   paddingLeft: "7px",
                   paddingRight: "7px"
                 }}
-                href="/"
+                href="/#/"
               >
                 <img src={logo} className="nav-logo" />
               </a>

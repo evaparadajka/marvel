@@ -127,47 +127,46 @@ class ComicDetails extends React.Component {
       console.log("mam");
       return (
         <div className="img-container">
-          <StyledCharacterBase>
-            <div className="square">
-              <img
-                src={`${this.props.comic.thumbnail
-                  .path}/standard_fantastic.jpg`}
-                alt="image not found"
-              />
-              <h1 className="bottom-overlay">
-                {this.props.comic.title}
-              </h1>
-            </div>
+        <StyledCharacterBase>
+          <div className="square">
+            <img
+              src={`${this.props.comic.thumbnail.path}/standard_fantastic.jpg`}
+              alt="image not found"
+            />
+            <h1 className="bottom-overlay">
+              {this.props.comic.title}
+            </h1>
+          </div>
 
-            <div className="description">
-              <h4>Description:</h4>
-              {this.renderDescription()}
-              {this.renderActionButton()}
-            </div>
-          </StyledCharacterBase>
+          <div className="description">
+            <h4>Description:</h4>
+            {this.renderDescription()}
+          </div>
+          {this.renderActionButton()}
+        </StyledCharacterBase>
 
-          <Tabs
-            selectedIndex={this.state.selectedTab}
-            onSelect={selectedTab => this.setState({ selectedTab })}
-          >
-            <TabList className="tablist">
-              <Tab className={`tab ${this.getActiveClass(0)}`}>Characters</Tab>
-              <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
-              <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
-            </TabList>
+        <Tabs
+          selectedIndex={this.state.selectedTab}
+          onSelect={selectedTab => this.setState({ selectedTab })}
+        >
+          <TabList className="tablist">
+            <Tab className={`tab ${this.getActiveClass(0)}`}>Characters</Tab>
+            <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
+            <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
+          </TabList>
 
-            <TabPanel className="tabpanel">
-              <ComicCharacterList
-                characters={this.props.comic.characters.items}
-              />
-            </TabPanel>
-            <TabPanel className="tabpanel">
-              {this.props.comic.series.name}
-            </TabPanel>
-            <TabPanel className="tabpanel">
-              <CreatorList creators={this.props.comic.creators.items} />
-            </TabPanel>
-          </Tabs>
+          <TabPanel className="tabpanel">
+            <ComicCharacterList
+              characters={this.props.comic.characters.items}
+            />
+          </TabPanel>
+          <TabPanel className="tabpanel">
+            {this.props.comic.series.name}
+          </TabPanel>
+          <TabPanel className="tabpanel">
+            <CreatorList creators={this.props.comic.creators.items} />
+          </TabPanel>
+        </Tabs>
         </div>
       );
     }
@@ -205,8 +204,10 @@ class ComicDetails extends React.Component {
 
   render() {
     return (
+
       <div>
         {this.doIHaveSomethingToRender()}
+
       </div>
     );
   }
