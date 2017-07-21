@@ -24,10 +24,11 @@ const characters = (state = initialState, action) => {
     case "FETCH_ONE_USER_CHAR":
       return {
         ...state,
-        userCharactersCollection: [
-          ...state.userCharactersCollection,
-          action.payload
-        ]
+        charactersCollection:
+          state.charactersCollection[state.charactersCollection.length - 1]
+            .id === action.payload.id
+            ? [...state.charactersCollection]
+            : [...state.charactersCollection, action.payload]
       };
     case "CHARACTERS/ADD_TO_FAVOURITES":
       return {

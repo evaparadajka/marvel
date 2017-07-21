@@ -18,6 +18,15 @@ const comics = (state = initialState, action) => {
         ...state,
         userComicsCollection: action.payload
       };
+    case "FETCH_ONE_USER_COMIC":
+      return {
+        ...state,
+        comicsCollection:
+          state.comicsCollection[state.comicsCollection.length - 1].id ===
+          action.payload.id
+            ? [...state.comicsCollection]
+            : [...state.comicsCollection, action.payload]
+      };
     case "COMICS/ADD_TO_FAVOURITES":
       return {
         ...state,
