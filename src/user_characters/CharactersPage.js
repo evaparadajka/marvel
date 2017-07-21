@@ -20,16 +20,13 @@ class CharactersPage extends React.Component {
 
   fetchCharacter = (element, index) => {
     if (typeof element.needCharacterID !== "undefined") {
-      console.log(element.needCharacterID, "need this");
       apiMarvelId
         .get(`${element.needCharacterID}`)
         .then(response => {
-          console.log("pobrałem");
           this.props.dispatch({
             type: "FETCH_ONE_USER_CHAR",
             payload: response.data.data.results[0]
           });
-          console.log("po dispatchu");
         })
         .catch(error => {
           console.log(error);

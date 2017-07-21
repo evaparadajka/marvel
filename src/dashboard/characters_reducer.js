@@ -22,7 +22,6 @@ const characters = (state = initialState, action) => {
         userCharactersCollection: action.payload
       };
     case "FETCH_ONE_USER_CHAR":
-      console.log("fetch one user character");
       return {
         ...state,
         charactersCollection:
