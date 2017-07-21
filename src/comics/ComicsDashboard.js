@@ -29,8 +29,8 @@ class ComicsDashboard extends React.Component {
 
   clickNewComics = e => {
     e.preventDefault();
-    const comicsAmmount = this.props.comics.length;
-    this.fetchComics(comicsAmmount);
+    const comicsAmount = this.props.comics.length;
+    this.fetchComics(comicsAmount);
   };
 
   render() {
