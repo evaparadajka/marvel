@@ -1,7 +1,6 @@
 const initialState = {
   charactersCollection: [],
-  userCharactersCollection: [],
-  characterToShow: {}
+  userCharactersCollection: []
 };
 
 const characters = (state = initialState, action) => {

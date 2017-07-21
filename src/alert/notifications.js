@@ -1,16 +1,15 @@
-
 import { success } from "react-notification-system-redux";
 
 export const notificationLoadCharacters = {
   // uid: 'once-please', // you can specify your own uid if required
   title: "Loading new characters",
-  message: "",
+  // message: "",
   position: "tr",
-  autoDismiss: 0,
-  action: {
-    label: "Click me!!",
-    callback: () => alert("clicked!")
-  }
+  autoDismiss: 2
+  // action: {
+  //   label: "Click me!!",
+  //   callback: () => alert("clicked!")
+  // }
 };
 
 export const notificationCharacterAdded = {
@@ -59,5 +58,4 @@ export const notificationComicDeleted = {
   //   label: "Click me!!",
   //   callback: () => alert("clicked!")
   // }
-
 };

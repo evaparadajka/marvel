@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 import ComicList from "./ComicList";
 import Button from "../user_interface/Button";
-import { appendFavouritesComics } from "../character_details/selectors";
+import { appendFavouritesComics } from "../comic-details/selectors";
 
 class ComicsDashboard extends React.Component {
   fetchComics(offset) {
@@ -38,10 +38,7 @@ class ComicsDashboard extends React.Component {
     return (
       <div className="center">
         <div className="img-container">
-          <ComicList
-            show={this.show}
-            comics={this.props.comics.comicsCollection}
-          />
+          <ComicList show={this.show} comics={this.props.comics} />
         </div>
         <br />
         <Button
@@ -58,7 +55,7 @@ class ComicsDashboard extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    comics: state.comics
+    comics: appendFavouritesComics(state)
   };
 };
 

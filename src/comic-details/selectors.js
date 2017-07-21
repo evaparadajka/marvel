@@ -22,3 +22,16 @@ export const getFavouriteComics = state => {
     return getComicDetails(state, id);
   });
 };
+
+export const appendFavouritesComics = state => {
+  const comics = state.comics.comicsCollection.map(c => {
+    state.comics.userComicsCollection.map(userComic => {
+      if (c.id === userComic.external_id) {
+        c = { ...c, isFavourite: true, binarId: userComic.id };
+      }
+    });
+    return c;
+  });
+
+  return comics;
+};

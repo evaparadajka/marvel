@@ -82,6 +82,7 @@ class CharacterDetails extends React.Component {
   };
 
   doIHaveSomethingToRender = () => {
+    console.log(this.props.character);
     if (typeof this.props.character === "undefined") {
       return <div />;
     } else {

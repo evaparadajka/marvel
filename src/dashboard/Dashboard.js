@@ -21,8 +21,8 @@ import { notificationLoadCharacters } from "../alert/notifications";
 // };
 
 class Dashboard extends React.Component {
-  showNotification = notificationOpts => {
-    this.context.store.dispatch(success(notificationOpts));
+  showNotification = message => {
+    this.context.store.dispatch(message);
   };
 
   fetchCharacters(offset) {
@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
 
   clickNewChar = e => {
     e.preventDefault();
-    this.showNotification(notificationLoadCharacters);
+    this.showNotification(success(notificationLoadCharacters));
     const charactersAmount = this.props.characters.length;
     this.fetchCharacters(charactersAmount);
   };
