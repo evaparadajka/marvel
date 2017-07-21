@@ -28,10 +28,8 @@ class Character extends React.Component {
   };
 
   show = event => {
-    console.log(this.state.actionButtonClicked);
     if (this.state.actionButtonClicked) return null;
     else {
-      console.log("show", event);
       this.props.show(this.props.id);
     }
   };
@@ -57,15 +55,12 @@ class Character extends React.Component {
   };
   addToFav = event => {
     event.stopPropagation();
-    console.log("add", event);
-    console.log(this.state.actionButtonClicked);
     this.showNotification(success(notificationCharacterAdded));
     const character = { name: this.props.name, id: this.props.id };
     this.props.dispatch(addToFavourites(character));
   };
   delFromFav = event => {
     event.stopPropagation();
-    console.log("del", event);
     this.showNotification(error(notificationCharacterDeleted));
     const character = { name: this.props.name, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(character));

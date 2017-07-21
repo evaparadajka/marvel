@@ -90,13 +90,11 @@ class ComicDetails extends React.Component {
   };
 
   doIHaveComic = id => {
-    console.log(id, "id");
     if (
       typeof this.props.comic === "undefined" ||
       this.props.comic.id !== Number(id)
     ) {
       if (typeof this.props.comic === "undefined") {
-        console.log("pobieram");
         apiMarvelIdComic
           .get(id)
           .then(response => {
@@ -121,52 +119,51 @@ class ComicDetails extends React.Component {
       typeof this.props.comic === "undefined" ||
       typeof this.props.comic.thumbnail === "undefined"
     ) {
-      console.log("nie mam");
       return <div />;
     } else {
-      console.log("mam");
       return (
         <div className="img-container">
-        <StyledCharacterBase>
-          <div className="square">
-            <img
-              src={`${this.props.comic.thumbnail.path}/standard_fantastic.jpg`}
-              alt="image not found"
-            />
-            <h1 className="bottom-overlay">
-              {this.props.comic.title}
-            </h1>
-          </div>
+          <StyledCharacterBase>
+            <div className="square">
+              <img
+                src={`${this.props.comic.thumbnail
+                  .path}/standard_fantastic.jpg`}
+                alt="image not found"
+              />
+              <h1 className="bottom-overlay">
+                {this.props.comic.title}
+              </h1>
+            </div>
 
-          <div className="description">
-            <h4>Description:</h4>
-            {this.renderDescription()}
-          </div>
-          {this.renderActionButton()}
-        </StyledCharacterBase>
+            <div className="description">
+              <h4>Description:</h4>
+              {this.renderDescription()}
+            </div>
+            {this.renderActionButton()}
+          </StyledCharacterBase>
 
-        <Tabs
-          selectedIndex={this.state.selectedTab}
-          onSelect={selectedTab => this.setState({ selectedTab })}
-        >
-          <TabList className="tablist">
-            <Tab className={`tab ${this.getActiveClass(0)}`}>Characters</Tab>
-            <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
-            <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
-          </TabList>
+          <Tabs
+            selectedIndex={this.state.selectedTab}
+            onSelect={selectedTab => this.setState({ selectedTab })}
+          >
+            <TabList className="tablist">
+              <Tab className={`tab ${this.getActiveClass(0)}`}>Characters</Tab>
+              <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
+              <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
+            </TabList>
 
-          <TabPanel className="tabpanel">
-            <ComicCharacterList
-              characters={this.props.comic.characters.items}
-            />
-          </TabPanel>
-          <TabPanel className="tabpanel">
-            {this.props.comic.series.name}
-          </TabPanel>
-          <TabPanel className="tabpanel">
-            <CreatorList creators={this.props.comic.creators.items} />
-          </TabPanel>
-        </Tabs>
+            <TabPanel className="tabpanel">
+              <ComicCharacterList
+                characters={this.props.comic.characters.items}
+              />
+            </TabPanel>
+            <TabPanel className="tabpanel">
+              {this.props.comic.series.name}
+            </TabPanel>
+            <TabPanel className="tabpanel">
+              <CreatorList creators={this.props.comic.creators.items} />
+            </TabPanel>
+          </Tabs>
         </div>
       );
     }
@@ -180,10 +177,23 @@ class ComicDetails extends React.Component {
         ]
       )
     ) {
-      return this.props.router.location.pathname.slice(
-        this.props.router.location.pathname.length - 4,
-        this.props.router.location.pathname.length
-      );
+      if (
+        isNaN(
+          this.props.router.location.pathname[
+            this.props.router.location.pathname.length - 4
+          ]
+        )
+      ) {
+        return this.props.router.location.pathname.slice(
+          this.props.router.location.pathname.length - 3,
+          this.props.router.location.pathname.length
+        );
+      } else {
+        return this.props.router.location.pathname.slice(
+          this.props.router.location.pathname.length - 4,
+          this.props.router.location.pathname.length
+        );
+      }
     } else {
       return this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 5,
@@ -193,21 +203,17 @@ class ComicDetails extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.lookingForNumber(), "mount");
     this.doIHaveComic(this.lookingForNumber());
   }
 
   componentDidUpdate() {
-    console.log(this.lookingForNumber(), "update");
     this.doIHaveComic(this.lookingForNumber());
   }
 
   render() {
     return (
-
       <div>
         {this.doIHaveSomethingToRender()}
-
       </div>
     );
   }
