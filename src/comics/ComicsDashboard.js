@@ -29,15 +29,17 @@ class ComicsDashboard extends React.Component {
   }
 
   show = id => {
-    this.props.dispatch({ type: "COMIC/SHOW", id: id });
     this.props.router.push("/comic-details/" + id);
   };
 
   clickNewComics = e => {
     e.preventDefault();
+
     this.showNotification(success(notificationLoadComics));
-    const comicsAmount = this.props.comics.length;
-    this.fetchComics(comicsAmount);
+   
+
+    this.fetchComics(this.props.comicsToSkip);
+
   };
 
   render() {
@@ -64,7 +66,8 @@ ComicsDashboard.contextTypes = {
 
 const mapStateToProps = state => {
   return {
-    comics: appendFavouritesComics(state)
+    comics: appendFavouritesComics(state),
+    comicsToSkip: state.comics.weHaveFetched
   };
 };
 
