@@ -34,7 +34,6 @@ class ComicsDashboard extends React.Component {
 
   clickNewComics = e => {
     e.preventDefault();
-
     this.showNotification(success(notificationLoadComics));
     this.fetchComics(this.props.comicsToSkip);
   };
@@ -46,10 +45,9 @@ class ComicsDashboard extends React.Component {
           <ComicList show={this.show} comics={this.props.comics} />
         </div>
         <br />
-        <Button
-          className="btn-danger"
+        <i
           onClick={this.clickNewComics}
-          label="Load more..."
+          className="fa fa-plus fa-3x nav-style"
         />
         <br />
         <br />

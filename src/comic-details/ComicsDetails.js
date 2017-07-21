@@ -66,7 +66,7 @@ class ComicDetails extends React.Component {
     } else {
       return (
         <div>
-          <i onClick={this.addToFav} className="fa fa-plus fa-3x nav-style" />
+          <i onClick={this.addToFav} className="fa fa-star fa-3x nav-style" />
         </div>
       );
     }
@@ -123,6 +123,10 @@ class ComicDetails extends React.Component {
     } else {
       return (
         <div className="img-container">
+          <h1>
+            {this.props.comic.title}
+          </h1>
+
           <StyledCharacterBase>
             <div className="square">
               <img
@@ -130,14 +134,12 @@ class ComicDetails extends React.Component {
                   .path}/standard_fantastic.jpg`}
                 alt="image not found"
               />
-              <h1 className="bottom-overlay">
-                {this.props.comic.title}
-              </h1>
             </div>
-
             <div className="description">
-              <h4>Description:</h4>
-              {this.renderDescription()}
+              <h4>DESCRIPTION:</h4>
+              <p>
+                {this.renderDescription()}
+              </p>
             </div>
             {this.renderActionButton()}
           </StyledCharacterBase>
