@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { connect } from "react-redux";
 import logo from "./img/marvel_logo.png";
 import Logout from "./session/Logout";
+import styled from "styled-components";
 
 export class Layout extends React.Component {
   render() {
@@ -11,7 +12,15 @@ export class Layout extends React.Component {
         <div className="nav ">
           <ul className="nav navbar-nav">
             <li>
-              <a href="/" className="nav-style">
+              <a
+                style={{
+                  position: "relative",
+                  padding: 0,
+                  paddingLeft: "7px",
+                  paddingRight: "7px"
+                }}
+                href="/"
+              >
                 <img src={logo} className="nav-logo" />
               </a>
             </li>
@@ -50,5 +59,11 @@ export class Layout extends React.Component {
     );
   }
 }
-
+const StyledA = styled.a`
+  position: relative;
+  /* display: block; */
+  padding: 0;
+  padding-left: 7px;
+  padding-right: 7px;
+`;
 export default connect()(Layout);
