@@ -36,10 +36,7 @@ class ComicsDashboard extends React.Component {
     e.preventDefault();
 
     this.showNotification(success(notificationLoadComics));
-   
-
     this.fetchComics(this.props.comicsToSkip);
-
   };
 
   render() {

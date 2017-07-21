@@ -36,6 +36,7 @@ class Dashboard extends React.Component {
   clickNewChar = e => {
     e.preventDefault();
     this.showNotification(success(notificationLoadCharacters));
+
     this.fetchCharacters(this.props.charactersToSkip);
   };
 

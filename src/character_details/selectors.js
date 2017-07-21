@@ -5,7 +5,7 @@ export const getCharDetails = (state, charID) => {
     ? state.characters.charactersCollection.find(c => {
         return c.id === charID;
       })
-    : {};
+    : { needCharacterID: charID };
   const userCharResult = state.characters.userCharactersCollection.find(
     c => c.external_id === charID
   );
