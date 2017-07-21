@@ -48,8 +48,7 @@ class Dashboard extends React.Component {
   clickNewChar = e => {
     e.preventDefault();
     this.showNotification(success(notificationLoadCharacters));
-    const charactersAmount = this.props.characters.length;
-    this.fetchCharacters(charactersAmount);
+    this.fetchCharacters(this.props.charactersToSkip);
   };
 
   render() {
@@ -79,7 +78,8 @@ Dashboard.contextTypes = {
 };
 const mapStateToProps = state => {
   return {
-    characters: appendFavourites(state)
+    characters: appendFavourites(state),
+    charactersToSkip: state.characters.weHaveFetched
   };
 };
 

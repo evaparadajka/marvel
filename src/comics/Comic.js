@@ -56,7 +56,6 @@ class Comic extends React.Component {
     // showNotification("Comic deleted!");
   };
   isComicInFavs = () => {
-    console.log(this.props.isFavourite);
     return this.props.isFavourite;
   };
   renderActionButton = () => {

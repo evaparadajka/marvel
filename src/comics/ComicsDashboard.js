@@ -23,18 +23,17 @@ class ComicsDashboard extends React.Component {
   }
 
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: id });
+    this.props.dispatch({ type: "COMIC/SHOW", id: id });
     this.props.router.push("/comic-details/" + id);
   };
 
   clickNewComics = e => {
     e.preventDefault();
-    const comicsAmmount = this.props.comics.comicsCollection.length;
+    const comicsAmmount = this.props.comics.length;
     this.fetchComics(comicsAmmount);
   };
 
   render() {
-    console.log(this.props.comics);
     return (
       <div className="center">
         <div className="img-container">

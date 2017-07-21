@@ -6,7 +6,7 @@ import { fetchFavouriteComics } from "../comic-details/actions";
 
 class ComicsPage extends React.Component {
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: id });
+    this.props.dispatch({ type: "COMIC/SHOW", id: id });
     this.props.router.push("/comic-details/" + id);
   };
   fetchFromFavComics = () => {

@@ -1,6 +1,9 @@
 const initialState = {
   charactersCollection: [],
-  userCharactersCollection: []
+  userCharactersCollection: [],
+  characterToShow: {},
+  temporaryCollection: [],
+  weHaveFetched: 0
 };
 
 const characters = (state = initialState, action) => {
@@ -8,7 +11,11 @@ const characters = (state = initialState, action) => {
     case "FETCH_CHAR":
       return {
         ...state,
-        charactersCollection: [...state.charactersCollection, ...action.payload]
+        charactersCollection: [
+          ...state.charactersCollection,
+          ...action.payload
+        ],
+        weHaveFetched: state.weHaveFetched + 20
       };
     case "FETCH_USER_CHAR":
       return {
@@ -41,7 +48,11 @@ const characters = (state = initialState, action) => {
       return {
         ...state,
         characterToShow: action.payload,
-        charactersCollection: [...state.charactersCollection, action.payload]
+        charactersCollection:
+          state.charactersCollection[state.charactersCollection.length - 1]
+            .id === action.payload.id
+            ? [...state.charactersCollection]
+            : [...state.charactersCollection, action.payload]
       };
     default:
       return state;
