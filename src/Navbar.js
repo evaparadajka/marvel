@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-
+import logo from "./img/marvel_logo.png";
 import Logout from "./session/Logout";
 
 export class Layout extends React.Component {
@@ -10,6 +10,12 @@ export class Layout extends React.Component {
       <nav className="navbar-fixed-top">
         <div className="nav ">
           <ul className="nav navbar-nav">
+            <li>
+              <a href="/" className="nav-style">
+                <img src={logo} className="nav-logo" />
+              </a>
+            </li>
+
             <li className="active">
               <Link to="/" className="nav-style">
                 Characters
@@ -30,7 +36,7 @@ export class Layout extends React.Component {
                 Favourite Comics
               </Link>
             </li>
-            
+
             <li className="nav-style ">
               <b>
                 Hello, {this.props.name}!
