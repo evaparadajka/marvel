@@ -1,7 +1,8 @@
 const initialState = {
   comicsCollection: [],
   userComicsCollection: [],
-  comicsToShow: {}
+  comicsToShow: {},
+  weHaveFetched: 0
 };
 
 const comics = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const comics = (state = initialState, action) => {
     case "FETCH_COMICS":
       return {
         ...state,
-        comicsCollection: [...state.comicsCollection, ...action.payload]
+        comicsCollection: [...state.comicsCollection, ...action.payload],
+        weHaveFetched: state.weHaveFetched + 20
       };
     case "FETCH_USER_COMICS":
       return {
@@ -36,8 +38,12 @@ const comics = (state = initialState, action) => {
     case "COMIC/SHOW/FETCH":
       return {
         ...state,
-        comicToShow: action.payload,
-        comicsCollection: [...state.comicsCollection, action.payload]
+        comicsToShow: action.payload,
+        comicsCollection:
+          state.comicsCollection[state.comicsCollection.length - 1].id ===
+          action.payload.id
+            ? [...state.comicsCollection]
+            : [...state.comicsCollection, action.payload]
       };
     default:
       return state;

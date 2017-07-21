@@ -61,7 +61,6 @@ class CharacterDetails extends React.Component {
       this.props.character.id !== Number(id)
     ) {
       if (typeof this.props.character === "undefined") {
-        console.log("pobieram");
         apiMarvelId
           .get(id)
           .then(response => {
