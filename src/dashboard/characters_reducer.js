@@ -2,7 +2,6 @@ const initialState = {
   charactersCollection: [],
   userCharactersCollection: [],
   characterToShow: {},
-  temporaryCollection: [],
   weHaveFetched: 0
 };
 
