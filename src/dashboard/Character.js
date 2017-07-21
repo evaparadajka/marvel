@@ -18,7 +18,8 @@ class Character extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
+      actionButtonClicked: false
     };
   }
 
@@ -26,8 +27,13 @@ class Character extends React.Component {
     this.context.store.dispatch(message);
   };
 
-  show = () => {
-    this.props.show(this.props.id);
+  show = event => {
+    console.log(this.state.actionButtonClicked);
+    if (this.state.actionButtonClicked) return null;
+    else {
+      console.log("show", event);
+      this.props.show(this.props.id);
+    }
   };
 
   onMouseEnterHandler = () => {
@@ -44,13 +50,22 @@ class Character extends React.Component {
   isHovered = () => {
     return this.state.hover;
   };
-
-  addToFav = () => {
+  setActionButtonClicked = () => {
+    this.setState({
+      actionButtonClicked: true
+    });
+  };
+  addToFav = event => {
+    event.stopPropagation();
+    console.log("add", event);
+    console.log(this.state.actionButtonClicked);
     this.showNotification(success(notificationCharacterAdded));
     const character = { name: this.props.name, id: this.props.id };
     this.props.dispatch(addToFavourites(character));
   };
-  delFromFav = () => {
+  delFromFav = event => {
+    event.stopPropagation();
+    console.log("del", event);
     this.showNotification(error(notificationCharacterDeleted));
     const character = { name: this.props.name, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(character));
@@ -58,22 +73,21 @@ class Character extends React.Component {
   isCharInFavs = () => {
     return this.props.isFavourite;
   };
-  renderActionButton = () => {
+  renderActionIcons = () => {
     if (this.isCharInFavs()) {
       return (
-        <Button
-          className="btn-danger"
-          label="Delete from favourites!"
-          onClick={this.delFromFav}
-        />
+        <div>
+          <i
+            onClick={this.delFromFav}
+            className="fa fa-trash-o fa-3x nav-style "
+          />
+        </div>
       );
     } else {
       return (
-        <Button
-          className="btn-danger"
-          label="Add to favourites!"
-          onClick={this.addToFav}
-        />
+        <div className="action-icon">
+          <i onClick={this.addToFav} className="fa fa-plus fa-3x nav-style" />
+        </div>
       );
     }
   };
@@ -81,17 +95,12 @@ class Character extends React.Component {
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
-        <StyledOverlay>
+        <StyledOverlay onClick={this.show}>
           <div className="name">
             {this.props.name}
           </div>
           <div>
-            <Button
-              className="btn-danger"
-              label="Details"
-              onClick={this.show}
-            />
-            {this.renderActionButton()}
+            {this.renderActionIcons()}
           </div>
         </StyledOverlay>
       );

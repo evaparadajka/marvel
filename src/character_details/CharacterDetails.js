@@ -26,12 +26,10 @@ class CharacterDetails extends React.Component {
   addToFav = () => {
     this.showNotification(success(notificationCharacterAdded));
     this.props.dispatch(addToFavourites(this.props.character));
-    // showNotification("Character added!");
   };
   delFromFav = () => {
     this.showNotification(error(notificationCharacterDeleted));
     this.props.dispatch(deleteFromFavourites(this.props.character));
-    // showNotification("Character deleted!");
   };
   isCharInFavs = () => {
     return this.props.character.isFavourite;
@@ -107,9 +105,8 @@ class CharacterDetails extends React.Component {
               <p>
                 {this.renderDescription()}
               </p>
-
-              {this.renderActionButton()}
             </div>
+            {this.renderActionButton()}
           </StyledCharacterBase>
 
           <Tabs

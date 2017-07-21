@@ -36,6 +36,18 @@ export const notificationCharacterDeleted = {
   // }
 };
 
+export const notificationLoadComics = {
+  // uid: 'once-please', // you can specify your own uid if required
+  title: "Loading new comics",
+  // message: "",
+  position: "tr",
+  autoDismiss: 2
+  // action: {
+  //   label: "Click me!!",
+  //   callback: () => alert("clicked!")
+  // }
+};
+
 export const notificationComicAdded = {
   // uid: 'once-please', // you can specify your own uid if required
   title: "New comic added to favourites!",

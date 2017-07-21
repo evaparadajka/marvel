@@ -6,19 +6,7 @@ import CharacterList from "./CharacterList";
 import { appendFavourites } from "../character_details/selectors";
 import PropTypes from "prop-types";
 import Notifications, { success } from "react-notification-system-redux";
-// import DemoComponent from "../DemoComponent";
 import { notificationLoadCharacters } from "../alert/notifications";
-// const notificationOpts = {
-//   // uid: 'once-please', // you can specify your own uid if required
-//   title: "Loading new characters",
-//   message: "",
-//   position: "tr",
-//   autoDismiss: 0,
-//   action: {
-//     label: "Click me!!",
-//     callback: () => alert("clicked!")
-//   }
-// };
 
 class Dashboard extends React.Component {
   showNotification = message => {

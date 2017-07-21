@@ -5,11 +5,11 @@ import ComicCharacter from "./ComicCharacter";
 class ComicCharacterList extends Component {
   render() {
     return (
-      <div>
+      <ol>
         {this.props.characters.map((d, index) =>
           <ComicCharacter name={d.name} resourceURI={d.resourceURI} />
         )}
-      </div>
+      </ol>
     );
   }
 }

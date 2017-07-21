@@ -81,16 +81,11 @@ class Comic extends React.Component {
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
-        <StyledOverlay>
+        <StyledOverlay onClick={this.show}>
           <div className="name">
             {this.props.title}
           </div>
           <div>
-            <Button
-              className="btn-danger"
-              label="Details"
-              onClick={this.show}
-            />
             {this.renderActionButton()}
           </div>
         </StyledOverlay>

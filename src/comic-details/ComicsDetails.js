@@ -105,8 +105,8 @@ class ComicDetails extends React.Component {
           <div className="description">
             <h4>Description:</h4>
             {this.renderDescription()}
-            {this.renderActionButton()}
           </div>
+          {this.renderActionButton()}
         </StyledCharacterBase>
 
         <Tabs
