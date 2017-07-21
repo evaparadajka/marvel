@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-
+import apiMarvelId from "../lib/api-marvel-id";
 import Character from "./Character";
+import { connect } from "react-redux";
 
 class CharacterList extends Component {
   makeCharacter = d => {
     if (typeof d.thumbnail === "undefined") {
+      if (typeof d.needCharacterID !== "undefined") {
+        console.log(d.needCharacterID);
+      }
     } else {
       return (
         <Character
@@ -30,4 +34,16 @@ class CharacterList extends Component {
   }
 }
 
-export default CharacterList;
+export default connect()(CharacterList);
+
+// apiMarvelId
+//   .get(`${d.needCharacterID}`)
+//   .then(response => {
+//     this.props.dispatch({
+//       type: "FETCH_ONE_USER_CHAR",
+//       payload: response.data.data.results[0]
+//     });
+//   })
+//   .catch(error => {
+//     console.log(error);
+//   });

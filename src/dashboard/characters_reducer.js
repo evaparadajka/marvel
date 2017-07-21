@@ -21,6 +21,14 @@ const characters = (state = initialState, action) => {
         ...state,
         userCharactersCollection: action.payload
       };
+    case "FETCH_ONE_USER_CHAR":
+      return {
+        ...state,
+        userCharactersCollection: [
+          ...state.userCharactersCollection,
+          action.payload
+        ]
+      };
     case "CHARACTERS/ADD_TO_FAVOURITES":
       return {
         ...state,

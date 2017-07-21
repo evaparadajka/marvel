@@ -90,13 +90,11 @@ class ComicDetails extends React.Component {
   };
 
   doIHaveComic = id => {
-    console.log(id, "id");
     if (
       typeof this.props.comic === "undefined" ||
       this.props.comic.id !== Number(id)
     ) {
       if (typeof this.props.comic === "undefined") {
-        console.log("pobieram");
         apiMarvelIdComic
           .get(id)
           .then(response => {
@@ -128,6 +126,7 @@ class ComicDetails extends React.Component {
           <h1>
             {this.props.comic.title}
           </h1>
+
           <StyledCharacterBase>
             <div className="square">
               <img
@@ -136,7 +135,6 @@ class ComicDetails extends React.Component {
                 alt="image not found"
               />
             </div>
-
             <div className="description">
               <h4>DESCRIPTION:</h4>
               <p>
@@ -181,10 +179,23 @@ class ComicDetails extends React.Component {
         ]
       )
     ) {
-      return this.props.router.location.pathname.slice(
-        this.props.router.location.pathname.length - 4,
-        this.props.router.location.pathname.length
-      );
+      if (
+        isNaN(
+          this.props.router.location.pathname[
+            this.props.router.location.pathname.length - 4
+          ]
+        )
+      ) {
+        return this.props.router.location.pathname.slice(
+          this.props.router.location.pathname.length - 3,
+          this.props.router.location.pathname.length
+        );
+      } else {
+        return this.props.router.location.pathname.slice(
+          this.props.router.location.pathname.length - 4,
+          this.props.router.location.pathname.length
+        );
+      }
     } else {
       return this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 5,
@@ -194,12 +205,10 @@ class ComicDetails extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.lookingForNumber(), "mount");
     this.doIHaveComic(this.lookingForNumber());
   }
 
   componentDidUpdate() {
-    console.log(this.lookingForNumber(), "update");
     this.doIHaveComic(this.lookingForNumber());
   }
 

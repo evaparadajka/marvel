@@ -34,9 +34,7 @@ class ComicsDashboard extends React.Component {
 
   clickNewComics = e => {
     e.preventDefault();
-
     this.showNotification(success(notificationLoadComics));
-
     this.fetchComics(this.props.comicsToSkip);
   };
 
