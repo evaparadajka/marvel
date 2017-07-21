@@ -8,7 +8,7 @@ import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
 // import { showNotification } from "../alert/notifications";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import Notifications, { success } from "react-notification-system-redux";
+import Notifications, { success, error } from "react-notification-system-redux";
 import PropTypes from "prop-types";
 import {
   notificationCharacterAdded,
@@ -20,16 +20,16 @@ class CharacterDetails extends React.Component {
     super();
     this.state = { selectedTab: 0 };
   }
-  showNotification = notificationOpts => {
-    this.context.store.dispatch(success(notificationOpts));
+  showNotification = message => {
+    this.context.store.dispatch(message);
   };
   addToFav = () => {
-    this.showNotification(notificationCharacterAdded);
+    this.showNotification(success(notificationCharacterAdded));
     this.props.dispatch(addToFavourites(this.props.character));
     // showNotification("Character added!");
   };
   delFromFav = () => {
-    this.showNotification(notificationCharacterDeleted);
+    this.showNotification(error(notificationCharacterDeleted));
     this.props.dispatch(deleteFromFavourites(this.props.character));
     // showNotification("Character deleted!");
   };

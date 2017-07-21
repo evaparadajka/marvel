@@ -12,7 +12,7 @@ import {
   notificationComicDeleted
 } from "../alert/notifications";
 import PropTypes from "prop-types";
-import Notifications, { success } from "react-notification-system-redux";
+import Notifications, { success, error } from "react-notification-system-redux";
 
 class Comic extends React.Component {
   constructor(props) {
@@ -21,8 +21,8 @@ class Comic extends React.Component {
       hover: false
     };
   }
-  showNotification = notificationOpts => {
-    this.context.store.dispatch(success(notificationOpts));
+  showNotification = message => {
+    this.context.store.dispatch(message);
   };
   show = () => {
     this.props.show(this.props.id);
@@ -44,13 +44,13 @@ class Comic extends React.Component {
   };
 
   addToFav = () => {
-    this.showNotification(notificationComicAdded);
+    this.showNotification(success(notificationComicAdded));
     const comic = { title: this.props.title, id: this.props.id };
     this.props.dispatch(addToFavourites(comic));
     // showNotification("Comic added!");
   };
   delFromFav = () => {
-    this.showNotification(notificationComicDeleted);
+    this.showNotification(error(notificationComicDeleted));
     const comic = { title: this.props.title, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(comic));
     // showNotification("Comic deleted!");
