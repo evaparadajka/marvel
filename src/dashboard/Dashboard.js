@@ -49,11 +49,7 @@ class Dashboard extends React.Component {
           {/* <div className="infinitive-scroll" onMouseMove={this.clickNewChar} /> */}
         </div>
         <br />
-        <Button
-          className="btn-danger"
-          onClick={this.clickNewChar}
-          label="Load more..."
-        />
+        <i onClick={this.clickNewChar} className="fa fa-plus fa-3x nav-style" />
 
         <br />
         <br />

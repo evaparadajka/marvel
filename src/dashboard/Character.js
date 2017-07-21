@@ -18,8 +18,8 @@ class Character extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false,
-      actionButtonClicked: false
+      hover: false
+      // actionButtonClicked: false
     };
   }
 
@@ -28,12 +28,7 @@ class Character extends React.Component {
   };
 
   show = event => {
-    console.log(this.state.actionButtonClicked);
-    if (this.state.actionButtonClicked) return null;
-    else {
-      console.log("show", event);
-      this.props.show(this.props.id);
-    }
+    this.props.show(this.props.id);
   };
 
   onMouseEnterHandler = () => {
@@ -50,11 +45,11 @@ class Character extends React.Component {
   isHovered = () => {
     return this.state.hover;
   };
-  setActionButtonClicked = () => {
-    this.setState({
-      actionButtonClicked: true
-    });
-  };
+  // setActionButtonClicked = () => {
+  //   this.setState({
+  //     actionButtonClicked: true
+  //   });
+  // };
   addToFav = event => {
     event.stopPropagation();
     console.log("add", event);
@@ -86,7 +81,7 @@ class Character extends React.Component {
     } else {
       return (
         <div className="action-icon">
-          <i onClick={this.addToFav} className="fa fa-plus fa-3x nav-style" />
+          <i onClick={this.addToFav} className="fa fa-star fa-3x nav-style" />
         </div>
       );
     }
