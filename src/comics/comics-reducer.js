@@ -28,12 +28,12 @@ const comics = (state = initialState, action) => {
           c => c.id !== action.payload
         )
       };
-    case "SHOW":
+    case "COMIC/SHOW":
       return {
         ...state,
         comicsToShow: state.comicsCollection.find(p => p.id === action.id)
       };
-    case "SHOW/FETCH":
+    case "COMIC/SHOW/FETCH":
       return {
         ...state,
         comicToShow: action.payload,

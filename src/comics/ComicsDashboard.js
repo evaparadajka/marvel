@@ -23,7 +23,7 @@ class ComicsDashboard extends React.Component {
   }
 
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: id });
+    this.props.dispatch({ type: "COMIC/SHOW", id: id });
     this.props.router.push("/comic-details/" + id);
   };
 
@@ -34,7 +34,6 @@ class ComicsDashboard extends React.Component {
   };
 
   render() {
-    console.log(this.props.comics);
     return (
       <div className="center">
         <div className="img-container">
