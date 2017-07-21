@@ -3905,7 +3905,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.1, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.1, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -5039,13 +5039,38 @@ react-error-overlay@^1.0.9:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
+react-infinite-scroll-component@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-infinite-scroll-component/-/react-infinite-scroll-component-2.4.0.tgz#b00e757a65db4e3cc6784d97ece6f3a4ee5310f6"
+
 react-infinite-scroll@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/react-infinite-scroll/-/react-infinite-scroll-0.1.5.tgz#18204e4a238b1a69cabd43c2b26db94a5941f81a"
 
+react-infinite-scroller@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/react-infinite-scroller/-/react-infinite-scroller-1.0.14.tgz#ffe54321f4a93f70885d4b064600a9fd5a8e5be2"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-native-md5@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-md5/-/react-native-md5-1.0.0.tgz#2320be24d674938ae5ef4f492698edbbfa0e0205"
+
+react-notification-system-redux@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-notification-system-redux/-/react-notification-system-redux-1.1.4.tgz#abda4f847223a18d39687d4ff4c9bbd3b0d738ce"
+  dependencies:
+    prop-types "^15.5.8"
+    react-notification-system "^0.2.x"
+
+react-notification-system@^0.2.14, react-notification-system@^0.2.x:
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/react-notification-system/-/react-notification-system-0.2.14.tgz#21f917f39feee145516864350875041433c4d5c0"
+  dependencies:
+    create-react-class "^15.5.1"
+    object-assign "^4.0.1"
+    prop-types "^15.5.6"
 
 react-notify-toast@^0.3.0:
   version "0.3.0"

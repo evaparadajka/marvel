@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const apiMarvelId = axios.create({
-  baseURL: "http://gateway.marvel.com/v1/public/characters/",
+const apiMarvelIdComic = axios.create({
+  baseURL: "http://gateway.marvel.com/v1/public/comics/",
   params: {
     apikey: "93e03380bbb458e68945c50bdd245b08"
   },
@@ -10,4 +10,4 @@ const apiMarvelId = axios.create({
   }
 });
 
-export default apiMarvelId;
+export default apiMarvelIdComic;

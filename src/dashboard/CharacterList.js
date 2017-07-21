@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import Character from "./Character";
 
 class CharacterList extends Component {

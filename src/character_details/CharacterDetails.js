@@ -2,27 +2,34 @@ import React from "react";
 import { connect } from "react-redux";
 import ComicList from "./ComicList";
 import StoryList from "./StoryList";
-import StyledCharacterDetails from "../user_interface/StyledCharacterDetails";
 import StyledCharacterBase from "../user_interface/StyledCharacterBase";
-import apiClient from "../lib/api-client";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
-import { showNotification } from "../lib/functions";
+import Button from "../user_interface/Button";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import Notifications, { success, error } from "react-notification-system-redux";
+import PropTypes from "prop-types";
+import {
+  notificationCharacterAdded,
+  notificationCharacterDeleted
+} from "../alert/notifications";
 
 class CharacterDetails extends React.Component {
   constructor() {
     super();
     this.state = { selectedTab: 0 };
   }
+  showNotification = message => {
+    this.context.store.dispatch(message);
+  };
   addToFav = () => {
+    this.showNotification(success(notificationCharacterAdded));
     this.props.dispatch(addToFavourites(this.props.character));
-    showNotification("Character added!");
   };
   delFromFav = () => {
+    this.showNotification(error(notificationCharacterDeleted));
     this.props.dispatch(deleteFromFavourites(this.props.character));
-    showNotification("Character deleted!");
   };
   isCharInFavs = () => {
     return this.props.character.isFavourite;
@@ -31,65 +38,79 @@ class CharacterDetails extends React.Component {
     if (this.isCharInFavs()) {
       return (
         <div>
-          <i
+          <Button
             onClick={this.delFromFav}
-            className="fa fa-trash-o fa-3x nav-style"
+            className="btn-danger"
+            label="Delete from favourites!"
           />
         </div>
       );
     } else {
       return (
         <div>
-          <i onClick={this.addToFav} className="fa fa-plus fa-3x nav-style" />
+          <Button
+            onClick={this.addToFav}
+            className="btn-danger"
+            label="Add to favourites!"
+          />
         </div>
       );
     }
   };
 
   doIHaveCharacter = id => {
-    if (typeof this.props.character === "undefined") {
-      apiMarvelId
-        .get(id)
-        .then(response => {
-          this.props.dispatch({
-            type: "SHOW/FETCH",
-            payload: response.data.data.results[0]
+    if (
+      typeof this.props.character === "undefined" ||
+      this.props.character.id !== Number(id)
+    ) {
+      if (typeof this.props.character === "undefined") {
+        apiMarvelId
+          .get(id)
+          .then(response => {
+            this.props.dispatch({
+              type: "SHOW/FETCH",
+              payload: response.data.data.results[0]
+            });
+          })
+          .catch(error => {
+            console.log(error);
+            this.props.router.push("/not-found/");
           });
-          //this.props.router.push("/character-details/" + id);
-        })
-        .catch(error => console.log(error));
+      } else {
+        this.props.dispatch({ type: "SHOW", id: Number(id) });
+      }
     } else {
-      //this.props.router.push("/character-details/" + id);
     }
   };
 
   doIHaveSomethingToRender = () => {
-    if (typeof this.props.character === "undefined") {
+    if (
+      typeof this.props.character === "undefined" ||
+      typeof this.props.character.thumbnail === "undefined"
+    ) {
       return <div />;
     } else {
       return (
         <div className="img-container">
+          <h1>
+            {this.props.character.name}
+          </h1>
           <StyledCharacterBase>
-
             <div className="square">
               <img
-                // className="img-responsive"
                 src={`${this.props.character.thumbnail
                   .path}/standard_fantastic.jpg`}
+                alt="image not found"
               />
-              <h1 className="bottom-overlay">
-                {this.props.character.name}
-              </h1>
             </div>
 
             <div className="description">
-              <h4>Description:</h4>
+              <h4>DESCRIPTION:</h4>
               <p>
                 {this.renderDescription()}
               </p>
-
-              {this.renderActionButton()}
             </div>
+            {this.renderActionButton()}
           </StyledCharacterBase>
 
           <Tabs
@@ -112,7 +133,6 @@ class CharacterDetails extends React.Component {
               <StoryList stories={this.props.character.series.items} />
             </TabPanel>
           </Tabs>
-
         </div>
       );
     }
@@ -122,7 +142,17 @@ class CharacterDetails extends React.Component {
     if (this.state.selectedTab === id) return "active";
     else return "inactive";
   };
+
   componentDidMount() {
+    this.doIHaveCharacter(
+      this.props.router.location.pathname.slice(
+        this.props.router.location.pathname.length - 7,
+        this.props.router.location.pathname.length
+      )
+    );
+  }
+
+  componentDidUpdate() {
     this.doIHaveCharacter(
       this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 7,
@@ -148,7 +178,6 @@ class CharacterDetails extends React.Component {
   };
 
   render() {
-    console.log("Wybrany tab", this.state.selectedTab);
     return (
       <div>
         {this.doIHaveSomethingToRender()}
@@ -159,13 +188,16 @@ class CharacterDetails extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    //state.characters.characterToShow,
     character:
       typeof state.characters.characterToShow === "undefined"
         ? state.characters.characterToShow
         : getCharDetails(state, state.characters.characterToShow.id),
     session: state.session
   };
+};
+
+CharacterDetails.contextTypes = {
+  store: PropTypes.object
 };
 
 export default connect(mapStateToProps)(CharacterDetails);

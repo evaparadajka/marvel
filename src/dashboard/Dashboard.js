@@ -2,11 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 import Button from "../user_interface/Button";
-import apiClient from "../lib/api-client";
 import CharacterList from "./CharacterList";
-import { fetchFavouriteCharacters } from "../character_details/actions";
 import { appendFavourites } from "../character_details/selectors";
+import PropTypes from "prop-types";
+import Notifications, { success } from "react-notification-system-redux";
+import { notificationLoadCharacters } from "../alert/notifications";
+
 class Dashboard extends React.Component {
+  showNotification = message => {
+    this.context.store.dispatch(message);
+  };
+
   fetchCharacters(offset) {
     apiMarvel
       .get("/characters", {
@@ -24,14 +30,14 @@ class Dashboard extends React.Component {
   }
 
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/character-details/" + id);
   };
 
   clickNewChar = e => {
     e.preventDefault();
-    const charactersAmount = this.props.characters.length;
-    this.fetchCharacters(charactersAmount);
+    this.showNotification(success(notificationLoadCharacters));
+
+    this.fetchCharacters(this.props.charactersToSkip);
   };
 
   render() {
@@ -39,25 +45,26 @@ class Dashboard extends React.Component {
 
     return (
       <div className="center">
-        <div className="img-container styled-dashboard">
+        <div className="img-container">
           <CharacterList show={this.show} characters={charactersToRender} />
+          {/* <div className="infinitive-scroll" onMouseMove={this.clickNewChar} /> */}
         </div>
         <br />
-        <Button
-          className="btn-danger"
-          onClick={this.clickNewChar}
-          label="Load more..."
-        />
+        <i onClick={this.clickNewChar} className="fa fa-plus fa-3x nav-style" />
+
         <br />
         <br />
       </div>
     );
   }
 }
-
+Dashboard.contextTypes = {
+  store: PropTypes.object
+};
 const mapStateToProps = state => {
   return {
-    characters: appendFavourites(state)
+    characters: appendFavourites(state),
+    charactersToSkip: state.characters.weHaveFetched
   };
 };
 

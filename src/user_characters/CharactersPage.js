@@ -1,13 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import apiMarvelId from "../lib/api-marvel-id";
 import CharacterList from "../dashboard/CharacterList";
-import apiClient from "../lib/api-client";
 import { getFavouriteCharacters } from "../character_details/selectors";
 import { fetchFavouriteCharacters } from "../character_details/actions";
 
 class CharactersPage extends React.Component {
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/character-details/" + id);
   };
 
@@ -19,9 +18,30 @@ class CharactersPage extends React.Component {
     this.fetchFromFavCharacters();
   }
 
+  fetchCharacter = (element, index) => {
+    if (typeof element.needCharacterID !== "undefined") {
+      apiMarvelId
+        .get(`${element.needCharacterID}`)
+        .then(response => {
+          this.props.dispatch({
+            type: "FETCH_ONE_USER_CHAR",
+            payload: response.data.data.results[0]
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  };
+
+  fetchMissingCharacters() {
+    this.props.characters.forEach(this.fetchCharacter);
+  }
+
   render() {
+    this.fetchMissingCharacters();
     return (
-      <div className="img-container styled-dashboard">
+      <div className="img-container">
         <CharacterList show={this.show} characters={this.props.characters} />
       </div>
     );

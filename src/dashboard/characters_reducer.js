@@ -1,7 +1,8 @@
 const initialState = {
   charactersCollection: [],
   userCharactersCollection: [],
-  characterToShow: {}
+  characterToShow: {},
+  weHaveFetched: 0
 };
 
 const characters = (state = initialState, action) => {
@@ -9,12 +10,25 @@ const characters = (state = initialState, action) => {
     case "FETCH_CHAR":
       return {
         ...state,
-        charactersCollection: [...state.charactersCollection, ...action.payload]
+        charactersCollection: [
+          ...state.charactersCollection,
+          ...action.payload
+        ],
+        weHaveFetched: state.weHaveFetched + 20
       };
     case "FETCH_USER_CHAR":
       return {
         ...state,
         userCharactersCollection: action.payload
+      };
+    case "FETCH_ONE_USER_CHAR":
+      return {
+        ...state,
+        charactersCollection:
+          state.charactersCollection[state.charactersCollection.length - 1]
+            .id === action.payload.id
+            ? [...state.charactersCollection]
+            : [...state.charactersCollection, action.payload]
       };
     case "CHARACTERS/ADD_TO_FAVOURITES":
       return {
@@ -42,7 +56,11 @@ const characters = (state = initialState, action) => {
       return {
         ...state,
         characterToShow: action.payload,
-        charactersCollection: [...state.charactersCollection, action.payload]
+        charactersCollection:
+          state.charactersCollection[state.charactersCollection.length - 1]
+            .id === action.payload.id
+            ? [...state.charactersCollection]
+            : [...state.charactersCollection, action.payload]
       };
     default:
       return state;

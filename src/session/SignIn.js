@@ -4,8 +4,7 @@ import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
 import { signIn } from "./session-actions";
 import { Link } from "react-router";
-import StyledLog from "../user_interface/StyledLog";
-import { showNotification } from "../lib/functions";
+import StyledInput from "../user_interface/StyledInput";
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,6 @@ class SignIn extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     this.props.dispatch(
       signIn({
         email: this.state.email,
@@ -44,19 +42,17 @@ class SignIn extends React.Component {
     return (
       <div className="container-fluid background">
         <form className="form-group ">
-          <StyledLog className="log-style col-xs-5 ">
+          <div className="log-style">
             <br />
             <label>Email: </label>
-            <input
-              className="form-control"
+            <StyledInput
               onChange={this.updateEmail}
               type="email"
               value={this.state.email}
             />
 
             <label>Password: </label>
-            <input
-              className="form-control"
+            <StyledInput
               onChange={this.updatePassword}
               type="password"
               value={this.state.password}
@@ -69,9 +65,8 @@ class SignIn extends React.Component {
               className="btn-danger"
             />
             <h2>
-              or
               <Link to="/sign-up" className="sign-up">
-                sign up!
+                or sign up!
               </Link>
               <br />
               {this.state.error}
@@ -79,7 +74,7 @@ class SignIn extends React.Component {
             <h4>
               {this.props.session.status}
             </h4>
-          </StyledLog>
+          </div>
         </form>
       </div>
     );

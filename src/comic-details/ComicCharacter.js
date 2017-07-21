@@ -21,16 +21,9 @@ class ComicCharacter extends React.Component {
 
   render() {
     return (
-      <div className="table-style">
-        <tr>
-          <td className="name table">
-            {this.props.name}
-          </td>
-          <td className="table">
-            <Button label="SHOW" onClick={this.getID} />
-          </td>
-        </tr>
-      </div>
+      <li onClick={this.getID} className="">
+        {this.props.name}
+      </li>
     );
   }
 }

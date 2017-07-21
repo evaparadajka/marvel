@@ -5,18 +5,29 @@ import {
   addToFavourites,
   deleteFromFavourites
 } from "../character_details/actions";
-import { showNotification } from "../lib/functions";
+import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
+import Notifications, { success, error } from "react-notification-system-redux";
+import PropTypes from "prop-types";
+import {
+  notificationCharacterAdded,
+  notificationCharacterDeleted
+} from "../alert/notifications";
 
 class Character extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hover: false
+      // actionButtonClicked: false
     };
   }
 
-  show = () => {
+  showNotification = message => {
+    this.context.store.dispatch(message);
+  };
+
+  show = event => {
     this.props.show(this.props.id);
   };
 
@@ -34,36 +45,46 @@ class Character extends React.Component {
   isHovered = () => {
     return this.state.hover;
   };
-
-  addToFav = () => {
+  // setActionButtonClicked = () => {
+  //   this.setState({
+  //     actionButtonClicked: true
+  //   });
+  // };
+  addToFav = event => {
+    event.stopPropagation();
+    this.showNotification(success(notificationCharacterAdded));
     const character = { name: this.props.name, id: this.props.id };
     this.props.dispatch(addToFavourites(character));
-    showNotification("Character added!");
   };
-  delFromFav = () => {
+  delFromFav = event => {
+    event.stopPropagation();
+    this.showNotification(error(notificationCharacterDeleted));
     const character = { name: this.props.name, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(character));
-    showNotification("Character deleted!");
   };
   isCharInFavs = () => {
     return this.props.isFavourite;
   };
-  renderActionButton = () => {
+  renderActionIcons = () => {
     if (this.isCharInFavs()) {
       return (
-        <Button
-          className="btn-danger"
-          label="Delete from favourites!"
-          onClick={this.delFromFav}
-        />
+        <div>
+          <Button
+            onClick={this.delFromFav}
+            className="btn-danger"
+            label="Delete from favourites!"
+          />
+        </div>
       );
     } else {
       return (
-        <Button
-          className="btn-danger"
-          label="Add to favourites!"
-          onClick={this.addToFav}
-        />
+        <div className="action-icon">
+          <Button
+            onClick={this.addToFav}
+            className="btn-danger"
+            label="Add to favourites!"
+          />
+        </div>
       );
     }
   };
@@ -71,17 +92,12 @@ class Character extends React.Component {
   renderOverlay = () => {
     if (this.isHovered()) {
       return (
-        <StyledOverlay>
+        <StyledOverlay onClick={this.show}>
           <div className="name">
-            {this.props.name ? this.props.name : this.props.title}
+            {this.props.name}
           </div>
           <div>
-            <Button
-              className="btn-danger"
-              label="Details"
-              onClick={this.show}
-            />
-            {this.renderActionButton()}
+            {this.renderActionIcons()}
           </div>
         </StyledOverlay>
       );
@@ -103,4 +119,7 @@ class Character extends React.Component {
   }
 }
 
+Character.contextTypes = {
+  store: PropTypes.object
+};
 export default connect()(Character);
