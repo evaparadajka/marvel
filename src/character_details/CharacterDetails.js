@@ -6,7 +6,7 @@ import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
-// import { showNotification } from "../alert/notifications";
+import Button from "../user_interface/Button";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Notifications, { success, error } from "react-notification-system-redux";
 import PropTypes from "prop-types";
@@ -38,16 +38,21 @@ class CharacterDetails extends React.Component {
     if (this.isCharInFavs()) {
       return (
         <div>
-          <i
+          <Button
             onClick={this.delFromFav}
-            className="fa fa-trash-o fa-3x nav-style"
+            className="btn-danger"
+            label="Delete from favourites!"
           />
         </div>
       );
     } else {
       return (
         <div>
-          <i onClick={this.addToFav} className="fa fa-star fa-3x nav-style" />
+          <Button
+            onClick={this.addToFav}
+            className="btn-danger"
+            label="Add to favourites!"
+          />
         </div>
       );
     }

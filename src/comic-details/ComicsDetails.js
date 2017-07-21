@@ -11,6 +11,7 @@ import {
   notificationComicAdded,
   notificationComicDeleted
 } from "../alert/notifications";
+import Button from "../user_interface/Button";
 import PropTypes from "prop-types";
 import Notifications, { success, error } from "react-notification-system-redux";
 import apiMarvelIdComic from "../lib/api-marvel-id-comic";
@@ -57,16 +58,21 @@ class ComicDetails extends React.Component {
     if (this.isComicInFavs()) {
       return (
         <div>
-          <i
+          <Button
             onClick={this.delFromFav}
-            className="fa fa-trash-o fa-3x nav-style"
+            className="btn-danger"
+            label="Delete from favourites!"
           />
         </div>
       );
     } else {
       return (
         <div>
-          <i onClick={this.addToFav} className="fa fa-star fa-3x nav-style" />
+          <Button
+            onClick={this.addToFav}
+            className="btn-danger"
+            label="Add to favourites!"
+          />
         </div>
       );
     }

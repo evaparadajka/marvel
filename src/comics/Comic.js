@@ -64,16 +64,21 @@ class Comic extends React.Component {
     if (this.isComicInFavs()) {
       return (
         <div>
-          <i
+          <Button
             onClick={this.delFromFav}
-            className="fa fa-trash-o fa-3x nav-style "
+            className="btn-danger"
+            label="Delete from favourites!"
           />
         </div>
       );
     } else {
       return (
         <div className="action-icon">
-          <i onClick={this.addToFav} className="fa fa-star fa-3x nav-style" />
+          <Button
+            onClick={this.addToFav}
+            className="btn-danger"
+            label="Add to favourites!"
+          />
         </div>
       );
     }
