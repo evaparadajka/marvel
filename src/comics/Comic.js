@@ -43,13 +43,15 @@ class Comic extends React.Component {
     return this.state.hover;
   };
 
-  addToFav = () => {
+  addToFav = event => {
+    event.stopPropagation();
     this.showNotification(success(notificationComicAdded));
     const comic = { title: this.props.title, id: this.props.id };
     this.props.dispatch(addToFavourites(comic));
     // showNotification("Comic added!");
   };
-  delFromFav = () => {
+  delFromFav = event => {
+    event.stopPropagation();
     this.showNotification(error(notificationComicDeleted));
     const comic = { title: this.props.title, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(comic));
@@ -61,19 +63,18 @@ class Comic extends React.Component {
   renderActionButton = () => {
     if (this.isComicInFavs()) {
       return (
-        <Button
-          className="btn-danger"
-          label="Delete from favourites!"
-          onClick={this.delFromFav}
-        />
+        <div>
+          <i
+            onClick={this.delFromFav}
+            className="fa fa-trash-o fa-3x nav-style "
+          />
+        </div>
       );
     } else {
       return (
-        <Button
-          className="btn-danger"
-          label="Add to favourites!"
-          onClick={this.addToFav}
-        />
+        <div className="action-icon">
+          <i onClick={this.addToFav} className="fa fa-star fa-3x nav-style" />
+        </div>
       );
     }
   };

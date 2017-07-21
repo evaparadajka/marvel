@@ -10,6 +10,13 @@ hr {
   border-width: 1px;
   margin: 0;
 }
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #562121;
+}
 .nav > li {
   height: 50px;
   display: flex;
@@ -118,6 +125,7 @@ hr {
 .description {
   padding: 2%;
   font-size: 1.3em;
+  max-width: 600px;
   text-align: justify;
   margin: 0px 15px;
 }
@@ -175,13 +183,14 @@ hr {
   border-bottom: 2px solid #c94c4c;
   margin: 0 0 10px;
   padding: 0;
-
+  color: #562121;
   font-size: 1.5em;
 }
 
 .tabpanel {
   font-size: 1.3em;
   text-align: left;
+  color: #562121;
 }
 
 .infinitive-scroll {
@@ -215,7 +224,7 @@ hr {
     margin: 0 auto;
   }
   .img-container {
-    padding-top: 400px;
+    padding-top: 200px;
   }
   .nav {
     display: block;
@@ -225,5 +234,11 @@ hr {
   }
   .rectangle {
     width: 300px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .img-container {
+    padding-top: 400px;
   }
 }

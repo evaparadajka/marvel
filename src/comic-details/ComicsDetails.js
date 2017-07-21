@@ -66,7 +66,7 @@ class ComicDetails extends React.Component {
     } else {
       return (
         <div>
-          <i onClick={this.addToFav} className="fa fa-plus fa-3x nav-style" />
+          <i onClick={this.addToFav} className="fa fa-star fa-3x nav-style" />
         </div>
       );
     }
@@ -121,52 +121,53 @@ class ComicDetails extends React.Component {
       typeof this.props.comic === "undefined" ||
       typeof this.props.comic.thumbnail === "undefined"
     ) {
-      console.log("nie mam");
       return <div />;
     } else {
-      console.log("mam");
       return (
         <div className="img-container">
-        <StyledCharacterBase>
-          <div className="square">
-            <img
-              src={`${this.props.comic.thumbnail.path}/standard_fantastic.jpg`}
-              alt="image not found"
-            />
-            <h1 className="bottom-overlay">
-              {this.props.comic.title}
-            </h1>
-          </div>
+          <h1>
+            {this.props.comic.title}
+          </h1>
+          <StyledCharacterBase>
+            <div className="square">
+              <img
+                src={`${this.props.comic.thumbnail
+                  .path}/standard_fantastic.jpg`}
+                alt="image not found"
+              />
+            </div>
 
-          <div className="description">
-            <h4>Description:</h4>
-            {this.renderDescription()}
-          </div>
-          {this.renderActionButton()}
-        </StyledCharacterBase>
+            <div className="description">
+              <h4>DESCRIPTION:</h4>
+              <p>
+                {this.renderDescription()}
+              </p>
+            </div>
+            {this.renderActionButton()}
+          </StyledCharacterBase>
 
-        <Tabs
-          selectedIndex={this.state.selectedTab}
-          onSelect={selectedTab => this.setState({ selectedTab })}
-        >
-          <TabList className="tablist">
-            <Tab className={`tab ${this.getActiveClass(0)}`}>Characters</Tab>
-            <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
-            <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
-          </TabList>
+          <Tabs
+            selectedIndex={this.state.selectedTab}
+            onSelect={selectedTab => this.setState({ selectedTab })}
+          >
+            <TabList className="tablist">
+              <Tab className={`tab ${this.getActiveClass(0)}`}>Characters</Tab>
+              <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
+              <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
+            </TabList>
 
-          <TabPanel className="tabpanel">
-            <ComicCharacterList
-              characters={this.props.comic.characters.items}
-            />
-          </TabPanel>
-          <TabPanel className="tabpanel">
-            {this.props.comic.series.name}
-          </TabPanel>
-          <TabPanel className="tabpanel">
-            <CreatorList creators={this.props.comic.creators.items} />
-          </TabPanel>
-        </Tabs>
+            <TabPanel className="tabpanel">
+              <ComicCharacterList
+                characters={this.props.comic.characters.items}
+              />
+            </TabPanel>
+            <TabPanel className="tabpanel">
+              {this.props.comic.series.name}
+            </TabPanel>
+            <TabPanel className="tabpanel">
+              <CreatorList creators={this.props.comic.creators.items} />
+            </TabPanel>
+          </Tabs>
         </div>
       );
     }
@@ -204,10 +205,8 @@ class ComicDetails extends React.Component {
 
   render() {
     return (
-
       <div>
         {this.doIHaveSomethingToRender()}
-
       </div>
     );
   }

@@ -47,7 +47,7 @@ class CharacterDetails extends React.Component {
     } else {
       return (
         <div>
-          <i onClick={this.addToFav} className="fa fa-plus fa-3x nav-style" />
+          <i onClick={this.addToFav} className="fa fa-star fa-3x nav-style" />
         </div>
       );
     }
@@ -87,6 +87,9 @@ class CharacterDetails extends React.Component {
     } else {
       return (
         <div className="img-container">
+          <h1>
+            {this.props.character.name}
+          </h1>
           <StyledCharacterBase>
             <div className="square">
               <img
@@ -94,13 +97,10 @@ class CharacterDetails extends React.Component {
                   .path}/standard_fantastic.jpg`}
                 alt="image not found"
               />
-              <h1 className="bottom-overlay">
-                {this.props.character.name}
-              </h1>
             </div>
 
             <div className="description">
-              <h4>Description:</h4>
+              <h4>DESCRIPTION:</h4>
               <p>
                 {this.renderDescription()}
               </p>
