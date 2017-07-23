@@ -41,9 +41,13 @@ class ComicCharacter extends React.Component {
     } else return null;
   };
 
-  show = id => {
-    this.props.dispatch({ type: "SHOW", id: parseFloat(id) }); //czy to moge usunac?
-    this.props.router.push("/character-details/" + id);
+  show = event => {
+    this.props.show(
+      this.props.resourceURI.slice(
+        this.props.resourceURI.length - 7,
+        this.props.resourceURI.length
+      )
+    );
   };
 
   getID = () => {

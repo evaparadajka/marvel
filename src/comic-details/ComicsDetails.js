@@ -21,6 +21,11 @@ class ComicDetails extends React.Component {
     super();
     this.state = { selectedTab: 0 };
   }
+
+  show = id => {
+    this.props.router.push("/character-details/" + id);
+  };
+
   showNotification = message => {
     this.context.store.dispatch(message);
   };
@@ -77,43 +82,6 @@ class ComicDetails extends React.Component {
       );
     }
   };
-
-  // getChar = id => {
-  //   console.log("pobieram", id);
-  //   // apiMarvelId
-  //   //   .get(id)
-  //   //   .then(response => {
-  //   //     this.props.dispatch({
-  //   //       type: "FETCH_ONE_COMIC_CHAR",
-  //   //       payload: response.data.data.results[0]
-  //   //     });
-  //   //   })
-  //   //   .catch(error => {
-  //   //     console.log(error);
-  //   //   });
-  // };
-  //
-  // getCharById = (e, i, a) => {
-  //   //to jeszcze mi będzie potrzebne na 90% ~Ewa
-  //   console.log(
-  //     this.props.comic.characters.items[i].resourceURI.slice(
-  //       this.props.comic.characters.items[i].resourceURI.length - 7,
-  //       this.props.comic.characters.items[i].resourceURI.length
-  //     )
-  //   );
-  //   this.getChar(
-  //     this.props.comic.characters.items[i].resourceURI.slice(
-  //       this.props.comic.characters.items[i].resourceURI.length - 7,
-  //       this.props.comic.characters.items[i].resourceURI.length
-  //     )
-  //   );
-  // };
-  //
-  // getCharacters = () => {
-  //   //to jeszcze mi będzie potrzebne na 90% ~Ewa
-  //   this.props.dispatch({ type: "CLEAR_COMIC_CHAR" });
-  //   this.props.comic.characters.items.forEach(this.getCharById);
-  // };
 
   getActiveClass = id => {
     if (this.state.selectedTab === id) return "active";
@@ -187,6 +155,7 @@ class ComicDetails extends React.Component {
 
             <TabPanel className="tabpanel">
               <ComicCharacterList
+                show={this.show}
                 characters={this.props.comic.characters.items}
               />
             </TabPanel>

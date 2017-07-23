@@ -49,7 +49,11 @@ class ComicCharacterList extends Component {
     return (
       <ol>
         {this.props.characters.map((d, index) =>
-          <ComicCharacter name={d.name} resourceURI={d.resourceURI} />
+          <ComicCharacter
+            show={this.props.show}
+            name={d.name}
+            resourceURI={d.resourceURI}
+          />
         )}
       </ol>
     );
