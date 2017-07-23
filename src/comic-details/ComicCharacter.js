@@ -3,10 +3,46 @@ import Button from "../user_interface/Button";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 import { withRouter } from "react-router";
+import StyledOverlay from "../user_interface/StyledOverlay";
 
 class ComicCharacter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hover: false
+      // actionButtonClicked: false
+    };
+  }
+
+  onMouseEnterHandler = () => {
+    this.setState({
+      hover: true
+    });
+  };
+  onMouseLeaveHandler = () => {
+    this.setState({
+      hover: false
+    });
+  };
+
+  isHovered = () => {
+    return this.state.hover;
+  };
+
+  renderOverlay = () => {
+    if (this.isHovered()) {
+      return (
+        <StyledOverlay onClick={this.show}>
+          <div className="name">
+            {this.props.name}
+          </div>
+        </StyledOverlay>
+      );
+    } else return null;
+  };
+
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: parseFloat(id) });
+    this.props.dispatch({ type: "SHOW", id: parseFloat(id) }); //czy to moge usunac?
     this.props.router.push("/character-details/" + id);
   };
 
@@ -46,20 +82,22 @@ class ComicCharacter extends React.Component {
                 )
             ).thumbnail
           }
+          alt="Image not found"
         />
       );
     } else {
-      console.log("sorry nie mam");
     }
   };
 
   render() {
     return (
-      <div>
+      <div
+        className="square"
+        onMouseEnter={this.onMouseEnterHandler}
+        onMouseLeave={this.onMouseLeaveHandler}
+      >
         {this.findThumbnail()}
-        <li onClick={this.getID} className="">
-          {this.props.name}
-        </li>
+        {this.renderOverlay()}
       </div>
     );
   }
