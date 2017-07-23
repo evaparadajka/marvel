@@ -153,7 +153,7 @@ class ComicDetails extends React.Component {
               <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
             </TabList>
 
-            <TabPanel className="tabpanel">
+            <TabPanel className="tabpanel space">
               <ComicCharacterList
                 show={this.show}
                 characters={this.props.comic.characters.items}
