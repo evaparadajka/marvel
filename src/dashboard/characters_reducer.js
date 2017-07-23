@@ -34,10 +34,11 @@ const characters = (state = initialState, action) => {
       return {
         ...state,
         charactersCollection:
-          state.charactersCollection[state.charactersCollection.length - 1]
-            .id === action.payload.id
-            ? [...state.charactersCollection]
-            : [...state.charactersCollection, action.payload]
+          typeof state.charactersCollection.find(
+            p => p.id === action.payload.id
+          ) === "undefined"
+            ? [...state.charactersCollection, action.payload]
+            : [...state.charactersCollection]
       };
     case "CHARACTERS/ADD_TO_FAVOURITES":
       return {
