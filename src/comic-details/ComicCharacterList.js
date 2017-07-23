@@ -45,6 +45,12 @@ class ComicCharacterList extends Component {
     }
   }
 
+  componentDidUpdate() {
+    {
+      this.props.characters.map((d, index) => this.getCharThumbnail(d, index));
+    }
+  }
+
   render() {
     return (
       <ol>
