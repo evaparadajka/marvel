@@ -159,10 +159,10 @@ class ComicDetails extends React.Component {
                 characters={this.props.comic.characters.items}
               />
             </TabPanel>
-            <TabPanel className="tabpanel">
+            <TabPanel className="tabpanel space">
               {this.props.comic.series.name}
             </TabPanel>
-            <TabPanel className="tabpanel">
+            <TabPanel className="tabpanel space">
               <CreatorList creators={this.props.comic.creators.items} />
             </TabPanel>
           </Tabs>

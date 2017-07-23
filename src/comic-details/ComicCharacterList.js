@@ -29,7 +29,7 @@ class ComicCharacterList extends Component {
                 )
               ),
               thumbnail: `${response.data.data.results[0].thumbnail
-                .path}/standard_fantastic.jpg`
+                .path}/standard_large.jpg`
             }
           });
         })
@@ -53,7 +53,7 @@ class ComicCharacterList extends Component {
 
   render() {
     return (
-      <ol>
+      <div className="space">
         {this.props.characters.map((d, index) =>
           <ComicCharacter
             show={this.props.show}
@@ -61,7 +61,7 @@ class ComicCharacterList extends Component {
             resourceURI={d.resourceURI}
           />
         )}
-      </ol>
+      </div>
     );
   }
 }

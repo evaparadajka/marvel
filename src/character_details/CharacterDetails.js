@@ -123,13 +123,13 @@ class CharacterDetails extends React.Component {
               <Tab className={`tab ${this.getActiveClass(2)}`}>Series</Tab>
             </TabList>
 
-            <TabPanel className="tabpanel">
+            <TabPanel className="tabpanel space">
               <ComicList comics={this.props.character.comics.items} />
             </TabPanel>
-            <TabPanel className="tabpanel">
+            <TabPanel className="tabpanel space">
               <StoryList stories={this.props.character.stories.items} />
             </TabPanel>
-            <TabPanel className="tabpanel">
+            <TabPanel className="tabpanel space">
               <StoryList stories={this.props.character.series.items} />
             </TabPanel>
           </Tabs>

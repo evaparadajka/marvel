@@ -33,7 +33,7 @@ class ComicCharacter extends React.Component {
     if (this.isHovered()) {
       return (
         <StyledOverlay onClick={this.show}>
-          <div className="name">
+          <div className="name-small">
             {this.props.name}
           </div>
         </StyledOverlay>
@@ -96,7 +96,7 @@ class ComicCharacter extends React.Component {
   render() {
     return (
       <div
-        className="square"
+        className="square-small"
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
       >
