@@ -21,6 +21,11 @@ class ComicDetails extends React.Component {
     super();
     this.state = { selectedTab: 0 };
   }
+
+  show = id => {
+    this.props.router.push("/character-details/" + id);
+  };
+
   showNotification = message => {
     this.context.store.dispatch(message);
   };
@@ -76,18 +81,6 @@ class ComicDetails extends React.Component {
         </div>
       );
     }
-  };
-
-  getID = (e, i, a) => {
-    //to jeszcze mi będzie potrzebne na 90% ~Ewa
-    // this.props.comic.characters.items[i].resourceURI.slice(
-    // this.props.comic.characters.items[i].resourceURI.length - 7,
-    // this.props.comic.characters.items[i].resourceURI.length
-  };
-
-  getCharIDs = (i = 0) => {
-    //to jeszcze mi będzie potrzebne na 90% ~Ewa
-    //this.props.comic.characters.items.forEach(this.getID);
   };
 
   getActiveClass = id => {
@@ -162,13 +155,14 @@ class ComicDetails extends React.Component {
 
             <TabPanel className="tabpanel">
               <ComicCharacterList
+                show={this.show}
                 characters={this.props.comic.characters.items}
               />
             </TabPanel>
-            <TabPanel className="tabpanel">
+            <TabPanel className="tabpanel space">
               {this.props.comic.series.name}
             </TabPanel>
-            <TabPanel className="tabpanel">
+            <TabPanel className="tabpanel space">
               <CreatorList creators={this.props.comic.creators.items} />
             </TabPanel>
           </Tabs>

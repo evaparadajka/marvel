@@ -22,10 +22,11 @@ const comics = (state = initialState, action) => {
       return {
         ...state,
         comicsCollection:
-          state.comicsCollection[state.comicsCollection.length - 1].id ===
-          action.payload.id
-            ? [...state.comicsCollection]
-            : [...state.comicsCollection, action.payload]
+          typeof state.comicsCollection.find(
+            p => p.id === action.payload.id
+          ) === "undefined"
+            ? [...state.comicsCollection, action.payload]
+            : [...state.comicsCollection]
       };
     case "COMICS/ADD_TO_FAVOURITES":
       return {
