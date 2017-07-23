@@ -51,6 +51,12 @@ class ComicCharacterList extends Component {
     }
   }
 
+  anyCharacters = () => {
+    if (this.props.characters.length === 0) {
+      return <div> There are not any characters in this comic</div>;
+    }
+  };
+
   render() {
     return (
       <div className="space">
@@ -61,6 +67,7 @@ class ComicCharacterList extends Component {
             resourceURI={d.resourceURI}
           />
         )}
+        {this.anyCharacters()}
       </div>
     );
   }
