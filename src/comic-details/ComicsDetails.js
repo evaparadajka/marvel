@@ -78,17 +78,42 @@ class ComicDetails extends React.Component {
     }
   };
 
-  getID = (e, i, a) => {
-    //to jeszcze mi będzie potrzebne na 90% ~Ewa
-    // this.props.comic.characters.items[i].resourceURI.slice(
-    // this.props.comic.characters.items[i].resourceURI.length - 7,
-    // this.props.comic.characters.items[i].resourceURI.length
-  };
-
-  getCharIDs = (i = 0) => {
-    //to jeszcze mi będzie potrzebne na 90% ~Ewa
-    //this.props.comic.characters.items.forEach(this.getID);
-  };
+  // getChar = id => {
+  //   console.log("pobieram", id);
+  //   // apiMarvelId
+  //   //   .get(id)
+  //   //   .then(response => {
+  //   //     this.props.dispatch({
+  //   //       type: "FETCH_ONE_COMIC_CHAR",
+  //   //       payload: response.data.data.results[0]
+  //   //     });
+  //   //   })
+  //   //   .catch(error => {
+  //   //     console.log(error);
+  //   //   });
+  // };
+  //
+  // getCharById = (e, i, a) => {
+  //   //to jeszcze mi będzie potrzebne na 90% ~Ewa
+  //   console.log(
+  //     this.props.comic.characters.items[i].resourceURI.slice(
+  //       this.props.comic.characters.items[i].resourceURI.length - 7,
+  //       this.props.comic.characters.items[i].resourceURI.length
+  //     )
+  //   );
+  //   this.getChar(
+  //     this.props.comic.characters.items[i].resourceURI.slice(
+  //       this.props.comic.characters.items[i].resourceURI.length - 7,
+  //       this.props.comic.characters.items[i].resourceURI.length
+  //     )
+  //   );
+  // };
+  //
+  // getCharacters = () => {
+  //   //to jeszcze mi będzie potrzebne na 90% ~Ewa
+  //   this.props.dispatch({ type: "CLEAR_COMIC_CHAR" });
+  //   this.props.comic.characters.items.forEach(this.getCharById);
+  // };
 
   getActiveClass = id => {
     if (this.state.selectedTab === id) return "active";

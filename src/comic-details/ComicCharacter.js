@@ -19,13 +19,56 @@ class ComicCharacter extends React.Component {
     );
   };
 
+  findThumbnail = () => {
+    if (
+      typeof this.props.thumbnails.find(
+        p =>
+          p.id ===
+          parseFloat(
+            this.props.resourceURI.slice(
+              this.props.resourceURI.length - 7,
+              this.props.resourceURI.length
+            )
+          )
+      ) !== "undefined"
+    ) {
+      return (
+        <img
+          src={
+            this.props.thumbnails.find(
+              p =>
+                p.id ===
+                parseFloat(
+                  this.props.resourceURI.slice(
+                    this.props.resourceURI.length - 7,
+                    this.props.resourceURI.length
+                  )
+                )
+            ).thumbnail
+          }
+        />
+      );
+    } else {
+      console.log("sorry nie mam");
+    }
+  };
+
   render() {
     return (
-      <li onClick={this.getID} className="">
-        {this.props.name}
-      </li>
+      <div>
+        {this.findThumbnail()}
+        <li onClick={this.getID} className="">
+          {this.props.name}
+        </li>
+      </div>
     );
   }
 }
 
-export default connect()(withRouter(ComicCharacter));
+const mapStateToProps = state => {
+  return {
+    thumbnails: state.characters.thumbnailsToShow
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(ComicCharacter));
