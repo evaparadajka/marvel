@@ -2,11 +2,20 @@ const initialState = {
   charactersCollection: [],
   userCharactersCollection: [],
   characterToShow: {},
+  thumbnailsToShow: [],
   weHaveFetched: 0
 };
 
 const characters = (state = initialState, action) => {
   switch (action.type) {
+    case "FETCH_THUMBNAILS":
+      return {
+        ...state,
+        thumbnailsToShow: [
+          ...state.thumbnailsToShow.filter(c => c.id !== action.payload),
+          action.payload
+        ]
+      };
     case "FETCH_CHAR":
       return {
         ...state,
