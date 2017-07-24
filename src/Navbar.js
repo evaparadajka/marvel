@@ -15,53 +15,61 @@ export class Layout extends React.Component {
 
   render() {
     return (
-      <Menu customCrossIcon={<img src={exit} />} isOpen={true}>
-        <div className="nav">
-          <div className="">
-            <div className="menu-item">
-              <a
-                style={{
-                  position: "relative",
-                  padding: 0,
-                  paddingLeft: "7px",
-                  paddingRight: "7px"
-                }}
-                href="/#/"
-              >
-                <img src={logo} className="nav-logo" />
-              </a>
-            </div>
+      <Menu
+        width={"100%"}
+        noOverlay
+        customCrossIcon={<img src={exit} />}
+        customBurgerIcon={<img src={burgerIcon} />}
+        isOpen={true}
+      >
+        <nav className="">
+          <div className="nav">
+            <ul className="nav navbar-nav">
+              <div className="menu-item">
+                <a
+                  style={{
+                    position: "relative",
+                    padding: 0,
+                    paddingLeft: "7px",
+                    paddingRight: "7px"
+                  }}
+                  href="/#/"
+                >
+                  <img src={logo} className="nav-logo" />
+                </a>
+              </div>
 
-            <div className="active menu-item">
-              <Link to="/" className="nav-style">
-                Characters
-              </Link>
-            </div>
-            <div className="active menu-item">
-              <Link to="/comics" className="nav-style">
-                Comics
-              </Link>
-            </div>
-            <div className="active menu-item">
-              <Link to="/fav-characters" className="nav-style">
-                Favourite Characters
-              </Link>
-            </div>
-            <div className="active menu-item">
-              <Link to="/fav-comics" className="nav-style">
-                Favourite Comics
-              </Link>
-            </div>
+              <li className="menu-item active">
+                <Link to="/" className="nav-style">
+                  Characters
+                </Link>
+              </li>
+              <li className="active menu-item">
+                <Link to="/comics" className="nav-style">
+                  Comics
+                </Link>
+              </li>
+              <li className="active menu-item">
+                <Link to="/fav-characters" className="nav-style">
+                  Favourite Characters
+                </Link>
+              </li>
+              <li className="active menu-item">
+                <Link to="/fav-comics" className="nav-style">
+                  Favourite Comics
+                </Link>
+              </li>
 
-            <div className="nav-style menu-item">
-              <b>
-                Hello, {this.props.name}!
-              </b>
-            </div>
-            <Logout email={this.props.email} />
+              <div className="nav-style menu-item">
+                <b>
+                  Hello, {this.props.name}!
+                </b>
+              </div>
+              <Logout email={this.props.email} />
+            </ul>
           </div>
-        </div>
-        <hr />
+          <hr />
+        </nav>
       </Menu>
     );
   }
