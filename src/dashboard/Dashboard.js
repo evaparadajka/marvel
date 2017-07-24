@@ -7,6 +7,7 @@ import { appendFavourites } from "../character_details/selectors";
 import PropTypes from "prop-types";
 import Notifications, { success } from "react-notification-system-redux";
 import { notificationLoadCharacters } from "../alert/notifications";
+import PageTitle from "../user_interface/PageTitle";
 
 class Dashboard extends React.Component {
   showNotification = message => {
@@ -46,6 +47,7 @@ class Dashboard extends React.Component {
     return (
       <div className="center">
         <div className="img-container">
+          <PageTitle title="MARVEL'S CHARACTERS - FIND YOUR FAVOURITES" />
           <CharacterList show={this.show} characters={charactersToRender} />
           {/* <div className="infinitive-scroll" onMouseMove={this.clickNewChar} /> */}
         </div>

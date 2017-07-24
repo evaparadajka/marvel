@@ -15,6 +15,7 @@ import Button from "../user_interface/Button";
 import PropTypes from "prop-types";
 import Notifications, { success, error } from "react-notification-system-redux";
 import apiMarvelIdComic from "../lib/api-marvel-id-comic";
+import PageTitle from "../user_interface/PageTitle";
 
 class ComicDetails extends React.Component {
   constructor() {
@@ -122,10 +123,7 @@ class ComicDetails extends React.Component {
     } else {
       return (
         <div className="img-container">
-          <h1>
-            {this.props.comic.title}
-          </h1>
-
+          <PageTitle title={this.props.comic.title} />
           <StyledCharacterBase>
             <div className="square">
               <img

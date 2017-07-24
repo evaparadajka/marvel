@@ -4,6 +4,7 @@ import apiMarvelId from "../lib/api-marvel-id";
 import CharacterList from "../dashboard/CharacterList";
 import { getFavouriteCharacters } from "../character_details/selectors";
 import { fetchFavouriteCharacters } from "../character_details/actions";
+import PageTitle from "../user_interface/PageTitle";
 
 class CharactersPage extends React.Component {
   show = id => {
@@ -42,6 +43,7 @@ class CharactersPage extends React.Component {
     this.fetchMissingCharacters();
     return (
       <div className="img-container">
+        <PageTitle title="YOUR FAVOURITES MARVEL'S CHARACTERS" />
         <CharacterList show={this.show} characters={this.props.characters} />
       </div>
     );

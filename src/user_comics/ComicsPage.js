@@ -4,6 +4,7 @@ import ComicList from "../comics/ComicList";
 import { getFavouriteComics } from "../comic-details/selectors";
 import { fetchFavouriteComics } from "../comic-details/actions";
 import apiMarvelIdComic from "../lib/api-marvel-id-comic";
+import PageTitle from "../user_interface/PageTitle";
 
 class ComicsPage extends React.Component {
   show = id => {
@@ -41,6 +42,7 @@ class ComicsPage extends React.Component {
     this.fetchMissingComics();
     return (
       <div className="img-container">
+        <PageTitle title="YOUR FAVOURITES MARVEL'S COMICS" />
         <ComicList show={this.show} comics={this.props.comics} />
       </div>
     );

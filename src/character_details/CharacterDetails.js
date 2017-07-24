@@ -15,6 +15,7 @@ import {
   notificationCharacterAdded,
   notificationCharacterDeleted
 } from "../alert/notifications";
+import PageTitle from "../user_interface/PageTitle";
 
 class CharacterDetails extends React.Component {
   constructor() {
@@ -93,9 +94,7 @@ class CharacterDetails extends React.Component {
     } else {
       return (
         <div className="img-container">
-          <h1>
-            {this.props.character.name}
-          </h1>
+          <PageTitle title={this.props.character.name} />
           <StyledCharacterBase>
             <div className="square">
               <img
