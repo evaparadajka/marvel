@@ -39,15 +39,18 @@ export const appendFavourites = state => {
   return characters;
 };
 
-// export const appendFavouritesComics = state => {
-//   const characters = state.characters.charactersCollection.map(c => {
-//     state.characters.userCharactersCollection.map(userChar => {
-//       if (c.id === userChar.external_id) {
-//         c = { ...c, isFavourite: true, binarId: userChar.id };
-//       }
-//     });
-//     return c;
-//   });
-//
-//   return characters;
-// };
+export const fetchPaginatedCharacters = state => {
+  const paginatedCharacters =
+    state.pagination.pages[state.pagination.activePage - 1];
+  // console.log(paginatedCharacters);
+  // const appendedFavouritesCharacters = appendFavourites(state);
+  if (typeof paginatedCharacters === "undefined") return [];
+  else {
+    const result = paginatedCharacters.map(id => {
+      return getCharDetails(state, id);
+    });
+    console.log(result);
+
+    return result;
+  }
+};
