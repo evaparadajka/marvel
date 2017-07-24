@@ -160,7 +160,9 @@ class ComicDetails extends React.Component {
               />
             </TabPanel>
             <TabPanel className="tabpanel space">
-              {this.props.comic.series.name}
+              {typeof this.props.comic.series.name === "undefined"
+                ? <div>There are not any series in this comic</div>
+                : this.props.comic.series.name}
             </TabPanel>
             <TabPanel className="tabpanel space">
               <CreatorList creators={this.props.comic.creators.items} />

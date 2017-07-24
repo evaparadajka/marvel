@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import ComicList from "./ComicList";
 import StoryList from "./StoryList";
+import SeriesList from "./SeriesList";
 import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
@@ -130,7 +131,7 @@ class CharacterDetails extends React.Component {
               <StoryList stories={this.props.character.stories.items} />
             </TabPanel>
             <TabPanel className="tabpanel space">
-              <StoryList stories={this.props.character.series.items} />
+              <SeriesList series={this.props.character.series.items} />
             </TabPanel>
           </Tabs>
         </div>
