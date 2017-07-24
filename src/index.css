@@ -66,17 +66,13 @@ h5 {
   width: 50px;
 }
 
-.nav-margin {
-  padding-bottom: 80px;
+.zIndex {
+  z-index: 4;
 }
-
 .right {
   flex: end;
 }
 .center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .space {

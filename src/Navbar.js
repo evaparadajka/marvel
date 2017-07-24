@@ -17,10 +17,10 @@ export class Layout extends React.Component {
     return (
       <Menu
         width={"100%"}
-        noOverlay
         customCrossIcon={<img src={exit} />}
         customBurgerIcon={<img src={burgerIcon} />}
         isOpen={true}
+        styles={height}
       >
         <nav className="">
           <div className="nav">
@@ -81,4 +81,12 @@ const StyledA = styled.a`
   padding-left: 7px;
   padding-right: 7px;
 `;
+const height = {
+  bmOverlay: {
+    height: "52px"
+  },
+  bmMenuWrap: {
+    height: "auto"
+  }
+};
 export default connect()(Layout);
