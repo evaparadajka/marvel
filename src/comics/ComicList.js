@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import Character from "./Character";
 
-class CharacterList extends Component {
-  makeCharacter = d => {
+import Comic from "./Comic";
+
+class ComicList extends Component {
+  makeComic = d => {
     if (typeof d.thumbnail === "undefined") {
     } else {
       return (
-        <Character
+        <Comic
           show={this.props.show}
           id={d.id}
-          name={d.name}
           title={d.title}
           description={d.description}
           img={`${d.thumbnail.path}/standard_fantastic.jpg`}
@@ -23,10 +23,10 @@ class CharacterList extends Component {
   render() {
     return (
       <div className="space">
-        {this.props.characters.map((d, index) => this.makeCharacter(d))}
+        {this.props.comics.map((d, index) => this.makeComic(d))}
       </div>
     );
   }
 }
 
-export default CharacterList;
+export default ComicList;

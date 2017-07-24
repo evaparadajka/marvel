@@ -1,11 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
-
-import CharacterList from "../dashboard/CharacterList";
-import StyledDashboard from "../user_interface/StyledDashboard";
+import ComicList from "./ComicList";
+import Button from "../user_interface/Button";
+import { appendFavouritesComics } from "../comic-details/selectors";
+import PropTypes from "prop-types";
+import Notifications, { success } from "react-notification-system-redux";
+import { notificationLoadComics } from "../alert/notifications";
 
 class ComicsDashboard extends React.Component {
+  showNotification = message => {
+    this.context.store.dispatch(message);
+  };
   fetchComics(offset) {
     apiMarvel
       .get("/comics", {
@@ -23,30 +29,40 @@ class ComicsDashboard extends React.Component {
   }
 
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/comic-details/" + id);
   };
 
-  componentDidMount() {
-    this.fetchComics(this.props.comics.comicsCollection.length);
-  }
+  clickNewComics = e => {
+    e.preventDefault();
+    this.showNotification(success(notificationLoadComics));
+    this.fetchComics(this.props.comicsToSkip);
+  };
 
   render() {
-    const comicsToRender = this.props.comics.comicsCollection;
-
     return (
       <div className="center">
-        <StyledDashboard className="img-container">
-          <CharacterList show={this.show} characters={comicsToRender} />
-        </StyledDashboard>
+        <div className="img-container">
+          <ComicList show={this.show} comics={this.props.comics} />
+        </div>
+        <br />
+        <i
+          onClick={this.clickNewComics}
+          className="fa fa-plus fa-3x nav-style"
+        />
+        <br />
+        <br />
       </div>
     );
   }
 }
+ComicsDashboard.contextTypes = {
+  store: PropTypes.object
+};
 
 const mapStateToProps = state => {
   return {
-    comics: state.comics
+    comics: appendFavouritesComics(state),
+    comicsToSkip: state.comics.weHaveFetched
   };
 };
 

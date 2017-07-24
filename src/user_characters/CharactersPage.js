@@ -1,13 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import apiMarvelId from "../lib/api-marvel-id";
 import CharacterList from "../dashboard/CharacterList";
-import StyledDashboard from "../user_interface/StyledDashboard";
-import apiClient from "../lib/api-client";
 import { getFavouriteCharacters } from "../character_details/selectors";
 import { fetchFavouriteCharacters } from "../character_details/actions";
+
 class CharactersPage extends React.Component {
   show = id => {
-    this.props.dispatch({ type: "SHOW", id: id });
     this.props.router.push("/character-details/" + id);
   };
 
@@ -19,20 +18,37 @@ class CharactersPage extends React.Component {
     this.fetchFromFavCharacters();
   }
 
+  fetchCharacter = (element, index) => {
+    if (typeof element.needCharacterID !== "undefined") {
+      apiMarvelId
+        .get(`${element.needCharacterID}`)
+        .then(response => {
+          this.props.dispatch({
+            type: "FETCH_ONE_USER_CHAR",
+            payload: response.data.data.results[0]
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  };
+
+  fetchMissingCharacters() {
+    this.props.characters.forEach(this.fetchCharacter);
+  }
+
   render() {
-    console.log(this.props.characters);
+    this.fetchMissingCharacters();
     return (
-      <div>
-        <StyledDashboard className="img-container">
-          <CharacterList show={this.show} characters={this.props.characters} />
-        </StyledDashboard>
+      <div className="img-container">
+        <CharacterList show={this.show} characters={this.props.characters} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     characters: getFavouriteCharacters(state)
   };

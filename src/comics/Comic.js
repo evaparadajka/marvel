@@ -4,30 +4,27 @@ import StyledOverlay from "../user_interface/StyledOverlay";
 import {
   addToFavourites,
   deleteFromFavourites
-} from "../character_details/actions";
-import { showNotification } from "../alert/notifications";
+} from "../comic-details/actions";
+// import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
-import Notifications, { success, error } from "react-notification-system-redux";
-import PropTypes from "prop-types";
 import {
-  notificationCharacterAdded,
-  notificationCharacterDeleted
+  notificationComicAdded,
+  notificationComicDeleted
 } from "../alert/notifications";
+import PropTypes from "prop-types";
+import Notifications, { success, error } from "react-notification-system-redux";
 
-class Character extends React.Component {
+class Comic extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       hover: false
-      // actionButtonClicked: false
     };
   }
-
   showNotification = message => {
     this.context.store.dispatch(message);
   };
-
-  show = event => {
+  show = () => {
     this.props.show(this.props.id);
   };
 
@@ -45,28 +42,26 @@ class Character extends React.Component {
   isHovered = () => {
     return this.state.hover;
   };
-  // setActionButtonClicked = () => {
-  //   this.setState({
-  //     actionButtonClicked: true
-  //   });
-  // };
+
   addToFav = event => {
     event.stopPropagation();
-    this.showNotification(success(notificationCharacterAdded));
-    const character = { name: this.props.name, id: this.props.id };
-    this.props.dispatch(addToFavourites(character));
+    this.showNotification(success(notificationComicAdded));
+    const comic = { title: this.props.title, id: this.props.id };
+    this.props.dispatch(addToFavourites(comic));
+    // showNotification("Comic added!");
   };
   delFromFav = event => {
     event.stopPropagation();
-    this.showNotification(error(notificationCharacterDeleted));
-    const character = { name: this.props.name, binarId: this.props.binarId };
-    this.props.dispatch(deleteFromFavourites(character));
+    this.showNotification(error(notificationComicDeleted));
+    const comic = { title: this.props.title, binarId: this.props.binarId };
+    this.props.dispatch(deleteFromFavourites(comic));
+    // showNotification("Comic deleted!");
   };
-  isCharInFavs = () => {
+  isComicInFavs = () => {
     return this.props.isFavourite;
   };
-  renderActionIcons = () => {
-    if (this.isCharInFavs()) {
+  renderActionButton = () => {
+    if (this.isComicInFavs()) {
       return (
         <div>
           <Button
@@ -94,10 +89,10 @@ class Character extends React.Component {
       return (
         <StyledOverlay onClick={this.show}>
           <div className="name">
-            {this.props.name}
+            {this.props.title}
           </div>
           <div>
-            {this.renderActionIcons()}
+            {this.renderActionButton()}
           </div>
         </StyledOverlay>
       );
@@ -119,7 +114,7 @@ class Character extends React.Component {
   }
 }
 
-Character.contextTypes = {
+Comic.contextTypes = {
   store: PropTypes.object
 };
-export default connect()(Character);
+export default connect()(Comic);

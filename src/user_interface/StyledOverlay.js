@@ -11,6 +11,7 @@ const StyledOverlay = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  cursor: pointer;
 `;
 
 export default StyledOverlay;
