@@ -242,6 +242,11 @@ h5 {
   position: relative;
 }
 
+.comicHover:hover {
+  color: #c51111;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 960px) {
   .nav > li {
     height: 50px;

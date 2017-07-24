@@ -13,7 +13,13 @@ class ComicList extends Component {
     return (
       <div>
         <ol>
-          {this.props.comics.map((d, index) => <Comic name={d.name} />)}
+          {this.props.comics.map((d, index) =>
+            <Comic
+              show={this.props.show}
+              name={d.name}
+              resourceURI={d.resourceURI}
+            />
+          )}
         </ol>
         {this.anyComics()}
       </div>
