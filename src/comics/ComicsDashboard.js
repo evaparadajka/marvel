@@ -45,9 +45,10 @@ class ComicsDashboard extends React.Component {
           <ComicList show={this.show} comics={this.props.comics} />
         </div>
         <br />
-        <i
+        <Button
           onClick={this.clickNewComics}
-          className="fa fa-plus fa-3x nav-style"
+          className="btn-danger"
+          label="Load more..."
         />
         <br />
         <br />
