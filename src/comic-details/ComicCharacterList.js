@@ -53,7 +53,7 @@ class ComicCharacterList extends Component {
 
   anyCharacters = () => {
     if (this.props.characters.length === 0) {
-      return <div> There are not any characters in this comic</div>;
+      return <div> There are not any characters in this comic.</div>;
     }
   };
 

@@ -263,6 +263,15 @@ h5 {
   }
 }
 
+@font-face {
+  font-family: BEBAS;
+  src: url(./user_interface/BebasNeueBold.otf);
+}
+
+.bebas {
+  font-family: BEBAS, Arial Narrow;
+}
+
 @media only screen and (max-width: 768px) {
   .img-container {
     padding-top: 400px;
