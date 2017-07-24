@@ -10,7 +10,7 @@ import {
 import PropTypes from "prop-types";
 import Notifications, { success } from "react-notification-system-redux";
 import { notificationLoadCharacters } from "../alert/notifications";
-import Pagination from "../Pagination";
+// import Pagination from "../Pagination";
 
 class Dashboard extends React.Component {
   showNotification = message => {
@@ -33,7 +33,7 @@ class Dashboard extends React.Component {
         // //paginate characters
         this.paginateCharacters(response.data.data.results);
         this.props.dispatch({
-          type: "LOAD_NEXT_PAGE"
+          type: "CHARACTERS/LOAD_NEXT_PAGE"
         });
       })
       .catch(error => console.log(error));
@@ -49,9 +49,9 @@ class Dashboard extends React.Component {
     this.fetchCharacters(this.props.charactersToSkip);
   };
   paginateCharacters = characters => {
-    const numOfPages = this.props.pagination.pages.length;
+    // const numOfPages = this.props.pagination.pages.length;
     this.props.dispatch({
-      type: "PAGINATE_CHARACTERS",
+      type: "CHARACTERS_PAGINATE",
       charactersOnPage: characters.map(c => c.id)
     });
   };
@@ -66,24 +66,43 @@ class Dashboard extends React.Component {
   };
 
   loadNextPage = () => {
-    this.showNotification(success(notificationLoadCharacters));
+    // this.showNotification(success(notificationLoadCharacters));
     if (this.isNextPageInStore()) {
       this.props.dispatch({
-        type: "LOAD_NEXT_PAGE"
+        type: "CHARACTERS/LOAD_NEXT_PAGE"
       });
     } else {
       this.fetchCharacters(this.props.charactersToSkip);
     }
   };
 
-  setActivePage = pageNumber => {
-    // e.preventDefault();
-    console.log(pageNumber);
-    // this.props.dispatch({
-    //   type: "SET_ACTIVE_PAGE",
-    //   activePage: pageNumber
-    // });
+  isPreviousPageInStore = () => {
+    if (this.props.pagination.activePage === 0) {
+      console.log("Previous page? False");
+      return false;
+    } else {
+      console.log("Previous page? True");
+      return true;
+    }
   };
+
+  loadPreviousPage = () => {
+    // this.showNotification(success(notificationLoadCharacters));
+    if (this.isPreviousPageInStore()) {
+      this.props.dispatch({
+        type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
+      });
+    }
+  };
+
+  // setActivePage = pageNumber => {
+  //   // e.preventDefault();
+  //   console.log(pageNumber);
+  //   // this.props.dispatch({
+  //   //   type: "SET_ACTIVE_PAGE",
+  //   //   activePage: pageNumber
+  //   // });
+  // };
 
   render() {
     const charactersToRender = this.props.characters;
@@ -101,9 +120,14 @@ class Dashboard extends React.Component {
           label="Load more MARVEL..."
         /> */}
         <Button
+          onClick={this.loadPreviousPage}
+          className="btn-danger"
+          label="Load previous page"
+        />
+        <Button
           onClick={this.loadNextPage}
           className="btn-danger"
-          label="Load more PAGINATION..."
+          label="Load next page"
         />
 
         <br />
@@ -119,7 +143,7 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     // characters: appendFavourites(state),
-    pagination: state.pagination,
+    pagination: state.paginationCharacters,
     characters: fetchPaginatedCharacters(state),
     charactersToSkip: state.characters.weHaveFetched
   };

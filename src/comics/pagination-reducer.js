@@ -4,9 +4,9 @@ const initialState = {
   pagesCount: 0
 };
 
-const pagination = (state = initialState, action) => {
+const paginationComics = (state = initialState, action) => {
   switch (action.type) {
-    case "PAGINATE_CHARACTERS":
+    case "COMICS_PAGINATE":
       return {
         ...state,
         pages: {
@@ -15,12 +15,12 @@ const pagination = (state = initialState, action) => {
         },
         pagesCount: state.pagesCount + 1
       };
-    case "LOAD_NEXT_PAGE":
+    case "COMICS/LOAD_NEXT_PAGE":
       return {
         ...state,
         activePage: state.activePage + 1
       };
-    case "LOAD_PREVIOUS_PAGE":
+    case "COMICS/LOAD_PREVIOUS_PAGE":
       return {
         ...state,
         activePage: state.activePage - 1
@@ -30,4 +30,4 @@ const pagination = (state = initialState, action) => {
   }
 };
 
-export default pagination;
+export default paginationComics;
