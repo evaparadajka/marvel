@@ -2,16 +2,23 @@ import React from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
 import logo from "./img/marvel_logo.png";
+import burgerIcon from "./img/burgerIcon.png";
+import exit from "./img/exit.png";
 import Logout from "./session/Logout";
 import styled from "styled-components";
+import { slide as Menu } from "react-burger-menu";
 
 export class Layout extends React.Component {
+  showSettings = e => {
+    e.preventDefault();
+  };
+
   render() {
     return (
-      <nav className="navbar-fixed-top">
-        <div className="nav ">
-          <ul className="nav navbar-nav">
-            <li>
+      <Menu customCrossIcon={<img src={exit} />} isOpen={true}>
+        <div className="nav">
+          <div className="">
+            <div className="menu-item">
               <a
                 style={{
                   position: "relative",
@@ -23,39 +30,39 @@ export class Layout extends React.Component {
               >
                 <img src={logo} className="nav-logo" />
               </a>
-            </li>
+            </div>
 
-            <li className="active">
+            <div className="active menu-item">
               <Link to="/" className="nav-style">
                 Characters
               </Link>
-            </li>
-            <li className="active">
+            </div>
+            <div className="active menu-item">
               <Link to="/comics" className="nav-style">
                 Comics
               </Link>
-            </li>
-            <li className="active">
+            </div>
+            <div className="active menu-item">
               <Link to="/fav-characters" className="nav-style">
                 Favourite Characters
               </Link>
-            </li>
-            <li className="active">
+            </div>
+            <div className="active menu-item">
               <Link to="/fav-comics" className="nav-style">
                 Favourite Comics
               </Link>
-            </li>
+            </div>
 
-            <li className="nav-style ">
+            <div className="nav-style menu-item">
               <b>
                 Hello, {this.props.name}!
               </b>
-            </li>
+            </div>
             <Logout email={this.props.email} />
-          </ul>
+          </div>
         </div>
         <hr />
-      </nav>
+      </Menu>
     );
   }
 }
