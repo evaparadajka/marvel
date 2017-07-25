@@ -11,7 +11,8 @@ import PropTypes from "prop-types";
 import Notifications, { success } from "react-notification-system-redux";
 import { notificationLoadCharacters } from "../alert/notifications";
 import PageTitle from "../user_interface/PageTitle";
-import InfiniteScroll from "react-infinite-scroller";
+
+import InfiniteScroll from "redux-infinite-scroll";
 
 class Dashboard extends React.Component {
   showNotification = message => {
@@ -96,24 +97,56 @@ class Dashboard extends React.Component {
     }
   };
 
-  loadItems = () => {
-    console.log("Load items...");
+  _loadMore() {
+    console.log("LOAD MORE");
+  }
+
+  _renderMessages() {
+    console.log("Render InfiniteScroll");
+    // return _.map(this.props.messages, (msg) => {
+    //   return(
+    //       <div>{msg}</div>
+    //   )
+    // })
+    // <CharacterList show={this.show} characters={this.props.characters} />;
+  }
+  // onScroll = (ev) => {
+  //   window.onscroll = function(ev) {
+  //   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+  //       alert("you're at the bottom of the page");
+  //   }
+  // };
+  componentDidMount() {
+    // console.log("didmount");
+    window.addEventListener("scroll", this.handleScroll);
+    console.log(window);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = event => {
+    console.log("scrollY", window.scrollY);
+    console.log("offset", document.body.offsetHeight);
+    console.log("inner Height", window.innerHeight);
+    console.log("inner + scroll", window.scrollY + window.innerHeight);
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
+      // alert("you're at the bottom of the page");
+      this.loadNextPage();
+    }
   };
   render() {
     const charactersToRender = this.props.characters;
     const loader = <div className="loader">Loading ...</div>;
+
     return (
-      <div className="center">
+      <div className="center" onScroll={this.onScroll}>
         <div className="img-container">
           <PageTitle title="MARVEL'S CHARACTERS - FIND YOUR FAVOURITES" />
-          {/* <InfiniteScroll
-            pageStart={0}
-            loadMore={this.loadNextPage}
-            hasMore={this.state.hasMoreItems}
-            loader={loader}
-          > */}
+
           <CharacterList show={this.show} characters={charactersToRender} />
-          {/* </InfiniteScroll> */}
+
           {/* <div className="infinitive-scroll" onMouseMove={this.clickNewChar} /> */}
         </div>
         <br />
