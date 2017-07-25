@@ -179,7 +179,6 @@ b {
 }
 
 .img-container {
-  padding-top: 80px;
   max-width: 1200px;
   position: relative;
   z-index: 1;
@@ -268,9 +267,6 @@ b {
     width: 50%;
     margin: 0 auto;
   }
-  .img-container {
-    padding-top: 200px;
-  }
   .nav {
     display: block;
   }
@@ -292,7 +288,4 @@ b {
 }
 
 @media only screen and (max-width: 768px) {
-  .img-container {
-    padding-top: 400px;
-  }
 }
