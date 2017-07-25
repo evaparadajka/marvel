@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import Notifications, { success } from "react-notification-system-redux";
 import { notificationLoadCharacters } from "../alert/notifications";
 import PageTitle from "../user_interface/PageTitle";
+import InfiniteScroll from "react-infinite-scroller";
 
 class Dashboard extends React.Component {
   showNotification = message => {
@@ -95,23 +96,24 @@ class Dashboard extends React.Component {
     }
   };
 
-  // setActivePage = pageNumber => {
-  //   // e.preventDefault();
-  //   console.log(pageNumber);
-  //   // this.props.dispatch({
-  //   //   type: "SET_ACTIVE_PAGE",
-  //   //   activePage: pageNumber
-  //   // });
-  // };
-
+  loadItems = () => {
+    console.log("Load items...");
+  };
   render() {
     const charactersToRender = this.props.characters;
-
+    const loader = <div className="loader">Loading ...</div>;
     return (
       <div className="center">
         <div className="img-container">
           <PageTitle title="MARVEL'S CHARACTERS - FIND YOUR FAVOURITES" />
+          {/* <InfiniteScroll
+            pageStart={0}
+            loadMore={this.loadNextPage}
+            hasMore={this.state.hasMoreItems}
+            loader={loader}
+          > */}
           <CharacterList show={this.show} characters={charactersToRender} />
+          {/* </InfiniteScroll> */}
           {/* <div className="infinitive-scroll" onMouseMove={this.clickNewChar} /> */}
         </div>
         <br />
