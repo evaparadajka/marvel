@@ -61,7 +61,7 @@ class ComicsDashboard extends React.Component {
   };
 
   loadNextPage = () => {
-    // this.showNotification(success(notificationLoadCharacters));
+    this.showNotification(success(notificationLoadComics));
     if (this.isNextPageInStore()) {
       this.props.dispatch({
         type: "COMICS/LOAD_NEXT_PAGE"
