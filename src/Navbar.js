@@ -9,20 +9,40 @@ import styled from "styled-components";
 import { slide as Menu } from "react-burger-menu";
 
 export class Layout extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: true
+    };
+  }
+
   showSettings = e => {
     e.preventDefault();
   };
 
   render() {
+    var isMenuOpen = state => {
+      if (state.isOpen) {
+        this.setState({
+          open: true
+        });
+      } else {
+        this.setState({
+          open: false
+        });
+      }
+      return state.isOpen;
+    };
     return (
       <Menu
         width={"100%"}
         customCrossIcon={<img src={exit} />}
         customBurgerIcon={<img src={burgerIcon} />}
-        isOpen={true}
         styles={styleMenu}
         noOverlay
+        onStateChange={isMenuOpen}
       >
+        {console.log(this.state)}
         <nav>
           <div className="nav">
             <ul className="nav navbar-nav">
