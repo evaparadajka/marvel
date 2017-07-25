@@ -104,7 +104,7 @@ class Dashboard extends React.Component {
   }
 
   handleScroll = event => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
       this.loadNextPage();
     }
   };
