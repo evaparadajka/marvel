@@ -25,6 +25,7 @@ const paginationCharacters = (state = initialState, action) => {
         ...state,
         activePage: state.activePage - 1
       };
+
     default:
       return state;
   }

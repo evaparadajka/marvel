@@ -41,15 +41,19 @@ export const appendFavouritesComics = state => {
 };
 
 export const fetchPaginatedComics = state => {
-  const paginatedComics =
-    state.paginationComics.pages[state.paginationComics.activePage - 1];
+  const activePage = state.paginationComics.activePage;
 
+  let paginatedComics = [];
+  for (var i = 0; i < activePage; i++) {
+    state.paginationComics.pages[i].map(c => {
+      paginatedComics.push(c);
+    });
+  }
   if (typeof paginatedComics === "undefined") return [];
   else {
     const result = paginatedComics.map(id => {
       return getComicDetails(state, id);
     });
-    console.log(result);
 
     return result;
   }

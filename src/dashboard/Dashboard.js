@@ -95,31 +95,32 @@ class Dashboard extends React.Component {
     }
   };
 
-  // setActivePage = pageNumber => {
-  //   // e.preventDefault();
-  //   console.log(pageNumber);
-  //   // this.props.dispatch({
-  //   //   type: "SET_ACTIVE_PAGE",
-  //   //   activePage: pageNumber
-  //   // });
-  // };
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
 
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = event => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
+      this.loadNextPage();
+    }
+  };
   render() {
     const charactersToRender = this.props.characters;
+    const loader = <div className="loader">Loading ...</div>;
 
     return (
-      <div className="center">
+      <div className="center" onScroll={this.onScroll}>
         <div className="img-container">
           <PageTitle title="MARVEL'S CHARACTERS - FIND YOUR FAVOURITES" />
+
           <CharacterList show={this.show} characters={charactersToRender} />
-          {/* <div className="infinitive-scroll" onMouseMove={this.clickNewChar} /> */}
         </div>
         <br />
-        {/* <Button
-          onClick={this.clickNewChar}
-          className="btn-danger"
-          label="Load more MARVEL..."
-        /> */}
+
         <Button
           onClick={this.loadPreviousPage}
           className="btn-danger"
