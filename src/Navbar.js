@@ -20,7 +20,8 @@ export class Layout extends React.Component {
         customCrossIcon={<img src={exit} />}
         customBurgerIcon={<img src={burgerIcon} />}
         isOpen={true}
-        styles={height}
+        styles={styleMenu}
+        noOverlay
       >
         <nav className="">
           <div className="nav">
@@ -81,7 +82,10 @@ const StyledA = styled.a`
   padding-left: 7px;
   padding-right: 7px;
 `;
-const height = {
+const styleMenu = {
+  bmBurgerButton: {
+    position: "relative"
+  },
   bmOverlay: {
     height: "52px"
   },
