@@ -61,7 +61,7 @@ class ComicsDashboard extends React.Component {
   };
 
   loadNextPage = () => {
-    // this.showNotification(success(notificationLoadCharacters));
+    this.showNotification(success(notificationLoadComics));
     if (this.isNextPageInStore()) {
       this.props.dispatch({
         type: "COMICS/LOAD_NEXT_PAGE"
@@ -110,6 +110,11 @@ class ComicsDashboard extends React.Component {
       <div className="center">
         <div className="img-container">
           <PageTitle title="MARVEL'S COMICS - FIND YOUR FAVOURITES" />
+          {/* <Button
+            onClick={this.loadPreviousPage}
+            className="btn-danger"
+            label="Load previous page"
+          /> */}
           <ComicList show={this.show} comics={this.props.comics} />
         </div>
         <br />
@@ -124,6 +129,7 @@ class ComicsDashboard extends React.Component {
           className="btn-danger"
           label="Load next page"
         />
+       
         <br />
         <br />
       </div>

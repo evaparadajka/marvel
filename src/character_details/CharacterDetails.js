@@ -16,6 +16,7 @@ import {
   notificationCharacterDeleted
 } from "../alert/notifications";
 import PageTitle from "../user_interface/PageTitle";
+import { Scrollbars } from "react-custom-scrollbars";
 
 class CharacterDetails extends React.Component {
   constructor() {
@@ -127,16 +128,22 @@ class CharacterDetails extends React.Component {
             </TabList>
 
             <TabPanel className="tabpanel space">
-              <ComicList
-                comics={this.props.character.comics.items}
-                show={this.show}
-              />
+              <Scrollbars style={{ width: 800, height: 300 }}>
+                <ComicList
+                  comics={this.props.character.comics.items}
+                  show={this.show}
+                />
+              </Scrollbars>
             </TabPanel>
             <TabPanel className="tabpanel space">
-              <StoryList stories={this.props.character.stories.items} />
+              <Scrollbars style={{ width: 800, height: 300 }}>
+                <StoryList stories={this.props.character.stories.items} />
+              </Scrollbars>
             </TabPanel>
             <TabPanel className="tabpanel space">
-              <SeriesList series={this.props.character.series.items} />
+              <Scrollbars style={{ width: 800, height: 300 }}>
+                <SeriesList series={this.props.character.series.items} />
+              </Scrollbars>
             </TabPanel>
           </Tabs>
         </div>

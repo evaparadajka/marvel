@@ -4,7 +4,6 @@ const StyledPageTitle = styled.div`
   font-size: 3em;
   font-weight: bold;
   background-color: #c51111;
-  border-style: solid;
   padding-top: 10px;
   margin-bottom: 40px;
   display: flex;

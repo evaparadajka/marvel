@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding-top: 0px;
   font-family: sans-serif;
+  background-color: rgba(0, 0, 0, 0.14);
 }
 
 hr {
@@ -17,6 +18,11 @@ h4,
 h5 {
   color: #562121;
 }
+
+b {
+  padding: 10px 15px;
+}
+
 .nav > li {
   height: 50px;
   display: flex;
@@ -66,8 +72,7 @@ h5 {
   color: #c94c4c;
 }
 .btn-danger:hover {
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.14), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
   transition: all 0.3s;
 }
 
@@ -174,13 +179,15 @@ h5 {
 }
 
 .img-container {
-  padding-top: 80px;
+  padding-top: 60px;
   max-width: 1200px;
   position: relative;
   z-index: 1;
   top: 0;
   display: table;
   margin: 0 auto;
+  background-color: white;
+  padding-bottom: 60px;
 }
 
 .styled-dashboard {
@@ -263,9 +270,6 @@ h5 {
     width: 50%;
     margin: 0 auto;
   }
-  .img-container {
-    padding-top: 200px;
-  }
   .nav {
     display: block;
   }
@@ -287,7 +291,4 @@ h5 {
 }
 
 @media only screen and (max-width: 768px) {
-  .img-container {
-    padding-top: 400px;
-  }
 }

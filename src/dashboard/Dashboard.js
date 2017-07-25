@@ -57,16 +57,16 @@ class Dashboard extends React.Component {
   };
   isNextPageInStore = () => {
     if (this.props.pagination.pagesCount === this.props.pagination.activePage) {
-      console.log("Next page? False");
+      // console.log("Next page? False");
       return false;
     } else {
-      console.log("Next page? True");
+      // console.log("Next page? True");
       return true;
     }
   };
 
   loadNextPage = () => {
-    // this.showNotification(success(notificationLoadCharacters));
+    this.showNotification(success(notificationLoadCharacters));
     if (this.isNextPageInStore()) {
       this.props.dispatch({
         type: "CHARACTERS/LOAD_NEXT_PAGE"
@@ -78,10 +78,10 @@ class Dashboard extends React.Component {
 
   isPreviousPageInStore = () => {
     if (this.props.pagination.activePage === 0) {
-      console.log("Previous page? False");
+      // console.log("Previous page? False");
       return false;
     } else {
-      console.log("Previous page? True");
+      // console.log("Previous page? True");
       return true;
     }
   };
@@ -94,6 +94,7 @@ class Dashboard extends React.Component {
       });
     }
   };
+
   //**** INFINITE SCROLL *****
   // componentDidMount() {
   //   window.addEventListener("scroll", this.handleScroll);
@@ -108,29 +109,31 @@ class Dashboard extends React.Component {
   //     this.loadNextPage();
   //   }
   // };
+
+
   render() {
     const charactersToRender = this.props.characters;
-    const loader = <div className="loader">Loading ...</div>;
 
     return (
       <div className="center" onScroll={this.onScroll}>
         <div className="img-container">
           <PageTitle title="MARVEL'S CHARACTERS - FIND YOUR FAVOURITES" />
-
+          {/* ALTERNATVIE BUTTON FOR REDUCING ITEMS NUMBER IN DASHBOARD
+            <Button
+            onClick={this.loadPreviousPage}
+            className="btn-danger"
+            label="Load previous page"
+          /> */}
           <CharacterList show={this.show} characters={charactersToRender} />
         </div>
         <br />
 
-        <Button
-          onClick={this.loadPreviousPage}
-          className="btn-danger"
-          label="Load previous page"
-        />
-        <Button
+        {/* ALTERNATIVE BUTTON FOR LOADING NEXT PAGE
+          <Button
           onClick={this.loadNextPage}
           className="btn-danger"
           label="Load next page"
-        />
+        /> */}
 
         <br />
         <br />
