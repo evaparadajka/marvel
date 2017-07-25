@@ -15,7 +15,6 @@ import ComicsPage from "./user_comics/ComicsPage";
 import NotificationComponent from "./alert/NotificationComponent";
 import NotFound from "./NotFound";
 
-
 class App extends Component {
   authenticateUser = (nextState, replace) => {
     const state = this.props.store.getState();
