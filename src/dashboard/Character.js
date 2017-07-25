@@ -52,15 +52,17 @@ class Character extends React.Component {
   // };
   addToFav = event => {
     event.stopPropagation();
-    this.showNotification(success(notificationCharacterAdded));
+
     const character = { name: this.props.name, id: this.props.id };
     this.props.dispatch(addToFavourites(character));
+    this.showNotification(success(notificationCharacterAdded));
   };
   delFromFav = event => {
     event.stopPropagation();
-    this.showNotification(error(notificationCharacterDeleted));
+
     const character = { name: this.props.name, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(character));
+    this.showNotification(error(notificationCharacterDeleted));
   };
   isCharInFavs = () => {
     return this.props.isFavourite;

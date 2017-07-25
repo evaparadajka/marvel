@@ -90,19 +90,20 @@ class ComicsDashboard extends React.Component {
     }
   };
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-
-  handleScroll = event => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
-      this.loadNextPage();
-    }
-  };
+  //******INFINITE SCROLL*****
+  // componentDidMount() {
+  //   window.addEventListener("scroll", this.handleScroll);
+  // }
+  //
+  // componentWillUnmount() {
+  //   window.removeEventListener("scroll", this.handleScroll);
+  // }
+  //
+  // handleScroll = event => {
+  //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
+  //     this.loadNextPage();
+  //   }
+  // };
 
   render() {
     return (
@@ -112,11 +113,7 @@ class ComicsDashboard extends React.Component {
           <ComicList show={this.show} comics={this.props.comics} />
         </div>
         <br />
-        {/* <Button
-          onClick={this.clickNewComics}
-          className="btn-danger"
-          label="Load more..."
-        /> */}
+
         <Button
           onClick={this.loadPreviousPage}
           className="btn-danger"

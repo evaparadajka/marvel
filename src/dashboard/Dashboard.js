@@ -94,20 +94,20 @@ class Dashboard extends React.Component {
       });
     }
   };
-
-  componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-
-  handleScroll = event => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
-      this.loadNextPage();
-    }
-  };
+  //**** INFINITE SCROLL *****
+  // componentDidMount() {
+  //   window.addEventListener("scroll", this.handleScroll);
+  // }
+  //
+  // componentWillUnmount() {
+  //   window.removeEventListener("scroll", this.handleScroll);
+  // }
+  //
+  // handleScroll = event => {
+  //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
+  //     this.loadNextPage();
+  //   }
+  // };
   render() {
     const charactersToRender = this.props.characters;
     const loader = <div className="loader">Loading ...</div>;

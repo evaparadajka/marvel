@@ -31,14 +31,12 @@ class ComicDetails extends React.Component {
     this.context.store.dispatch(message);
   };
   addToFav = () => {
-    this.showNotification(success(notificationComicAdded));
     this.props.dispatch(addToFavourites(this.props.comic));
-    // showNotification("Comic added!");
+    this.showNotification(success(notificationComicAdded));
   };
   delFromFav = () => {
-    this.showNotification(error(notificationComicDeleted));
     this.props.dispatch(deleteFromFavourites(this.props.comic));
-    // showNotification("Comic deleted!");
+    this.showNotification(error(notificationComicDeleted));
   };
   isComicInFavs = () => {
     return this.props.comic.isFavourite;
