@@ -110,7 +110,6 @@ class Dashboard extends React.Component {
   //   }
   // };
 
-
   render() {
     const charactersToRender = this.props.characters;
 
@@ -118,22 +117,21 @@ class Dashboard extends React.Component {
       <div className="center" onScroll={this.onScroll}>
         <div className="img-container">
           <PageTitle title="MARVEL'S CHARACTERS - FIND YOUR FAVOURITES" />
-          {/* ALTERNATVIE BUTTON FOR REDUCING ITEMS NUMBER IN DASHBOARD
-            <Button
-            onClick={this.loadPreviousPage}
-            className="btn-danger"
-            label="Load previous page"
-          /> */}
+
           <CharacterList show={this.show} characters={charactersToRender} />
         </div>
         <br />
+        <Button
+          onClick={this.loadPreviousPage}
+          className="btn-danger"
+          label="Load previous page"
+        />
 
-        {/* ALTERNATIVE BUTTON FOR LOADING NEXT PAGE
-          <Button
+        <Button
           onClick={this.loadNextPage}
           className="btn-danger"
           label="Load next page"
-        /> */}
+        />
 
         <br />
         <br />
