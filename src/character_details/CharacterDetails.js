@@ -27,12 +27,12 @@ class CharacterDetails extends React.Component {
     this.context.store.dispatch(message);
   };
   addToFav = () => {
-    this.showNotification(success(notificationCharacterAdded));
     this.props.dispatch(addToFavourites(this.props.character));
+    this.showNotification(success(notificationCharacterAdded));
   };
   delFromFav = () => {
-    this.showNotification(error(notificationCharacterDeleted));
     this.props.dispatch(deleteFromFavourites(this.props.character));
+    this.showNotification(error(notificationCharacterDeleted));
   };
   isCharInFavs = () => {
     return this.props.character.isFavourite;

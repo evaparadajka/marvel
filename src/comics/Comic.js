@@ -45,17 +45,17 @@ class Comic extends React.Component {
 
   addToFav = event => {
     event.stopPropagation();
-    this.showNotification(success(notificationComicAdded));
+
     const comic = { title: this.props.title, id: this.props.id };
     this.props.dispatch(addToFavourites(comic));
-    // showNotification("Comic added!");
+    this.showNotification(success(notificationComicAdded));
   };
   delFromFav = event => {
     event.stopPropagation();
-    this.showNotification(error(notificationComicDeleted));
+
     const comic = { title: this.props.title, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(comic));
-    // showNotification("Comic deleted!");
+    this.showNotification(error(notificationComicDeleted));
   };
   isComicInFavs = () => {
     return this.props.isFavourite;
