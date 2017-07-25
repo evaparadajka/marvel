@@ -17,6 +17,11 @@ h4,
 h5 {
   color: #562121;
 }
+
+b {
+  padding: 10px 15px;
+}
+
 .nav > li {
   height: 50px;
   display: flex;

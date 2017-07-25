@@ -9,6 +9,7 @@
     "lodash": "^4.17.4",
     "react": "^15.6.1",
     "react-burger-menu": "^2.1.4",
+    "react-custom-scrollbars": "^4.1.2",
     "react-dom": "^15.6.1",
     "react-infinite-scroll": "^0.1.5",
     "react-infinite-scroll-component": "^2.4.0",

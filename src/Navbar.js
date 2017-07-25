@@ -9,21 +9,41 @@ import styled from "styled-components";
 import { slide as Menu } from "react-burger-menu";
 
 export class Layout extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: true
+    };
+  }
+
   showSettings = e => {
     e.preventDefault();
   };
 
   render() {
+    var isMenuOpen = state => {
+      if (state.isOpen) {
+        this.setState({
+          open: true
+        });
+      } else {
+        this.setState({
+          open: false
+        });
+      }
+      return state.isOpen;
+    };
     return (
       <Menu
         width={"100%"}
         customCrossIcon={<img src={exit} />}
         customBurgerIcon={<img src={burgerIcon} />}
-        isOpen={true}
         styles={styleMenu}
         noOverlay
+        onStateChange={isMenuOpen}
       >
-        <nav className="">
+        {console.log(this.state)}
+        <nav>
           <div className="nav">
             <ul className="nav navbar-nav">
               <div className="menu-item">
@@ -61,11 +81,11 @@ export class Layout extends React.Component {
                 </Link>
               </li>
 
-              <div className="nav-style menu-item">
+              <li className="nav-style menu-item">
                 <b>
                   Hello, {this.props.name}!
                 </b>
-              </div>
+              </li>
               <Logout email={this.props.email} />
             </ul>
           </div>
@@ -85,6 +105,20 @@ const StyledA = styled.a`
 const styleMenu = {
   bmBurgerButton: {
     position: "relative"
+  },
+  bmCrossButton: {
+    width: "45px",
+    height: "45px",
+    position: "absolute",
+    top: "2px",
+    left: "2px"
+  },
+  bmCross: {
+    width: "45px",
+    height: "45px",
+    position: "absolute",
+    top: "2px",
+    left: "2px"
   },
   bmOverlay: {
     height: "52px"
