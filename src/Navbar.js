@@ -20,22 +20,8 @@ export class Layout extends React.Component {
     e.preventDefault();
   };
 
-  renderMargin = () => {
-    if (this.state.open) {
-      if (window.innerWidth <= 768) {
-        console.log(400, "telefon");
-        return <div style={{ marginTop: "400px" }} />;
-      } else if (window.innerWidth <= 960) {
-        console.log(200, "tablet");
-        return <div style={{ marginTop: "200px" }} />;
-      } else {
-        console.log(80, "komputer");
-        return <div style={{ marginTop: "80px" }} />;
-      }
-    }
-  };
-
   render() {
+    console.log(window.innerWidth);
     var isMenuOpen = state => {
       if (state.isOpen) {
         this.setState({
@@ -49,67 +35,63 @@ export class Layout extends React.Component {
       return state.isOpen;
     };
     return (
-      <div>
-        <Menu
-          width={"100%"}
-          customCrossIcon={<img src={exit} />}
-          customBurgerIcon={<img src={burgerIcon} />}
-          styles={styleMenu}
-          noOverlay
-          onStateChange={isMenuOpen}
-        >
-          <nav>
-            <div className="nav">
-              <ul className="nav navbar-nav">
-                <div className="menu-item">
-                  <a
-                    style={{
-                      position: "relative",
-                      padding: 0,
-                      paddingLeft: "7px",
-                      paddingRight: "7px"
-                    }}
-                    href="/#/"
-                  >
-                    <img src={logo} className="nav-logo" />
-                  </a>
-                </div>
+      <Menu
+        width={"100%"}
+        customBurgerIcon={<img src={burgerIcon} />}
+        styles={styleMenu}
+        noOverlay
+        onStateChange={isMenuOpen}
+        isOpen={window.innerWidth > 1120 ? true : undefined}
+      >
+        <nav>
+          <div className="nav">
+            <ul className="nav navbar-nav">
+              <div className="menu-item">
+                <a
+                  style={{
+                    position: "relative",
+                    padding: 0,
+                    paddingLeft: "7px",
+                    paddingRight: "7px"
+                  }}
+                  href="/#/"
+                >
+                  <img src={logo} className="nav-logo" />
+                </a>
+              </div>
 
-                <li className="menu-item active">
-                  <Link to="/" className="nav-style">
-                    Characters
-                  </Link>
-                </li>
-                <li className="active menu-item">
-                  <Link to="/comics" className="nav-style">
-                    Comics
-                  </Link>
-                </li>
-                <li className="active menu-item">
-                  <Link to="/fav-characters" className="nav-style">
-                    Favourite Characters
-                  </Link>
-                </li>
-                <li className="active menu-item">
-                  <Link to="/fav-comics" className="nav-style">
-                    Favourite Comics
-                  </Link>
-                </li>
+              <li className="menu-item active">
+                <Link to="/" className="nav-style">
+                  Characters
+                </Link>
+              </li>
+              <li className="active menu-item">
+                <Link to="/comics" className="nav-style">
+                  Comics
+                </Link>
+              </li>
+              <li className="active menu-item">
+                <Link to="/fav-characters" className="nav-style">
+                  Favourite Characters
+                </Link>
+              </li>
+              <li className="active menu-item">
+                <Link to="/fav-comics" className="nav-style">
+                  Favourite Comics
+                </Link>
+              </li>
 
-                <li className="nav-style menu-item">
-                  <b>
-                    Hello, {this.props.name}!
-                  </b>
-                </li>
-                <Logout email={this.props.email} />
-              </ul>
-            </div>
-            <hr />
-          </nav>
-        </Menu>
-
-        {this.renderMargin()}
-      </div>
+              <li className="nav-style menu-item">
+                <b>
+                  Hello, {this.props.name}!
+                </b>
+              </li>
+              <Logout email={this.props.email} />
+            </ul>
+          </div>
+          <hr />
+        </nav>
+      </Menu>
     );
   }
 }
@@ -122,7 +104,8 @@ const StyledA = styled.a`
 `;
 const styleMenu = {
   bmBurgerButton: {
-    position: "relative"
+    position: "fixed",
+    zIndex: "10"
   },
   bmCrossButton: {
     width: "45px",
