@@ -39,3 +39,22 @@ export const appendFavouritesComics = state => {
 
   return comics;
 };
+
+export const fetchPaginatedComics = state => {
+  const activePage = state.paginationComics.activePage;
+
+  let paginatedComics = [];
+  for (var i = 0; i < activePage; i++) {
+    state.paginationComics.pages[i].map(c => {
+      paginatedComics.push(c);
+    });
+  }
+  if (typeof paginatedComics === "undefined") return [];
+  else {
+    const result = paginatedComics.map(id => {
+      return getComicDetails(state, id);
+    });
+
+    return result;
+  }
+};

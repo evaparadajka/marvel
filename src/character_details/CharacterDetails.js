@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import ComicList from "./ComicList";
 import StoryList from "./StoryList";
+import SeriesList from "./SeriesList";
 import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
@@ -14,6 +15,8 @@ import {
   notificationCharacterAdded,
   notificationCharacterDeleted
 } from "../alert/notifications";
+import PageTitle from "../user_interface/PageTitle";
+import { Scrollbars } from "react-custom-scrollbars";
 
 class CharacterDetails extends React.Component {
   constructor() {
@@ -33,6 +36,9 @@ class CharacterDetails extends React.Component {
   };
   isCharInFavs = () => {
     return this.props.character.isFavourite;
+  };
+  show = id => {
+    this.props.router.push("/comic-details/" + id);
   };
   renderActionButton = () => {
     if (this.isCharInFavs()) {
@@ -92,9 +98,7 @@ class CharacterDetails extends React.Component {
     } else {
       return (
         <div className="img-container">
-          <h1>
-            {this.props.character.name}
-          </h1>
+          <PageTitle title={this.props.character.name} />
           <StyledCharacterBase>
             <div className="square">
               <img
@@ -124,13 +128,22 @@ class CharacterDetails extends React.Component {
             </TabList>
 
             <TabPanel className="tabpanel space">
-              <ComicList comics={this.props.character.comics.items} />
+              <Scrollbars style={{ width: 800, height: 300 }}>
+                <ComicList
+                  comics={this.props.character.comics.items}
+                  show={this.show}
+                />
+              </Scrollbars>
             </TabPanel>
             <TabPanel className="tabpanel space">
-              <StoryList stories={this.props.character.stories.items} />
+              <Scrollbars style={{ width: 800, height: 300 }}>
+                <StoryList stories={this.props.character.stories.items} />
+              </Scrollbars>
             </TabPanel>
             <TabPanel className="tabpanel space">
-              <StoryList stories={this.props.character.series.items} />
+              <Scrollbars style={{ width: 800, height: 300 }}>
+                <SeriesList series={this.props.character.series.items} />
+              </Scrollbars>
             </TabPanel>
           </Tabs>
         </div>

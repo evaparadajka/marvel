@@ -3,11 +3,26 @@ import React, { Component } from "react";
 import Comic from "./Comic";
 
 class ComicList extends Component {
+  anyComics = () => {
+    if (this.props.comics.length === 0) {
+      return <div> There are not any comics in this character.</div>;
+    }
+  };
+
   render() {
     return (
-      <ol>
-        {this.props.comics.map((d, index) => <Comic name={d.name} />)}
-      </ol>
+      <div>
+        <ol>
+          {this.props.comics.map((d, index) =>
+            <Comic
+              show={this.props.show}
+              name={d.name}
+              resourceURI={d.resourceURI}
+            />
+          )}
+        </ol>
+        {this.anyComics()}
+      </div>
     );
   }
 }
