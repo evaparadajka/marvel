@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import ComicList from "./ComicList";
 import StoryList from "./StoryList";
+import SeriesList from "./SeriesList";
 import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import { getCharDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
@@ -14,6 +15,7 @@ import {
   notificationCharacterAdded,
   notificationCharacterDeleted
 } from "../alert/notifications";
+import PageTitle from "../user_interface/PageTitle";
 
 class CharacterDetails extends React.Component {
   constructor() {
@@ -33,6 +35,9 @@ class CharacterDetails extends React.Component {
   };
   isCharInFavs = () => {
     return this.props.character.isFavourite;
+  };
+  show = id => {
+    this.props.router.push("/comic-details/" + id);
   };
   renderActionButton = () => {
     if (this.isCharInFavs()) {
@@ -92,9 +97,7 @@ class CharacterDetails extends React.Component {
     } else {
       return (
         <div className="img-container">
-          <h1>
-            {this.props.character.name}
-          </h1>
+          <PageTitle title={this.props.character.name} />
           <StyledCharacterBase>
             <div className="square">
               <img
@@ -124,13 +127,16 @@ class CharacterDetails extends React.Component {
             </TabList>
 
             <TabPanel className="tabpanel space">
-              <ComicList comics={this.props.character.comics.items} />
+              <ComicList
+                comics={this.props.character.comics.items}
+                show={this.show}
+              />
             </TabPanel>
             <TabPanel className="tabpanel space">
               <StoryList stories={this.props.character.stories.items} />
             </TabPanel>
             <TabPanel className="tabpanel space">
-              <StoryList stories={this.props.character.series.items} />
+              <SeriesList series={this.props.character.series.items} />
             </TabPanel>
           </Tabs>
         </div>

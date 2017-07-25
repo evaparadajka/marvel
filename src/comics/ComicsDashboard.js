@@ -7,6 +7,7 @@ import { fetchPaginatedComics } from "../comic-details/selectors";
 import PropTypes from "prop-types";
 import Notifications, { success } from "react-notification-system-redux";
 import { notificationLoadComics } from "../alert/notifications";
+import PageTitle from "../user_interface/PageTitle";
 
 class ComicsDashboard extends React.Component {
   showNotification = message => {
@@ -93,6 +94,7 @@ class ComicsDashboard extends React.Component {
     return (
       <div className="center">
         <div className="img-container">
+          <PageTitle title="MARVEL'S COMICS - FIND YOUR FAVOURITES" />
           <ComicList show={this.show} comics={this.props.comics} />
         </div>
         <br />
