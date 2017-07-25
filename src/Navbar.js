@@ -23,7 +23,7 @@ export class Layout extends React.Component {
         styles={styleMenu}
         noOverlay
       >
-        <nav className="">
+        <nav>
           <div className="nav">
             <ul className="nav navbar-nav">
               <div className="menu-item">
@@ -61,11 +61,11 @@ export class Layout extends React.Component {
                 </Link>
               </li>
 
-              <div className="nav-style menu-item">
+              <li className="nav-style menu-item">
                 <b>
                   Hello, {this.props.name}!
                 </b>
-              </div>
+              </li>
               <Logout email={this.props.email} />
             </ul>
           </div>
@@ -85,6 +85,20 @@ const StyledA = styled.a`
 const styleMenu = {
   bmBurgerButton: {
     position: "relative"
+  },
+  bmCrossButton: {
+    width: "45px",
+    height: "45px",
+    position: "absolute",
+    top: "2px",
+    left: "2px"
+  },
+  bmCross: {
+    width: "45px",
+    height: "45px",
+    position: "absolute",
+    top: "2px",
+    left: "2px"
   },
   bmOverlay: {
     height: "52px"
