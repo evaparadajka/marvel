@@ -26,11 +26,6 @@ const paginationCharacters = (state = initialState, action) => {
         activePage: state.activePage - 1
       };
 
-    // case "CHARACTERS/FETCH_ITEMS":
-    // return  {
-    //   ...state,
-    //   messages: initialState.concat(action.messages)
-    // }
     default:
       return state;
   }

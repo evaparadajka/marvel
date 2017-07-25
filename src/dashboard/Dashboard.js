@@ -12,8 +12,6 @@ import Notifications, { success } from "react-notification-system-redux";
 import { notificationLoadCharacters } from "../alert/notifications";
 import PageTitle from "../user_interface/PageTitle";
 
-import InfiniteScroll from "redux-infinite-scroll";
-
 class Dashboard extends React.Component {
   showNotification = message => {
     this.context.store.dispatch(message);
@@ -97,29 +95,8 @@ class Dashboard extends React.Component {
     }
   };
 
-  _loadMore() {
-    console.log("LOAD MORE");
-  }
-
-  _renderMessages() {
-    console.log("Render InfiniteScroll");
-    // return _.map(this.props.messages, (msg) => {
-    //   return(
-    //       <div>{msg}</div>
-    //   )
-    // })
-    // <CharacterList show={this.show} characters={this.props.characters} />;
-  }
-  // onScroll = (ev) => {
-  //   window.onscroll = function(ev) {
-  //   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-  //       alert("you're at the bottom of the page");
-  //   }
-  // };
   componentDidMount() {
-    // console.log("didmount");
     window.addEventListener("scroll", this.handleScroll);
-    console.log(window);
   }
 
   componentWillUnmount() {
@@ -127,12 +104,7 @@ class Dashboard extends React.Component {
   }
 
   handleScroll = event => {
-    console.log("scrollY", window.scrollY);
-    console.log("offset", document.body.offsetHeight);
-    console.log("inner Height", window.innerHeight);
-    console.log("inner + scroll", window.scrollY + window.innerHeight);
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
-      // alert("you're at the bottom of the page");
       this.loadNextPage();
     }
   };
@@ -146,15 +118,9 @@ class Dashboard extends React.Component {
           <PageTitle title="MARVEL'S CHARACTERS - FIND YOUR FAVOURITES" />
 
           <CharacterList show={this.show} characters={charactersToRender} />
-
-          {/* <div className="infinitive-scroll" onMouseMove={this.clickNewChar} /> */}
         </div>
         <br />
-        {/* <Button
-          onClick={this.clickNewChar}
-          className="btn-danger"
-          label="Load more MARVEL..."
-        /> */}
+
         <Button
           onClick={this.loadPreviousPage}
           className="btn-danger"

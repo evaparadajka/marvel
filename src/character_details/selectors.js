@@ -48,7 +48,6 @@ export const fetchPaginatedCharacters = state => {
       paginatedCharacters.push(c);
     });
   }
-  console.log("test", paginatedCharacters);
 
   if (typeof paginatedCharacters === "undefined") return [];
   else {
@@ -57,6 +56,6 @@ export const fetchPaginatedCharacters = state => {
     });
 
     return result;
-    console.log("result", result);
+    // console.log("result", result);
   }
 };
