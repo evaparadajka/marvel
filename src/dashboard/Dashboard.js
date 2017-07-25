@@ -66,6 +66,7 @@ class Dashboard extends React.Component {
   };
 
   loadNextPage = () => {
+    console.log(this.props.router.location);
     this.showNotification(success(notificationLoadCharacters));
     if (this.isNextPageInStore()) {
       this.props.dispatch({
@@ -74,6 +75,7 @@ class Dashboard extends React.Component {
     } else {
       this.fetchCharacters(this.props.charactersToSkip);
     }
+    this.props.router.push("/" + (this.props.pagination.activePage + 1));
   };
 
   isPreviousPageInStore = () => {
@@ -92,8 +94,81 @@ class Dashboard extends React.Component {
       this.props.dispatch({
         type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
       });
+      this.props.router.push("/" + (this.props.pagination.activePage - 1));
     }
   };
+
+  // doIHaveCharacter = id => {
+  //   if (
+  //     typeof this.props.character === "undefined" ||
+  //     this.props.character.id !== Number(id)
+  //   ) {
+  //     if (typeof this.props.character === "undefined") {
+  //       apiMarvelId
+  //         .get(id)
+  //         .then(response => {
+  //           this.props.dispatch({
+  //             type: "SHOW/FETCH",
+  //             payload: response.data.data.results[0]
+  //           });
+  //         })
+  //         .catch(error => {
+  //           console.log(error);
+  //           this.props.router.push("/not-found/");
+  //         });
+  //     } else {
+  //       this.props.dispatch({ type: "SHOW", id: Number(id) });
+  //     }
+  //   } else {
+  //   }
+  // };
+  //
+  isPageDefined = page => {
+    //console.log(this.props.pagination.pages[page]);
+    return typeof this.props.pagination.pages[page] != "undefined"
+      ? true
+      : false;
+    // return false;
+  };
+  loadPage = page => {
+    this.props.dispatch({
+      type: "CHARACTERS/LOAD_PAGE",
+      payload: page
+    });
+  };
+  loadNotFoundPage = () => {
+    this.props.router.push("/not-found/");
+  };
+  componentDidMount() {
+    const page = this.props.router.location.pathname.slice(
+      1,
+      this.props.location.pathname.length
+    );
+    console.log("didmount", page);
+
+    if (this.isPageDefined(page)) {
+      //this.loadPage(page);
+      console.log("page exists");
+    } else {
+      // this.loadNotFoundPage(page);
+      console.log("page not found");
+    }
+  }
+
+  componentDidUpdate() {
+    const page = this.props.router.location.pathname.slice(
+      1,
+      this.props.location.pathname.length
+    );
+    console.log("didupdate", page);
+    if (this.isPageDefined(page)) {
+      //this.loadPage(page);
+      console.log("page exists");
+    } else {
+      // this.loadNotFoundPage(page);
+      console.log("page not found");
+    }
+  }
 
   //**** INFINITE SCROLL *****
   // componentDidMount() {
@@ -145,7 +220,6 @@ Dashboard.contextTypes = {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    // characters: appendFavourites(state),
     pagination: state.paginationCharacters,
     characters: fetchPaginatedCharacters(state),
     charactersToSkip: state.characters.weHaveFetched

@@ -38,16 +38,9 @@ export const appendFavourites = state => {
 
   return characters;
 };
-
 export const fetchPaginatedCharacters = state => {
-  const activePage = state.paginationCharacters.activePage;
-
-  let paginatedCharacters = [];
-  for (var i = 0; i < activePage; i++) {
-    state.paginationCharacters.pages[i].map(c => {
-      paginatedCharacters.push(c);
-    });
-  }
+  const paginatedCharacters =
+    state.paginationCharacters.pages[state.paginationCharacters.activePage - 1];
 
   if (typeof paginatedCharacters === "undefined") return [];
   else {
@@ -56,6 +49,25 @@ export const fetchPaginatedCharacters = state => {
     });
 
     return result;
-    // console.log("result", result);
   }
 };
+// export const fetchPaginatedCharacters = state => {
+//   const activePage = state.paginationCharacters.activePage;
+//
+//   let paginatedCharacters = [];
+//   for (var i = 0; i < activePage; i++) {
+//     state.paginationCharacters.pages[i].map(c => {
+//       paginatedCharacters.push(c);
+//     });
+//   }
+//
+//   if (typeof paginatedCharacters === "undefined") return [];
+//   else {
+//     const result = paginatedCharacters.map(id => {
+//       return getCharDetails(state, id);
+//     });
+//
+//     return result;
+//
+//   }
+// };
