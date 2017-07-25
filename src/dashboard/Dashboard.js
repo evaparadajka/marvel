@@ -66,7 +66,7 @@ class Dashboard extends React.Component {
   };
 
   loadNextPage = () => {
-    // this.showNotification(success(notificationLoadCharacters));
+    this.showNotification(success(notificationLoadCharacters));
     if (this.isNextPageInStore()) {
       this.props.dispatch({
         type: "CHARACTERS/LOAD_NEXT_PAGE"
