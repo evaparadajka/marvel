@@ -25,6 +25,21 @@ const paginationComics = (state = initialState, action) => {
         ...state,
         activePage: state.activePage - 1
       };
+    case "COMICS/LOAD_PAGE":
+      return {
+        ...state,
+        activePage: action.payload
+      };
+
+    case "COMICS/SAVE_PAGE":
+      return {
+        ...state,
+        pages: {
+          ...state.pages,
+          [action.page]: action.comicsOnPage
+        },
+        pagesCount: state.pagesCount + 1
+      };
     default:
       return state;
   }

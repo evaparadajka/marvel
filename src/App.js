@@ -36,7 +36,7 @@ class App extends Component {
             <Route path="character-details/:id" component={CharacterDetails} />
             <Route path="not-found" component={NotFound} />
             <Route path="fav-characters" component={CharactersPage} />
-            <Route path="comics" component={ComicsDashboard} />
+            <Route path="comics/:page" component={ComicsDashboard} />
             <Route path="comic-details/:id" component={ComicsDetails} />
             {<Route path="fav-comics" component={ComicsPage} />}
           </Route>
