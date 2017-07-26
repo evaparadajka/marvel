@@ -27,7 +27,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <Notifications options={{ zIndex: 5000 }} /> */}
         <NotificationComponent />
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>

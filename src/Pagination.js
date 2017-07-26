@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 export class Pagination extends React.Component {
   setActivePage = () => {
-    console.log("pagination");
     this.props.onClick(this.props.id);
   };
 
@@ -20,8 +19,8 @@ export class Pagination extends React.Component {
       );
     });
   };
+
   render() {
-    // this.renderPagesNumbers();
     return (
       <div>
         Pagination:

@@ -22,7 +22,6 @@ class UserProfile extends React.Component {
   };
 
   render() {
-    console.log(this.state, "state");
     return (
       <div className="center">
         <div className="img-container">

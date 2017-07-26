@@ -35,19 +35,17 @@ export const appendFavourites = state => {
     });
     return c;
   });
-
   return characters;
 };
+
 export const fetchPaginatedCharacters = state => {
   const paginatedCharacters =
     state.paginationCharacters.pages[state.paginationCharacters.activePage];
-
   if (typeof paginatedCharacters === "undefined") return [];
   else {
     const result = paginatedCharacters.map(id => {
       return getCharDetails(state, id);
     });
-
     return result;
   }
 };

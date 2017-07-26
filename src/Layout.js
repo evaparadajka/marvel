@@ -23,4 +23,5 @@ const mapStateToProps = state => {
     name: state.session.name
   };
 };
+
 export default connect(mapStateToProps)(Layout);

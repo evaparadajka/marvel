@@ -58,7 +58,6 @@ export class Layout extends React.Component {
                   <img src={logo} className="nav-logo" />
                 </a>
               </div>
-
               <li className="menu-item active">
                 <Link to="/dashboard/0" className="nav-style">
                   Characters
@@ -79,7 +78,6 @@ export class Layout extends React.Component {
                   Favourite Comics
                 </Link>
               </li>
-
               <li className="nav-style menu-item">
                 <Link to="/user-profile" className="nav-style userName">
                   Hello, {this.props.name}!
@@ -94,13 +92,7 @@ export class Layout extends React.Component {
     );
   }
 }
-const StyledA = styled.a`
-  position: relative;
-  /* display: block; */
-  padding: 0;
-  padding-left: 7px;
-  padding-right: 7px;
-`;
+
 const styleMenu = {
   bmBurgerButton: {
     position: "fixed",

@@ -35,6 +35,7 @@ class Character extends React.Component {
       hover: true
     });
   };
+
   onMouseLeaveHandler = () => {
     this.setState({
       hover: false
@@ -47,7 +48,6 @@ class Character extends React.Component {
 
   addToFav = event => {
     event.stopPropagation();
-
     const character = { name: this.props.name, id: this.props.id };
     this.props.dispatch(addToFavourites(character));
     this.showNotification(success(notificationCharacterAdded));
@@ -55,7 +55,6 @@ class Character extends React.Component {
 
   delFromFav = event => {
     event.stopPropagation();
-
     const character = { name: this.props.name, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(character));
     this.showNotification(error(notificationCharacterDeleted));
@@ -112,7 +111,6 @@ class Character extends React.Component {
         onMouseLeave={this.onMouseLeaveHandler}
       >
         <img src={this.props.img} alt="Image not found" />
-
         {this.renderOverlay()}
       </div>
     );
@@ -122,4 +120,5 @@ class Character extends React.Component {
 Character.contextTypes = {
   store: PropTypes.object
 };
+
 export default connect()(Character);

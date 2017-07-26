@@ -5,7 +5,6 @@ import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import { getComicDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import ComicCharacterList from "./ComicCharacterList";
-// import { showNotification } from "../alert/notifications";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import {
   notificationComicAdded,
@@ -31,14 +30,17 @@ class ComicDetails extends React.Component {
   showNotification = message => {
     this.context.store.dispatch(message);
   };
+
   addToFav = () => {
     this.props.dispatch(addToFavourites(this.props.comic));
     this.showNotification(success(notificationComicAdded));
   };
+
   delFromFav = () => {
     this.props.dispatch(deleteFromFavourites(this.props.comic));
     this.showNotification(error(notificationComicDeleted));
   };
+
   isComicInFavs = () => {
     return this.props.comic.isFavourite;
   };
@@ -88,7 +90,7 @@ class ComicDetails extends React.Component {
     else return "inactive";
   };
 
-  doIHaveComic = id => {
+  findComicInStoreOrFetch = id => {
     if (
       typeof this.props.comic === "undefined" ||
       this.props.comic.id !== Number(id)
@@ -139,7 +141,6 @@ class ComicDetails extends React.Component {
             </div>
             {this.renderActionButton()}
           </StyledCharacterBase>
-
           <Tabs
             selectedIndex={this.state.selectedTab}
             onSelect={selectedTab => this.setState({ selectedTab })}
@@ -149,7 +150,6 @@ class ComicDetails extends React.Component {
               <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
               <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
             </TabList>
-
             <TabPanel className="tabpanel space">
               <Scrollbars style={{ width: 800, height: 300 }}>
                 <ComicCharacterList
@@ -189,11 +189,15 @@ class ComicDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.doIHaveComic(this.extractID(this.props.router.location.pathname));
+    this.findComicInStoreOrFetch(
+      this.extractID(this.props.router.location.pathname)
+    );
   }
 
   componentDidUpdate() {
-    this.doIHaveComic(this.extractID(this.props.router.location.pathname));
+    this.findComicInStoreOrFetch(
+      this.extractID(this.props.router.location.pathname)
+    );
   }
 
   render() {

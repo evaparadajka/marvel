@@ -62,8 +62,6 @@ class Dashboard extends React.Component {
           this.props.location.pathname.length
         )
       ) + 1;
-    console.log("nextPage", nextPage);
-
     if (this.isPageDefined(nextPage)) {
       this.props.router.push("/dashboard/" + nextPage);
       this.loadPage(nextPage);
@@ -90,7 +88,6 @@ class Dashboard extends React.Component {
           this.props.location.pathname.length
         )
       ) - 1;
-    console.log("previousPage", previousPage);
     if (this.isPageDefined(previousPage)) {
       this.props.router.push("/dashboard/" + previousPage);
       this.loadPage(previousPage);
@@ -102,18 +99,18 @@ class Dashboard extends React.Component {
   };
 
   isPageDefined = page => {
-    console.log("Is page defined", page);
     return typeof this.props.pagination.pages[page] != "undefined"
       ? true
       : false;
   };
+
   loadPage = page => {
-    console.log("load page", page);
     this.props.dispatch({
       type: "CHARACTERS/LOAD_PAGE",
       payload: Number(page)
     });
   };
+
   loadNotFoundPage = () => {
     this.props.router.push("/not-found/");
   };
@@ -131,13 +128,11 @@ class Dashboard extends React.Component {
           type: "CHARACTERS/FETCH_PAGE_CHARACTERS",
           payload: response.data.data.results
         });
-
         this.props.dispatch({
           type: "CHARACTERS/SAVE_PAGE",
           charactersOnPage: response.data.data.results.map(c => c.id),
           page: page
         });
-
         this.props.router.push("/dashboard/" + page);
         this.loadPage(page);
       })
@@ -152,7 +147,6 @@ class Dashboard extends React.Component {
       11,
       this.props.location.pathname.length
     );
-
     if (this.isPageDefined(page)) {
       this.loadPage(page);
     } else {
@@ -165,7 +159,6 @@ class Dashboard extends React.Component {
       11,
       this.props.location.pathname.length
     );
-
     if (this.props.location.pathname != prevProps.location.pathname) {
       if (this.isPageDefined(page)) {
         this.loadPage(page);
@@ -215,9 +208,11 @@ class Dashboard extends React.Component {
     );
   }
 }
+
 Dashboard.contextTypes = {
   store: PropTypes.object
 };
+
 const mapStateToProps = state => {
   return {
     pagination: state.paginationCharacters,

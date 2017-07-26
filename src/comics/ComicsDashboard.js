@@ -58,7 +58,6 @@ class ComicsDashboard extends React.Component {
           this.props.location.pathname.length
         )
       ) + 1;
-
     if (this.isPageDefined(nextPage)) {
       this.props.router.push("/comics/" + nextPage);
       this.loadPage(nextPage);
@@ -85,7 +84,6 @@ class ComicsDashboard extends React.Component {
           this.props.location.pathname.length
         )
       ) - 1;
-    console.log("previousPage", previousPage);
     if (this.isPageDefined(previousPage)) {
       this.props.router.push("/comics/" + previousPage);
       this.loadPage(previousPage);
@@ -97,18 +95,18 @@ class ComicsDashboard extends React.Component {
   };
 
   isPageDefined = page => {
-    console.log("Is page defined", page);
     return typeof this.props.pagination.pages[page] != "undefined"
       ? true
       : false;
   };
+
   loadPage = page => {
-    console.log("load page", page);
     this.props.dispatch({
       type: "COMICS/LOAD_PAGE",
       payload: Number(page)
     });
   };
+
   loadNotFoundPage = () => {
     this.props.router.push("/not-found/");
   };
@@ -126,14 +124,11 @@ class ComicsDashboard extends React.Component {
           type: "COMICS/FETCH_PAGE_COMICS",
           payload: response.data.data.results
         });
-        console.log(response.data.data.results);
-
         this.props.dispatch({
           type: "COMICS/SAVE_PAGE",
           comicsOnPage: response.data.data.results.map(c => c.id),
           page: page
         });
-
         this.props.router.push("/comics/" + page);
         this.loadPage(page);
       })
@@ -148,7 +143,6 @@ class ComicsDashboard extends React.Component {
       8,
       this.props.location.pathname.length
     );
-
     if (this.isPageDefined(page)) {
       this.loadPage(page);
     } else {
@@ -161,7 +155,6 @@ class ComicsDashboard extends React.Component {
       8,
       this.props.location.pathname.length
     );
-
     if (this.props.location.pathname != prevProps.location.pathname) {
       if (this.isPageDefined(page)) {
         this.loadPage(page);
@@ -182,7 +175,6 @@ class ComicsDashboard extends React.Component {
               className="fa fa-arrow-left fa-5x prev-page "
               onClick={this.loadPreviousPage}
             />
-
             <i
               onClick={this.loadNextPage}
               className="fa fa-arrow-right fa-5x next-page"
@@ -195,12 +187,12 @@ class ComicsDashboard extends React.Component {
     );
   }
 }
+
 ComicsDashboard.contextTypes = {
   store: PropTypes.object
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     pagination: state.paginationComics,
     comics: fetchPaginatedComics(state),
