@@ -24,6 +24,7 @@
     "react-scripts": "1.0.10",
     "react-tabs": "^1.1.0",
     "react-toastr": "^2.8.2",
+    "recharts": "^1.0.0-alpha.2",
     "redux": "^3.7.1",
     "redux-infinite-scroll": "^1.0.9",
     "redux-localstorage": "^0.4.1",
