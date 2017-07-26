@@ -141,6 +141,7 @@ p {
   padding: 2px;
   width: 255px;
   height: 255px;
+  z-index: 10;
 }
 
 .square-small {
@@ -197,7 +198,9 @@ p {
   position: relative;
   z-index: 1;
   top: 0;
-  display: table;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   background-color: white;
   padding-bottom: 60px;
@@ -275,6 +278,38 @@ p {
 .comicHover:hover {
   color: #c51111;
   cursor: pointer;
+}
+
+.btn-container {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 59%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.prev-page {
+  color: #c94c4c;
+  display: flex;
+  align-self: flex-start;
+  text-align: center;
+}
+
+.next-page {
+  color: #c94c4c;
+  display: flex;
+  align-self: flex-end;
+  text-align: center;
+}
+
+i:hover {
+  color: #9e0606;
+  cursor: pointer;
+}
+
+i:visited {
+  color: #c94c4c;
 }
 
 @media only screen and (max-width: 960px) {
