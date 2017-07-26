@@ -55,31 +55,29 @@ class Dashboard extends React.Component {
       charactersOnPage: characters.map(c => c.id)
     });
   };
-  isNextPageInStore = () => {
-    if (this.props.pagination.pagesCount === this.props.pagination.activePage) {
-      // console.log("Next page? False");
-      return false;
-    } else {
-      // console.log("Next page? True");
-      return true;
-    }
-  };
 
   loadNextPage = () => {
-    //console.log(this.props.router.location);
-    const page = this.props.router.location.pathname.slice(
-      11,
-      this.props.location.pathname.length
-    );
-    this.showNotification(success(notificationLoadCharacters));
-    if (this.isNextPageInStore()) {
-      this.props.dispatch({
-        type: "CHARACTERS/LOAD_NEXT_PAGE"
-      });
+    const nextPage =
+      Number(
+        this.props.router.location.pathname.slice(
+          11,
+          this.props.location.pathname.length
+        )
+      ) + 1;
+    console.log("nextPage", nextPage);
+
+    if (this.isPageDefined(nextPage)) {
+      // this.props.dispatch({
+      //   type: "CHARACTERS/LOAD_NEXT_PAGE"
+      // });
+      this.props.router.push("/dashboard/" + nextPage);
+      this.loadPage(nextPage);
     } else {
-      this.fetchCharacters(this.props.charactersToSkip);
+      if (nextPage >= 1) {
+        this.fetchPageCharacters(nextPage);
+      }
     }
-    this.props.router.push("/dashboard/" + (Number(page) + 1));
+    //
   };
 
   isPreviousPageInStore = () => {
@@ -93,30 +91,40 @@ class Dashboard extends React.Component {
   };
 
   loadPreviousPage = () => {
-    const page = this.props.router.location.pathname.slice(
-      11,
-      this.props.location.pathname.length
-    );
+    const previousPage =
+      Number(
+        this.props.router.location.pathname.slice(
+          11,
+          this.props.location.pathname.length
+        )
+      ) - 1;
+    console.log("previousPage", previousPage);
     // this.showNotification(success(notificationLoadCharacters));
-    if (this.isPreviousPageInStore()) {
-      this.props.dispatch({
-        type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
-      });
-      this.props.router.push("/dashboard/" + (Number(page) - 1));
+    if (this.isPageDefined(previousPage)) {
+      this.props.router.push("/dashboard/" + previousPage);
+      this.loadPage(previousPage);
+      // this.props.dispatch({
+      //   type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
+      // });
+    } else {
+      if (previousPage >= 1) {
+        this.fetchPageCharacters(previousPage);
+      }
     }
   };
 
   isPageDefined = page => {
-    //console.log(this.props.pagination.pages[page]);
+    console.log("Is page defined", page);
     return typeof this.props.pagination.pages[page] != "undefined"
       ? true
       : false;
     // return false;
   };
   loadPage = page => {
+    console.log("load page", page);
     this.props.dispatch({
       type: "CHARACTERS/LOAD_PAGE",
-      payload: page
+      payload: Number(page)
     });
   };
   loadNotFoundPage = () => {
@@ -124,13 +132,12 @@ class Dashboard extends React.Component {
   };
 
   fetchPageCharacters(page) {
-    this.loadPage(page);
     const charactersPerPage = 20;
-    console.log("offset", (page - 1) * charactersPerPage);
+    // console.log("offset", (page - 1) * charactersPerPage);
     apiMarvel
       .get("/characters", {
         params: {
-          offset: (page - 1) * charactersPerPage
+          offset: page * charactersPerPage
         }
       })
       .then(response => {
@@ -143,8 +150,11 @@ class Dashboard extends React.Component {
         this.props.dispatch({
           type: "CHARACTERS/SAVE_PAGE",
           charactersOnPage: response.data.data.results.map(c => c.id),
-          page: page - 1
+          page: page
         });
+
+        this.props.router.push("/dashboard/" + page);
+        this.loadPage(page);
       })
       .catch(error => {
         console.log(error);
