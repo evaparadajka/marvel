@@ -1,6 +1,7 @@
 import React from "react";
 
 class Comic extends React.Component {
+  // za dluga funkcja
   lookingForNumber() {
     if (isNaN(this.props.resourceURI[this.props.resourceURI.length - 5])) {
       if (isNaN(this.props.resourceURI[this.props.resourceURI.length - 4])) {

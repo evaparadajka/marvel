@@ -13,7 +13,7 @@ import Notifications, { success, error } from "react-notification-system-redux";
 import PropTypes from "prop-types";
 import {
   notificationCharacterAdded,
-  notificationCharacterDeleted
+  notificationCharacterDeleted,
 } from "../alert/notifications";
 import PageTitle from "../user_interface/PageTitle";
 import { Scrollbars } from "react-custom-scrollbars";
@@ -64,6 +64,7 @@ class CharacterDetails extends React.Component {
     }
   };
 
+  // slaba nazwa funkcji
   doIHaveCharacter = id => {
     if (
       typeof this.props.character === "undefined" ||
@@ -75,7 +76,7 @@ class CharacterDetails extends React.Component {
           .then(response => {
             this.props.dispatch({
               type: "SHOW/FETCH",
-              payload: response.data.data.results[0]
+              payload: response.data.data.results[0],
             });
           })
           .catch(error => {
@@ -89,13 +90,16 @@ class CharacterDetails extends React.Component {
     }
   };
 
+  // slaba nazwa funkcji
   doIHaveSomethingToRender = () => {
+    // warunek do funkcji
     if (
       typeof this.props.character === "undefined" ||
       typeof this.props.character.thumbnail === "undefined"
     ) {
       return <div />;
     } else {
+      // podzielilbym na mniejsze komponenty
       return (
         <div className="img-container">
           <PageTitle title={this.props.character.name} />
@@ -119,8 +123,7 @@ class CharacterDetails extends React.Component {
 
           <Tabs
             selectedIndex={this.state.selectedTab}
-            onSelect={selectedTab => this.setState({ selectedTab })}
-          >
+            onSelect={selectedTab => this.setState({ selectedTab })}>
             <TabList className="tablist">
               <Tab className={`tab ${this.getActiveClass(0)}`}>Comics</Tab>
               <Tab className={`tab ${this.getActiveClass(1)}`}>Stories</Tab>
@@ -175,6 +178,7 @@ class CharacterDetails extends React.Component {
   }
 
   renderDescription = () => {
+    // mozna wylaczyc element wspolny
     if (this.props.character.description === "") {
       return (
         <div>
@@ -205,12 +209,12 @@ const mapStateToProps = state => {
       typeof state.characters.characterToShow === "undefined"
         ? state.characters.characterToShow
         : getCharDetails(state, state.characters.characterToShow.id),
-    session: state.session
+    session: state.session,
   };
 };
 
 CharacterDetails.contextTypes = {
-  store: PropTypes.object
+  store: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(CharacterDetails);

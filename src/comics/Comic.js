@@ -3,13 +3,13 @@ import Button from "../user_interface/Button";
 import StyledOverlay from "../user_interface/StyledOverlay";
 import {
   addToFavourites,
-  deleteFromFavourites
+  deleteFromFavourites,
 } from "../comic-details/actions";
 // import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
 import {
   notificationComicAdded,
-  notificationComicDeleted
+  notificationComicDeleted,
 } from "../alert/notifications";
 import PropTypes from "prop-types";
 import Notifications, { success, error } from "react-notification-system-redux";
@@ -18,7 +18,7 @@ class Comic extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
     };
   }
   showNotification = message => {
@@ -30,12 +30,12 @@ class Comic extends React.Component {
 
   onMouseEnterHandler = () => {
     this.setState({
-      hover: true
+      hover: true,
     });
   };
   onMouseLeaveHandler = () => {
     this.setState({
-      hover: false
+      hover: false,
     });
   };
 
@@ -48,6 +48,7 @@ class Comic extends React.Component {
     this.showNotification(success(notificationComicAdded));
     const comic = { title: this.props.title, id: this.props.id };
     this.props.dispatch(addToFavourites(comic));
+    // console.log
     // showNotification("Comic added!");
   };
   delFromFav = event => {
@@ -55,6 +56,7 @@ class Comic extends React.Component {
     this.showNotification(error(notificationComicDeleted));
     const comic = { title: this.props.title, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(comic));
+    // console.log
     // showNotification("Comic deleted!");
   };
   isComicInFavs = () => {
@@ -104,8 +106,7 @@ class Comic extends React.Component {
       <div
         className="square"
         onMouseEnter={this.onMouseEnterHandler}
-        onMouseLeave={this.onMouseLeaveHandler}
-      >
+        onMouseLeave={this.onMouseLeaveHandler}>
         <img src={this.props.img} alt="Image not found" />
 
         {this.renderOverlay()}
@@ -115,6 +116,6 @@ class Comic extends React.Component {
 }
 
 Comic.contextTypes = {
-  store: PropTypes.object
+  store: PropTypes.object,
 };
 export default connect()(Comic);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Character from "./Character";
 
 class CharacterList extends Component {
+  // slaba nazwa funkcji, dalbym jakies 'renderCharacter' albo zupelnie do komponentu
   makeCharacter = d => {
     if (typeof d.thumbnail === "undefined") {
     } else {

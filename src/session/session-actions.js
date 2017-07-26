@@ -1,6 +1,7 @@
 import apiClient from "../lib/api-client";
 import { hashHistory } from "react-router";
 
+// spora ta akcja, moznaby jakos podzielic to
 export const signIn = user => {
   return (dispatch, getState) => {
     dispatch({

@@ -1,4 +1,5 @@
 export const getComicDetails = (state, comicID) => {
+  // warunek tu powinien byc przypisany do zmiennej i dopiero pozniej uzyty
   const comicResult = state.comics.comicsCollection.find(c => {
     return c.id === comicID;
   })
