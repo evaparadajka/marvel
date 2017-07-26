@@ -5,7 +5,6 @@ import {
   addToFavourites,
   deleteFromFavourites
 } from "../comic-details/actions";
-// import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
 import {
   notificationComicAdded,
@@ -45,14 +44,12 @@ class Comic extends React.Component {
 
   addToFav = event => {
     event.stopPropagation();
-
     const comic = { title: this.props.title, id: this.props.id };
     this.props.dispatch(addToFavourites(comic));
     this.showNotification(success(notificationComicAdded));
   };
   delFromFav = event => {
     event.stopPropagation();
-
     const comic = { title: this.props.title, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(comic));
     this.showNotification(error(notificationComicDeleted));
@@ -107,7 +104,6 @@ class Comic extends React.Component {
         onMouseLeave={this.onMouseLeaveHandler}
       >
         <img src={this.props.img} alt="Image not found" />
-
         {this.renderOverlay()}
       </div>
     );

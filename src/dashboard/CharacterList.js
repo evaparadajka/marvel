@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Character from "./Character";
 
 class CharacterList extends Component {
-  makeCharacter = d => {
+  setCharacterProps = d => {
     if (typeof d.thumbnail === "undefined") {
     } else {
       return (
@@ -23,7 +23,7 @@ class CharacterList extends Component {
   render() {
     return (
       <div className="space">
-        {this.props.characters.map((d, index) => this.makeCharacter(d))}
+        {this.props.characters.map((d, index) => this.setCharacterProps(d))}
       </div>
     );
   }

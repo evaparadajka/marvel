@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Story from "./Story";
 
 class StoryList extends Component {
-  anyStories = () => {
+  informIfThereAreNoStories = () => {
     if (this.props.stories.length === 0) {
       return <div> There are not any stories in this character.</div>;
     }
@@ -15,7 +15,7 @@ class StoryList extends Component {
         <ol>
           {this.props.stories.map((d, index) => <Story name={d.name} />)}
         </ol>
-        {this.anyStories()}
+        {this.informIfThereAreNoStories()}
       </div>
     );
   }

@@ -4,8 +4,8 @@ import apiMarvelId from "../lib/api-marvel-id";
 import ComicCharacter from "./ComicCharacter";
 
 class ComicCharacterList extends Component {
-  getCharThumbnail = (d, index) => {
-    if (
+  checkIfThumbnailIsInStore = (d, i) => {
+    return (
       typeof this.props.thumbnails.find(
         p =>
           p.id ===
@@ -13,7 +13,11 @@ class ComicCharacterList extends Component {
             d.resourceURI.slice(d.resourceURI.length - 7, d.resourceURI.length)
           )
       ) === "undefined"
-    ) {
+    );
+  };
+
+  getCharThumbnail = (d, i) => {
+    if (this.checkIfThumbnailIsInStore(d, i)) {
       apiMarvelId
         .get(
           d.resourceURI.slice(d.resourceURI.length - 7, d.resourceURI.length)
@@ -40,18 +44,14 @@ class ComicCharacterList extends Component {
   };
 
   componentDidMount() {
-    {
-      this.props.characters.map((d, index) => this.getCharThumbnail(d, index));
-    }
+    this.props.characters.map((d, index) => this.getCharThumbnail(d, index));
   }
 
   componentDidUpdate() {
-    {
-      this.props.characters.map((d, index) => this.getCharThumbnail(d, index));
-    }
+    this.props.characters.map((d, index) => this.getCharThumbnail(d, index));
   }
 
-  anyCharacters = () => {
+  informIfThereAreNoCharacters = () => {
     if (this.props.characters.length === 0) {
       return <div> There are not any characters in this comic.</div>;
     }
@@ -67,7 +67,7 @@ class ComicCharacterList extends Component {
             resourceURI={d.resourceURI}
           />
         )}
-        {this.anyCharacters()}
+        {this.informIfThereAreNoCharacters()}
       </div>
     );
   }
