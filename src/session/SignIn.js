@@ -5,15 +5,24 @@ import Button from "../user_interface/Button";
 import { signIn } from "./session-actions";
 import { Link } from "react-router";
 import StyledInput from "../user_interface/StyledInput";
+import ReactLoading from "react-loading";
+import Notifications, { error } from "react-notification-system-redux";
+import { notificationLoginFailed } from "../alert/notifications";
+import PropTypes from "prop-types";
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
-      error: ""
+      isSubmit: false
     };
   }
+
+  showNotification = message => {
+    this.context.store.dispatch(message);
+  };
 
   updateEmail = e => {
     this.setState({
@@ -29,6 +38,9 @@ class SignIn extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
+    this.setState({
+      isSubmit: true
+    });
     this.props.dispatch(
       signIn({
         email: this.state.email,
@@ -36,7 +48,39 @@ class SignIn extends React.Component {
       })
     );
   };
-  showError = () => {};
+
+  loading = () => {
+    if (
+      this.props.session.status === "Login failed" &&
+      this.state.isSubmit === true
+    ) {
+      this.showNotification(error(notificationLoginFailed));
+      this.setState({
+        isSubmit: false
+      });
+    }
+    if (this.state.isSubmit) {
+      return (
+        <div className="spin">
+          <ReactLoading
+            type="spin"
+            color="#a91c1c"
+            height="34px"
+            width="34px"
+            delay="0"
+          />
+        </div>
+      );
+    } else {
+      return (
+        <Button
+          onClick={this.onSubmit}
+          label={"Sign in"}
+          className="btn-danger"
+        />
+      );
+    }
+  };
 
   render() {
     return (
@@ -58,28 +102,22 @@ class SignIn extends React.Component {
               value={this.state.password}
             />
             <br />
-
-            <Button
-              onClick={this.onSubmit}
-              label={"Sign in"}
-              className="btn-danger"
-            />
+            {this.loading()}
             <h2>
               <Link to="/sign-up" className="sign-up">
                 or sign up!
               </Link>
               <br />
-              {this.state.error}
             </h2>
-            <h4>
-              {this.props.session.status}
-            </h4>
           </div>
         </form>
       </div>
     );
   }
 }
+SignIn.contextTypes = {
+  store: PropTypes.object
+};
 const mapStateToProps = state => {
   return {
     session: state.session

@@ -3,6 +3,14 @@ import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
 import StyledInput from "../user_interface/StyledInput";
+import Notifications, { error, success } from "react-notification-system-redux";
+import {
+  notificationRegistrationCompleted,
+  notificationUnexpectedErrorOccurred,
+  notificationInvalidPasswords
+} from "../alert/notifications";
+import PropTypes from "prop-types";
+import ReactLoading from "react-loading";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -11,9 +19,14 @@ class SignUp extends React.Component {
       email: "",
       password: "",
       passwordRepeat: "",
-      error: ""
+      error: false,
+      isSubmit: false
     };
   }
+
+  showNotification = message => {
+    this.context.store.dispatch(message);
+  };
 
   updateEmail = e => {
     this.setState({
@@ -36,7 +49,8 @@ class SignUp extends React.Component {
   isInputFormValid = () => {
     if (
       this.state.password === this.state.passwordRepeat &&
-      this.state.password !== ""
+      this.state.password !== "" &&
+      this.state.password.length >= 8
     )
       return true;
     else return false;
@@ -51,13 +65,15 @@ class SignUp extends React.Component {
   };
   resetErrorMsg = () => {
     this.setState({
-      error: ""
+      error: false
     });
   };
   onSubmit = e => {
     e.preventDefault();
     this.resetErrorMsg();
-
+    this.setState({
+      isSubmit: true
+    });
     if (this.isInputFormValid()) {
       apiClient
         .post("/api/v1/registrations", {
@@ -68,21 +84,52 @@ class SignUp extends React.Component {
         })
         .then(response => {
           this.resetForm();
+          this.showNotification(success(notificationRegistrationCompleted));
           this.props.router.push("/sign-in");
         })
-        .catch(error => {
-          console.log(error);
+        .catch(errorL => {
+          console.log(errorL);
+          this.showNotification(error(notificationUnexpectedErrorOccurred));
           this.setState({
-            error: "Something went wrong."
+            error: true
           });
         });
     } else {
+      this.showNotification(error(notificationInvalidPasswords));
       this.setState({
-        error: "Passwords are invalid"
+        error: true
       });
     }
   };
-  showError = () => {};
+
+  loading = () => {
+    if (this.state.error === true && this.state.isSubmit === true) {
+      this.setState({
+        isSubmit: false
+      });
+    }
+    if (this.state.isSubmit) {
+      return (
+        <div className="spin">
+          <ReactLoading
+            type="spin"
+            color="#a91c1c"
+            height="34px"
+            width="34px"
+            delay="0"
+          />
+        </div>
+      );
+    } else {
+      return (
+        <Button
+          onClick={this.onSubmit}
+          label={"Sign up"}
+          className="btn-danger"
+        />
+      );
+    }
+  };
 
   render() {
     return (
@@ -111,19 +158,14 @@ class SignUp extends React.Component {
               value={this.state.passwordRepeat}
             />
             <br />
-            <Button
-              onClick={this.onSubmit}
-              label={"Sign up"}
-              className="btn-danger"
-            />
-            <h4>
-              {this.state.error}
-            </h4>
+            {this.loading()}
           </div>
         </form>
       </div>
     );
   }
 }
-
+SignUp.contextTypes = {
+  store: PropTypes.object
+};
 export default withRouter(SignUp);

@@ -37,6 +37,13 @@ b {
   color: #a91c1c;
   text-decoration: none;
 }
+
+.spin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .nav {
   background: white;
   display: flex;

@@ -71,3 +71,28 @@ export const notificationComicDeleted = {
   //   callback: () => alert("clicked!")
   // }
 };
+
+export const notificationLoginFailed = {
+  title: "Loading failed!",
+  position: "tr",
+  autoDismiss: 2
+};
+
+export const notificationRegistrationCompleted = {
+  title: "Registration completed! You can login!",
+  position: "tr",
+  autoDismiss: 2
+};
+
+export const notificationUnexpectedErrorOccurred = {
+  title: "We are sorry - unexpected error occurred.",
+  position: "tr",
+  autoDismiss: 2
+};
+
+export const notificationInvalidPasswords = {
+  title:
+    "Please make sure that your passwords are identical and have at least 8 characters.",
+  position: "tr",
+  autoDismiss: 2
+};
