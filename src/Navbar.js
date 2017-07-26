@@ -21,7 +21,6 @@ export class Layout extends React.Component {
   };
 
   render() {
-    console.log(window.innerWidth);
     var isMenuOpen = state => {
       if (state.isOpen) {
         this.setState({
@@ -82,9 +81,9 @@ export class Layout extends React.Component {
               </li>
 
               <li className="nav-style menu-item">
-                <b>
+                <Link to="/user-profile" className="nav-style userName">
                   Hello, {this.props.name}!
-                </b>
+                </Link>
               </li>
               <Logout email={this.props.email} />
             </ul>
