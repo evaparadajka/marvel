@@ -30,7 +30,6 @@ const paginationComics = (state = initialState, action) => {
         ...state,
         activePage: action.payload
       };
-
     case "COMICS/SAVE_PAGE":
       return {
         ...state,

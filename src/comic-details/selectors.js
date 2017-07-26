@@ -1,7 +1,11 @@
-export const getComicDetails = (state, comicID) => {
-  const comicResult = state.comics.comicsCollection.find(c => {
+const isInCollection = (state, comicID) => {
+  return state.comics.comicsCollection.find(c => {
     return c.id === comicID;
-  })
+  });
+};
+
+export const getComicDetails = (state, comicID) => {
+  const comicResult = isInCollection(state, comicID)
     ? state.comics.comicsCollection.find(c => {
         return c.id === comicID;
       })
@@ -36,20 +40,17 @@ export const appendFavouritesComics = state => {
     });
     return c;
   });
-
   return comics;
 };
 
 export const fetchPaginatedComics = state => {
   const paginatedComics =
     state.paginationComics.pages[state.paginationComics.activePage];
-
   if (typeof paginatedComics === "undefined") return [];
   else {
     const result = paginatedComics.map(id => {
       return getComicDetails(state, id);
     });
-
     return result;
   }
 };

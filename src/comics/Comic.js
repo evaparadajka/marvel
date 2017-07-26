@@ -20,9 +20,11 @@ class Comic extends React.Component {
       hover: false
     };
   }
+
   showNotification = message => {
     this.context.store.dispatch(message);
   };
+
   show = () => {
     this.props.show(this.props.id);
   };
@@ -32,6 +34,7 @@ class Comic extends React.Component {
       hover: true
     });
   };
+
   onMouseLeaveHandler = () => {
     this.setState({
       hover: false
@@ -48,15 +51,18 @@ class Comic extends React.Component {
     this.props.dispatch(addToFavourites(comic));
     this.showNotification(success(notificationComicAdded));
   };
+
   delFromFav = event => {
     event.stopPropagation();
     const comic = { title: this.props.title, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(comic));
     this.showNotification(error(notificationComicDeleted));
   };
+
   isComicInFavs = () => {
     return this.props.isFavourite;
   };
+
   renderActionButton = () => {
     if (this.isComicInFavs()) {
       return (

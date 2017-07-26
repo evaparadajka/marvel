@@ -23,23 +23,29 @@ class CharacterDetails extends React.Component {
     super();
     this.state = { selectedTab: 0 };
   }
+
   showNotification = message => {
     this.context.store.dispatch(message);
   };
+
   addToFav = () => {
     this.props.dispatch(addToFavourites(this.props.character));
     this.showNotification(success(notificationCharacterAdded));
   };
+
   delFromFav = () => {
     this.props.dispatch(deleteFromFavourites(this.props.character));
     this.showNotification(error(notificationCharacterDeleted));
   };
+
   isCharInFavs = () => {
     return this.props.character.isFavourite;
   };
+
   show = id => {
     this.props.router.push("/comic-details/" + id);
   };
+
   renderActionButton = () => {
     if (this.isCharInFavs()) {
       return (
@@ -107,7 +113,6 @@ class CharacterDetails extends React.Component {
                 alt="image not found"
               />
             </div>
-
             <div className="description">
               <h4>DESCRIPTION:</h4>
               <p>

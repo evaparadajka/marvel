@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import Creator from "./Creator";
 
 class CreatorList extends Component {

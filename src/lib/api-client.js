@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const apiClient = axios.create({
   baseURL: "https://praktyki-react.herokuapp.com",
   headers: {
@@ -18,11 +19,10 @@ const configureApi = store => {
       return config;
     },
     function(error) {
-      // Do something with request error
       return Promise.reject(error);
     }
   );
 };
-// Add a request interceptor
+
 export { configureApi };
 export default apiClient;

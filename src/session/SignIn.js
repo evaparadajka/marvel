@@ -94,7 +94,6 @@ class SignIn extends React.Component {
               type="email"
               value={this.state.email}
             />
-
             <label>Password: </label>
             <StyledInput
               onChange={this.updatePassword}
@@ -115,9 +114,11 @@ class SignIn extends React.Component {
     );
   }
 }
+
 SignIn.contextTypes = {
   store: PropTypes.object
 };
+
 const mapStateToProps = state => {
   return {
     session: state.session

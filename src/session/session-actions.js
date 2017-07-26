@@ -22,7 +22,6 @@ export const signIn = user => {
             user_id: response.data.data.user_id
           }
         });
-
         hashHistory.push("/user-profile");
       })
       .catch(error => {

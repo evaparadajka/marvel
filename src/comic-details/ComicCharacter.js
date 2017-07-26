@@ -10,7 +10,6 @@ class ComicCharacter extends React.Component {
     super(props);
     this.state = {
       hover: false
-      // actionButtonClicked: false
     };
   }
 
@@ -19,6 +18,7 @@ class ComicCharacter extends React.Component {
       hover: true
     });
   };
+
   onMouseLeaveHandler = () => {
     this.setState({
       hover: false

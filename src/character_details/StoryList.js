@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import Story from "./Story";
 
 class StoryList extends Component {

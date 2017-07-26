@@ -63,11 +63,13 @@ class SignUp extends React.Component {
       passwordRepeat: ""
     });
   };
+
   resetErrorMsg = () => {
     this.setState({
       error: false
     });
   };
+
   onSubmit = e => {
     e.preventDefault();
     this.resetErrorMsg();
@@ -165,7 +167,9 @@ class SignUp extends React.Component {
     );
   }
 }
+
 SignUp.contextTypes = {
   store: PropTypes.object
 };
+
 export default withRouter(SignUp);

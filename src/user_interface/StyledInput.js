@@ -11,6 +11,7 @@ class StyledInput extends React.Component {
   updateField = e => {
     this.props.onChange(e);
   };
+
   render() {
     return (
       <input

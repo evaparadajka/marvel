@@ -1,7 +1,11 @@
-export const getCharDetails = (state, charID) => {
-  const charResult = state.characters.charactersCollection.find(c => {
+const isInCollection = (state, charID) => {
+  return state.characters.charactersCollection.find(c => {
     return c.id === charID;
-  })
+  });
+};
+
+export const getCharDetails = (state, charID) => {
+  const charResult = isInCollection(state, charID)
     ? state.characters.charactersCollection.find(c => {
         return c.id === charID;
       })
@@ -35,19 +39,17 @@ export const appendFavourites = state => {
     });
     return c;
   });
-
   return characters;
 };
+
 export const fetchPaginatedCharacters = state => {
   const paginatedCharacters =
     state.paginationCharacters.pages[state.paginationCharacters.activePage];
-
   if (typeof paginatedCharacters === "undefined") return [];
   else {
     const result = paginatedCharacters.map(id => {
       return getCharDetails(state, id);
     });
-
     return result;
   }
 };
