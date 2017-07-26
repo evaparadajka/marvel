@@ -15,6 +15,8 @@ import Button from "../user_interface/Button";
 import PropTypes from "prop-types";
 import Notifications, { success, error } from "react-notification-system-redux";
 import apiMarvelIdComic from "../lib/api-marvel-id-comic";
+import PageTitle from "../user_interface/PageTitle";
+import { Scrollbars } from "react-custom-scrollbars";
 
 class ComicDetails extends React.Component {
   constructor() {
@@ -122,10 +124,7 @@ class ComicDetails extends React.Component {
     } else {
       return (
         <div className="img-container">
-          <h1>
-            {this.props.comic.title}
-          </h1>
-
+          <PageTitle title={this.props.comic.title} />
           <StyledCharacterBase>
             <div className="square">
               <img
@@ -154,16 +153,24 @@ class ComicDetails extends React.Component {
             </TabList>
 
             <TabPanel className="tabpanel space">
-              <ComicCharacterList
-                show={this.show}
-                characters={this.props.comic.characters.items}
-              />
+              <Scrollbars style={{ width: 800, height: 300 }}>
+                <ComicCharacterList
+                  show={this.show}
+                  characters={this.props.comic.characters.items}
+                />
+              </Scrollbars>
             </TabPanel>
             <TabPanel className="tabpanel space">
-              {this.props.comic.series.name}
+              <Scrollbars style={{ width: 800, height: 300 }}>
+                {typeof this.props.comic.series.name === "undefined"
+                  ? <div>There are not any series in this comic</div>
+                  : this.props.comic.series.name}
+              </Scrollbars>
             </TabPanel>
             <TabPanel className="tabpanel space">
-              <CreatorList creators={this.props.comic.creators.items} />
+              <Scrollbars style={{ width: 800, height: 300 }}>
+                <CreatorList creators={this.props.comic.creators.items} />
+              </Scrollbars>
             </TabPanel>
           </Tabs>
         </div>
