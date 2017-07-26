@@ -1,7 +1,11 @@
-export const getComicDetails = (state, comicID) => {
-  const comicResult = state.comics.comicsCollection.find(c => {
+const isInCollection = (state, comicID) => {
+  return state.comics.comicsCollection.find(c => {
     return c.id === comicID;
-  })
+  });
+};
+
+export const getComicDetails = (state, comicID) => {
+  const comicResult = isInCollection(state, comicID)
     ? state.comics.comicsCollection.find(c => {
         return c.id === comicID;
       })

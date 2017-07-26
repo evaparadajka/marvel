@@ -168,7 +168,7 @@ class ComicsDashboard extends React.Component {
     return (
       <div className="center">
         <div className="img-container">
-          <PageTitle title="MARVEL'S COMICS - FIND YOUR FAVOURITES" />/}
+          <PageTitle title="MARVEL'S COMICS - FIND YOUR FAVOURITES" />
           <ComicList show={this.show} comics={this.props.comics} />
           <div className="btn-container">
             <i

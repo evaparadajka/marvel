@@ -1,7 +1,11 @@
-export const getCharDetails = (state, charID) => {
-  const charResult = state.characters.charactersCollection.find(c => {
+const isInCollection = (state, charID) => {
+  return state.characters.charactersCollection.find(c => {
     return c.id === charID;
-  })
+  });
+};
+
+export const getCharDetails = (state, charID) => {
+  const charResult = isInCollection(state, charID)
     ? state.characters.charactersCollection.find(c => {
         return c.id === charID;
       })
