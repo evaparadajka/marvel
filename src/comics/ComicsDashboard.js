@@ -50,45 +50,140 @@ class ComicsDashboard extends React.Component {
       charactersOnPage: characters.map(c => c.id)
     });
   };
-  isNextPageInStore = () => {
-    if (this.props.pagination.pagesCount === this.props.pagination.activePage) {
-      console.log("Next page? False");
-      return false;
-    } else {
-      console.log("Next page? True");
-      return true;
-    }
-  };
 
   loadNextPage = () => {
-    this.showNotification(success(notificationLoadComics));
-    if (this.isNextPageInStore()) {
-      this.props.dispatch({
-        type: "COMICS/LOAD_NEXT_PAGE"
-      });
+    const nextPage =
+      Number(
+        this.props.router.location.pathname.slice(
+          8,
+          this.props.location.pathname.length
+        )
+      ) + 1;
+    console.log("nextPage", nextPage);
+
+    if (this.isPageDefined(nextPage)) {
+      // this.props.dispatch({
+      //   type: "CHARACTERS/LOAD_NEXT_PAGE"
+      // });
+      this.props.router.push("/comics/" + nextPage);
+      this.loadPage(nextPage);
     } else {
-      this.fetchComics(this.props.comicsToSkip);
+      if (nextPage >= 0) {
+        this.fetchPageComics(nextPage);
+      }
     }
+    //
   };
 
   isPreviousPageInStore = () => {
     if (this.props.pagination.activePage === 0) {
-      console.log("Previous page? False");
+      // console.log("Previous page? False");
       return false;
     } else {
-      console.log("Previous page? True");
+      // console.log("Previous page? True");
       return true;
     }
   };
 
   loadPreviousPage = () => {
+    const previousPage =
+      Number(
+        this.props.router.location.pathname.slice(
+          8,
+          this.props.location.pathname.length
+        )
+      ) - 1;
+    console.log("previousPage", previousPage);
     // this.showNotification(success(notificationLoadCharacters));
-    if (this.isPreviousPageInStore()) {
-      this.props.dispatch({
-        type: "COMICS/LOAD_PREVIOUS_PAGE"
-      });
+    if (this.isPageDefined(previousPage)) {
+      this.props.router.push("/comics/" + previousPage);
+      this.loadPage(previousPage);
+      // this.props.dispatch({
+      //   type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
+      // });
+    } else {
+      if (previousPage >= 0) {
+        this.fetchPageComics(previousPage);
+      }
     }
   };
+
+  isPageDefined = page => {
+    console.log("Is page defined", page);
+    return typeof this.props.pagination.pages[page] != "undefined"
+      ? true
+      : false;
+    // return false;
+  };
+  loadPage = page => {
+    console.log("load page", page);
+    this.props.dispatch({
+      type: "COMICS/LOAD_PAGE",
+      payload: Number(page)
+    });
+  };
+  loadNotFoundPage = () => {
+    this.props.router.push("/not-found/");
+  };
+
+  fetchPageComics(page) {
+    const comicsPerPage = 20;
+    // console.log("offset", (page - 1) * charactersPerPage);
+    apiMarvel
+      .get("/comics", {
+        params: {
+          offset: page * comicsPerPage
+        }
+      })
+      .then(response => {
+        this.props.dispatch({
+          type: "COMICS/FETCH_PAGE_COMICS",
+          payload: response.data.data.results
+        });
+        console.log(response.data.data.results);
+
+        this.props.dispatch({
+          type: "COMICS/SAVE_PAGE",
+          comicsOnPage: response.data.data.results.map(c => c.id),
+          page: page
+        });
+
+        this.props.router.push("/comics/" + page);
+        this.loadPage(page);
+      })
+      .catch(error => {
+        console.log(error);
+        this.loadNotFoundPage();
+      });
+  }
+
+  componentDidMount() {
+    const page = this.props.router.location.pathname.slice(
+      8,
+      this.props.location.pathname.length
+    );
+
+    if (this.isPageDefined(page)) {
+      this.loadPage(page);
+    } else {
+      this.fetchPageComics(page);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const page = this.props.router.location.pathname.slice(
+      8,
+      this.props.location.pathname.length
+    );
+
+    if (this.props.location.pathname != prevProps.location.pathname) {
+      if (this.isPageDefined(page)) {
+        this.loadPage(page);
+      } else {
+        this.fetchPageComics(page);
+      }
+    }
+  }
 
   //******INFINITE SCROLL*****
   // componentDidMount() {
@@ -129,7 +224,7 @@ class ComicsDashboard extends React.Component {
           className="btn-danger"
           label="Load next page"
         />
-       
+
         <br />
         <br />
       </div>

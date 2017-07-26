@@ -40,7 +40,7 @@ export const appendFavourites = state => {
 };
 export const fetchPaginatedCharacters = state => {
   const paginatedCharacters =
-    state.paginationCharacters.pages[state.paginationCharacters.activePage - 1];
+    state.paginationCharacters.pages[state.paginationCharacters.activePage];
 
   if (typeof paginatedCharacters === "undefined") return [];
   else {
