@@ -311,6 +311,10 @@ i:hover {
 i:visited {
   color: #c94c4c;
 }
+.chart-container {
+  display: flex;
+  justify-content: center;
+}
 
 @media only screen and (max-width: 960px) {
   .nav > li {
