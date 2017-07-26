@@ -54,19 +54,19 @@ export class Layout extends React.Component {
                     paddingLeft: "7px",
                     paddingRight: "7px"
                   }}
-                  href="/#/dashboard/1"
+                  href="/#/dashboard/0"
                 >
                   <img src={logo} className="nav-logo" />
                 </a>
               </div>
 
               <li className="menu-item active">
-                <Link to="/dashboard/1" className="nav-style">
+                <Link to="/dashboard/0" className="nav-style">
                   Characters
                 </Link>
               </li>
               <li className="active menu-item">
-                <Link to="/comics" className="nav-style">
+                <Link to="/comics/0" className="nav-style">
                   Comics
                 </Link>
               </li>

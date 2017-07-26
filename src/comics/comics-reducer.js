@@ -13,6 +13,11 @@ const comics = (state = initialState, action) => {
         comicsCollection: [...state.comicsCollection, ...action.payload],
         weHaveFetched: state.weHaveFetched + 20
       };
+    case "COMICS/FETCH_PAGE_COMICS":
+      return {
+        ...state,
+        comicsCollection: [...state.comicsCollection, ...action.payload]
+      };
     case "FETCH_USER_COMICS":
       return {
         ...state,

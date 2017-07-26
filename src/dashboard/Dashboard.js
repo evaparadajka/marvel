@@ -73,7 +73,7 @@ class Dashboard extends React.Component {
       this.props.router.push("/dashboard/" + nextPage);
       this.loadPage(nextPage);
     } else {
-      if (nextPage >= 1) {
+      if (nextPage >= 0) {
         this.fetchPageCharacters(nextPage);
       }
     }
@@ -107,7 +107,7 @@ class Dashboard extends React.Component {
       //   type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
       // });
     } else {
-      if (previousPage >= 1) {
+      if (previousPage >= 0) {
         this.fetchPageCharacters(previousPage);
       }
     }
