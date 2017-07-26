@@ -3,7 +3,7 @@ import Button from "../user_interface/Button";
 import StyledOverlay from "../user_interface/StyledOverlay";
 import {
   addToFavourites,
-  deleteFromFavourites
+  deleteFromFavourites,
 } from "../character_details/actions";
 import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
@@ -11,14 +11,15 @@ import Notifications, { success, error } from "react-notification-system-redux";
 import PropTypes from "prop-types";
 import {
   notificationCharacterAdded,
-  notificationCharacterDeleted
+  notificationCharacterDeleted,
 } from "../alert/notifications";
 
 class Character extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
+      // console.log
       // actionButtonClicked: false
     };
   }
@@ -33,23 +34,25 @@ class Character extends React.Component {
 
   onMouseEnterHandler = () => {
     this.setState({
-      hover: true
+      hover: true,
     });
   };
   onMouseLeaveHandler = () => {
     this.setState({
-      hover: false
+      hover: false,
     });
   };
 
   isHovered = () => {
     return this.state.hover;
   };
+  // console.log
   // setActionButtonClicked = () => {
   //   this.setState({
   //     actionButtonClicked: true
   //   });
   // };
+  // utrzymujemy linjke przerwy miedzy funkcjami
   addToFav = event => {
     event.stopPropagation();
     this.showNotification(success(notificationCharacterAdded));
@@ -109,8 +112,7 @@ class Character extends React.Component {
       <div
         className="square"
         onMouseEnter={this.onMouseEnterHandler}
-        onMouseLeave={this.onMouseLeaveHandler}
-      >
+        onMouseLeave={this.onMouseLeaveHandler}>
         <img src={this.props.img} alt="Image not found" />
 
         {this.renderOverlay()}
@@ -120,6 +122,6 @@ class Character extends React.Component {
 }
 
 Character.contextTypes = {
-  store: PropTypes.object
+  store: PropTypes.object,
 };
 export default connect()(Character);

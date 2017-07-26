@@ -9,7 +9,7 @@ import ComicCharacterList from "./ComicCharacterList";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import {
   notificationComicAdded,
-  notificationComicDeleted
+  notificationComicDeleted,
 } from "../alert/notifications";
 import Button from "../user_interface/Button";
 import PropTypes from "prop-types";
@@ -101,7 +101,7 @@ class ComicDetails extends React.Component {
           .then(response => {
             this.props.dispatch({
               type: "COMIC/SHOW/FETCH",
-              payload: response.data.data.results[0]
+              payload: response.data.data.results[0],
             });
           })
           .catch(error => {
@@ -115,7 +115,9 @@ class ComicDetails extends React.Component {
     }
   };
 
+  // rozbilbym to na mniejsze komponenty
   doIHaveSomethingToRender = () => {
+    // warunek przerzucilbym do funkcji
     if (
       typeof this.props.comic === "undefined" ||
       typeof this.props.comic.thumbnail === "undefined"
@@ -144,8 +146,7 @@ class ComicDetails extends React.Component {
 
           <Tabs
             selectedIndex={this.state.selectedTab}
-            onSelect={selectedTab => this.setState({ selectedTab })}
-          >
+            onSelect={selectedTab => this.setState({ selectedTab })}>
             <TabList className="tablist">
               <Tab className={`tab ${this.getActiveClass(0)}`}>Characters</Tab>
               <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
@@ -178,6 +179,7 @@ class ComicDetails extends React.Component {
     }
   };
 
+  // slaba nazwa funkcji i zdecydowanie za dlugo
   lookingForNumber() {
     if (
       isNaN(
@@ -234,12 +236,12 @@ const mapStateToProps = state => {
       typeof state.comics.comicsToShow === "undefined"
         ? state.comics.comicsToShow
         : getComicDetails(state, state.comics.comicsToShow.id),
-    session: state.session
+    session: state.session,
   };
 };
 
 ComicDetails.contextTypes = {
-  store: PropTypes.object
+  store: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(ComicDetails);

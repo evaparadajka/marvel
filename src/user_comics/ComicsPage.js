@@ -8,6 +8,7 @@ import PageTitle from "../user_interface/PageTitle";
 
 class ComicsPage extends React.Component {
   show = id => {
+    // console.log
     //this.props.dispatch({ type: "COMIC/SHOW", id: id });
     this.props.router.push("/comic-details/" + id);
   };

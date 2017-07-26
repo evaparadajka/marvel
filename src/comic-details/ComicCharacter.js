@@ -9,19 +9,20 @@ class ComicCharacter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
+      // console.log
       // actionButtonClicked: false
     };
   }
 
   onMouseEnterHandler = () => {
     this.setState({
-      hover: true
+      hover: true,
     });
   };
   onMouseLeaveHandler = () => {
     this.setState({
-      hover: false
+      hover: false,
     });
   };
 
@@ -59,6 +60,7 @@ class ComicCharacter extends React.Component {
     );
   };
 
+  // za dluga funkcja
   findThumbnail = () => {
     if (
       typeof this.props.thumbnails.find(
@@ -98,8 +100,7 @@ class ComicCharacter extends React.Component {
       <div
         className="square-small"
         onMouseEnter={this.onMouseEnterHandler}
-        onMouseLeave={this.onMouseLeaveHandler}
-      >
+        onMouseLeave={this.onMouseLeaveHandler}>
         {this.findThumbnail()}
         {this.renderOverlay()}
       </div>
@@ -109,7 +110,7 @@ class ComicCharacter extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    thumbnails: state.characters.thumbnailsToShow
+    thumbnails: state.characters.thumbnailsToShow,
   };
 };
 

@@ -1,11 +1,12 @@
 import { success } from "react-notification-system-redux";
 
+// zbedne komentarze
 export const notificationLoadCharacters = {
   // uid: 'once-please', // you can specify your own uid if required
   title: "Loading new characters",
   // message: "",
   position: "tr",
-  autoDismiss: 2
+  autoDismiss: 2,
   // action: {
   //   label: "Click me!!",
   //   callback: () => alert("clicked!")
@@ -17,7 +18,7 @@ export const notificationCharacterAdded = {
   title: "New character added to favourites!",
   // message: `${this.props.name}, please welcome!`,
   position: "tr",
-  autoDismiss: 2
+  autoDismiss: 2,
   // action: {
   //   label: "Click me!!",
   //   callback: () => alert("clicked!")
@@ -29,7 +30,7 @@ export const notificationCharacterDeleted = {
   title: "Character deleted from favourites!",
   // message: `${this.props.name}, please welcome!`,
   position: "tr",
-  autoDismiss: 2
+  autoDismiss: 2,
   // action: {
   //   label: "Click me!!",
   //   callback: () => alert("clicked!")
@@ -41,7 +42,7 @@ export const notificationLoadComics = {
   title: "Loading new comics",
   // message: "",
   position: "tr",
-  autoDismiss: 2
+  autoDismiss: 2,
   // action: {
   //   label: "Click me!!",
   //   callback: () => alert("clicked!")
@@ -53,7 +54,7 @@ export const notificationComicAdded = {
   title: "New comic added to favourites!",
   // message: `${this.props.name}, please welcome!`,
   position: "tr",
-  autoDismiss: 2
+  autoDismiss: 2,
   // action: {
   //   label: "Click me!!",
   //   callback: () => alert("clicked!")
@@ -65,7 +66,7 @@ export const notificationComicDeleted = {
   title: "Comic deleted from favourites!",
   // message: `${this.props.name}, please welcome!`,
   position: "tr",
-  autoDismiss: 2
+  autoDismiss: 2,
   // action: {
   //   label: "Click me!!",
   //   callback: () => alert("clicked!")

@@ -4,6 +4,7 @@ import apiMarvelId from "../lib/api-marvel-id";
 import ComicCharacter from "./ComicCharacter";
 
 class ComicCharacterList extends Component {
+  // zdecydowanie za dluga funkcja
   getCharThumbnail = (d, index) => {
     if (
       typeof this.props.thumbnails.find(
@@ -29,8 +30,8 @@ class ComicCharacterList extends Component {
                 )
               ),
               thumbnail: `${response.data.data.results[0].thumbnail
-                .path}/standard_large.jpg`
-            }
+                .path}/standard_large.jpg`,
+            },
           });
         })
         .catch(error => {
@@ -40,17 +41,20 @@ class ComicCharacterList extends Component {
   };
 
   componentDidMount() {
+    // czemu tutaj obiekt?
     {
       this.props.characters.map((d, index) => this.getCharThumbnail(d, index));
     }
   }
 
   componentDidUpdate() {
+    // czemu tutaj obiekt?
     {
       this.props.characters.map((d, index) => this.getCharThumbnail(d, index));
     }
   }
 
+  // slaba nazwa funkcji
   anyCharacters = () => {
     if (this.props.characters.length === 0) {
       return <div> There are not any characters in this comic.</div>;
@@ -75,7 +79,7 @@ class ComicCharacterList extends Component {
 
 const mapStateToProps = state => {
   return {
-    thumbnails: state.characters.thumbnailsToShow
+    thumbnails: state.characters.thumbnailsToShow,
   };
 };
 

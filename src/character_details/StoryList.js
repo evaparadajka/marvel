@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Story from "./Story";
 
 class StoryList extends Component {
+  // slaba nazwa funkcji
   anyStories = () => {
     if (this.props.stories.length === 0) {
       return <div> There are not any stories in this character.</div>;

@@ -17,17 +17,17 @@ class ComicsDashboard extends React.Component {
     apiMarvel
       .get("/comics", {
         params: {
-          offset: offset
-        }
+          offset: offset,
+        },
       })
       .then(response => {
         this.props.dispatch({
           type: "FETCH_COMICS",
-          payload: response.data.data.results
+          payload: response.data.data.results,
         });
         this.paginateComics(response.data.data.results);
         this.props.dispatch({
-          type: "COMICS/LOAD_NEXT_PAGE"
+          type: "COMICS/LOAD_NEXT_PAGE",
         });
       })
       .catch(error => console.log(error));
@@ -44,17 +44,20 @@ class ComicsDashboard extends React.Component {
   };
 
   paginateComics = characters => {
+    // console.log
     // const numOfPages = this.props.pagination.pages.length;
     this.props.dispatch({
       type: "COMICS_PAGINATE",
-      charactersOnPage: characters.map(c => c.id)
+      charactersOnPage: characters.map(c => c.id),
     });
   };
   isNextPageInStore = () => {
     if (this.props.pagination.pagesCount === this.props.pagination.activePage) {
+      // console.log
       console.log("Next page? False");
       return false;
     } else {
+      // console.log
       console.log("Next page? True");
       return true;
     }
@@ -64,7 +67,7 @@ class ComicsDashboard extends React.Component {
     this.showNotification(success(notificationLoadComics));
     if (this.isNextPageInStore()) {
       this.props.dispatch({
-        type: "COMICS/LOAD_NEXT_PAGE"
+        type: "COMICS/LOAD_NEXT_PAGE",
       });
     } else {
       this.fetchComics(this.props.comicsToSkip);
@@ -82,10 +85,11 @@ class ComicsDashboard extends React.Component {
   };
 
   loadPreviousPage = () => {
+    // console.log
     // this.showNotification(success(notificationLoadCharacters));
     if (this.isPreviousPageInStore()) {
       this.props.dispatch({
-        type: "COMICS/LOAD_PREVIOUS_PAGE"
+        type: "COMICS/LOAD_PREVIOUS_PAGE",
       });
     }
   };
@@ -112,6 +116,7 @@ class ComicsDashboard extends React.Component {
           <ComicList show={this.show} comics={this.props.comics} />
         </div>
         <br />
+        {/* console.log */}
         {/* <Button
           onClick={this.clickNewComics}
           className="btn-danger"
@@ -134,16 +139,18 @@ class ComicsDashboard extends React.Component {
   }
 }
 ComicsDashboard.contextTypes = {
-  store: PropTypes.object
+  store: PropTypes.object,
 };
 
 const mapStateToProps = state => {
+  // console.log
   console.log(state);
   return {
+    // console.log
     // comics: appendFavouritesComics(state),
     pagination: state.paginationComics,
     comics: fetchPaginatedComics(state),
-    comicsToSkip: state.comics.weHaveFetched
+    comicsToSkip: state.comics.weHaveFetched,
   };
 };
 
