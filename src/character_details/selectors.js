@@ -51,6 +51,8 @@ export const fetchPaginatedCharacters = state => {
     return result;
   }
 };
+
+//***** INFINITE SCROLL ****
 // export const fetchPaginatedCharacters = state => {
 //   const activePage = state.paginationCharacters.activePage;
 //
