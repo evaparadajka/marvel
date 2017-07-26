@@ -30,11 +30,7 @@ class App extends Component {
         {/* <Notifications options={{ zIndex: 5000 }} /> */}
         <NotificationComponent />
         <Router history={hashHistory}>
-          <Route
-            path="/dashboard/1"
-            component={Layout}
-            onEnter={this.authenticateUser}
-          >
+          <Route path="/" component={Layout} onEnter={this.authenticateUser}>
             <IndexRoute component={Dashboard} />
             <Route path="dashboard/:page" component={Dashboard} />
             <Route path="character-details/:id" component={CharacterDetails} />
