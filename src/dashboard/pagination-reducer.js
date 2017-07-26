@@ -25,7 +25,21 @@ const paginationCharacters = (state = initialState, action) => {
         ...state,
         activePage: state.activePage - 1
       };
+    case "CHARACTERS/LOAD_PAGE":
+      return {
+        ...state,
+        activePage: action.payload
+      };
 
+    case "CHARACTERS/SAVE_PAGE":
+      return {
+        ...state,
+        pages: {
+          ...state.pages,
+          [action.page]: action.charactersOnPage
+        },
+        pagesCount: state.pagesCount + 1
+      };
     default:
       return state;
   }

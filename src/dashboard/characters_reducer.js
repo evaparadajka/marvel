@@ -25,6 +25,11 @@ const characters = (state = initialState, action) => {
         ],
         weHaveFetched: state.weHaveFetched + 20
       };
+    case "CHARACTERS/FETCH_PAGE_CHARACTERS":
+      return {
+        ...state,
+        charactersCollection: [...state.charactersCollection, ...action.payload]
+      };
     case "FETCH_USER_CHAR":
       return {
         ...state,

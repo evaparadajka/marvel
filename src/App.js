@@ -32,7 +32,7 @@ class App extends Component {
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>
             <IndexRoute component={Dashboard} />
-
+            <Route path="dashboard/:page" component={Dashboard} />
             <Route path="character-details/:id" component={CharacterDetails} />
             <Route path="not-found" component={NotFound} />
             <Route path="fav-characters" component={CharactersPage} />

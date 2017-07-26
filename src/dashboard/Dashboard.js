@@ -66,6 +66,11 @@ class Dashboard extends React.Component {
   };
 
   loadNextPage = () => {
+    //console.log(this.props.router.location);
+    const page = this.props.router.location.pathname.slice(
+      11,
+      this.props.location.pathname.length
+    );
     this.showNotification(success(notificationLoadCharacters));
     if (this.isNextPageInStore()) {
       this.props.dispatch({
@@ -74,6 +79,7 @@ class Dashboard extends React.Component {
     } else {
       this.fetchCharacters(this.props.charactersToSkip);
     }
+    this.props.router.push("/dashboard/" + (Number(page) + 1));
   };
 
   isPreviousPageInStore = () => {
@@ -87,13 +93,92 @@ class Dashboard extends React.Component {
   };
 
   loadPreviousPage = () => {
+    const page = this.props.router.location.pathname.slice(
+      11,
+      this.props.location.pathname.length
+    );
     // this.showNotification(success(notificationLoadCharacters));
     if (this.isPreviousPageInStore()) {
       this.props.dispatch({
         type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
       });
+      this.props.router.push("/dashboard/" + (Number(page) - 1));
     }
   };
+
+  isPageDefined = page => {
+    //console.log(this.props.pagination.pages[page]);
+    return typeof this.props.pagination.pages[page] != "undefined"
+      ? true
+      : false;
+    // return false;
+  };
+  loadPage = page => {
+    this.props.dispatch({
+      type: "CHARACTERS/LOAD_PAGE",
+      payload: page
+    });
+  };
+  loadNotFoundPage = () => {
+    this.props.router.push("/not-found/");
+  };
+
+  fetchPageCharacters(page) {
+    this.loadPage(page);
+    const charactersPerPage = 20;
+    console.log("offset", (page - 1) * charactersPerPage);
+    apiMarvel
+      .get("/characters", {
+        params: {
+          offset: (page - 1) * charactersPerPage
+        }
+      })
+      .then(response => {
+        this.props.dispatch({
+          type: "CHARACTERS/FETCH_PAGE_CHARACTERS",
+          payload: response.data.data.results
+        });
+        console.log(response.data.data.results);
+
+        this.props.dispatch({
+          type: "CHARACTERS/SAVE_PAGE",
+          charactersOnPage: response.data.data.results.map(c => c.id),
+          page: page - 1
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        this.loadNotFoundPage();
+      });
+  }
+
+  componentDidMount() {
+    const page = this.props.router.location.pathname.slice(
+      11,
+      this.props.location.pathname.length
+    );
+
+    if (this.isPageDefined(page)) {
+      this.loadPage(page);
+    } else {
+      this.fetchPageCharacters(page);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const page = this.props.router.location.pathname.slice(
+      11,
+      this.props.location.pathname.length
+    );
+
+    if (this.props.location.pathname != prevProps.location.pathname) {
+      if (this.isPageDefined(page)) {
+        this.loadPage(page);
+      } else {
+        this.fetchPageCharacters(page);
+      }
+    }
+  }
 
   //**** INFINITE SCROLL *****
   // componentDidMount() {
@@ -143,9 +228,8 @@ Dashboard.contextTypes = {
   store: PropTypes.object
 };
 const mapStateToProps = state => {
-  console.log(state);
+  console.log(state.paginationCharacters);
   return {
-    // characters: appendFavourites(state),
     pagination: state.paginationCharacters,
     characters: fetchPaginatedCharacters(state),
     charactersToSkip: state.characters.weHaveFetched
