@@ -46,8 +46,8 @@ class Dashboard extends React.Component {
     this.showNotification(success(notificationLoadCharacters));
     this.fetchCharacters(this.props.charactersToSkip);
   };
+
   paginateCharacters = characters => {
-    // const numOfPages = this.props.pagination.pages.length;
     this.props.dispatch({
       type: "CHARACTERS_PAGINATE",
       charactersOnPage: characters.map(c => c.id)
@@ -65,9 +65,6 @@ class Dashboard extends React.Component {
     console.log("nextPage", nextPage);
 
     if (this.isPageDefined(nextPage)) {
-      // this.props.dispatch({
-      //   type: "CHARACTERS/LOAD_NEXT_PAGE"
-      // });
       this.props.router.push("/dashboard/" + nextPage);
       this.loadPage(nextPage);
     } else {
@@ -75,15 +72,12 @@ class Dashboard extends React.Component {
         this.fetchPageCharacters(nextPage);
       }
     }
-    //
   };
 
   isPreviousPageInStore = () => {
     if (this.props.pagination.activePage === 0) {
-      // console.log("Previous page? False");
       return false;
     } else {
-      // console.log("Previous page? True");
       return true;
     }
   };
@@ -97,13 +91,9 @@ class Dashboard extends React.Component {
         )
       ) - 1;
     console.log("previousPage", previousPage);
-    // this.showNotification(success(notificationLoadCharacters));
     if (this.isPageDefined(previousPage)) {
       this.props.router.push("/dashboard/" + previousPage);
       this.loadPage(previousPage);
-      // this.props.dispatch({
-      //   type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
-      // });
     } else {
       if (previousPage >= 0) {
         this.fetchPageCharacters(previousPage);
@@ -116,7 +106,6 @@ class Dashboard extends React.Component {
     return typeof this.props.pagination.pages[page] != "undefined"
       ? true
       : false;
-    // return false;
   };
   loadPage = page => {
     console.log("load page", page);
@@ -208,23 +197,18 @@ class Dashboard extends React.Component {
       <div className="center" onScroll={this.onScroll}>
         <div className="img-container">
           <PageTitle title="MARVEL'S CHARACTERS - FIND YOUR FAVOURITES" />
-
           <CharacterList show={this.show} characters={charactersToRender} />
           <div className="btn-container">
             <i
               className="fa fa-arrow-left fa-5x prev-page "
               onClick={this.loadPreviousPage}
             />
-
             <i
               onClick={this.loadNextPage}
               className="fa fa-arrow-right fa-5x next-page"
             />
           </div>
         </div>
-        <br />
-        <div />
-
         <br />
         <br />
       </div>

@@ -64,7 +64,7 @@ class CharacterDetails extends React.Component {
     }
   };
 
-  doIHaveCharacter = id => {
+  findCharacterInStoreOrFetch = id => {
     if (
       typeof this.props.character === "undefined" ||
       this.props.character.id !== Number(id)
@@ -89,7 +89,7 @@ class CharacterDetails extends React.Component {
     }
   };
 
-  doIHaveSomethingToRender = () => {
+  isCharacterToRender = () => {
     if (
       typeof this.props.character === "undefined" ||
       typeof this.props.character.thumbnail === "undefined"
@@ -116,7 +116,6 @@ class CharacterDetails extends React.Component {
             </div>
             {this.renderActionButton()}
           </StyledCharacterBase>
-
           <Tabs
             selectedIndex={this.state.selectedTab}
             onSelect={selectedTab => this.setState({ selectedTab })}
@@ -126,7 +125,6 @@ class CharacterDetails extends React.Component {
               <Tab className={`tab ${this.getActiveClass(1)}`}>Stories</Tab>
               <Tab className={`tab ${this.getActiveClass(2)}`}>Series</Tab>
             </TabList>
-
             <TabPanel className="tabpanel space">
               <Scrollbars style={{ width: 800, height: 300 }}>
                 <ComicList
@@ -157,7 +155,7 @@ class CharacterDetails extends React.Component {
   };
 
   componentDidMount() {
-    this.doIHaveCharacter(
+    this.findCharacterInStoreOrFetch(
       this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 7,
         this.props.router.location.pathname.length
@@ -166,7 +164,7 @@ class CharacterDetails extends React.Component {
   }
 
   componentDidUpdate() {
-    this.doIHaveCharacter(
+    this.findCharacterInStoreOrFetch(
       this.props.router.location.pathname.slice(
         this.props.router.location.pathname.length - 7,
         this.props.router.location.pathname.length
@@ -193,7 +191,7 @@ class CharacterDetails extends React.Component {
   render() {
     return (
       <div>
-        {this.doIHaveSomethingToRender()}
+        {this.isCharacterToRender()}
       </div>
     );
   }

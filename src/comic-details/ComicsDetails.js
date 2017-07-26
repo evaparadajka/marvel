@@ -113,7 +113,7 @@ class ComicDetails extends React.Component {
     }
   };
 
-  doIHaveSomethingToRender = () => {
+  isComicToRender = () => {
     if (
       typeof this.props.comic === "undefined" ||
       typeof this.props.comic.thumbnail === "undefined"
@@ -176,51 +176,30 @@ class ComicDetails extends React.Component {
     }
   };
 
-  lookingForNumber() {
-    if (
-      isNaN(
-        this.props.router.location.pathname[
-          this.props.router.location.pathname.length - 5
-        ]
-      )
-    ) {
-      if (
-        isNaN(
-          this.props.router.location.pathname[
-            this.props.router.location.pathname.length - 4
-          ]
-        )
-      ) {
-        return this.props.router.location.pathname.slice(
-          this.props.router.location.pathname.length - 3,
-          this.props.router.location.pathname.length
-        );
+  extractID(pathname) {
+    if (isNaN(pathname[pathname.length - 5])) {
+      if (isNaN(pathname[pathname.length - 4])) {
+        return pathname.slice(pathname.length - 3, pathname.length);
       } else {
-        return this.props.router.location.pathname.slice(
-          this.props.router.location.pathname.length - 4,
-          this.props.router.location.pathname.length
-        );
+        return pathname.slice(pathname.length - 4, pathname.length);
       }
     } else {
-      return this.props.router.location.pathname.slice(
-        this.props.router.location.pathname.length - 5,
-        this.props.router.location.pathname.length
-      );
+      return pathname.slice(pathname.length - 5, pathname.length);
     }
   }
 
   componentDidMount() {
-    this.doIHaveComic(this.lookingForNumber());
+    this.doIHaveComic(this.extractID(this.props.router.location.pathname));
   }
 
   componentDidUpdate() {
-    this.doIHaveComic(this.lookingForNumber());
+    this.doIHaveComic(this.extractID(this.props.router.location.pathname));
   }
 
   render() {
     return (
       <div>
-        {this.doIHaveSomethingToRender()}
+        {this.isComicToRender()}
       </div>
     );
   }

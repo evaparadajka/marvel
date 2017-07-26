@@ -19,7 +19,6 @@ class Character extends React.Component {
     super(props);
     this.state = {
       hover: false
-      // actionButtonClicked: false
     };
   }
 
@@ -45,11 +44,7 @@ class Character extends React.Component {
   isHovered = () => {
     return this.state.hover;
   };
-  // setActionButtonClicked = () => {
-  //   this.setState({
-  //     actionButtonClicked: true
-  //   });
-  // };
+
   addToFav = event => {
     event.stopPropagation();
 
@@ -57,6 +52,7 @@ class Character extends React.Component {
     this.props.dispatch(addToFavourites(character));
     this.showNotification(success(notificationCharacterAdded));
   };
+
   delFromFav = event => {
     event.stopPropagation();
 
@@ -64,9 +60,11 @@ class Character extends React.Component {
     this.props.dispatch(deleteFromFavourites(character));
     this.showNotification(error(notificationCharacterDeleted));
   };
+
   isCharInFavs = () => {
     return this.props.isFavourite;
   };
+
   renderActionIcons = () => {
     if (this.isCharInFavs()) {
       return (

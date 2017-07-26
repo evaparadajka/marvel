@@ -1,5 +1,5 @@
 const initialState = {
-  pages: {}, // [{1, [id11, id12, id13 ...]}, {2, [id21, id22, id23, ...]} ]
+  pages: {},
   activePage: 0,
   pagesCount: 0
 };

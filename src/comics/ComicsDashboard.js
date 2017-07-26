@@ -44,7 +44,6 @@ class ComicsDashboard extends React.Component {
   };
 
   paginateComics = characters => {
-    // const numOfPages = this.props.pagination.pages.length;
     this.props.dispatch({
       type: "COMICS_PAGINATE",
       charactersOnPage: characters.map(c => c.id)
@@ -59,12 +58,8 @@ class ComicsDashboard extends React.Component {
           this.props.location.pathname.length
         )
       ) + 1;
-    console.log("nextPage", nextPage);
 
     if (this.isPageDefined(nextPage)) {
-      // this.props.dispatch({
-      //   type: "CHARACTERS/LOAD_NEXT_PAGE"
-      // });
       this.props.router.push("/comics/" + nextPage);
       this.loadPage(nextPage);
     } else {
@@ -72,15 +67,12 @@ class ComicsDashboard extends React.Component {
         this.fetchPageComics(nextPage);
       }
     }
-    //
   };
 
   isPreviousPageInStore = () => {
     if (this.props.pagination.activePage === 0) {
-      // console.log("Previous page? False");
       return false;
     } else {
-      // console.log("Previous page? True");
       return true;
     }
   };
@@ -94,13 +86,9 @@ class ComicsDashboard extends React.Component {
         )
       ) - 1;
     console.log("previousPage", previousPage);
-    // this.showNotification(success(notificationLoadCharacters));
     if (this.isPageDefined(previousPage)) {
       this.props.router.push("/comics/" + previousPage);
       this.loadPage(previousPage);
-      // this.props.dispatch({
-      //   type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
-      // });
     } else {
       if (previousPage >= 0) {
         this.fetchPageComics(previousPage);
@@ -113,7 +101,6 @@ class ComicsDashboard extends React.Component {
     return typeof this.props.pagination.pages[page] != "undefined"
       ? true
       : false;
-    // return false;
   };
   loadPage = page => {
     console.log("load page", page);
@@ -128,7 +115,6 @@ class ComicsDashboard extends React.Component {
 
   fetchPageComics(page) {
     const comicsPerPage = 20;
-    // console.log("offset", (page - 1) * charactersPerPage);
     apiMarvel
       .get("/comics", {
         params: {
@@ -189,8 +175,7 @@ class ComicsDashboard extends React.Component {
     return (
       <div className="center">
         <div className="img-container">
-          <PageTitle title="MARVEL'S COMICS - FIND YOUR FAVOURITES" />
-
+          <PageTitle title="MARVEL'S COMICS - FIND YOUR FAVOURITES" />/}
           <ComicList show={this.show} comics={this.props.comics} />
           <div className="btn-container">
             <i
@@ -205,8 +190,6 @@ class ComicsDashboard extends React.Component {
           </div>
         </div>
         <br />
-
-        <br />
         <br />
       </div>
     );
@@ -219,7 +202,6 @@ ComicsDashboard.contextTypes = {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    // comics: appendFavouritesComics(state),
     pagination: state.paginationComics,
     comics: fetchPaginatedComics(state),
     comicsToSkip: state.comics.weHaveFetched
