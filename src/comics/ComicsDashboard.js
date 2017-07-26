@@ -185,45 +185,26 @@ class ComicsDashboard extends React.Component {
     }
   }
 
-  //******INFINITE SCROLL*****
-  // componentDidMount() {
-  //   window.addEventListener("scroll", this.handleScroll);
-  // }
-  //
-  // componentWillUnmount() {
-  //   window.removeEventListener("scroll", this.handleScroll);
-  // }
-  //
-  // handleScroll = event => {
-  //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
-  //     this.loadNextPage();
-  //   }
-  // };
-
   render() {
     return (
       <div className="center">
         <div className="img-container">
           <PageTitle title="MARVEL'S COMICS - FIND YOUR FAVOURITES" />
-          {/* <Button
-            onClick={this.loadPreviousPage}
-            className="btn-danger"
-            label="Load previous page"
-          /> */}
+
           <ComicList show={this.show} comics={this.props.comics} />
+          <div className="btn-container">
+            <i
+              className="fa fa-arrow-left fa-5x prev-page "
+              onClick={this.loadPreviousPage}
+            />
+
+            <i
+              onClick={this.loadNextPage}
+              className="fa fa-arrow-right fa-5x next-page"
+            />
+          </div>
         </div>
         <br />
-
-        <Button
-          onClick={this.loadPreviousPage}
-          className="btn-danger"
-          label="Load previous page"
-        />
-        <Button
-          onClick={this.loadNextPage}
-          className="btn-danger"
-          label="Load next page"
-        />
 
         <br />
         <br />
