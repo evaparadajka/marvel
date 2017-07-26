@@ -31,7 +31,7 @@ class App extends Component {
         <NotificationComponent />
         <Router history={hashHistory}>
           <Route path="/" component={Layout} onEnter={this.authenticateUser}>
-            <IndexRoute component={Dashboard} />
+            <IndexRoute component={UserProfile} />
             <Route path="dashboard/:page" component={Dashboard} />
             <Route path="character-details/:id" component={CharacterDetails} />
             <Route path="not-found" component={NotFound} />
