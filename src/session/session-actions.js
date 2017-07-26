@@ -23,7 +23,7 @@ export const signIn = user => {
           }
         });
 
-        hashHistory.push("/");
+        hashHistory.push("/dashboard/1");
       })
       .catch(error => {
         console.error(error);

@@ -29,8 +29,6 @@ class Dashboard extends React.Component {
           type: "FETCH_CHAR",
           payload: response.data.data.results
         });
-        console.log(response.data.data.results);
-        // //paginate characters
         this.paginateCharacters(response.data.data.results);
         this.props.dispatch({
           type: "CHARACTERS/LOAD_NEXT_PAGE"
@@ -133,7 +131,6 @@ class Dashboard extends React.Component {
 
   fetchPageCharacters(page) {
     const charactersPerPage = 20;
-    // console.log("offset", (page - 1) * charactersPerPage);
     apiMarvel
       .get("/characters", {
         params: {
@@ -145,7 +142,6 @@ class Dashboard extends React.Component {
           type: "CHARACTERS/FETCH_PAGE_CHARACTERS",
           payload: response.data.data.results
         });
-        console.log(response.data.data.results);
 
         this.props.dispatch({
           type: "CHARACTERS/SAVE_PAGE",
@@ -238,7 +234,6 @@ Dashboard.contextTypes = {
   store: PropTypes.object
 };
 const mapStateToProps = state => {
-  console.log(state.paginationCharacters);
   return {
     pagination: state.paginationCharacters,
     characters: fetchPaginatedCharacters(state),

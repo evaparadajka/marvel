@@ -19,8 +19,13 @@ h5 {
   color: #562121;
 }
 
-b {
-  padding: 10px 15px;
+p {
+  padding: 10px;
+  margin: 10px;
+}
+
+.userName {
+  font-weight: bold;
 }
 
 .nav > li {
@@ -188,6 +193,7 @@ b {
 .img-container {
   padding-top: 60px;
   max-width: 1200px;
+  min-width: 400px;
   position: relative;
   z-index: 1;
   top: 0;
