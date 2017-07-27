@@ -40,9 +40,8 @@ class UserProfile extends React.Component {
       date => {
         return {
           date: date,
-          "New characters in favourites": charactersData.filter(
-            c => c.createdAt === date
-          ).length
+          "Characters number": charactersData.filter(c => c.createdAt === date)
+            .length
         };
       }
     );
@@ -65,8 +64,7 @@ class UserProfile extends React.Component {
     const newComicsAmountPerDay = distinctComicSubmissionDates.map(date => {
       return {
         date: date,
-        "New comics in favourites": comicsData.filter(c => c.createdAt === date)
-          .length
+        "Comics number": comicsData.filter(c => c.createdAt === date).length
       };
     });
     return newComicsAmountPerDay.sort((a, b) => {
@@ -81,10 +79,7 @@ class UserProfile extends React.Component {
       <div>
         <div className="img-container">
           <PageTitle title={` WELCOME, ${this.props.user.name}! `} />
-
-          <div>
-            <p>Check out your favourite characters and comics</p>
-          </div>
+          <h4>Check out your favourite characters and comics</h4>
           <div className="space">
             <Button
               label="Favourite Characters"
@@ -96,22 +91,25 @@ class UserProfile extends React.Component {
               onClick={this.pushToFavComics}
               className="btn-danger"
             />
-            <br />
-          </div>
-          <div>
-            <p>Check out your account stats:</p>
-          </div>
-
-          <div className="chart-container">
-            <Scrollbars style={{ width: 600, height: 300 }}>
-              <UserCharactersBarChart data={userCharactersData} />
-            </Scrollbars>
-          </div>
-          <div className="chart-container">
-            <Scrollbars style={{ width: 600, height: 300 }}>
-              <UserComicsBarChart data={userComicsData} />
-            </Scrollbars>
-          </div>
+          </div>{" "}
+          <br />
+          <br />
+          <Scrollbars style={{ height: 600 }}>
+            <h4>New characters in favourites</h4>
+            <div className="chart-container">
+              <Scrollbars style={{ width: 600, height: 300 }}>
+                <UserCharactersBarChart data={userCharactersData} />
+              </Scrollbars>
+            </div>{" "}
+            <h4>New comics in favourites</h4>
+            <div className="chart-container">
+              <Scrollbars style={{ width: 600, height: 300 }}>
+                <UserComicsBarChart data={userComicsData} />
+              </Scrollbars>
+            </div>
+          </Scrollbars>
+          <br />
+          <br />
         </div>
       </div>
     );

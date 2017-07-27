@@ -15,17 +15,16 @@ export class UserCharactersBarChart extends React.Component {
     return (
       <BarChart
         width={500}
-        height={200}
+        height={250}
         data={this.props.data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 5, right: 10, left: 40, bottom: 5 }}
       >
         <XAxis dataKey="date" />
         <YAxis />
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="New characters in favourites" fill="#c94c4c" />
-        {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
+        <Bar dataKey="Characters number" fill="#c94c4c" />
       </BarChart>
     );
   }
@@ -36,17 +35,16 @@ export class UserComicsBarChart extends React.Component {
     return (
       <BarChart
         width={500}
-        height={200}
+        height={250}
         data={this.props.data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 5, right: 10, left: 40, bottom: 5 }}
       >
         <XAxis dataKey="date" />
         <YAxis />
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="New comics in favourites" fill="#c94c4c" />
-        {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
+        <Bar dataKey="Comics number" fill="#c94c4c" />
       </BarChart>
     );
   }
