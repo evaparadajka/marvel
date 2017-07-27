@@ -3,7 +3,6 @@ import StyledPageTitle from "./StyledPageTitle";
 
 class PageTitle extends React.Component {
   render() {
-    console.log(this.props.title);
     return (
       <div>
         <StyledPageTitle className="bebas">

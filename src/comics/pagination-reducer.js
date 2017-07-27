@@ -1,5 +1,5 @@
 const initialState = {
-  pages: {}, // [{1, [id11, id12, id13 ...]}, {2, [id21, id22, id23, ...]} ]
+  pages: {},
   activePage: 0,
   pagesCount: 0
 };
@@ -24,6 +24,20 @@ const paginationComics = (state = initialState, action) => {
       return {
         ...state,
         activePage: state.activePage - 1
+      };
+    case "COMICS/LOAD_PAGE":
+      return {
+        ...state,
+        activePage: action.payload
+      };
+    case "COMICS/SAVE_PAGE":
+      return {
+        ...state,
+        pages: {
+          ...state.pages,
+          [action.page]: action.comicsOnPage
+        },
+        pagesCount: state.pagesCount + 1
       };
     default:
       return state;

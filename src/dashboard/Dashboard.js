@@ -29,8 +29,6 @@ class Dashboard extends React.Component {
           type: "FETCH_CHAR",
           payload: response.data.data.results
         });
-        console.log(response.data.data.results);
-        // //paginate characters
         this.paginateCharacters(response.data.data.results);
         this.props.dispatch({
           type: "CHARACTERS/LOAD_NEXT_PAGE"
@@ -48,103 +46,178 @@ class Dashboard extends React.Component {
     this.showNotification(success(notificationLoadCharacters));
     this.fetchCharacters(this.props.charactersToSkip);
   };
+
   paginateCharacters = characters => {
-    // const numOfPages = this.props.pagination.pages.length;
     this.props.dispatch({
       type: "CHARACTERS_PAGINATE",
       charactersOnPage: characters.map(c => c.id)
     });
   };
-  isNextPageInStore = () => {
-    if (this.props.pagination.pagesCount === this.props.pagination.activePage) {
-      console.log("Next page? False");
-      return false;
-    } else {
-      console.log("Next page? True");
-      return true;
-    }
-  };
 
   loadNextPage = () => {
-    this.showNotification(success(notificationLoadCharacters));
-    if (this.isNextPageInStore()) {
-      this.props.dispatch({
-        type: "CHARACTERS/LOAD_NEXT_PAGE"
-      });
+    const nextPage =
+      Number(
+        this.props.router.location.pathname.slice(
+          11,
+          this.props.location.pathname.length
+        )
+      ) + 1;
+    if (this.isPageDefined(nextPage)) {
+      this.props.router.push("/dashboard/" + nextPage);
+      this.loadPage(nextPage);
     } else {
-      this.fetchCharacters(this.props.charactersToSkip);
+      if (nextPage >= 0) {
+        this.fetchPageCharacters(nextPage);
+      }
     }
   };
 
   isPreviousPageInStore = () => {
     if (this.props.pagination.activePage === 0) {
-      console.log("Previous page? False");
       return false;
     } else {
-      console.log("Previous page? True");
       return true;
     }
   };
 
   loadPreviousPage = () => {
-    this.showNotification(success(notificationLoadCharacters));
-    if (this.isPreviousPageInStore()) {
-      this.props.dispatch({
-        type: "CHARACTERS/LOAD_PREVIOUS_PAGE"
-      });
+    const previousPage =
+      Number(
+        this.props.router.location.pathname.slice(
+          11,
+          this.props.location.pathname.length
+        )
+      ) - 1;
+    if (this.isPageDefined(previousPage)) {
+      this.props.router.push("/dashboard/" + previousPage);
+      this.loadPage(previousPage);
+    } else {
+      if (previousPage >= 0) {
+        this.fetchPageCharacters(previousPage);
+      }
     }
   };
+
+  isPageDefined = page => {
+    return typeof this.props.pagination.pages[page] != "undefined"
+      ? true
+      : false;
+  };
+
+  loadPage = page => {
+    this.props.dispatch({
+      type: "CHARACTERS/LOAD_PAGE",
+      payload: Number(page)
+    });
+  };
+
+  loadNotFoundPage = () => {
+    this.props.router.push("/not-found/");
+  };
+
+  fetchPageCharacters(page) {
+    const charactersPerPage = 20;
+    apiMarvel
+      .get("/characters", {
+        params: {
+          offset: page * charactersPerPage
+        }
+      })
+      .then(response => {
+        console.log(response.data.data.results.length);
+        if (response.data.data.results.length != 0) {
+          this.props.dispatch({
+            type: "CHARACTERS/FETCH_PAGE_CHARACTERS",
+            payload: response.data.data.results
+          });
+          this.props.dispatch({
+            type: "CHARACTERS/SAVE_PAGE",
+            charactersOnPage: response.data.data.results.map(c => c.id),
+            page: page
+          });
+          this.props.router.push("/dashboard/" + page);
+          this.loadPage(page);
+        } else this.loadNotFoundPage();
+      })
+      .catch(error => {
+        console.log(error);
+        this.loadNotFoundPage();
+      });
+  }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-
-  handleScroll = event => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
-      this.loadNextPage();
+    const page = this.props.router.location.pathname.slice(
+      11,
+      this.props.location.pathname.length
+    );
+    if (this.isPageDefined(page)) {
+      this.loadPage(page);
+    } else {
+      this.fetchPageCharacters(page);
     }
-  };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const page = this.props.router.location.pathname.slice(
+      11,
+      this.props.location.pathname.length
+    );
+    if (this.props.location.pathname != prevProps.location.pathname) {
+      if (this.isPageDefined(page)) {
+        this.loadPage(page);
+      } else {
+        this.fetchPageCharacters(page);
+      }
+    }
+  }
+
+  //**** INFINITE SCROLL *****
+  // componentDidMount() {
+  //   window.addEventListener("scroll", this.handleScroll);
+  // }
+  //
+  // componentWillUnmount() {
+  //   window.removeEventListener("scroll", this.handleScroll);
+  // }
+  //
+  // handleScroll = event => {
+  //   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
+  //     this.loadNextPage();
+  //   }
+  // };
+
   render() {
     const charactersToRender = this.props.characters;
-    const loader = <div className="loader">Loading ...</div>;
 
     return (
       <div className="center" onScroll={this.onScroll}>
         <div className="img-container">
           <PageTitle title="MARVEL'S CHARACTERS - FIND YOUR FAVOURITES" />
-
           <CharacterList show={this.show} characters={charactersToRender} />
+          <div className="btn-container">
+            <i
+              className="fa fa-arrow-left fa-5x prev-page "
+              onClick={this.loadPreviousPage}
+            />
+            <i
+              onClick={this.loadNextPage}
+              className="fa fa-arrow-right fa-5x next-page"
+            />
+          </div>
         </div>
-        <br />
-
-        <Button
-          onClick={this.loadPreviousPage}
-          className="btn-danger"
-          label="Load previous page"
-        />
-        <Button
-          onClick={this.loadNextPage}
-          className="btn-danger"
-          label="Load next page"
-        />
-
         <br />
         <br />
       </div>
     );
   }
 }
+
 Dashboard.contextTypes = {
   store: PropTypes.object
 };
+
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    // characters: appendFavourites(state),
     pagination: state.paginationCharacters,
     characters: fetchPaginatedCharacters(state),
     charactersToSkip: state.characters.weHaveFetched

@@ -10,7 +10,6 @@ class ComicCharacter extends React.Component {
     super(props);
     this.state = {
       hover: false
-      // actionButtonClicked: false
     };
   }
 
@@ -19,6 +18,7 @@ class ComicCharacter extends React.Component {
       hover: true
     });
   };
+
   onMouseLeaveHandler = () => {
     this.setState({
       hover: false
@@ -59,37 +59,22 @@ class ComicCharacter extends React.Component {
     );
   };
 
-  findThumbnail = () => {
+  findThumbnail = URI => {
     if (
       typeof this.props.thumbnails.find(
-        p =>
-          p.id ===
-          parseFloat(
-            this.props.resourceURI.slice(
-              this.props.resourceURI.length - 7,
-              this.props.resourceURI.length
-            )
-          )
+        p => p.id === parseFloat(URI.slice(URI.length - 7, URI.length))
       ) !== "undefined"
     ) {
       return (
         <img
           src={
             this.props.thumbnails.find(
-              p =>
-                p.id ===
-                parseFloat(
-                  this.props.resourceURI.slice(
-                    this.props.resourceURI.length - 7,
-                    this.props.resourceURI.length
-                  )
-                )
+              p => p.id === parseFloat(URI.slice(URI.length - 7, URI.length))
             ).thumbnail
           }
           alt="Image not found"
         />
       );
-    } else {
     }
   };
 
@@ -100,7 +85,7 @@ class ComicCharacter extends React.Component {
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
       >
-        {this.findThumbnail()}
+        {this.findThumbnail(this.props.resourceURI)}
         {this.renderOverlay()}
       </div>
     );

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-
 import Story from "./Story";
 
 class SeriesList extends Component {
-  anySeries = () => {
+  informIfThereAreNoSeries = () => {
     if (this.props.series.length === 0) {
       return <div> There are not any series in this character.</div>;
     }
@@ -15,7 +14,7 @@ class SeriesList extends Component {
         <ol>
           {this.props.series.map((d, index) => <Story name={d.name} />)}
         </ol>
-        {this.anySeries()}
+        {this.informIfThereAreNoSeries()}
       </div>
     );
   }

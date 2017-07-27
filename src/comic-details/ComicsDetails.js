@@ -5,7 +5,6 @@ import StyledCharacterBase from "../user_interface/StyledCharacterBase";
 import { getComicDetails } from "./selectors";
 import { addToFavourites, deleteFromFavourites } from "./actions";
 import ComicCharacterList from "./ComicCharacterList";
-// import { showNotification } from "../alert/notifications";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import {
   notificationComicAdded,
@@ -17,11 +16,16 @@ import Notifications, { success, error } from "react-notification-system-redux";
 import apiMarvelIdComic from "../lib/api-marvel-id-comic";
 import PageTitle from "../user_interface/PageTitle";
 import { Scrollbars } from "react-custom-scrollbars";
+import ReactLoading from "react-loading";
 
 class ComicDetails extends React.Component {
   constructor() {
     super();
-    this.state = { selectedTab: 0 };
+    this.state = {
+      selectedTab: 0,
+      click: false,
+      isFavourite: false
+    };
   }
 
   show = id => {
@@ -31,17 +35,30 @@ class ComicDetails extends React.Component {
   showNotification = message => {
     this.context.store.dispatch(message);
   };
+
   addToFav = () => {
-    this.showNotification(success(notificationComicAdded));
+    this.setState({
+      click: true
+    });
     this.props.dispatch(addToFavourites(this.props.comic));
-    // showNotification("Comic added!");
+    this.showNotification(success(notificationComicAdded));
   };
+
   delFromFav = () => {
-    this.showNotification(error(notificationComicDeleted));
+    this.setState({
+      click: true
+    });
     this.props.dispatch(deleteFromFavourites(this.props.comic));
-    // showNotification("Comic deleted!");
+    this.showNotification(error(notificationComicDeleted));
   };
+
   isComicInFavs = () => {
+    if (this.state.isFavourite !== this.props.comic.isFavourite) {
+      this.setState({
+        click: false,
+        isFavourite: this.props.comic.isFavourite
+      });
+    }
     return this.props.comic.isFavourite;
   };
 
@@ -62,26 +79,41 @@ class ComicDetails extends React.Component {
   };
 
   renderActionButton = () => {
-    if (this.isComicInFavs()) {
+    this.isComicInFavs();
+    if (this.state.click) {
       return (
-        <div>
-          <Button
-            onClick={this.delFromFav}
-            className="btn-danger"
-            label="Delete from favourites!"
+        <div className="button-width bubbles">
+          <ReactLoading
+            type="bubbles"
+            color="#a91c1c"
+            height="34px"
+            width="34px"
+            delay="0"
           />
         </div>
       );
     } else {
-      return (
-        <div>
-          <Button
-            onClick={this.addToFav}
-            className="btn-danger"
-            label="Add to favourites!"
-          />
-        </div>
-      );
+      if (this.isComicInFavs()) {
+        return (
+          <div className="button-width">
+            <Button
+              onClick={this.delFromFav}
+              className="btn-danger"
+              label="Delete from favourites!"
+            />
+          </div>
+        );
+      } else {
+        return (
+          <div className="button-width">
+            <Button
+              onClick={this.addToFav}
+              className="btn-danger"
+              label="Add to favourites!"
+            />
+          </div>
+        );
+      }
     }
   };
 
@@ -90,7 +122,7 @@ class ComicDetails extends React.Component {
     else return "inactive";
   };
 
-  doIHaveComic = id => {
+  findComicInStoreOrFetch = id => {
     if (
       typeof this.props.comic === "undefined" ||
       this.props.comic.id !== Number(id)
@@ -115,114 +147,110 @@ class ComicDetails extends React.Component {
     }
   };
 
-  doIHaveSomethingToRender = () => {
-    if (
+  renderBase = () => {
+    return (
+      <StyledCharacterBase>
+        <div className="square">
+          <img
+            src={`${this.props.comic.thumbnail.path}/standard_fantastic.jpg`}
+            alt="image not found"
+          />
+        </div>
+        <div className="description">
+          <h4>DESCRIPTION:</h4>
+          <p>
+            {this.renderDescription()}
+          </p>
+        </div>
+        {this.renderActionButton()}
+      </StyledCharacterBase>
+    );
+  };
+
+  renderTabs = () => {
+    return (
+      <Tabs
+        selectedIndex={this.state.selectedTab}
+        onSelect={selectedTab => this.setState({ selectedTab })}
+      >
+        <TabList className="tablist">
+          <Tab className={`tab ${this.getActiveClass(0)}`}>Characters</Tab>
+          <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
+          <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
+        </TabList>
+        <TabPanel className="tabpanel space">
+          <Scrollbars style={{ width: 800, height: 300 }}>
+            <ComicCharacterList
+              show={this.show}
+              characters={this.props.comic.characters.items}
+            />
+          </Scrollbars>
+        </TabPanel>
+        <TabPanel className="tabpanel space">
+          <Scrollbars style={{ width: 800, height: 300 }}>
+            {typeof this.props.comic.series.name === "undefined"
+              ? <div>There are not any series in this comic</div>
+              : this.props.comic.series.name}
+          </Scrollbars>
+        </TabPanel>
+        <TabPanel className="tabpanel space">
+          <Scrollbars style={{ width: 800, height: 300 }}>
+            <CreatorList creators={this.props.comic.creators.items} />
+          </Scrollbars>
+        </TabPanel>
+      </Tabs>
+    );
+  };
+
+  isComicInProps = () => {
+    return (
       typeof this.props.comic === "undefined" ||
       typeof this.props.comic.thumbnail === "undefined"
-    ) {
+    );
+  };
+
+  isComicToRender = () => {
+    if (this.isComicInProps()) {
       return <div />;
     } else {
       return (
         <div className="img-container">
           <PageTitle title={this.props.comic.title} />
-          <StyledCharacterBase>
-            <div className="square">
-              <img
-                src={`${this.props.comic.thumbnail
-                  .path}/standard_fantastic.jpg`}
-                alt="image not found"
-              />
-            </div>
-            <div className="description">
-              <h4>DESCRIPTION:</h4>
-              <p>
-                {this.renderDescription()}
-              </p>
-            </div>
-            {this.renderActionButton()}
-          </StyledCharacterBase>
-
-          <Tabs
-            selectedIndex={this.state.selectedTab}
-            onSelect={selectedTab => this.setState({ selectedTab })}
-          >
-            <TabList className="tablist">
-              <Tab className={`tab ${this.getActiveClass(0)}`}>Characters</Tab>
-              <Tab className={`tab ${this.getActiveClass(1)}`}>Series</Tab>
-              <Tab className={`tab ${this.getActiveClass(2)}`}>Creators</Tab>
-            </TabList>
-
-            <TabPanel className="tabpanel space">
-              <Scrollbars style={{ width: 800, height: 300 }}>
-                <ComicCharacterList
-                  show={this.show}
-                  characters={this.props.comic.characters.items}
-                />
-              </Scrollbars>
-            </TabPanel>
-            <TabPanel className="tabpanel space">
-              <Scrollbars style={{ width: 800, height: 300 }}>
-                {typeof this.props.comic.series.name === "undefined"
-                  ? <div>There are not any series in this comic</div>
-                  : this.props.comic.series.name}
-              </Scrollbars>
-            </TabPanel>
-            <TabPanel className="tabpanel space">
-              <Scrollbars style={{ width: 800, height: 300 }}>
-                <CreatorList creators={this.props.comic.creators.items} />
-              </Scrollbars>
-            </TabPanel>
-          </Tabs>
+          {this.renderBase()}
+          {this.renderTabs()}
         </div>
       );
     }
   };
 
-  lookingForNumber() {
-    if (
-      isNaN(
-        this.props.router.location.pathname[
-          this.props.router.location.pathname.length - 5
-        ]
-      )
-    ) {
-      if (
-        isNaN(
-          this.props.router.location.pathname[
-            this.props.router.location.pathname.length - 4
-          ]
-        )
-      ) {
-        return this.props.router.location.pathname.slice(
-          this.props.router.location.pathname.length - 3,
-          this.props.router.location.pathname.length
-        );
+  extractID(pathname) {
+    if (isNaN(pathname[pathname.length - 5])) {
+      if (isNaN(pathname[pathname.length - 4])) {
+        return pathname.slice(pathname.length - 3, pathname.length);
       } else {
-        return this.props.router.location.pathname.slice(
-          this.props.router.location.pathname.length - 4,
-          this.props.router.location.pathname.length
-        );
+        return pathname.slice(pathname.length - 4, pathname.length);
       }
     } else {
-      return this.props.router.location.pathname.slice(
-        this.props.router.location.pathname.length - 5,
-        this.props.router.location.pathname.length
-      );
+      return pathname.slice(pathname.length - 5, pathname.length);
     }
   }
 
   componentDidMount() {
-    this.doIHaveComic(this.lookingForNumber());
+    this.findComicInStoreOrFetch(
+      this.extractID(this.props.router.location.pathname)
+    );
   }
 
   componentDidUpdate() {
-    this.doIHaveComic(this.lookingForNumber());
+    this.findComicInStoreOrFetch(
+      this.extractID(this.props.router.location.pathname)
+    );
   }
 
   render() {
     return (
       <div>
-        {this.doIHaveSomethingToRender()}
+        {this.isComicToRender()}
       </div>
     );
   }

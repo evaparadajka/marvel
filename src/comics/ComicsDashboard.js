@@ -44,65 +44,127 @@ class ComicsDashboard extends React.Component {
   };
 
   paginateComics = characters => {
-    // const numOfPages = this.props.pagination.pages.length;
     this.props.dispatch({
       type: "COMICS_PAGINATE",
       charactersOnPage: characters.map(c => c.id)
     });
   };
-  isNextPageInStore = () => {
-    if (this.props.pagination.pagesCount === this.props.pagination.activePage) {
-      console.log("Next page? False");
-      return false;
-    } else {
-      console.log("Next page? True");
-      return true;
-    }
-  };
 
   loadNextPage = () => {
-    this.showNotification(success(notificationLoadComics));
-    if (this.isNextPageInStore()) {
-      this.props.dispatch({
-        type: "COMICS/LOAD_NEXT_PAGE"
-      });
+    const nextPage =
+      Number(
+        this.props.router.location.pathname.slice(
+          8,
+          this.props.location.pathname.length
+        )
+      ) + 1;
+    if (this.isPageDefined(nextPage)) {
+      this.props.router.push("/comics/" + nextPage);
+      this.loadPage(nextPage);
     } else {
-      this.fetchComics(this.props.comicsToSkip);
+      if (nextPage >= 0) {
+        this.fetchPageComics(nextPage);
+      }
     }
   };
 
   isPreviousPageInStore = () => {
     if (this.props.pagination.activePage === 0) {
-      console.log("Previous page? False");
       return false;
     } else {
-      console.log("Previous page? True");
       return true;
     }
   };
 
   loadPreviousPage = () => {
-    // this.showNotification(success(notificationLoadCharacters));
-    if (this.isPreviousPageInStore()) {
-      this.props.dispatch({
-        type: "COMICS/LOAD_PREVIOUS_PAGE"
-      });
+    const previousPage =
+      Number(
+        this.props.router.location.pathname.slice(
+          8,
+          this.props.location.pathname.length
+        )
+      ) - 1;
+    if (this.isPageDefined(previousPage)) {
+      this.props.router.push("/comics/" + previousPage);
+      this.loadPage(previousPage);
+    } else {
+      if (previousPage >= 0) {
+        this.fetchPageComics(previousPage);
+      }
     }
   };
+
+  isPageDefined = page => {
+    return typeof this.props.pagination.pages[page] != "undefined"
+      ? true
+      : false;
+  };
+
+  loadPage = page => {
+    this.props.dispatch({
+      type: "COMICS/LOAD_PAGE",
+      payload: Number(page)
+    });
+  };
+
+  loadNotFoundPage = () => {
+    this.props.router.push("/not-found/");
+  };
+
+  fetchPageComics(page) {
+    const comicsPerPage = 20;
+    apiMarvel
+      .get("/comics", {
+        params: {
+          offset: page * comicsPerPage
+        }
+      })
+      .then(response => {
+        if (response.data.data.results.length != 0) {
+          this.props.dispatch({
+            type: "COMICS/FETCH_PAGE_COMICS",
+            payload: response.data.data.results
+          });
+          this.props.dispatch({
+            type: "COMICS/SAVE_PAGE",
+            comicsOnPage: response.data.data.results.map(c => c.id),
+            page: page
+          });
+          this.props.router.push("/comics/" + page);
+          this.loadPage(page);
+        } else this.loadNotFoundPage();
+      })
+      .catch(error => {
+        console.log(error);
+        this.loadNotFoundPage();
+      });
+  }
 
   componentDidMount() {
-    window.addEventListener("scroll", this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
-
-  handleScroll = event => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1) {
-      this.loadNextPage();
+    const page = this.props.router.location.pathname.slice(
+      8,
+      this.props.location.pathname.length
+    );
+    if (this.isPageDefined(page)) {
+      this.loadPage(page);
+    } else {
+      this.fetchPageComics(page);
     }
-  };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const page = this.props.router.location.pathname.slice(
+      8,
+      this.props.location.pathname.length
+    );
+    if (this.props.location.pathname != prevProps.location.pathname) {
+      if (this.isPageDefined(page)) {
+        this.loadPage(page);
+      } else {
+        this.fetchPageComics(page);
+      }
+    }
+  }
 
   render() {
     return (
@@ -110,37 +172,30 @@ class ComicsDashboard extends React.Component {
         <div className="img-container">
           <PageTitle title="MARVEL'S COMICS - FIND YOUR FAVOURITES" />
           <ComicList show={this.show} comics={this.props.comics} />
+          <div className="btn-container">
+            <i
+              className="fa fa-arrow-left fa-5x prev-page "
+              onClick={this.loadPreviousPage}
+            />
+            <i
+              onClick={this.loadNextPage}
+              className="fa fa-arrow-right fa-5x next-page"
+            />
+          </div>
         </div>
-        <br />
-        {/* <Button
-          onClick={this.clickNewComics}
-          className="btn-danger"
-          label="Load more..."
-        /> */}
-        <Button
-          onClick={this.loadPreviousPage}
-          className="btn-danger"
-          label="Load previous page"
-        />
-        <Button
-          onClick={this.loadNextPage}
-          className="btn-danger"
-          label="Load next page"
-        />
         <br />
         <br />
       </div>
     );
   }
 }
+
 ComicsDashboard.contextTypes = {
   store: PropTypes.object
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    // comics: appendFavouritesComics(state),
     pagination: state.paginationComics,
     comics: fetchPaginatedComics(state),
     comicsToSkip: state.comics.weHaveFetched

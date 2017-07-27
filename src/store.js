@@ -16,6 +16,7 @@ const rootReducer = combineReducers({
   paginationCharacters: paginationCharacters,
   paginationComics: paginationComics
 });
+
 const enhancer = compose(
   applyMiddleware(thunk),
   persistState([
@@ -26,6 +27,7 @@ const enhancer = compose(
     "paginationComics"
   ])
 );
+
 const store = createStore(rootReducer, {}, enhancer);
 
 export default store;

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-
 import Creator from "./Creator";
 
 class CreatorList extends Component {
-  anyCreators = () => {
+  informIfThereAreNoCreators = () => {
     if (this.props.creators.length === 0) {
       return <div> There are not any creators in this comic.</div>;
     }
@@ -15,7 +14,7 @@ class CreatorList extends Component {
         <ol>
           {this.props.creators.map((d, index) => <Creator name={d.name} />)}
         </ol>
-        {this.anyCreators()}
+        {this.informIfThereAreNoCreators()}
       </div>
     );
   }

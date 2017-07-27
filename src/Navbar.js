@@ -36,13 +36,12 @@ export class Layout extends React.Component {
     return (
       <Menu
         width={"100%"}
-        customCrossIcon={<img src={exit} />}
         customBurgerIcon={<img src={burgerIcon} />}
         styles={styleMenu}
         noOverlay
         onStateChange={isMenuOpen}
+        isOpen={window.innerWidth > 1120 ? true : undefined}
       >
-        {console.log(this.state)}
         <nav>
           <div className="nav">
             <ul className="nav navbar-nav">
@@ -54,19 +53,18 @@ export class Layout extends React.Component {
                     paddingLeft: "7px",
                     paddingRight: "7px"
                   }}
-                  href="/#/"
+                  href="/#/dashboard/0"
                 >
                   <img src={logo} className="nav-logo" />
                 </a>
               </div>
-
               <li className="menu-item active">
-                <Link to="/" className="nav-style">
+                <Link to="/dashboard/0" className="nav-style">
                   Characters
                 </Link>
               </li>
               <li className="active menu-item">
-                <Link to="/comics" className="nav-style">
+                <Link to="/comics/0" className="nav-style">
                   Comics
                 </Link>
               </li>
@@ -80,11 +78,10 @@ export class Layout extends React.Component {
                   Favourite Comics
                 </Link>
               </li>
-
               <li className="nav-style menu-item">
-                <b>
+                <Link to="/user-profile" className="nav-style userName">
                   Hello, {this.props.name}!
-                </b>
+                </Link>
               </li>
               <Logout email={this.props.email} />
             </ul>
@@ -95,16 +92,11 @@ export class Layout extends React.Component {
     );
   }
 }
-const StyledA = styled.a`
-  position: relative;
-  /* display: block; */
-  padding: 0;
-  padding-left: 7px;
-  padding-right: 7px;
-`;
+
 const styleMenu = {
   bmBurgerButton: {
-    position: "relative"
+    position: "fixed",
+    zIndex: "10"
   },
   bmCrossButton: {
     width: "45px",
