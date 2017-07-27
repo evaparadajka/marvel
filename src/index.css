@@ -332,6 +332,8 @@ i:visited {
   color: #c94c4c;
 }
 .chart-container {
+  width: 500px;
+  height: 300px;
   display: flex;
   justify-content: center;
 }

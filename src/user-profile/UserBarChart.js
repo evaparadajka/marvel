@@ -6,7 +6,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  ResponsiveContainer
 } from "recharts";
 
 export class UserCharactersBarChart extends React.Component {
@@ -23,7 +24,7 @@ export class UserCharactersBarChart extends React.Component {
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="New characters per day" fill="#c94c4c" />
+        <Bar dataKey="New characters in favourites" fill="#c94c4c" />
         {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
       </BarChart>
     );
@@ -44,7 +45,7 @@ export class UserComicsBarChart extends React.Component {
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="New comics per day" fill="#c94c4c" />
+        <Bar dataKey="New comics in favourites" fill="#c94c4c" />
         {/* <Bar dataKey="uv" fill="#82ca9d" /> */}
       </BarChart>
     );

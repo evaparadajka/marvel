@@ -4,6 +4,7 @@ import PageTitle from "../user_interface/PageTitle";
 import Button from "../user_interface/Button";
 import { withRouter } from "react-router";
 import { UserComicsBarChart, UserCharactersBarChart } from "./UserBarChart";
+import { ResponsiveContainer } from "recharts";
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +39,7 @@ class UserProfile extends React.Component {
       date => {
         return {
           date: date,
-          "New characters per day": charactersData.filter(
+          "New characters in favourites": charactersData.filter(
             c => c.createdAt === date
           ).length
         };
@@ -63,7 +64,7 @@ class UserProfile extends React.Component {
     const newComicsAmountPerDay = distinctComicSubmissionDates.map(date => {
       return {
         date: date,
-        "New comics per day": comicsData.filter(c => c.createdAt === date)
+        "New comics in favourites": comicsData.filter(c => c.createdAt === date)
           .length
       };
     });
