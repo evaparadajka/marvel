@@ -8,7 +8,7 @@ export class Layout extends React.Component {
     return (
       <div className="footer">
         <hr />
-        <div className="space center">
+        <div className="space footer-center">
           <div className="foot-item">
             <a
               style={{
@@ -41,6 +41,11 @@ export class Layout extends React.Component {
             <Link to="/fav-comics" className="nav-style">
               Favourite Comics
             </Link>
+          </div>
+          <div className="foot-item">
+            <b className="footer-space nav-style">
+              &copy; Copyright MARVELAPPS team
+            </b>
           </div>
         </div>
       </div>

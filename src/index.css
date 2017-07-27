@@ -359,11 +359,15 @@ i:visited {
   z-index: 10;
 }
 
-/*.center {
+.footer-center {
   display: flex;
   justify-content: center;
   align-items: center;
-}*/
+}
+
+.footer-space {
+  margin-left: 100px;
+}
 
 .foot-item {
   margin-left: 5px;
