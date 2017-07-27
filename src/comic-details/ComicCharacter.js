@@ -1,7 +1,5 @@
 import React from "react";
-import Button from "../user_interface/Button";
 import { connect } from "react-redux";
-import apiMarvel from "../lib/api-marvel";
 import { withRouter } from "react-router";
 import StyledOverlay from "../user_interface/StyledOverlay";
 
@@ -72,7 +70,7 @@ class ComicCharacter extends React.Component {
               p => p.id === parseFloat(URI.slice(URI.length - 7, URI.length))
             ).thumbnail
           }
-          alt="Image not found"
+          alt="Character"
         />
       );
     }

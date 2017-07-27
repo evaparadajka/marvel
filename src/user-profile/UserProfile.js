@@ -4,7 +4,7 @@ import PageTitle from "../user_interface/PageTitle";
 import Button from "../user_interface/Button";
 import { withRouter } from "react-router";
 import { UserComicsBarChart, UserCharactersBarChart } from "./UserBarChart";
-import { ResponsiveContainer } from "recharts";
+
 import { Scrollbars } from "react-custom-scrollbars";
 class UserProfile extends React.Component {
   constructor(props) {

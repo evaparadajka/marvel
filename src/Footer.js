@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router";
 import { connect } from "react-redux";
 import logo from "./img/marvel_logo.png";
 import facebook from "./img/facebook.png";
@@ -23,7 +22,7 @@ export class Layout extends React.Component {
               }}
               href="http://marvel.com/"
             >
-              <img src={logo} className="nav-logo" />
+              <img src={logo} alt="logo" className="nav-logo" />
             </a>
           </div>
           <div className="foot-item">
@@ -36,7 +35,7 @@ export class Layout extends React.Component {
               }}
               href="https://www.facebook.com/Marvel"
             >
-              <img src={facebook} className="footer-logo" />
+              <img src={facebook} alt="facebook icon" className="footer-logo" />
             </a>
           </div>
           <div className="foot-item">
@@ -49,7 +48,7 @@ export class Layout extends React.Component {
               }}
               href="https://plus.google.com/+marvel/posts"
             >
-              <img src={google} className="footer-logo" />
+              <img src={google} alt="google icon" className="footer-logo" />
             </a>
           </div>
           <div className="foot-item">
@@ -62,7 +61,7 @@ export class Layout extends React.Component {
               }}
               href="https://twitter.com/#!/marvel"
             >
-              <img src={twitter} className="footer-logo" />
+              <img src={twitter} alt=" twitter icon" className="footer-logo" />
             </a>
           </div>
           <div className="foot-item">
@@ -75,7 +74,7 @@ export class Layout extends React.Component {
               }}
               href="http://www.youtube.com/marvel"
             >
-              <img src={youtube} className="footer-logo" />
+              <img src={youtube} alt="youtube icon" className="footer-logo" />
             </a>
           </div>
           <div className="foot-item">

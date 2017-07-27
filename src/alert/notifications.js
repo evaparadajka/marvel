@@ -1,5 +1,3 @@
-import { success } from "react-notification-system-redux";
-
 export const notificationLoadCharacters = {
   title: "Loading new characters",
   position: "tr",

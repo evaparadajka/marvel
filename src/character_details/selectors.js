@@ -30,18 +30,6 @@ export const getFavouriteCharacters = state => {
   });
 };
 
-export const appendFavourites = state => {
-  const characters = state.characters.charactersCollection.map(c => {
-    state.characters.userCharactersCollection.map(userChar => {
-      if (c.id === userChar.external_id) {
-        c = { ...c, isFavourite: true, binarId: userChar.id };
-      }
-    });
-    return c;
-  });
-  return characters;
-};
-
 export const fetchPaginatedCharacters = state => {
   const paginatedCharacters =
     state.paginationCharacters.pages[state.paginationCharacters.activePage];

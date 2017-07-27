@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import Button from "../user_interface/Button";
 import apiClient from "../lib/api-client";
 import StyledInput from "../user_interface/StyledInput";
-import Notifications, { error, success } from "react-notification-system-redux";
+import { error, success } from "react-notification-system-redux";
 import {
   notificationRegistrationCompleted,
   notificationUnexpectedErrorOccurred,

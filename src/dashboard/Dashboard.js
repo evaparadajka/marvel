@@ -1,14 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
-import Button from "../user_interface/Button";
 import CharacterList from "./CharacterList";
-import {
-  appendFavourites,
-  fetchPaginatedCharacters
-} from "../character_details/selectors";
+import { fetchPaginatedCharacters } from "../character_details/selectors";
 import PropTypes from "prop-types";
-import Notifications, { success } from "react-notification-system-redux";
+import { success } from "react-notification-system-redux";
 import { notificationLoadCharacters } from "../alert/notifications";
 import PageTitle from "../user_interface/PageTitle";
 
@@ -99,7 +95,7 @@ class Dashboard extends React.Component {
   };
 
   isPageDefined = page => {
-    return typeof this.props.pagination.pages[page] != "undefined"
+    return typeof this.props.pagination.pages[page] !== "undefined"
       ? true
       : false;
   };
@@ -125,7 +121,7 @@ class Dashboard extends React.Component {
       })
       .then(response => {
         console.log(response.data.data.results.length);
-        if (response.data.data.results.length != 0) {
+        if (response.data.data.results.length !== 0) {
           this.props.dispatch({
             type: "CHARACTERS/FETCH_PAGE_CHARACTERS",
             payload: response.data.data.results
@@ -162,7 +158,7 @@ class Dashboard extends React.Component {
       11,
       this.props.location.pathname.length
     );
-    if (this.props.location.pathname != prevProps.location.pathname) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
       if (this.isPageDefined(page)) {
         this.loadPage(page);
       } else {

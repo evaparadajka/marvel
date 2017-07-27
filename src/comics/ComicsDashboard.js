@@ -2,10 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 import ComicList from "./ComicList";
-import Button from "../user_interface/Button";
 import { fetchPaginatedComics } from "../comic-details/selectors";
 import PropTypes from "prop-types";
-import Notifications, { success } from "react-notification-system-redux";
+import { success } from "react-notification-system-redux";
 import { notificationLoadComics } from "../alert/notifications";
 import PageTitle from "../user_interface/PageTitle";
 
@@ -95,7 +94,7 @@ class ComicsDashboard extends React.Component {
   };
 
   isPageDefined = page => {
-    return typeof this.props.pagination.pages[page] != "undefined"
+    return typeof this.props.pagination.pages[page] !== "undefined"
       ? true
       : false;
   };
@@ -120,7 +119,7 @@ class ComicsDashboard extends React.Component {
         }
       })
       .then(response => {
-        if (response.data.data.results.length != 0) {
+        if (response.data.data.results.length !== 0) {
           this.props.dispatch({
             type: "COMICS/FETCH_PAGE_COMICS",
             payload: response.data.data.results
@@ -157,7 +156,7 @@ class ComicsDashboard extends React.Component {
       8,
       this.props.location.pathname.length
     );
-    if (this.props.location.pathname != prevProps.location.pathname) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
       if (this.isPageDefined(page)) {
         this.loadPage(page);
       } else {

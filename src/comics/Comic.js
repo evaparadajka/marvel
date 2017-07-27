@@ -11,7 +11,7 @@ import {
   notificationComicDeleted
 } from "../alert/notifications";
 import PropTypes from "prop-types";
-import Notifications, { success, error } from "react-notification-system-redux";
+import { success, error } from "react-notification-system-redux";
 import ReactLoading from "react-loading";
 
 class Comic extends React.Component {
@@ -139,7 +139,7 @@ class Comic extends React.Component {
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
       >
-        <img src={this.props.img} alt="Image not found" />
+        <img src={this.props.img} alt="Comic" />
         {this.renderOverlay()}
       </div>
     );

@@ -31,18 +31,6 @@ export const getFavouriteComics = state => {
   });
 };
 
-export const appendFavouritesComics = state => {
-  const comics = state.comics.comicsCollection.map(c => {
-    state.comics.userComicsCollection.map(userComic => {
-      if (c.id === userComic.external_id) {
-        c = { ...c, isFavourite: true, binarId: userComic.id };
-      }
-    });
-    return c;
-  });
-  return comics;
-};
-
 export const fetchPaginatedComics = state => {
   const paginatedComics =
     state.paginationComics.pages[state.paginationComics.activePage];

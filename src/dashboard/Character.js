@@ -5,9 +5,8 @@ import {
   addToFavourites,
   deleteFromFavourites
 } from "../character_details/actions";
-import { showNotification } from "../alert/notifications";
 import { connect } from "react-redux";
-import Notifications, { success, error } from "react-notification-system-redux";
+import { success, error } from "react-notification-system-redux";
 import PropTypes from "prop-types";
 import {
   notificationCharacterAdded,
@@ -140,7 +139,7 @@ class Character extends React.Component {
         onMouseEnter={this.onMouseEnterHandler}
         onMouseLeave={this.onMouseLeaveHandler}
       >
-        <img src={this.props.img} alt="Image not found" />
+        <img src={this.props.img} alt="Character" />
         {this.renderOverlay()}
       </div>
     );

@@ -3,9 +3,7 @@ import { Link } from "react-router";
 import { connect } from "react-redux";
 import logo from "./img/marvel_logo.png";
 import burgerIcon from "./img/burgerIcon.png";
-import exit from "./img/exit.png";
 import Logout from "./session/Logout";
-import styled from "styled-components";
 import { slide as Menu } from "react-burger-menu";
 
 export class Layout extends React.Component {
@@ -36,7 +34,7 @@ export class Layout extends React.Component {
     return (
       <Menu
         width={"100%"}
-        customBurgerIcon={<img src={burgerIcon} />}
+        customBurgerIcon={<img src={burgerIcon} alt="BurgerIcon" />}
         styles={styleMenu}
         noOverlay
         onStateChange={isMenuOpen}
@@ -55,7 +53,7 @@ export class Layout extends React.Component {
                   }}
                   href="/#/dashboard/0"
                 >
-                  <img src={logo} className="nav-logo" />
+                  <img src={logo} alt="Logo" className="nav-logo" />
                 </a>
               </div>
               <li className="menu-item active">
