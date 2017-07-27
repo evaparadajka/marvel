@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PageTitle from "../user_interface/PageTitle";
 import Button from "../user_interface/Button";
 import { withRouter } from "react-router";
-import { UserBarChart } from "./UserBarChart";
+import { UserComicsBarChart, UserCharactersBarChart } from "./UserBarChart";
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -21,25 +21,60 @@ class UserProfile extends React.Component {
     this.props.router.push("/fav-comics/");
   };
 
-  render() {
-
-    const data = [
-      { name: "Page A", uv: 4000, pv: 2400, amt: 2400 },
-      { name: "Page B", uv: 3000, pv: 1398, amt: 2210 },
-      { name: "Page C", uv: 2000, pv: 9800, amt: 2290 },
-      { name: "Page D", uv: 2780, pv: 3908, amt: 2000 },
-      { name: "Page E", uv: 1890, pv: 4800, amt: 2181 },
-      { name: "Page F", uv: 2390, pv: 3800, amt: 2500 },
-      { name: "Page G", uv: 3490, pv: 4300, amt: 2100 }
-    ];
-    console.log("userChars", this.props.userCharacters);
-    console.log("userComics", this.props.userComics);
+  getUserCharactersData = () => {
     const charactersData = this.props.userCharacters.map(c => {
       return { name: c.name, createdAt: c.created_at.slice(0, 10) };
     });
 
-    console.log(charactersData);
+    const characterSubmissionDates = this.props.userCharacters.map(c => {
+      return c.created_at.slice(0, 10);
+    });
+    //console.log(characterSubmissionDates);
+    const distinctCharacterSubmissionDates = [
+      ...new Set(characterSubmissionDates)
+    ];
+    //console.log(distinctCharacterSubmissionDates);
+    const newCharactersAmountPerDay = distinctCharacterSubmissionDates.map(
+      date => {
+        return {
+          date: date,
+          "New characters per day": charactersData.filter(
+            c => c.createdAt === date
+          ).length
+        };
+      }
+    );
+    return newCharactersAmountPerDay.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    });
+  };
 
+  getUserComicsData = () => {
+    const comicsData = this.props.userComics.map(c => {
+      return { name: c.name, createdAt: c.created_at.slice(0, 10) };
+    });
+
+    const comicSubmissionDates = this.props.userComics.map(c => {
+      return c.created_at.slice(0, 10);
+    });
+    //console.log(characterSubmissionDates);
+    const distinctComicSubmissionDates = [...new Set(comicSubmissionDates)];
+    //console.log(distinctCharacterSubmissionDates);
+    const newComicsAmountPerDay = distinctComicSubmissionDates.map(date => {
+      return {
+        date: date,
+        "New comics per day": comicsData.filter(c => c.createdAt === date)
+          .length
+      };
+    });
+    return newComicsAmountPerDay.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    });
+  };
+
+  render() {
+    const userCharactersData = this.getUserCharactersData();
+    const userComicsData = this.getUserComicsData();
     return (
       <div className="center">
         <div className="img-container">
@@ -62,11 +97,14 @@ class UserProfile extends React.Component {
             <br />
           </div>
           <div>
-            <p>Check out timeline of your favourites</p>
+            <p>Check out your account stats:</p>
           </div>
 
           <div className="chart-container">
-            <UserBarChart data={charactersData} />
+            <UserCharactersBarChart data={userCharactersData} />
+          </div>
+          <div className="chart-container">
+            <UserComicsBarChart data={userComicsData} />
           </div>
         </div>
       </div>
