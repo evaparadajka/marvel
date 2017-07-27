@@ -12,7 +12,7 @@ import {
 } from "../alert/notifications";
 import Button from "../user_interface/Button";
 import PropTypes from "prop-types";
-import Notifications, { success, error } from "react-notification-system-redux";
+import { success, error } from "react-notification-system-redux";
 import apiMarvelIdComic from "../lib/api-marvel-id-comic";
 import PageTitle from "../user_interface/PageTitle";
 import { Scrollbars } from "react-custom-scrollbars";
@@ -153,7 +153,7 @@ class ComicDetails extends React.Component {
         <div className="square">
           <img
             src={`${this.props.comic.thumbnail.path}/standard_fantastic.jpg`}
-            alt="image not found"
+            alt="Comic"
           />
         </div>
         <div className="description">

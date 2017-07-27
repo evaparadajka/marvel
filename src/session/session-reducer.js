@@ -14,8 +14,7 @@ const session = (state = initialState, action) => {
       };
     case "LOGOUT":
       return { email: "", password: "", user_id: "" };
-    case "LOGIN_PROCESSING":
-      return { ...state, status: "User validation in progress..." };
+
     case "LOGIN_FAILED":
       return { ...state, status: "Login failed" };
     default:

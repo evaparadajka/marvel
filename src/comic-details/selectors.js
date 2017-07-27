@@ -3,12 +3,12 @@ const isInCollection = (state, comicID) => {
     return c.id === comicID;
   });
 };
-
+const areIdsEqual = (firstID, secondID) => {
+  return firstID === secondID;
+};
 export const getComicDetails = (state, comicID) => {
   const comicResult = isInCollection(state, comicID)
-    ? state.comics.comicsCollection.find(c => {
-        return c.id === comicID;
-      })
+    ? state.comics.comicsCollection.find(c => areIdsEqual(c.id, comicID))
     : { needComicID: comicID };
 
   const userComicResult = state.comics.userComicsCollection.find(
@@ -29,18 +29,6 @@ export const getFavouriteComics = state => {
   return favouriteComicsIDs.map(id => {
     return getComicDetails(state, id);
   });
-};
-
-export const appendFavouritesComics = state => {
-  const comics = state.comics.comicsCollection.map(c => {
-    state.comics.userComicsCollection.map(userComic => {
-      if (c.id === userComic.external_id) {
-        c = { ...c, isFavourite: true, binarId: userComic.id };
-      }
-    });
-    return c;
-  });
-  return comics;
 };
 
 export const fetchPaginatedComics = state => {

@@ -6,7 +6,7 @@ import { signIn } from "./session-actions";
 import { Link } from "react-router";
 import StyledInput from "../user_interface/StyledInput";
 import ReactLoading from "react-loading";
-import Notifications, { error } from "react-notification-system-redux";
+import { error } from "react-notification-system-redux";
 import { notificationLoginFailed } from "../alert/notifications";
 import PropTypes from "prop-types";
 

@@ -1,36 +1,38 @@
 import React from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { withRouter } from "react-router";
 
 class Logout extends React.Component {
-  isLogged = () => {
-    if (this.props.email !== "") return true;
-    else return false;
-  };
-
   logout = () => {
+    this.props.router.push("/sign-in/");
     this.props.dispatch({
       type: "LOGOUT"
     });
   };
 
-  renderLogout = () => {
-    if (this.isLogged()) {
-      return (
-        <Link to="/sign-in" onClick={this.logout} className="nav-style">
-          <i className="fa fa-sign-out" />
-        </Link>
-      );
-    } else return null;
+  submit = () => {
+    confirmAlert({
+      title: "Confirm logout",
+      message: "Are you sure you want to logout?.",
+      confirmLabel: "Yes",
+      cancelLabel: "No",
+      onConfirm: () => this.logout(),
+      onCancel: () => {}
+    });
   };
 
   render() {
     return (
       <li>
-        {this.renderLogout()}
+        <Link onClick={this.submit} className="nav-style">
+          <i className="fa fa-sign-out" />
+        </Link>
       </li>
     );
   }
 }
 
-export default connect()(Logout);
+export default connect()(withRouter(Logout));

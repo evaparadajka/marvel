@@ -9,7 +9,7 @@ import { addToFavourites, deleteFromFavourites } from "./actions";
 import apiMarvelId from "../lib/api-marvel-id";
 import Button from "../user_interface/Button";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import Notifications, { success, error } from "react-notification-system-redux";
+import { success, error } from "react-notification-system-redux";
 import PropTypes from "prop-types";
 import {
   notificationCharacterAdded,
@@ -134,7 +134,7 @@ class CharacterDetails extends React.Component {
           <img
             src={`${this.props.character.thumbnail
               .path}/standard_fantastic.jpg`}
-            alt="image not found"
+            alt="Character"
           />
         </div>
         <div className="description">

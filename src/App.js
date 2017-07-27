@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
 import Layout from "./Layout";
-import Notifications from "react-notify-toast";
 import SignIn from "./session/SignIn";
 import SignUp from "./session/SignUp";
 import Dashboard from "./dashboard/Dashboard";
