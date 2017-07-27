@@ -12,12 +12,15 @@ import {
 } from "../alert/notifications";
 import PropTypes from "prop-types";
 import Notifications, { success, error } from "react-notification-system-redux";
+import ReactLoading from "react-loading";
 
 class Comic extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
+      click: false,
+      isFavourite: this.props.isFavourite
     };
   }
 
@@ -46,6 +49,9 @@ class Comic extends React.Component {
   };
 
   addToFav = event => {
+    this.setState({
+      click: true
+    });
     event.stopPropagation();
     const comic = { title: this.props.title, id: this.props.id };
     this.props.dispatch(addToFavourites(comic));
@@ -53,6 +59,9 @@ class Comic extends React.Component {
   };
 
   delFromFav = event => {
+    this.setState({
+      click: true
+    });
     event.stopPropagation();
     const comic = { title: this.props.title, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(comic));
@@ -60,30 +69,51 @@ class Comic extends React.Component {
   };
 
   isComicInFavs = () => {
+    if (this.state.isFavourite !== this.props.isFavourite) {
+      this.setState({
+        click: false,
+        isFavourite: this.props.isFavourite
+      });
+    }
     return this.props.isFavourite;
   };
 
   renderActionButton = () => {
-    if (this.isComicInFavs()) {
+    this.isComicInFavs();
+    if (this.state.click) {
       return (
-        <div>
-          <Button
-            onClick={this.delFromFav}
-            className="btn-danger"
-            label="Delete from favourites!"
+        <div className="spin">
+          <ReactLoading
+            type="bubbles"
+            color="#a91c1c"
+            height="34px"
+            width="34px"
+            delay="0"
           />
         </div>
       );
     } else {
-      return (
-        <div className="action-icon">
-          <Button
-            onClick={this.addToFav}
-            className="btn-danger"
-            label="Add to favourites!"
-          />
-        </div>
-      );
+      if (this.isComicInFavs()) {
+        return (
+          <div>
+            <Button
+              onClick={this.delFromFav}
+              className="btn-danger"
+              label="Delete from favourites!"
+            />
+          </div>
+        );
+      } else {
+        return (
+          <div className="action-icon">
+            <Button
+              onClick={this.addToFav}
+              className="btn-danger"
+              label="Add to favourites!"
+            />
+          </div>
+        );
+      }
     }
   };
 
