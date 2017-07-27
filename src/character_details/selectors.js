@@ -3,12 +3,12 @@ const isInCollection = (state, charID) => {
     return c.id === charID;
   });
 };
-
+const areIdsEqual = (firstID, secondID) => {
+  return firstID === secondID;
+};
 export const getCharDetails = (state, charID) => {
   const charResult = isInCollection(state, charID)
-    ? state.characters.charactersCollection.find(c => {
-        return c.id === charID;
-      })
+    ? state.characters.charactersCollection.find(c => areIdsEqual(c.id, charID))
     : { needCharacterID: charID };
   const userCharResult = state.characters.userCharactersCollection.find(
     c => c.external_id === charID

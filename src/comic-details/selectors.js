@@ -3,12 +3,12 @@ const isInCollection = (state, comicID) => {
     return c.id === comicID;
   });
 };
-
+const areIdsEqual = (firstID, secondID) => {
+  return firstID === secondID;
+};
 export const getComicDetails = (state, comicID) => {
   const comicResult = isInCollection(state, comicID)
-    ? state.comics.comicsCollection.find(c => {
-        return c.id === comicID;
-      })
+    ? state.comics.comicsCollection.find(c => areIdsEqual(c.id, comicID))
     : { needComicID: comicID };
 
   const userComicResult = state.comics.userComicsCollection.find(

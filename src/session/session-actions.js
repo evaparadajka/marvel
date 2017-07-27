@@ -3,9 +3,6 @@ import { hashHistory } from "react-router";
 
 export const signIn = user => {
   return (dispatch, getState) => {
-    dispatch({
-      type: "LOGIN_PROCESSING"
-    });
     return apiClient
       .post("/api/v1/sessions", {
         user: {
