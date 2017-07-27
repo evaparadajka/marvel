@@ -13,12 +13,15 @@ import {
   notificationCharacterAdded,
   notificationCharacterDeleted
 } from "../alert/notifications";
+import ReactLoading from "react-loading";
 
 class Character extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
+      click: false,
+      isFavourite: this.props.isFavourite
     };
   }
 
@@ -47,6 +50,9 @@ class Character extends React.Component {
   };
 
   addToFav = event => {
+    this.setState({
+      click: true
+    });
     event.stopPropagation();
     const character = { name: this.props.name, id: this.props.id };
     this.props.dispatch(addToFavourites(character));
@@ -54,6 +60,9 @@ class Character extends React.Component {
   };
 
   delFromFav = event => {
+    this.setState({
+      click: true
+    });
     event.stopPropagation();
     const character = { name: this.props.name, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(character));
@@ -61,30 +70,51 @@ class Character extends React.Component {
   };
 
   isCharInFavs = () => {
+    if (this.state.isFavourite !== this.props.isFavourite) {
+      this.setState({
+        click: false,
+        isFavourite: this.props.isFavourite
+      });
+    }
     return this.props.isFavourite;
   };
 
   renderActionIcons = () => {
-    if (this.isCharInFavs()) {
+    this.isCharInFavs();
+    if (this.state.click) {
       return (
-        <div>
-          <Button
-            onClick={this.delFromFav}
-            className="btn-danger"
-            label="Delete from favourites!"
+        <div className="spin">
+          <ReactLoading
+            type="bubbles"
+            color="#a91c1c"
+            height="34px"
+            width="34px"
+            delay="0"
           />
         </div>
       );
     } else {
-      return (
-        <div className="action-icon">
-          <Button
-            onClick={this.addToFav}
-            className="btn-danger"
-            label="Add to favourites!"
-          />
-        </div>
-      );
+      if (this.isCharInFavs()) {
+        return (
+          <div>
+            <Button
+              onClick={this.delFromFav}
+              className="btn-danger"
+              label="Delete from favourites!"
+            />
+          </div>
+        );
+      } else {
+        return (
+          <div className="action-icon">
+            <Button
+              onClick={this.addToFav}
+              className="btn-danger"
+              label="Add to favourites!"
+            />
+          </div>
+        );
+      }
     }
   };
 
