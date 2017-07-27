@@ -116,6 +116,8 @@ p {
 }
 
 .space {
+  margin-left: 10%;
+  margin-right: 10%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -206,7 +208,7 @@ p {
 
 .img-container {
   padding-top: 60px;
-  max-width: 1200px;
+  max-width: 1300px;
   min-width: 400px;
   position: relative;
   z-index: 1;
@@ -297,11 +299,12 @@ p {
 }
 
 .btn-container {
-  position: absolute;
+  position: fixed;
+  max-width: 1300px;
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 59%;
+  margin-top: 40%;
   padding-left: 1%;
   padding-right: 1%;
 }
@@ -360,4 +363,16 @@ i:visited {
 }
 
 @media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-height: 1000px) {
+  .btn-container {
+    margin-top: 40%;
+  }
+}
+
+@media only screen and (min-height: 1650px) {
+  .btn-container {
+    margin-top: 30%;
+  }
 }
