@@ -5140,6 +5140,10 @@ react-burger-menu@^2.1.4:
     prop-types "^15.5.8"
     snapsvg-cjs "0.0.4"
 
+react-confirm-alert@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-confirm-alert/-/react-confirm-alert-1.0.7.tgz#d5c0f25e3981a87483d5458de84be6b20fb1ef27"
+
 react-custom-scrollbars@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/react-custom-scrollbars/-/react-custom-scrollbars-4.1.2.tgz#0e60c4a46c4a61f9e4994a7663e2b9cbbc5187a3"
