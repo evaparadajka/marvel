@@ -124,17 +124,20 @@ class Dashboard extends React.Component {
         }
       })
       .then(response => {
-        this.props.dispatch({
-          type: "CHARACTERS/FETCH_PAGE_CHARACTERS",
-          payload: response.data.data.results
-        });
-        this.props.dispatch({
-          type: "CHARACTERS/SAVE_PAGE",
-          charactersOnPage: response.data.data.results.map(c => c.id),
-          page: page
-        });
-        this.props.router.push("/dashboard/" + page);
-        this.loadPage(page);
+        console.log(response.data.data.results.length);
+        if (response.data.data.results.length != 0) {
+          this.props.dispatch({
+            type: "CHARACTERS/FETCH_PAGE_CHARACTERS",
+            payload: response.data.data.results
+          });
+          this.props.dispatch({
+            type: "CHARACTERS/SAVE_PAGE",
+            charactersOnPage: response.data.data.results.map(c => c.id),
+            page: page
+          });
+          this.props.router.push("/dashboard/" + page);
+          this.loadPage(page);
+        } else this.loadNotFoundPage();
       })
       .catch(error => {
         console.log(error);

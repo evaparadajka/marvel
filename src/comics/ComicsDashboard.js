@@ -120,17 +120,19 @@ class ComicsDashboard extends React.Component {
         }
       })
       .then(response => {
-        this.props.dispatch({
-          type: "COMICS/FETCH_PAGE_COMICS",
-          payload: response.data.data.results
-        });
-        this.props.dispatch({
-          type: "COMICS/SAVE_PAGE",
-          comicsOnPage: response.data.data.results.map(c => c.id),
-          page: page
-        });
-        this.props.router.push("/comics/" + page);
-        this.loadPage(page);
+        if (response.data.data.results.length != 0) {
+          this.props.dispatch({
+            type: "COMICS/FETCH_PAGE_COMICS",
+            payload: response.data.data.results
+          });
+          this.props.dispatch({
+            type: "COMICS/SAVE_PAGE",
+            comicsOnPage: response.data.data.results.map(c => c.id),
+            page: page
+          });
+          this.props.router.push("/comics/" + page);
+          this.loadPage(page);
+        } else this.loadNotFoundPage();
       })
       .catch(error => {
         console.log(error);
