@@ -1,6 +1,13 @@
-body {
+html {
+  height: 100%;
   margin: 0;
-  padding-top: 0px;
+  padding: 0;
+}
+body {
+  position: relative;
+  margin: 0;
+  padding: 0px;
+  min-height: 100%;
   font-family: sans-serif;
   background-color: rgba(0, 0, 0, 0.14);
 }
@@ -23,6 +30,11 @@ h5 {
 p {
   padding: 10px;
   margin: 10px;
+}
+
+.height-containter {
+  min-height: 100%;
+  position: relative;
 }
 
 .userName {
@@ -331,11 +343,31 @@ i:hover {
 i:visited {
   color: #c94c4c;
 }
+
 .chart-container {
   width: 500px;
   height: 300px;
   display: flex;
   justify-content: center;
+}
+
+.footer {
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.foot-item {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 @media only screen and (max-width: 960px) {
