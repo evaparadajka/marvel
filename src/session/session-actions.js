@@ -22,8 +22,7 @@ export const signIn = user => {
             user_id: response.data.data.user_id
           }
         });
-
-        hashHistory.push("/");
+        hashHistory.push("/user-profile");
       })
       .catch(error => {
         console.error(error);

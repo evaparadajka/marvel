@@ -2,11 +2,20 @@ const initialState = {
   charactersCollection: [],
   userCharactersCollection: [],
   characterToShow: {},
+  thumbnailsToShow: [],
   weHaveFetched: 0
 };
 
 const characters = (state = initialState, action) => {
   switch (action.type) {
+    case "FETCH_THUMBNAILS":
+      return {
+        ...state,
+        thumbnailsToShow: [
+          ...state.thumbnailsToShow.filter(c => c.id !== action.payload),
+          action.payload
+        ]
+      };
     case "FETCH_CHAR":
       return {
         ...state,
@@ -15,6 +24,11 @@ const characters = (state = initialState, action) => {
           ...action.payload
         ],
         weHaveFetched: state.weHaveFetched + 20
+      };
+    case "CHARACTERS/FETCH_PAGE_CHARACTERS":
+      return {
+        ...state,
+        charactersCollection: [...state.charactersCollection, ...action.payload]
       };
     case "FETCH_USER_CHAR":
       return {
@@ -25,10 +39,11 @@ const characters = (state = initialState, action) => {
       return {
         ...state,
         charactersCollection:
-          state.charactersCollection[state.charactersCollection.length - 1]
-            .id === action.payload.id
-            ? [...state.charactersCollection]
-            : [...state.charactersCollection, action.payload]
+          typeof state.charactersCollection.find(
+            p => p.id === action.payload.id
+          ) === "undefined"
+            ? [...state.charactersCollection, action.payload]
+            : [...state.charactersCollection]
       };
     case "CHARACTERS/ADD_TO_FAVOURITES":
       return {

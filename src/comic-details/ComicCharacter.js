@@ -3,11 +3,51 @@ import Button from "../user_interface/Button";
 import { connect } from "react-redux";
 import apiMarvel from "../lib/api-marvel";
 import { withRouter } from "react-router";
+import StyledOverlay from "../user_interface/StyledOverlay";
 
 class ComicCharacter extends React.Component {
-  show = id => {
-    this.props.dispatch({ type: "SHOW", id: parseFloat(id) });
-    this.props.router.push("/character-details/" + id);
+  constructor(props) {
+    super(props);
+    this.state = {
+      hover: false
+    };
+  }
+
+  onMouseEnterHandler = () => {
+    this.setState({
+      hover: true
+    });
+  };
+
+  onMouseLeaveHandler = () => {
+    this.setState({
+      hover: false
+    });
+  };
+
+  isHovered = () => {
+    return this.state.hover;
+  };
+
+  renderOverlay = () => {
+    if (this.isHovered()) {
+      return (
+        <StyledOverlay onClick={this.show}>
+          <div className="name-small">
+            {this.props.name}
+          </div>
+        </StyledOverlay>
+      );
+    } else return null;
+  };
+
+  show = event => {
+    this.props.show(
+      this.props.resourceURI.slice(
+        this.props.resourceURI.length - 7,
+        this.props.resourceURI.length
+      )
+    );
   };
 
   getID = () => {
@@ -19,13 +59,43 @@ class ComicCharacter extends React.Component {
     );
   };
 
+  findThumbnail = URI => {
+    if (
+      typeof this.props.thumbnails.find(
+        p => p.id === parseFloat(URI.slice(URI.length - 7, URI.length))
+      ) !== "undefined"
+    ) {
+      return (
+        <img
+          src={
+            this.props.thumbnails.find(
+              p => p.id === parseFloat(URI.slice(URI.length - 7, URI.length))
+            ).thumbnail
+          }
+          alt="Image not found"
+        />
+      );
+    }
+  };
+
   render() {
     return (
-      <li onClick={this.getID} className="">
-        {this.props.name}
-      </li>
+      <div
+        className="square-small"
+        onMouseEnter={this.onMouseEnterHandler}
+        onMouseLeave={this.onMouseLeaveHandler}
+      >
+        {this.findThumbnail(this.props.resourceURI)}
+        {this.renderOverlay()}
+      </div>
     );
   }
 }
 
-export default connect()(withRouter(ComicCharacter));
+const mapStateToProps = state => {
+  return {
+    thumbnails: state.characters.thumbnailsToShow
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(ComicCharacter));

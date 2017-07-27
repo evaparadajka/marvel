@@ -1,7 +1,11 @@
-export const getCharDetails = (state, charID) => {
-  const charResult = state.characters.charactersCollection.find(c => {
+const isInCollection = (state, charID) => {
+  return state.characters.charactersCollection.find(c => {
     return c.id === charID;
-  })
+  });
+};
+
+export const getCharDetails = (state, charID) => {
+  const charResult = isInCollection(state, charID)
     ? state.characters.charactersCollection.find(c => {
         return c.id === charID;
       })
@@ -35,19 +39,39 @@ export const appendFavourites = state => {
     });
     return c;
   });
-
   return characters;
 };
 
-// export const appendFavouritesComics = state => {
-//   const characters = state.characters.charactersCollection.map(c => {
-//     state.characters.userCharactersCollection.map(userChar => {
-//       if (c.id === userChar.external_id) {
-//         c = { ...c, isFavourite: true, binarId: userChar.id };
-//       }
-//     });
-//     return c;
-//   });
+export const fetchPaginatedCharacters = state => {
+  const paginatedCharacters =
+    state.paginationCharacters.pages[state.paginationCharacters.activePage];
+  if (typeof paginatedCharacters === "undefined") return [];
+  else {
+    const result = paginatedCharacters.map(id => {
+      return getCharDetails(state, id);
+    });
+    return result;
+  }
+};
+
+//***** INFINITE SCROLL ****
+// export const fetchPaginatedCharacters = state => {
+//   const activePage = state.paginationCharacters.activePage;
 //
-//   return characters;
+//   let paginatedCharacters = [];
+//   for (var i = 0; i < activePage; i++) {
+//     state.paginationCharacters.pages[i].map(c => {
+//       paginatedCharacters.push(c);
+//     });
+//   }
+//
+//   if (typeof paginatedCharacters === "undefined") return [];
+//   else {
+//     const result = paginatedCharacters.map(id => {
+//       return getCharDetails(state, id);
+//     });
+//
+//     return result;
+//
+//   }
 // };

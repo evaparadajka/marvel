@@ -13,13 +13,15 @@ import {
   notificationCharacterAdded,
   notificationCharacterDeleted
 } from "../alert/notifications";
+import ReactLoading from "react-loading";
 
 class Character extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
-      // actionButtonClicked: false
+      hover: false,
+      click: false,
+      isFavourite: this.props.isFavourite
     };
   }
 
@@ -36,6 +38,7 @@ class Character extends React.Component {
       hover: true
     });
   };
+
   onMouseLeaveHandler = () => {
     this.setState({
       hover: false
@@ -45,47 +48,73 @@ class Character extends React.Component {
   isHovered = () => {
     return this.state.hover;
   };
-  // setActionButtonClicked = () => {
-  //   this.setState({
-  //     actionButtonClicked: true
-  //   });
-  // };
+
   addToFav = event => {
+    this.setState({
+      click: true
+    });
     event.stopPropagation();
-    this.showNotification(success(notificationCharacterAdded));
     const character = { name: this.props.name, id: this.props.id };
     this.props.dispatch(addToFavourites(character));
+    this.showNotification(success(notificationCharacterAdded));
   };
+
   delFromFav = event => {
+    this.setState({
+      click: true
+    });
     event.stopPropagation();
-    this.showNotification(error(notificationCharacterDeleted));
     const character = { name: this.props.name, binarId: this.props.binarId };
     this.props.dispatch(deleteFromFavourites(character));
+    this.showNotification(error(notificationCharacterDeleted));
   };
+
   isCharInFavs = () => {
+    if (this.state.isFavourite !== this.props.isFavourite) {
+      this.setState({
+        click: false,
+        isFavourite: this.props.isFavourite
+      });
+    }
     return this.props.isFavourite;
   };
+
   renderActionIcons = () => {
-    if (this.isCharInFavs()) {
+    this.isCharInFavs();
+    if (this.state.click) {
       return (
-        <div>
-          <Button
-            onClick={this.delFromFav}
-            className="btn-danger"
-            label="Delete from favourites!"
+        <div className="spin">
+          <ReactLoading
+            type="bubbles"
+            color="#a91c1c"
+            height="34px"
+            width="34px"
+            delay="0"
           />
         </div>
       );
     } else {
-      return (
-        <div className="action-icon">
-          <Button
-            onClick={this.addToFav}
-            className="btn-danger"
-            label="Add to favourites!"
-          />
-        </div>
-      );
+      if (this.isCharInFavs()) {
+        return (
+          <div>
+            <Button
+              onClick={this.delFromFav}
+              className="btn-danger"
+              label="Delete from favourites!"
+            />
+          </div>
+        );
+      } else {
+        return (
+          <div className="action-icon">
+            <Button
+              onClick={this.addToFav}
+              className="btn-danger"
+              label="Add to favourites!"
+            />
+          </div>
+        );
+      }
     }
   };
 
@@ -112,7 +141,6 @@ class Character extends React.Component {
         onMouseLeave={this.onMouseLeaveHandler}
       >
         <img src={this.props.img} alt="Image not found" />
-
         {this.renderOverlay()}
       </div>
     );
@@ -122,4 +150,5 @@ class Character extends React.Component {
 Character.contextTypes = {
   store: PropTypes.object
 };
+
 export default connect()(Character);
