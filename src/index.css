@@ -316,7 +316,7 @@ p {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 40%;
+  height: 50%;
   padding-left: 1%;
   padding-right: 1%;
 }
@@ -324,7 +324,7 @@ p {
 .prev-page {
   color: #c94c4c;
   display: flex;
-  align-self: flex-start;
+  align-self: flex-end;
   text-align: center;
 }
 
@@ -345,8 +345,8 @@ i:visited {
 }
 
 .chart-container {
-  width: 500px;
-  height: 300px;
+  /*width: 500px;
+  height: 300px;*/
   display: flex;
   justify-content: center;
 }
@@ -359,11 +359,11 @@ i:visited {
   z-index: 10;
 }
 
-.center {
+/*.center {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+}*/
 
 .foot-item {
   margin-left: 5px;
@@ -399,9 +399,9 @@ i:visited {
 @media only screen and (max-width: 768px) {
 }
 
-@media only screen and (max-height: 1000px) {
+/*@media only screen and (max-height: 1000px) {
   .btn-container {
-    margin-top: 40%;
+    margin-top: 3  0%;
   }
 }
 
@@ -409,4 +409,4 @@ i:visited {
   .btn-container {
     margin-top: 30%;
   }
-}
+}*/

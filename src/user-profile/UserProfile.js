@@ -77,7 +77,7 @@ class UserProfile extends React.Component {
     const userCharactersData = this.getUserCharactersData();
     const userComicsData = this.getUserComicsData();
     return (
-      <div className="center">
+      <div>
         <div className="img-container">
           <PageTitle title={` WELCOME, ${this.props.user.name}! `} />
 
