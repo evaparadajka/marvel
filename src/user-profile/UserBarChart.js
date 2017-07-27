@@ -14,8 +14,8 @@ export class UserCharactersBarChart extends React.Component {
   render() {
     return (
       <BarChart
-        width={600}
-        height={300}
+        width={500}
+        height={200}
         data={this.props.data}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
@@ -35,8 +35,8 @@ export class UserComicsBarChart extends React.Component {
   render() {
     return (
       <BarChart
-        width={600}
-        height={300}
+        width={500}
+        height={200}
         data={this.props.data}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >

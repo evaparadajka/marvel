@@ -5,6 +5,7 @@ import Button from "../user_interface/Button";
 import { withRouter } from "react-router";
 import { UserComicsBarChart, UserCharactersBarChart } from "./UserBarChart";
 import { ResponsiveContainer } from "recharts";
+import { Scrollbars } from "react-custom-scrollbars";
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -102,10 +103,14 @@ class UserProfile extends React.Component {
           </div>
 
           <div className="chart-container">
-            <UserCharactersBarChart data={userCharactersData} />
+            <Scrollbars style={{ width: 600, height: 300 }}>
+              <UserCharactersBarChart data={userCharactersData} />
+            </Scrollbars>
           </div>
           <div className="chart-container">
-            <UserComicsBarChart data={userComicsData} />
+            <Scrollbars style={{ width: 600, height: 300 }}>
+              <UserComicsBarChart data={userComicsData} />
+            </Scrollbars>
           </div>
         </div>
       </div>
