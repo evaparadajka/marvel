@@ -50,6 +50,16 @@ p {
   justify-content: center;
 }
 
+.bubbles {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.button-width {
+  width: 200px;
+}
+
 .nav {
   background: white;
   display: flex;
