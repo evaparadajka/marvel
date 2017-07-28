@@ -53,15 +53,18 @@ class ComicsDashboard extends React.Component {
     });
   };
 
+  getPageNumberFromURL = () => {
+    return Number(
+      this.props.router.location.pathname.slice(
+        8,
+        this.props.location.pathname.length
+      )
+    );
+  };
+
   loadNextPage = () => {
     this.showNotification(success(notificationLoadNextPage));
-    const nextPage =
-      Number(
-        this.props.router.location.pathname.slice(
-          8,
-          this.props.location.pathname.length
-        )
-      ) + 1;
+    const nextPage = this.getPageNumberFromURL() + 1;
     if (this.isPageDefined(nextPage)) {
       this.props.router.push("/comics/" + nextPage);
       this.loadPage(nextPage);
@@ -82,13 +85,8 @@ class ComicsDashboard extends React.Component {
 
   loadPreviousPage = () => {
     this.showNotification(success(notificationLoadPreviousPage));
-    const previousPage =
-      Number(
-        this.props.router.location.pathname.slice(
-          8,
-          this.props.location.pathname.length
-        )
-      ) - 1;
+    const previousPage = this.getPageNumberFromURL() - 1;
+
     if (this.isPageDefined(previousPage)) {
       this.props.router.push("/comics/" + previousPage);
       this.loadPage(previousPage);
@@ -146,10 +144,7 @@ class ComicsDashboard extends React.Component {
   }
 
   componentDidMount() {
-    const page = this.props.router.location.pathname.slice(
-      8,
-      this.props.location.pathname.length
-    );
+    const page = this.getPageNumberFromURL();
     if (this.isPageDefined(page)) {
       this.loadPage(page);
     } else {
@@ -158,10 +153,7 @@ class ComicsDashboard extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const page = this.props.router.location.pathname.slice(
-      8,
-      this.props.location.pathname.length
-    );
+    const page = this.getPageNumberFromURL();
     if (this.props.location.pathname !== prevProps.location.pathname) {
       if (this.isPageDefined(page)) {
         this.loadPage(page);

@@ -54,15 +54,18 @@ class Dashboard extends React.Component {
     });
   };
 
+  getPageNumberFromURL = () => {
+    return Number(
+      this.props.router.location.pathname.slice(
+        11,
+        this.props.location.pathname.length
+      )
+    );
+  };
   loadNextPage = () => {
     this.showNotification(success(notificationLoadNextPage));
-    const nextPage =
-      Number(
-        this.props.router.location.pathname.slice(
-          11,
-          this.props.location.pathname.length
-        )
-      ) + 1;
+    const nextPage = this.getPageNumberFromURL() + 1;
+
     if (this.isPageDefined(nextPage)) {
       this.props.router.push("/dashboard/" + nextPage);
       this.loadPage(nextPage);
@@ -83,13 +86,8 @@ class Dashboard extends React.Component {
 
   loadPreviousPage = () => {
     this.showNotification(success(notificationLoadPreviousPage));
-    const previousPage =
-      Number(
-        this.props.router.location.pathname.slice(
-          11,
-          this.props.location.pathname.length
-        )
-      ) - 1;
+    const previousPage = this.getPageNumberFromURL() - 1;
+
     if (this.isPageDefined(previousPage)) {
       this.props.router.push("/dashboard/" + previousPage);
       this.loadPage(previousPage);
@@ -148,10 +146,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    const page = this.props.router.location.pathname.slice(
-      11,
-      this.props.location.pathname.length
-    );
+    const page = this.getPageNumberFromURL();
     if (this.isPageDefined(page)) {
       this.loadPage(page);
     } else {
@@ -160,10 +155,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const page = this.props.router.location.pathname.slice(
-      11,
-      this.props.location.pathname.length
-    );
+    const page = this.getPageNumberFromURL();
     if (this.props.location.pathname !== prevProps.location.pathname) {
       if (this.isPageDefined(page)) {
         this.loadPage(page);
