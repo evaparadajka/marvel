@@ -5,7 +5,11 @@ import CharacterList from "./CharacterList";
 import { fetchPaginatedCharacters } from "../character_details/selectors";
 import PropTypes from "prop-types";
 import { success } from "react-notification-system-redux";
-import { notificationLoadCharacters } from "../alert/notifications";
+import {
+  notificationLoadCharacters,
+  notificationLoadNextPage,
+  notificationLoadPreviousPage
+} from "../alert/notifications";
 import PageTitle from "../user_interface/PageTitle";
 
 class Dashboard extends React.Component {
@@ -51,6 +55,7 @@ class Dashboard extends React.Component {
   };
 
   loadNextPage = () => {
+    this.showNotification(success(notificationLoadNextPage));
     const nextPage =
       Number(
         this.props.router.location.pathname.slice(
@@ -77,6 +82,7 @@ class Dashboard extends React.Component {
   };
 
   loadPreviousPage = () => {
+    this.showNotification(success(notificationLoadPreviousPage));
     const previousPage =
       Number(
         this.props.router.location.pathname.slice(
