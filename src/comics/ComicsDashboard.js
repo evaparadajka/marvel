@@ -5,7 +5,11 @@ import ComicList from "./ComicList";
 import { fetchPaginatedComics } from "../comic-details/selectors";
 import PropTypes from "prop-types";
 import { success } from "react-notification-system-redux";
-import { notificationLoadComics } from "../alert/notifications";
+import {
+  notificationLoadComics,
+  notificationLoadNextPage,
+  notificationLoadPreviousPage
+} from "../alert/notifications";
 import PageTitle from "../user_interface/PageTitle";
 
 class ComicsDashboard extends React.Component {
@@ -49,14 +53,18 @@ class ComicsDashboard extends React.Component {
     });
   };
 
+  getPageNumberFromURL = () => {
+    return Number(
+      this.props.router.location.pathname.slice(
+        8,
+        this.props.location.pathname.length
+      )
+    );
+  };
+
   loadNextPage = () => {
-    const nextPage =
-      Number(
-        this.props.router.location.pathname.slice(
-          8,
-          this.props.location.pathname.length
-        )
-      ) + 1;
+    this.showNotification(success(notificationLoadNextPage));
+    const nextPage = this.getPageNumberFromURL() + 1;
     if (this.isPageDefined(nextPage)) {
       this.props.router.push("/comics/" + nextPage);
       this.loadPage(nextPage);
@@ -76,13 +84,9 @@ class ComicsDashboard extends React.Component {
   };
 
   loadPreviousPage = () => {
-    const previousPage =
-      Number(
-        this.props.router.location.pathname.slice(
-          8,
-          this.props.location.pathname.length
-        )
-      ) - 1;
+    this.showNotification(success(notificationLoadPreviousPage));
+    const previousPage = this.getPageNumberFromURL() - 1;
+
     if (this.isPageDefined(previousPage)) {
       this.props.router.push("/comics/" + previousPage);
       this.loadPage(previousPage);
@@ -140,10 +144,7 @@ class ComicsDashboard extends React.Component {
   }
 
   componentDidMount() {
-    const page = this.props.router.location.pathname.slice(
-      8,
-      this.props.location.pathname.length
-    );
+    const page = this.getPageNumberFromURL();
     if (this.isPageDefined(page)) {
       this.loadPage(page);
     } else {
@@ -152,10 +153,7 @@ class ComicsDashboard extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const page = this.props.router.location.pathname.slice(
-      8,
-      this.props.location.pathname.length
-    );
+    const page = this.getPageNumberFromURL();
     if (this.props.location.pathname !== prevProps.location.pathname) {
       if (this.isPageDefined(page)) {
         this.loadPage(page);

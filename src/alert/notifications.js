@@ -58,3 +58,15 @@ export const notificationInvalidPasswords = {
   position: "tr",
   autoDismiss: 2
 };
+
+export const notificationLoadNextPage = {
+  title: "Loading next page. Please wait.",
+  position: "tr",
+  autoDismiss: 2
+};
+
+export const notificationLoadPreviousPage = {
+  title: "Loading previous page. Please wait.",
+  position: "tr",
+  autoDismiss: 2
+};
